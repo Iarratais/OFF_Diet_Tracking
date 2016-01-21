@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#28546c</color>
+    <color name="colorPrimaryDark">#114662</color>
+    <color name="colorAccent">#248111</color>
+
+    <color name="nutrientTooHigh">#B80000</color>
+    <color name="nutrientTooLow">#009900</color>
+</resources>

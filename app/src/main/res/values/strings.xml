@@ -1,0 +1,106 @@
+<resources>
+    <string name="app_name">FYP</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+
+    <!-- Today fragment -->
+    <string name="today_fragment_title">Today</string>
+    <string name="today_fragment_daily_intake">Daily intake</string>
+    <string name="today_fragment_information">Information</string>
+    <string name="today_fragment_todays_entries">Today\'s Entries</string>
+    <string name="today_fragment_your_calorie_goal">Your calorie goal is:</string>
+    <string name="today_fragment_your_fat_goal">Your fat goal is:</string>
+    <string name="today_fragment_your_sat_fat_goal">Your saturated fat goal is:</string>
+    <string name="today_fragment_your_carbs_goal">Your carbohydrate goal is:</string>
+    <string name="today_fragment_your_sugar_goal">Your sugar goal is:</string>
+    <string name="today_fragment_your_salt_goal">Your salt goal is:</string>
+    <string name="today_fragment_your_sodium_goal">Your sodium goal is:</string>
+    <string name="today_fragment_your_protein_goal">Your protein goal is:</string>
+    <string name="today_fragment_you_have_exceeded_your_goal">You have exceeded your goal by:</string>
+
+    <!-- History fragment -->
+    <string name="history_fragment_title">History</string>
+
+    <!-- Lookup fragment -->
+    <string name="lookup_fragment_title">Barcode Search</string>
+    <string name="lookup_fragment_scan">Scan</string>
+
+    <!-- Search fragment -->
+    <string name="search_fragment_title">Search</string>
+
+    <!-- Goals fragment -->
+    <string name="goals_fragment_title">Goals</string>
+
+    <!-- Progress fragment -->
+    <string name="progress_fragment_title">Progress</string>
+
+    <!-- AddToDatabase fragment -->
+    <string name="addtodatabase_fragment_title">Add To Database</string>
+
+    <!-- Diary fragment -->
+    <string name="diary_fragment_title">Diary</string>
+
+    <!-- Settings Activity -->
+    <string name="settings_fragment_title">Settings</string>
+
+    <!-- About Activity -->
+    <string name="about_fragment_title">About</string>
+
+    <!-- Profile Activity -->
+    <string name="profile_fragment_title">Profile</string>
+    <string name="profile_fragment_name">Name</string>
+    <string name="profile_fragment_gender">Gender</string>
+    <string name="profile_fragment_male">Male</string>
+    <string name="profile_fragment_female">Female</string>
+    <string name="profile_fragment_weight">Weight (kgs)</string>
+    <string name="profile_fragment_height">Height (cms)</string>
+    <string name="profile_fragment_save_changes">Save Changes</string>
+    <string name="profile_fragment_saved">Profile updated</string>
+
+    <!-- Common strings -->
+    <string name="calories">Calories</string>
+    <string name="calories_abbv">Cal:</string>
+    <string name="fat">Fat</string>
+    <string name="fat_abbv">F:</string>
+    <string name="saturated_fat">Saturated Fat</string>
+    <string name="saturated_fat_abbv">SF:</string>
+    <string name="sodium">Sodium</string>
+    <string name="sodium_abbv">So:</string>
+    <string name="carbohydrate">Carbohydrate</string>
+    <string name="carbohydrate_abbv">C:</string>
+    <string name="protein">Protein</string>
+    <string name="protein_abbv">P:</string>
+    <string name="sugar">Sugar</string>
+    <string name="sugar_abbv">Su:</string>
+    <string name="salt">Salt</string>
+    <string name="salt_abbv">Sa:</string>
+    <string name="grams_abbv">g</string>
+    <string name="grams">grams</string>
+    <string name="slash"> / </string>
+
+    <!-- Misc strings -->
+    <string name="lorem_ipsum">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac ipsum magna. Nam at nunc pretium, aliquet mauris sed, efficitur ex.
+        Duis hendrerit, lorem quis laoreet feugiat, arcu velit interdum lorem, et commodo turpis ligula eu nisi. Mauris tempus tempor ultricies.
+        Sed vel finibus mauris. Suspendisse sed odio scelerisque, facilisis est sed, hendrerit lectus. In laoreet eros a lorem sagittis, sit amet
+        euismod turpis rhoncus.\n\n
+
+        Phasellus non pharetra ante. Duis et interdum enim, et condimentum eros. Vestibulum egestas felis non nisl lacinia, et eleifend metus
+        lacinia. Vestibulum ornare nibh sit amet lobortis volutpat. Vivamus consequat sollicitudin lacus in gravida. Pellentesque eget lectus
+        est. Fusce semper risus eros, eu eleifend purus commodo vitae.
+
+        Phasellus bibendum vel ante sit amet dapibus. Sed auctor sem turpis, et cursus augue porttitor scelerisque. Duis at gravida metus. Cum
+        sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus consectetur pellentesque ex vitae aliquet.
+        Aenean ipsum lectus, efficitur sit amet massa vitae, faucibus vulputate odio. Cras in sem vehicula, placerat nisl ac, lacinia enim. Sed
+        ut quam nulla.
+    </string>
+
+    <!-- Errors -->
+    <string name="sorry_check_your_network_settings">Please check your network settings</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+</resources>

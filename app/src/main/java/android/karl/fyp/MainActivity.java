@@ -54,8 +54,8 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent i = new Intent(getApplicationContext(), NewManualEntryActivity.class);
+                startActivity(i);
             }
         });
 
@@ -79,6 +79,14 @@ public class MainActivity extends AppCompatActivity
         // Fragments
         FragmentManager fm = getFragmentManager();
         fm.beginTransaction().replace(R.id.content_frame, new TodayFragment()).commit();
+
+//        db.createNewEntryToday(new Food("Dairygold", "000000", "57", "6.3", "2.3", "0", "0.1", "0", "0.199", "0.0787"));
+//        db.createNewEntryToday(new Food("Nutella", "000000", "83", "4.75", "1.64", "8.59", "8.51", "0.9", "0.0141", "0.00555"));
+//        db.createNewEntryToday(new Food("Royal Bacon", "000000", "504", "25.6", "12", "33.5", "8.08", "33.5", "1.6", "0.628"));
+//        db.createNewEntryToday(new Food("Power Crunch", "000000", "375", "11.9", "0", "33.8", "0", "34.7", "0", "0"));
+        Cursor res = db.returnTodaysEntries();
+        System.out.println("Today entries: " + res.getCount());
+        System.out.println("Res Column Count: " + res.getColumnCount());
 
         //db.createUser("Karl", "Male", "180", "190");
         //db.clearAllUser();

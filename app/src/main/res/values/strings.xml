@@ -9,7 +9,6 @@
     <string name="today_fragment_title">Today</string>
     <string name="today_fragment_daily_intake">Daily intake</string>
     <string name="today_fragment_information">Information</string>
-    <string name="today_fragment_todays_entries">Today\'s Entries</string>
     <string name="today_fragment_your_calorie_goal">Your calorie goal is:</string>
     <string name="today_fragment_your_fat_goal">Your fat goal is:</string>
     <string name="today_fragment_your_sat_fat_goal">Your saturated fat goal is:</string>
@@ -41,6 +40,7 @@
 
     <!-- Diary fragment -->
     <string name="diary_fragment_title">Diary</string>
+    <string name="diary_fragment_todays_entries">Today\'s Entries</string>
 
     <!-- Settings Activity -->
     <string name="settings_fragment_title">Settings</string>
@@ -58,6 +58,10 @@
     <string name="profile_fragment_height">Height (cms)</string>
     <string name="profile_fragment_save_changes">Save Changes</string>
     <string name="profile_fragment_saved">Profile updated</string>
+
+    <!-- New Manual Entry Activity -->
+    <string name="new_entry_food_name">Food Name</string>
+    <string name="new_entry_save">Save</string>
 
     <!-- Common strings -->
     <string name="calories">Calories</string>

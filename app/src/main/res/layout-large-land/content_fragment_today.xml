@@ -181,7 +181,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/today_fragment_todays_entries"
+            android:text="@string/diary_fragment_todays_entries"
             android:id="@+id/today_entries_title"
             android:layout_toRightOf="@id/today_chart_title"
             android:paddingBottom="10dp"/>

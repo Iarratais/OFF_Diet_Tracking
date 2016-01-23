@@ -7,7 +7,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/today_fragment_todays_entries"
+        android:text="@string/diary_fragment_todays_entries"
         android:id="@+id/today_entries_title"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"/>

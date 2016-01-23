@@ -43,16 +43,16 @@ public class DiaryFragment extends Fragment {
         ef = new ArrayList<>();
 
         // Dairygold
-        ef.add(new Food("Dairygold", 57f, 6.3f, 2.3f, 0f, 0.1f, 0f, 0.199f, 0.0787f));
+        ef.add(new Food("Dairygold", "000000", "57", "6.3", "2.3", "0", "0.1", "0", "0.199", "0.0787"));
 
         // Nutella
-        ef.add(new Food("Nutella", 83f, 4.75f, 1.64f, 8.59f, 8.51f, 0.9f, 0.0141f, 0.00555f));
+        ef.add(new Food("Nutella", "000000", "83", "4.75", "1.64", "8.59", "8.51", "0.9", "0.0141", "0.00555"));
 
         // Royal Bacon - MCDonalds
-        ef.add(new Food("Royal Bacon", 504f, 25.6f, 12f, 33.5f, 8.08f, 33.5f, 1.6f, 0.628f));
+        ef.add(new Food("Royal Bacon", "000000", "504", "25.6", "12", "33.5", "8.08", "33.5", "1.6", "0.628"));
 
         // Power crunch protein bar
-        ef.add(new Food("Power Crunch", 375f, 11.9f, 0f, 33.8f, 0f, 34.7f, 0f, 0f));
+        ef.add(new Food("Power Crunch", "000000", "375", "11.9", "0", "33.8", "0", "34.7", "0", "0"));
 
         makeList();
 
@@ -63,7 +63,7 @@ public class DiaryFragment extends Fragment {
         new AlertDialog.Builder(this.getContext())
                 .setTitle(title)
                 .setMessage(message)
-                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 

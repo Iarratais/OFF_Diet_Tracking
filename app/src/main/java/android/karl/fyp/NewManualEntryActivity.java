@@ -1,13 +1,12 @@
 package android.karl.fyp;
 
+import android.karl.models.Food;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 public class NewManualEntryActivity extends AppCompatActivity {
 

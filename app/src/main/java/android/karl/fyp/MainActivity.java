@@ -1,6 +1,7 @@
 package android.karl.fyp;
 
 import android.app.FragmentManager;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.karl.fragments.AddToDatabaseFragment;
@@ -19,6 +20,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -26,9 +28,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -90,10 +94,6 @@ public class MainActivity extends AppCompatActivity
 
         //db.createUser("Karl", "Male", "180", "190");
         //db.clearAllUser();
-//        // Hide the history - needs to only be done when there is no history to show
-//        MenuItem item = navigationView.getMenu().getItem(1);
-//        item.setVisible(false);
-
     }
 
     @Override

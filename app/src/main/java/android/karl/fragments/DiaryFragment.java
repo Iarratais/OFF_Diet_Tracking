@@ -4,7 +4,7 @@ package android.karl.fragments;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.graphics.Typeface;
-import android.karl.fyp.Food;
+import android.karl.models.Food;
 import android.karl.fyp.MainActivity;
 import android.os.Bundle;
 import android.app.Fragment;

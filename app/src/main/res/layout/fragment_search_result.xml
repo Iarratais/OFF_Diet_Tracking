@@ -1,0 +1,162 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="android.karl.fyp.SearchResultActivity$PlaceholderFragment">
+
+    <!-- Calories -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/today_chart"
+        android:layout_alignParentLeft="true"
+        android:text="@string/calories"
+        android:id="@+id/today_calories_text_view"
+        android:paddingLeft="10dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/today_chart"
+        android:paddingRight="10dp"
+        android:id="@+id/today_calories_stats"
+        android:text="1"/>
+
+    <!-- Fat -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/today_calories_text_view"
+        android:layout_alignParentLeft="true"
+        android:paddingLeft="10dp"
+        android:text="@string/fat"
+        android:id="@+id/today_fat_text_view"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/today_calories_stats"
+        android:paddingRight="10dp"
+        android:id="@+id/today_fat_stats"
+        android:text="2"/>
+
+    <!-- Sat Fat -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/today_fat_text_view"
+        android:layout_alignParentLeft="true"
+        android:paddingLeft="20dp"
+        android:text="@string/saturated_fat"
+        android:id="@+id/today_sat_fat_text_view"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/today_fat_stats"
+        android:paddingRight="10dp"
+        android:id="@+id/today_sat_fat_stats"
+        android:text="3"/>
+
+    <!-- Salt -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/today_sat_fat_text_view"
+        android:layout_alignParentLeft="true"
+        android:paddingLeft="10dp"
+        android:text="@string/salt"
+        android:id="@+id/today_salt_text_view"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/today_sat_fat_stats"
+        android:paddingRight="10dp"
+        android:id="@+id/today_salt_stats"
+        android:text="4"/>
+
+    <!-- Sodium -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/today_salt_text_view"
+        android:layout_alignParentLeft="true"
+        android:paddingLeft="20dp"
+        android:text="@string/sodium"
+        android:id="@+id/today_sodium_text_view"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/today_salt_stats"
+        android:paddingRight="10dp"
+        android:id="@+id/today_sodium_stats"
+        android:text="5"/>
+
+    <!-- Carbohydrates -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/today_sodium_text_view"
+        android:layout_alignParentLeft="true"
+        android:paddingLeft="10dp"
+        android:text="@string/carbohydrate"
+        android:id="@+id/today_carbohydrate_text_view"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/today_sodium_stats"
+        android:paddingRight="10dp"
+        android:id="@+id/today_carbs_stats"
+        android:text="6"/>
+
+    <!-- Sugar -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/today_carbohydrate_text_view"
+        android:layout_alignParentLeft="true"
+        android:paddingLeft="20dp"
+        android:text="@string/sugar"
+        android:id="@+id/today_sugar_text_view"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/today_carbs_stats"
+        android:paddingRight="10dp"
+        android:id="@+id/today_sugar_stats"
+        android:text="7"/>
+
+    <!-- Protein -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/today_sugar_text_view"
+        android:layout_alignParentLeft="true"
+        android:paddingLeft="10dp"
+        android:text="@string/protein"
+        android:id="@+id/today_protein_text_view"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/today_sugar_stats"
+        android:paddingRight="10dp"
+        android:id="@+id/today_protein_stats"
+        android:text="8"/>
+
+
+</RelativeLayout>

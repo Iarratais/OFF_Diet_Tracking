@@ -1,4 +1,4 @@
-package android.karl.fyp;
+package android.karl.models;
 
 
 public class Goals {
@@ -76,4 +76,22 @@ public class Goals {
         this.salt = salt;
     }
 
+    public void loadGoals() {
+        // This needs to be filled in with the database connection and gathering information
+        // about the goals set by the user
+    }
+
+    @Override
+    public String toString() {
+        return "Goals{" +
+                "calories=" + calories +
+                ", fat=" + fat +
+                ", sat_fat=" + sat_fat +
+                ", sodium=" + sodium +
+                ", carbs=" + carbs +
+                ", protein=" + protein +
+                ", sugar=" + sugar +
+                ", salt=" + salt +
+                '}';
+    }
 }

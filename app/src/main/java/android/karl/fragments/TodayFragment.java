@@ -5,9 +5,9 @@ import android.app.Fragment;
 import android.content.DialogInterface;
 import android.database.Cursor;
 import android.graphics.Typeface;
-import android.karl.fyp.Food;
+import android.karl.models.Food;
 import android.karl.examples.ExampleGoals;
-import android.karl.fyp.Goals;
+import android.karl.models.Goals;
 import android.karl.fyp.MainActivity;
 import android.karl.fyp.MySQLiteHelper;
 import android.karl.fyp.R;
@@ -16,8 +16,6 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -220,6 +218,8 @@ public class TodayFragment extends Fragment {
         goals.setSat_fat(eg.getExample_goal_sat_fat());
         goals.setSugar(eg.getExample_goal_sugar());
         goals.setSodium(eg.getExample_goal_sodium());
+
+        System.out.println(goals.toString());
 
         return goals;
     }
@@ -480,7 +480,7 @@ public class TodayFragment extends Fragment {
                     foods.get(i).setSalt(res.getString(8));
                     foods.get(i).setSodium(res.getString(9));
                 }
-                foods.get(i).printInformation();
+                System.out.println(foods.get(i).toString());
                 i++;
             }
         }

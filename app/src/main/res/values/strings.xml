@@ -42,6 +42,11 @@
     <string name="diary_fragment_title">Diary</string>
     <string name="diary_fragment_todays_entries">Today\'s Entries</string>
 
+    <!-- ResultPer100Fragment -->
+
+    <!-- ResultPerServingFragment -->
+
+
     <!-- Settings Activity -->
     <string name="settings_fragment_title">Settings</string>
 
@@ -103,6 +108,10 @@
 
     <!-- Errors -->
     <string name="sorry_check_your_network_settings">Please check your network settings</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="title_activity_search_result">SearchResultActivity</string>
+    <string name="section_format">Hello World from section: %1$d</string>
 
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

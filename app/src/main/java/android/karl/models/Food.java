@@ -1,5 +1,8 @@
-package android.karl.fyp;
+package android.karl.models;
 
+/**
+ * This class represents the attributes of the Food DTO
+ */
 public class Food {
 
     private String id = null;
@@ -132,17 +135,20 @@ public class Food {
         this.sodium = sodium;
     }
 
-    public void printInformation() {
-        System.out.println("ID: " + id);
-        System.out.println("FOOD NAME: " + name);
-        System.out.println("BARCODE NUMBER: " + barcode_number);
-        System.out.println("CALORIES: " + calories);
-        System.out.println("FAT: " + fats);
-        System.out.println("SATURATED FATS: " + sat_fats);
-        System.out.println("CARBOHYDRATES: " + carbs);
-        System.out.println("SUGAR: " + sugar);
-        System.out.println("PROTEIN: " + protein);
-        System.out.println("SALT: " + salt);
-        System.out.println("SODIUM: " + sodium);
+    @Override
+    public String toString() {
+        return "Food{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", barcode_number='" + barcode_number + '\'' +
+                ", calories='" + calories + '\'' +
+                ", fats='" + fats + '\'' +
+                ", sat_fats='" + sat_fats + '\'' +
+                ", carbs='" + carbs + '\'' +
+                ", sugar='" + sugar + '\'' +
+                ", protein='" + protein + '\'' +
+                ", salt='" + salt + '\'' +
+                ", sodium='" + sodium + '\'' +
+                '}';
     }
 }

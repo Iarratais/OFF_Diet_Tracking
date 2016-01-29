@@ -10,14 +10,12 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
-
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
-
         <activity
             android:name=".SettingsActivity"
             android:screenOrientation="portrait" >
@@ -25,7 +23,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="android.karl.fyp.MainActivity" />
         </activity>
-
         <activity
             android:name=".AboutActivity"
             android:screenOrientation="portrait" >
@@ -33,23 +30,32 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="android.karl.fyp.MainActivity" />
         </activity>
-
         <activity
             android:name=".SplashScreenActivity"
             android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".NewManualEntryActivity"
+        <activity
+            android:name=".NewManualEntryActivity"
+            android:screenOrientation="portrait" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="android.karl.fyp.MainActivity" />
+        </activity>
+        <activity
+            android:name=".SearchResultActivity"
+            android:label="@string/title_activity_search_result"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="android.karl.fyp.MainActivity" />
         </activity>
-
     </application>
 
 </manifest>

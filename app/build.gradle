@@ -6,11 +6,11 @@ android {
     useLibrary 'org.apache.http.legacy'
 
     defaultConfig {
-        applicationId "android.karl.fyp"
+        applicationId "com.karl.fyp"
         minSdkVersion 16
         targetSdkVersion 23
         versionCode 1
-        versionName "1.0"
+        versionName "0.030"
     }
     buildTypes {
         release {

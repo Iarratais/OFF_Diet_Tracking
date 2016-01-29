@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="android.karl.fyp" >
+    package="com.karl.fyp" >
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -11,27 +11,27 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".MainActivity"
+            android:name="com.karl.fyp.MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
         <activity
-            android:name=".SettingsActivity"
+            android:name="com.karl.fyp.SettingsActivity"
             android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="android.karl.fyp.MainActivity" />
+                android:value="com.karl.fyp.MainActivity" />
         </activity>
         <activity
-            android:name=".AboutActivity"
+            android:name="com.karl.fyp.AboutActivity"
             android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="android.karl.fyp.MainActivity" />
+                android:value="com.karl.fyp.MainActivity" />
         </activity>
         <activity
-            android:name=".SplashScreenActivity"
+            android:name="com.karl.fyp.SplashScreenActivity"
             android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -40,21 +40,21 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".NewManualEntryActivity"
+            android:name="com.karl.fyp.NewManualEntryActivity"
             android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="android.karl.fyp.MainActivity" />
+                android:value="com.karl.fyp.MainActivity" />
         </activity>
         <activity
-            android:name=".SearchResultActivity"
+            android:name="com.karl.fyp.SearchResultActivity"
             android:label="@string/title_activity_search_result"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName="com.karl.fyp.MainActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="android.karl.fyp.MainActivity" />
+                android:value="com.karl.fyp.MainActivity" />
         </activity>
     </application>
 

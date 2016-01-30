@@ -12,4 +12,5 @@ import java.util.List;
  */
 public interface IFoodDAO {
     List<Food> fetchFood(String searchBarcode) throws IOException, JSONException;
+    boolean checkProduct(String barcode) throws IOException, JSONException;
 }

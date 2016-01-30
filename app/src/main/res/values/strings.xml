@@ -25,6 +25,7 @@
     <!-- Lookup fragment -->
     <string name="lookup_fragment_title">Barcode Search</string>
     <string name="lookup_fragment_scan">Scan</string>
+    <string name="lookup_fragment_your_barcode_needs_13_digits">Please enter a 13 digit barcode</string>
 
     <!-- Search fragment -->
     <string name="search_fragment_title">Search</string>
@@ -107,13 +108,11 @@
     </string>
 
     <!-- Errors -->
-    <string name="sorry_check_your_network_settings">Please check your network settings</string>
+    <string name="error_sorry_check_your_network_settings">Please check your network settings</string>
+    <string name="error_item_does_not_exist">Item does not exist</string>
 
 <!-- TODO: Remove or change this placeholder text -->
     <string name="title_activity_search_result">SearchResultActivity</string>
-    <string name="section_format">Hello World from section: %1$d</string>
 
-<!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

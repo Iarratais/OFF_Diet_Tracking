@@ -2,6 +2,9 @@ package com.karl.dao;
 
 import com.karl.models.Food;
 
+import org.json.JSONException;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,5 +37,10 @@ public class FoodDAOStub implements IFoodDAO {
 
         // Return the return value
         return allFood;
+    }
+
+    @Override
+    public boolean checkProduct(String barcode) throws IOException, JSONException {
+        return false;
     }
 }

@@ -20,6 +20,13 @@ public class FoodDAO implements IFoodDAO {
         networkDAO = new NetworkDAO();
     }
 
+    /**
+     *
+     * @param searchBarcode the barcode of the infromation being sourced
+     * @return List of Food items
+     * @throws IOException
+     * @throws JSONException
+     */
     @Override
     public List<Food> fetchFood(String searchBarcode) throws IOException, JSONException {
         String uri = "http://world.openfoodfacts.org/api/v0/product/" + searchBarcode + ".json";
@@ -225,5 +232,22 @@ public class FoodDAO implements IFoodDAO {
         }
 
         return allFoods;
+    }
+
+    public boolean checkProduct(String barcode) throws IOException, JSONException{
+        String uri = "http://world.openfoodfacts.org/api/v0/product/" + barcode + ".json";
+        String request = networkDAO.request(uri);
+
+        // Parse the string into JSON here
+        JSONObject root = new JSONObject(request);
+
+        for(int i = 0 ; i < 1 ; i++) {
+            String exists = root.getString("status");
+            if(exists.equals("1")){
+                System.out.println("Item exists");
+                return true;
+            }
+        }
+        return false;
     }
 }

@@ -13,6 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.karl.fyp.R;
+
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.HorizontalBarChart;
@@ -32,6 +34,8 @@ public class ResultServingFragment extends android.support.v4.app.Fragment {
 
     View rootView;
 
+    ProgressBar progressBar;
+
     private String barcode = "0000000000000";
 
     public ResultServingFragment(String barcode) {
@@ -42,6 +46,9 @@ public class ResultServingFragment extends android.support.v4.app.Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_result_per100, container, false);
+
+        progressBar = (ProgressBar) rootView.findViewById(R.id.lookupProgressBar);
+        progressBar.setVisibility(View.GONE);
 
         BarcodeSearchTask bst = new BarcodeSearchTask();
         bst.execute(barcode);
@@ -111,7 +118,12 @@ public class ResultServingFragment extends android.support.v4.app.Fragment {
 
     class BarcodeSearchTask extends AsyncTask<String, Integer, List<Food>> {
 
-        Goals goals;
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            progressBar.setVisibility(View.VISIBLE);
+        }
 
         // User can pass in as many strings, params is an array
         // On a separate thread
@@ -168,6 +180,8 @@ public class ResultServingFragment extends android.support.v4.app.Fragment {
             chart.setDescription(" ");
             chart.animateXY(2000, 2000);
             chart.invalidate();
+
+            progressBar.setVisibility(View.GONE);
         }
 
         // Add the data into the bar chart

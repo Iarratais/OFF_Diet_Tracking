@@ -95,7 +95,10 @@ public class TodayFragment extends Fragment {
         return rootView;
     }
 
-    // Add the data into the bar chart
+    /**
+     *
+     * @return ArrayList of data for the chart
+     */
     private ArrayList<BarDataSet> getDataSet() {
         ArrayList<BarDataSet> dataSets = new ArrayList<>();
 
@@ -124,7 +127,10 @@ public class TodayFragment extends Fragment {
         return dataSets;
     }
 
-    // Set the values for the titles
+    /**
+     *
+     * @return ArrayList of data for the titles of the chart
+     */
     private ArrayList<String> getXAxisValues() {
         ArrayList<String> xAxis = new ArrayList<>();
         xAxis.add("Sodium");

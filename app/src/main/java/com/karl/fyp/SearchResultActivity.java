@@ -20,19 +20,9 @@ import android.view.View;
 
 public class SearchResultActivity extends AppCompatActivity {
 
-    /**
-     * The {@link android.support.v4.view.PagerAdapter} that will provide
-     * fragments for each of the sections. We use a
-     * {@link FragmentPagerAdapter} derivative, which will keep every
-     * loaded fragment in memory. If this becomes too memory intensive, it
-     * may be best to switch to a
-     * {@link android.support.v4.app.FragmentStatePagerAdapter}.
-     */
+
     private SectionsPagerAdapter mSectionsPagerAdapter;
 
-    /**
-     * The {@link ViewPager} that will host the section contents.
-     */
     private ViewPager mViewPager;
 
     public String section_1 = "100g/100ml";
@@ -108,6 +98,11 @@ public class SearchResultActivity extends AppCompatActivity {
             return NUM_PAGES;
         }
 
+        /**
+         *
+         * @param position that the page is at
+         * @return the title of the page
+         */
         @Override
         public CharSequence getPageTitle(int position) {
             switch (position) {

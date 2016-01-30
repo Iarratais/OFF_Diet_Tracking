@@ -11,6 +11,13 @@
         android:background="@drawable/circle"
         android:layout_centerInParent="true"/>
 
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/lookupProgressBar"/>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

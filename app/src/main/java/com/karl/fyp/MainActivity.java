@@ -1,6 +1,9 @@
 package com.karl.fyp;
 
+import android.app.AlertDialog;
+import android.app.DialogFragment;
 import android.app.FragmentManager;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import com.karl.fragments.AddToDatabaseFragment;
@@ -8,6 +11,7 @@ import com.karl.fragments.DiaryFragment;
 import com.karl.fragments.GoalsFragment;
 import com.karl.fragments.HistoryFragment;
 import com.karl.fragments.LookupFragment;
+import com.karl.fragments.MyListAlertDialogFragment;
 import com.karl.fragments.ProfileFragment;
 import com.karl.fragments.ProgressFragment;
 import com.karl.fragments.SearchFragment;
@@ -22,17 +26,22 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.DisplayMetrics;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    // Floating action button
+    private static final double SMALL_DEVICE_THRESHOLD = 4.9;
+
     FloatingActionButton fab;
 
     MySQLiteHelper db;
@@ -53,8 +62,7 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getApplicationContext(), NewManualEntryActivity.class);
-                startActivity(i);
+                userEntryChoice();
             }
         });
 
@@ -75,20 +83,11 @@ public class MainActivity extends AppCompatActivity
         navigation_bar_name_space = (TextView) header.findViewById(R.id.nav_bar_name);
         setNameHeader();
 
-        // Fragments
-        FragmentManager fm = getFragmentManager();
-        fm.beginTransaction().replace(R.id.content_frame, new TodayFragment()).commit();
+        getFragmentManager().beginTransaction().replace(R.id.content_frame, new TodayFragment()).commit();
 
-//        db.createNewEntryToday(new Food("Dairygold", "000000", "57", "6.3", "2.3", "0", "0.1", "0", "0.199", "0.0787"));
-//        db.createNewEntryToday(new Food("Nutella", "000000", "83", "4.75", "1.64", "8.59", "8.51", "0.9", "0.0141", "0.00555"));
-//        db.createNewEntryToday(new Food("Royal Bacon", "000000", "504", "25.6", "12", "33.5", "8.08", "33.5", "1.6", "0.628"));
-//        db.createNewEntryToday(new Food("Power Crunch", "000000", "375", "11.9", "0", "33.8", "0", "34.7", "0", "0"));
         Cursor res = db.returnTodaysEntries();
         System.out.println("Today entries: " + res.getCount());
         System.out.println("Res Column Count: " + res.getColumnCount());
-
-        //db.createUser("Karl", "Male", "180", "190");
-        //db.clearAllUser();
     }
 
     @Override
@@ -99,6 +98,37 @@ public class MainActivity extends AppCompatActivity
         } else {
             super.onBackPressed();
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.activity_main_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        // Check the screen size of the device
+        if(getScreenSize() < SMALL_DEVICE_THRESHOLD) {
+            fab.setVisibility(View.GONE);
+            MenuItem addButton = menu.findItem(R.id.action_new_entry);
+            addButton.setVisible(true);
+        } else {
+            MenuItem addButton = menu.findItem(R.id.action_new_entry);
+            addButton.setVisible(false);
+        }
+
+        return super.onPrepareOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()) {
+            case R.id.action_new_entry:
+                userEntryChoice();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
@@ -193,9 +223,14 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    /*
-    This allows the fragments to set their titles
-    @param String : title
+    public void userEntryChoice() {
+        DialogFragment newFrag = MyListAlertDialogFragment.newInstance(R.string.main_activity_new_entry_options_title);
+        newFrag.show(getFragmentManager(), "dialog");
+    }
+
+    /**
+     *
+     * @param title the title of the page
      */
     public void setActionBarTitle(String title) {
         try {
@@ -216,5 +251,22 @@ public class MainActivity extends AppCompatActivity
     public void setNameHeader() {
         getNameFromDatabase();
         navigation_bar_name_space.setText(name_user);
+    }
+
+    /**
+     * Get the screen size
+     * @return screen size in inches
+     */
+    public double getScreenSize(){
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        int width = displayMetrics.widthPixels;
+        int height = displayMetrics.heightPixels;
+        int density = displayMetrics.densityDpi;
+        double wi = (double)width / (double)density;
+        double hi = (double)height / (double) density;
+        double x = Math.pow(wi, 2);
+        double y = Math.pow(hi, 2);
+        return Math.sqrt(x+y);
     }
 }

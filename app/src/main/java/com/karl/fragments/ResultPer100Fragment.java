@@ -188,7 +188,17 @@ public class ResultPer100Fragment extends android.support.v4.app.Fragment {
             progressBar.setVisibility(View.GONE);
         }
 
-        // Add the data into the bar chart
+        /**
+         *
+         * @param total_fats fats
+         * @param total_sat_fats saturated fats
+         * @param total_protein protein
+         * @param total_sodium sodium
+         * @param total_salt salt
+         * @param total_sugar sugar
+         * @param total_carbs carbohydrates
+         * @return ArrayList with the data for the chart
+         */
         private ArrayList<BarDataSet> getDataSet(String total_fats, String total_sat_fats, String total_protein, String total_sodium, String total_salt, String total_sugar, String total_carbs) {
             ArrayList<BarDataSet> dataSets = new ArrayList<>();
 

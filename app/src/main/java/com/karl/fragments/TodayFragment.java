@@ -1,6 +1,7 @@
 package com.karl.fragments;
 
 import android.app.AlertDialog;
+import android.app.DialogFragment;
 import android.app.Fragment;
 import android.content.DialogInterface;
 import android.database.Cursor;
@@ -432,20 +433,12 @@ public class TodayFragment extends Fragment {
     }
 
     public void makeToast(String message) {
-        Toast.makeText(this.getContext(), message, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
     }
 
     public void makeAlert(String title, String message) {
-        new AlertDialog.Builder(this.getContext())
-                .setTitle(title)
-                .setMessage(message)
-                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                    }
-                })
-                .show();
+        DialogFragment dialogFragment = MyAlertDialogFragment.newInstance(title, message);
+        dialogFragment.show(getFragmentManager(), "dialog");
     }
 
     ArrayList<Food> foods;

@@ -58,14 +58,10 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-
-        // Create the user table
         createUserTable(db);
 
-        // Create the today table
         createTodayTable(db);
 
-        // Create the today stats table
         createTodayStatsTable(db);
     }
 
@@ -77,21 +73,29 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
         onCreate(db);
     }
 
-    /*
-    Create the User table
+    /**
+     * Create the user table.
+     * @param db instance.
      */
     public void createUserTable(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE " + USER_TABLE
-        + "(" + USER_KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + USER_KEY_NAME + " TEXT, "
-                + USER_KEY_GENDER + " TEXT, "
-                + USER_KEY_WEIGHT + " TEXT, "
-                + USER_KEY_HEIGHT + " TEXT)"
+                        + "(" + USER_KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                        + USER_KEY_NAME + " TEXT, "
+                        + USER_KEY_GENDER + " TEXT, "
+                        + USER_KEY_WEIGHT + " TEXT, "
+                        + USER_KEY_HEIGHT + " TEXT)"
         );
         System.out.println("MySQLiteHelper: createUserTable() - run");
     }
 
-    // Only to be called once before being removed
+    /**
+     * Create a user profile.
+     * @param name of the user.
+     * @param gender of the user.
+     * @param height of the user.
+     * @param weight of the user.
+     * @return id created for the user.
+     */
     public long createUser(String name, String gender, String height, String weight) {
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -108,6 +112,10 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
         return result;
     }
 
+    /**
+     * Get the user data.
+     * @return cursor containing user information.
+     */
     public Cursor getAllDataUser() {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor res = db.rawQuery("SELECT * FROM " + USER_TABLE, null);
@@ -115,17 +123,31 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
         return res;
     }
 
+    /**
+     * Get a user information.
+     * @return cursor with user information.
+     */
     public Cursor getUser() {
         SQLiteDatabase db = this.getWritableDatabase();
         return db.rawQuery("SELECT * FROM " + USER_TABLE + " WHERE " + USER_KEY_ID + " = 1", null);
     }
 
+    /**
+     * Clear all of the user data.
+     */
     public void clearAllUser() {
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("DELETE FROM " + USER_TABLE);
         db.close();
     }
 
+    /**
+     * Update the users profile.
+     * @param name of the user.
+     * @param gender of the user.
+     * @param weight of the user.
+     * @param height of the user.
+     */
     public void updateUser(String name, String gender, String weight, String height) {
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -208,6 +230,10 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
         return db.rawQuery(query, new String[]{String.valueOf(getDate())});
     }
 
+    /**
+     *
+     * @return cursor containing todats stats
+     */
     public Cursor returnTodayStatsEntries() {
         SQLiteDatabase db = this.getWritableDatabase();
 

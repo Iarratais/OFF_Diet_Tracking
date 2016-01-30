@@ -4,22 +4,14 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent">
 
-    <View
+    <ImageView
         android:layout_width="250dp"
         android:layout_height="250dp"
-        android:background="@drawable/circle"
+        android:background="@drawable/launcher_icon"
         android:layout_centerInParent="true"
         android:id="@+id/splash_screen_button"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Icon"
-        android:textSize="180px"
-        android:textColor="#ffffff"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:layout_centerInParent="true"
-        />
+
 
     <TextView
         android:layout_width="wrap_content"

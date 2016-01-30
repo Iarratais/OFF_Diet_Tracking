@@ -4,6 +4,11 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
+    <!-- MainActivity -->
+    <string name="main_activity_new">New</string>
+    <string name="main_activity_new_entry_manual">Manual</string>
+    <string name="main_activity_new_entry_barcode">Scan barcode</string>
+    <string name="main_activity_new_entry_options_title">Choose method:</string>
 
     <!-- Today fragment -->
     <string name="today_fragment_title">Today</string>
@@ -89,6 +94,7 @@
     <string name="grams_abbv">g</string>
     <string name="grams">grams</string>
     <string name="slash"> / </string>
+    <string name="cancel">Cancel</string>
 
     <!-- Misc strings -->
     <string name="lorem_ipsum">
@@ -113,6 +119,10 @@
 
 <!-- TODO: Remove or change this placeholder text -->
     <string name="title_activity_search_result">SearchResultActivity</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 
 
 </resources>

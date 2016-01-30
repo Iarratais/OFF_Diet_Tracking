@@ -16,10 +16,15 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 
 public class SearchResultActivity extends AppCompatActivity {
 
+    private static final double SMALL_DEVICE_THRESHOLD = 4.4;
 
     private SectionsPagerAdapter mSectionsPagerAdapter;
 
@@ -31,6 +36,8 @@ public class SearchResultActivity extends AppCompatActivity {
     private final static int NUM_PAGES = 2;
 
     public String barcode_number = "4260427290019";
+
+    FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +65,7 @@ public class SearchResultActivity extends AppCompatActivity {
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -66,6 +73,28 @@ public class SearchResultActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu_search_result, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        // Check the screen size of the device
+        if(getScreenSize() < SMALL_DEVICE_THRESHOLD) {
+            fab.setVisibility(View.GONE);
+            MenuItem addButton = menu.findItem(R.id.action_save);
+            addButton.setVisible(true);
+        } else {
+            MenuItem addButton = menu.findItem(R.id.action_save);
+            addButton.setVisible(false);
+        }
+
+        return super.onPrepareOptionsMenu(menu);
     }
 
     public void setTitle(String title) {
@@ -114,4 +143,18 @@ public class SearchResultActivity extends AppCompatActivity {
             return null;
         }
     }
+
+    public double getScreenSize(){
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        int width = displayMetrics.widthPixels;
+        int height = displayMetrics.heightPixels;
+        int density = displayMetrics.densityDpi;
+        double wi = (double)width / (double)density;
+        double hi = (double)height / (double) density;
+        double x = Math.pow(wi, 2);
+        double y = Math.pow(hi, 2);
+        return Math.sqrt(x+y);
+    }
 }
+

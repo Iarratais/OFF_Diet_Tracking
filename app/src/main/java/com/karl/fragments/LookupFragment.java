@@ -7,6 +7,7 @@ import android.content.Intent;
 
 import com.karl.dao.FoodDAO;
 import com.karl.dao.IFoodDAO;
+import com.karl.fyp.BarcodeScannerActivity;
 import com.karl.fyp.MainActivity;
 import com.karl.fyp.R;
 import com.karl.fyp.SearchResultActivity;
@@ -23,6 +24,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
+
+import java.awt.font.TextAttribute;
 
 /**
  * Search fragment
@@ -46,6 +50,15 @@ public class LookupFragment extends Fragment {
 
         View button = rootView.findViewById(R.id.scan_button);
         button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), BarcodeScannerActivity.class));
+                //showInputDialog();
+            }
+        });
+
+        TextView manualEntryTextView = (TextView) rootView.findViewById(R.id.manual_entry_button);
+        manualEntryTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showInputDialog();

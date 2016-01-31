@@ -27,4 +27,15 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:layout_centerInParent="true"/>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Manual Entry"
+        android:id="@+id/manual_entry_button"
+        android:layout_below="@+id/scan_button"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:textColor="@color/colorAccent"
+        android:paddingTop="50dp" />
+
 </RelativeLayout>

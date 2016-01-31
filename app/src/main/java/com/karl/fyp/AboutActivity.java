@@ -1,8 +1,12 @@
 package com.karl.fyp;
 
 import com.karl.fyp.R;
+
+import android.content.pm.PackageInfo;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.TextView;
 
 public class AboutActivity extends AppCompatActivity {
 
@@ -17,6 +21,10 @@ public class AboutActivity extends AppCompatActivity {
         } catch (NullPointerException e) {
             System.out.println("AboutActivity - onCreate(): " + e);
         }
+
+
+        TextView versionNumber = (TextView) findViewById(R.id.version_number_textview);
+        versionNumber.setText("Version " + BuildConfig.VERSION_NAME);
     }
 
     public void onBackPressed() {

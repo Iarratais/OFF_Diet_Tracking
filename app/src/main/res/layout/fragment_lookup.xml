@@ -4,11 +4,11 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent">
 
-    <View
+    <ImageView
         android:layout_width="250dp"
         android:layout_height="250dp"
         android:id="@+id/scan_button"
-        android:background="@drawable/circle"
+        android:background="@drawable/icon_camera"
         android:layout_centerInParent="true"/>
 
     <ProgressBar
@@ -21,16 +21,8 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/lookup_fragment_scan"
-        android:textSize="180px"
-        android:textColor="#ffffff"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:layout_centerInParent="true"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:text="Manual Entry"
+        android:textSize="25dp"
         android:id="@+id/manual_entry_button"
         android:layout_below="@+id/scan_button"
         android:layout_centerHorizontal="true"

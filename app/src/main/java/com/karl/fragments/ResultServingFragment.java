@@ -139,7 +139,10 @@ public class ResultServingFragment extends android.support.v4.app.Fragment {
             }
         }
 
-        // This is on the UI thread
+        /**
+         * Set up the information in the view.
+         * @param foods list of foods
+         */
         @Override
         protected void onPostExecute(List<Food> foods) {
             super.onPostExecute(foods);
@@ -184,7 +187,17 @@ public class ResultServingFragment extends android.support.v4.app.Fragment {
             progressBar.setVisibility(View.GONE);
         }
 
-        // Add the data into the bar chart
+        /**
+         * Get the information for the barchart.
+         * @param total_fats of the food.
+         * @param total_sat_fats of the food.
+         * @param total_protein of the food.
+         * @param total_sodium of the food.
+         * @param total_salt of the food.
+         * @param total_sugar of the food.
+         * @param total_carbs of the food.
+         * @return list of data for the barchart.
+         */
         private ArrayList<BarDataSet> getDataSet(String total_fats, String total_sat_fats, String total_protein, String total_sodium, String total_salt, String total_sugar, String total_carbs) {
             ArrayList<BarDataSet> dataSets = new ArrayList<>();
 
@@ -213,7 +226,10 @@ public class ResultServingFragment extends android.support.v4.app.Fragment {
             return dataSets;
         }
 
-        // Set the values for the titles
+        /**
+         * Give the titles for the barchart.
+         * @return arraylist of titles for the barchart.
+         */
         private ArrayList<String> getXAxisValues() {
             ArrayList<String> xAxis = new ArrayList<>();
             xAxis.add("Sodium");

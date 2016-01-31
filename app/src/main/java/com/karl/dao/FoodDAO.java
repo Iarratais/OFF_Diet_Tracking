@@ -234,6 +234,13 @@ public class FoodDAO implements IFoodDAO {
         return allFoods;
     }
 
+    /**
+     *
+     * @param barcode of the product.
+     * @return true or false if the product is found.
+     * @throws IOException
+     * @throws JSONException
+     */
     public boolean checkProduct(String barcode) throws IOException, JSONException{
         String uri = "http://world.openfoodfacts.org/api/v0/product/" + barcode + ".json";
         String request = networkDAO.request(uri);

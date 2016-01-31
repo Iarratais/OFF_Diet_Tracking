@@ -50,6 +50,8 @@ public class MainActivity extends AppCompatActivity
 
     TextView navigation_bar_name_space;
 
+    private Menu menu;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -102,6 +104,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        this.menu = menu;
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.activity_main_menu, menu);
         return super.onCreateOptionsMenu(menu);
@@ -146,38 +149,41 @@ public class MainActivity extends AppCompatActivity
             // Switch to the Today tab
             fm.beginTransaction().replace(R.id.content_frame, new TodayFragment()).commit();
 
-            // Show the FAB
-            Animation bottomUp = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.bottom_up);
-            fab.setAnimation(bottomUp);
-            fab.setVisibility(View.VISIBLE);
+            setNewEntryVisibility(true);
+
+            showFAB();
         } else if (id == R.id.nav_history) {
 
             // Switch to the History tab
             fm.beginTransaction().replace(R.id.content_frame, new HistoryFragment()).commit();
 
-            // Hide the FAB
-            fab.setVisibility(View.GONE);
+            setNewEntryVisibility(true);
+
+            hideFAB();
         } else if (id == R.id.nav_lookup) {
 
             // Switch to the Lookup tab
             fm.beginTransaction().replace(R.id.content_frame, new LookupFragment()).commit();
 
-            // Hide the FAB
-            fab.setVisibility(View.GONE);
+            setNewEntryVisibility(false);
+
+            hideFAB();
         } else if (id == R.id.nav_addtodatabase){
 
             // Switch to the goals tab
             fm.beginTransaction().replace(R.id.content_frame, new AddToDatabaseFragment()).commit();
 
-            // Hide the FAB
-            fab.setVisibility(View.GONE);
+            setNewEntryVisibility(true);
+
+            hideFAB();
         } else if (id == R.id.nav_goals){
 
             // Switch to the goals tab
             fm.beginTransaction().replace(R.id.content_frame, new GoalsFragment()).commit();
 
-            // Hide the FAB
-            fab.setVisibility(View.GONE);
+            setNewEntryVisibility(true);
+
+            hideFAB();
         } else if (id == R.id.nav_settings) {
 
             // Switch to the settings
@@ -193,29 +199,33 @@ public class MainActivity extends AppCompatActivity
             // Switch to the goals tab
             fm.beginTransaction().replace(R.id.content_frame, new SearchFragment()).commit();
 
-            // Hide the FAB
-            fab.setVisibility(View.GONE);
+            setNewEntryVisibility(false);
+
+            hideFAB();
         } else if (id == R.id.nav_progress){
 
             // Switch to the goals tab
             fm.beginTransaction().replace(R.id.content_frame, new ProgressFragment()).commit();
 
-            // Hide the FAB
-            fab.setVisibility(View.GONE);
+            setNewEntryVisibility(true);
+
+            hideFAB();
         } else if (id == R.id.nav_profile) {
 
             // Switch to the Profile tab
             fm.beginTransaction().replace(R.id.content_frame, new ProfileFragment()).commit();
 
-            // Hide the FAB
-            fab.setVisibility(View.GONE);
+            setNewEntryVisibility(false);
+
+            hideFAB();
         } else if (id == R.id.nav_diary) {
 
             // Switch to the Profile tab
             fm.beginTransaction().replace(R.id.content_frame, new DiaryFragment()).commit();
 
-            // Hide the FAB
-            fab.setVisibility(View.GONE);
+            setNewEntryVisibility(true);
+
+            hideFAB();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -238,6 +248,22 @@ public class MainActivity extends AppCompatActivity
         } catch (NullPointerException e){
             System.out.println("MainActivity - setActionBarTitle(): " + e);
         }
+    }
+
+    public void showFAB(){
+        Animation bottomUp = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.bottom_up);
+        fab.setAnimation(bottomUp);
+        fab.setVisibility(View.VISIBLE);
+    }
+
+    public void hideFAB(){
+        if(fab.isShown()){
+            fab.setVisibility(View.GONE);
+        }
+    }
+
+    public void setNewEntryVisibility(boolean visibility) {
+        menu.findItem(R.id.action_new_entry).setVisible(visibility);
     }
 
     public void getNameFromDatabase() {

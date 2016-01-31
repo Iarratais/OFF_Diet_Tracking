@@ -83,8 +83,6 @@ public class LookupFragment extends Fragment {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
         alertDialogBuilder.setView(promptView);
 
-        String barcode = "0000000000000";
-
         final EditText editText = (EditText) promptView.findViewById(R.id.edittext);
         // setup a dialog window
         alertDialogBuilder.setCancelable(false)
@@ -125,8 +123,8 @@ public class LookupFragment extends Fragment {
     }
 
     /**
-     *
-     * @param barcode to pass to the results activity
+     * Send the user to the results screen.
+     * @param barcode to pass to the results activity.
      */
     public void getResults(String barcode) {
         Intent i = new Intent(getActivity(), SearchResultActivity.class);
@@ -135,8 +133,8 @@ public class LookupFragment extends Fragment {
     }
 
     /**
-     *
-     * @return network connected status
+     * Check if the network is connected or not.
+     * @return network connected status.
      */
     public boolean isNetworkOnline() {
         boolean status = false;
@@ -160,6 +158,11 @@ public class LookupFragment extends Fragment {
         return status;
     }
 
+    /**
+     * Check if the length of the barcode is 13.
+     * @param barcode of the product.
+     * @return true if right length, false if wrong length.
+     */
     public boolean checkLength(String barcode) {
         boolean is13 = false;
         if(barcode.length() == 13) {
@@ -168,7 +171,10 @@ public class LookupFragment extends Fragment {
         return is13;
     }
 
-
+    /**
+     * Set up the asynchtask.
+     * @param barcode of the product.
+     */
     public void setUpTask(String barcode) {
         BarcodeSearchTask bst = new BarcodeSearchTask();
         bst.execute(barcode);

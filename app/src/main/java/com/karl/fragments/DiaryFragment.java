@@ -2,6 +2,7 @@ package com.karl.fragments;
 
 
 import android.app.AlertDialog;
+import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.graphics.Typeface;
 import com.karl.models.Food;
@@ -59,17 +60,14 @@ public class DiaryFragment extends Fragment {
         return rootView;
     }
 
+    /**
+     *
+     * @param title of the alert
+     * @param message to be contained in the alert
+     */
     public void makeAlert(String title, String message) {
-        new AlertDialog.Builder(this.getContext())
-                .setTitle(title)
-                .setMessage(message)
-                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                    }
-                })
-                .show();
+        DialogFragment dialogFragment = MyAlertDialogFragment.newInstance(title, message);
+        dialogFragment.show(getFragmentManager(), "dialog");
     }
 
     public void makeList() {
@@ -88,7 +86,7 @@ public class DiaryFragment extends Fragment {
             listItems.add(listItem);
         }
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getContext(), android.R.layout.simple_list_item_1, listItems);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, listItems);
         list.setAdapter(adapter);
     }
 }

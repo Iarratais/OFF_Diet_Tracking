@@ -17,13 +17,13 @@ import java.util.Calendar;
 public class MySQLiteHelper extends SQLiteOpenHelper{
 
     // Common
-    private static final int DATABASE_VERSION = 5;
+    private static final int DATABASE_VERSION = 6;
     private static final String DATABASE_NAME = "diet.db";
     private static final String USER_TABLE = "user";
     private static final String TODAY_TABLE = "today";
     private static final String TODAY_STATS_TABLE = "todaystats";
     private static final String HISTORY_TABLE = "history";
-    private static final String WEIGHT_HISTORY_TABLE = "weighthistory";
+    private static final String WEIGHT_HISTORY_TABLE = "weight_history";
     private static final String GOALS_TABLE = "goals";
 
     // User table
@@ -51,6 +51,17 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
     private static final String TODAY_STATS_KEY_SALT = "salt";
     private static final String TODAY_STATS_KEY_SODIUM = "sodium";
 
+    // History table
+    private static final String HISTORY_KEY_ID = "history_id";
+    private static final String HISTORY_DATE = "date";
+    private static final String HISTORY_CALORIES = "calories";
+    private static final String HISTORY_FAT = "fats";
+    private static final String HISTORY_SAT_FAT = "sat_fat";
+    private static final String HISTORY_SALT = "salt";
+    private static final String HISTORY_SODIUM = "sodium";
+    private static final String HISTORY_CARBS = "carbohydrates";
+    private static final String HISTORY_SUGAR = "sugar";
+    private static final String HISTORY_PROTEIN = "protein";
 
     public MySQLiteHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -63,6 +74,8 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
         createTodayTable(db);
 
         createTodayStatsTable(db);
+
+        createHistoryTable(db);
     }
 
     @Override
@@ -70,6 +83,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
         db.execSQL("DROP TABLE IF EXISTS " + USER_TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + TODAY_TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + TODAY_STATS_TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + HISTORY_TABLE);
         onCreate(db);
     }
 
@@ -209,7 +223,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
         today_stats.put(TODAY_STATS_KEY_DATE, getDate());
         today_stats.put(TODAY_STATS_KEY_CALORIES, food.getCalories());
         today_stats.put(TODAY_STATS_KEY_FAT, food.getFats());
-        today_stats.put(TODAY_STATS_KEY_SATURATED_FAT, food.getSat_fats());
+        today_stats.put(TODAY_STATS_KEY_SATURATED_FAT, food.getSaturated_fat());
         today_stats.put(TODAY_STATS_KEY_CARBOHYDRATES, food.getCarbs());
         today_stats.put(TODAY_STATS_KEY_SUGAR, food.getSugar());
         today_stats.put(TODAY_STATS_KEY_PROTEIN, food.getProtein());
@@ -219,7 +233,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
         db.insert(TODAY_STATS_TABLE, null, today_stats);
 
         System.out.println("DATE: " + getDate() + "\nFOOD NAME: " + food.getName() + "\nBARCODE NUMBER: " + food.getBarcode_number() + "\nCALORIES: " +
-        food.getCalories() + "\nFATS: " + food.getFats() + "\nSATURATED FATS: " + food.getSat_fats() + "\nCARBOHYDRATES: " + food.getCarbs() +
+        food.getCalories() + "\nFATS: " + food.getFats() + "\nSATURATED FATS: " + food.getSaturated_fat() + "\nCARBOHYDRATES: " + food.getCarbs() +
         "\nSUGAR: " + food.getSugar() + "\nPROTEIN: " + food.getProtein() + "\nSALT: " + food.getSalt() + "\nSODIUM: " + food.getSodium() );
     }
 
@@ -244,8 +258,45 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
     /*
     Create the History table
      */
-    public void createHistoryTable() {
+    public void createHistoryTable(SQLiteDatabase db) {
+        db.execSQL("CREATE TABLE " + HISTORY_TABLE + " ( "
+                + HISTORY_KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + HISTORY_DATE + " TEXT, "
+                + HISTORY_CALORIES + " TEXT, "
+                + HISTORY_FAT + " TEXT, "
+                + HISTORY_SAT_FAT + " TEXT, "
+                + HISTORY_SALT + " TEXT, "
+                + HISTORY_SODIUM + " TEXT, "
+                + HISTORY_CARBS + " TEXT, "
+                + HISTORY_SUGAR + " TEXT, "
+                + HISTORY_PROTEIN + " TEXT)");
+        System.out.println("History table success");
+    }
 
+    public void createHistoryEntry(Food food){
+        ContentValues cv = new ContentValues();
+        cv.put(HISTORY_DATE, food.getDate());
+        cv.put(HISTORY_CALORIES, food.getCalories());
+        cv.put(HISTORY_FAT, food.getFats());
+        cv.put(HISTORY_SAT_FAT, food.getSaturated_fat());
+        cv.put(HISTORY_SALT, food.getSalt());
+        cv.put(HISTORY_SODIUM, food.getSodium());
+        cv.put(HISTORY_CARBS, food.getCarbs());
+        cv.put(HISTORY_SUGAR, food.getSugar());
+        cv.put(HISTORY_PROTEIN, food.getProtein());
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        System.out.println("HISTORY TABLE INSERTED: " + db.insert(HISTORY_TABLE, null, cv));
+    }
+
+    public Cursor getHistory() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.rawQuery("SELECT * FROM " + HISTORY_TABLE, null);
+    }
+
+    public void clearHistory(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("DELETE FROM " + HISTORY_TABLE);
     }
 
     /*
@@ -277,7 +328,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
             month = "0" + temp;
         }
 
-        System.out.println("Date: " + day + month + year);
+        System.out.println("Date: " + day + "-" + month + "-" + year);
         return day + month + year;
     }
 }

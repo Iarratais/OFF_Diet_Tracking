@@ -6,6 +6,8 @@ import android.app.FragmentManager;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+
+import com.karl.examples.HistorySamples;
 import com.karl.fragments.AddToDatabaseFragment;
 import com.karl.fragments.DiaryFragment;
 import com.karl.fragments.GoalsFragment;
@@ -90,6 +92,10 @@ public class MainActivity extends AppCompatActivity
         Cursor res = db.returnTodaysEntries();
         System.out.println("Today entries: " + res.getCount());
         System.out.println("Res Column Count: " + res.getColumnCount());
+
+        HistorySamples hist = new HistorySamples(db);
+        hist.setUpStats();
+        //db.clearHistory();
     }
 
     @Override

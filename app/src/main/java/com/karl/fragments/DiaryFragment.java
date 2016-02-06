@@ -1,9 +1,7 @@
 package com.karl.fragments;
 
 
-import android.app.AlertDialog;
 import android.app.DialogFragment;
-import android.content.DialogInterface;
 import android.graphics.Typeface;
 import com.karl.models.Food;
 import com.karl.fyp.MainActivity;
@@ -77,7 +75,7 @@ public class DiaryFragment extends Fragment {
             String listItem = ef.get(i).getName() + "\n"
                     + getString(R.string.calories) + " " + ef.get(i).getCalories()
                     + "\n" + getString(R.string.fat) + " " + ef.get(i).getFats()
-                    + "\n" + getString(R.string.saturated_fat) + " " + ef.get(i).getSat_fats()
+                    + "\n" + getString(R.string.saturated_fat) + " " + ef.get(i).getSaturated_fat()
                     + "\n" + getString(R.string.carbohydrate) + " " + ef.get(i).getCarbs()
                     + "\n" + getString(R.string.sugar) + " " + ef.get(i).getSugar()
                     + "\n" + getString(R.string.protein) + " " + ef.get(i).getProtein()

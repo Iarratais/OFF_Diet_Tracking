@@ -1,9 +1,7 @@
 package com.karl.fragments;
 
-import android.app.AlertDialog;
 import android.app.DialogFragment;
 import android.app.Fragment;
-import android.content.DialogInterface;
 import android.database.Cursor;
 import android.graphics.Typeface;
 import com.karl.models.Food;
@@ -414,7 +412,7 @@ public class TodayFragment extends Fragment {
         for (int i = 0; i < ef.size(); i++) {
             temp_calories += Float.parseFloat(ef.get(i).getCalories());
             temp_fat += Float.parseFloat(ef.get(i).getFats());
-            temp_sat_fat += Float.parseFloat(ef.get(i).getSat_fats());
+            temp_sat_fat += Float.parseFloat(ef.get(i).getSaturated_fat());
             temp_carbs += Float.parseFloat(ef.get(i).getCarbs());
             temp_sugar += Float.parseFloat(ef.get(i).getSugar());
             temp_protein += Float.parseFloat(ef.get(i).getProtein());
@@ -472,7 +470,7 @@ public class TodayFragment extends Fragment {
                 if(res.getString(0).equals(foods.get(i).getId())){
                     foods.get(i).setCalories(res.getString(2));
                     foods.get(i).setFats(res.getString(3));
-                    foods.get(i).setSat_fats(res.getString(4));
+                    foods.get(i).setSaturated_fat(res.getString(4));
                     foods.get(i).setCarbs(res.getString(5));
                     foods.get(i).setSugar(res.getString(6));
                     foods.get(i).setProtein(res.getString(7));

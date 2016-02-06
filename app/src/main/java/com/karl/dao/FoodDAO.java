@@ -130,7 +130,7 @@ public class FoodDAO implements IFoodDAO {
             food.setBarcode_number(searchBarcode);
             food.setCalories(energy);
             food.setFats(fat);
-            food.setSat_fats(saturated_fat);
+            food.setSaturated_fat(saturated_fat);
             food.setCarbs(carbohydrates);
             food.setSugar(sugar);
             food.setProtein(protein);
@@ -220,7 +220,7 @@ public class FoodDAO implements IFoodDAO {
             foodServing.setBarcode_number(searchBarcode);
             foodServing.setCalories(energy_serving);
             foodServing.setFats(fat_serving);
-            foodServing.setSat_fats(saturated_fat_serving);
+            foodServing.setSaturated_fat(saturated_fat_serving);
             foodServing.setCarbs(carbohydrates_serving);
             foodServing.setSugar(sugar_serving);
             foodServing.setProtein(protein_serving);

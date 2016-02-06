@@ -1,5 +1,6 @@
 package com.karl.fragments;
 
+import android.content.Context;
 import android.database.Cursor;
 import com.karl.fyp.MainActivity;
 import com.karl.fyp.MySQLiteHelper;
@@ -21,7 +22,16 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
 public class ProfileFragment extends Fragment {
+
+    private static final String FILE_NAME = "user_profile";
+    private static final String READ_ERROR = "information could not be read";
 
     // Spinners
     Spinner gender;
@@ -53,11 +63,12 @@ public class ProfileFragment extends Fragment {
 
         db = new MySQLiteHelper((MainActivity) getActivity());
 
-        getInformationFromDatabase();
 
         setUpViews();
 
-        insertDataIntoViews();
+        getInformationFromDatabase();
+
+
 
         hideSaveButton();
 
@@ -146,12 +157,8 @@ public class ProfileFragment extends Fragment {
     }
 
     public void getInformationFromViews() {
-        String user_gender = gender.getSelectedItem().toString();
-        String name = user_name.getText().toString();
-        String height = user_height.getText().toString();
-        String weight = user_weight.getText().toString();
 
-        db.updateUser(name, user_gender, weight, height);
+        db.updateUser(user_name.getText().toString(), gender.getSelectedItem().toString(), user_weight.getText().toString(), user_height.getText().toString());
 
         ((MainActivity) getActivity()).setNameHeader();
 
@@ -168,20 +175,26 @@ public class ProfileFragment extends Fragment {
     public void getInformationFromDatabase() {
         Cursor res = db.getUser();
 
-        while(res.moveToNext()) {
-            name_user = res.getString(1);
-            gender_user = res.getString(2);
-            height_user = res.getString(4);
-            weight_user = res.getString(3);
+        System.out.println(res.getColumnCount());
+        if(res.getCount() == 0){
+
+        } else {
+            while (res.moveToNext()) {
+                user_name.setText(res.getString(1));
+                ArrayAdapter adapter = (ArrayAdapter) gender.getAdapter();
+                gender.setSelection(adapter.getPosition(res.getString(2)));
+                user_height.setText(res.getString(4));
+                user_weight.setText(res.getString(3));
+            }
         }
     }
 
-    public void insertDataIntoViews() {
-        user_name.setText(name_user);
-        user_height.setText(height_user);
-        user_weight.setText(weight_user);
+    public void insertDataIntoViews(String name_, String gender_, String height_, String weight_) {
+        user_name.setText(name_);
+        user_height.setText(height_);
+        user_weight.setText(weight_);
         ArrayAdapter adapter = (ArrayAdapter) gender.getAdapter();
-        gender.setSelection(adapter.getPosition(gender_user));
+        gender.setSelection(adapter.getPosition(gender_));
     }
 
     public void showSaveButton() {
@@ -191,4 +204,5 @@ public class ProfileFragment extends Fragment {
     public void hideSaveButton() {
         save_changes.setVisibility(View.GONE);
     }
+
 }

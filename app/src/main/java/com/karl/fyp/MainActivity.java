@@ -93,8 +93,12 @@ public class MainActivity extends AppCompatActivity
         System.out.println("Today entries: " + res.getCount());
         System.out.println("Res Column Count: " + res.getColumnCount());
 
-        HistorySamples hist = new HistorySamples(db);
-        hist.setUpStats();
+        //db.createUser("Karl", "Male", "190", "180");
+
+        // Set up random data into the history database for testing purposes
+        //HistorySamples hist = new HistorySamples(db);
+        //hist.setUpStatsJan();
+        //hist.setUpStatsFeb();
         //db.clearHistory();
     }
 

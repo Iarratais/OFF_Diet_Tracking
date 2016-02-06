@@ -297,6 +297,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
     public void clearHistory(){
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("DELETE FROM " + HISTORY_TABLE);
+        System.out.println("HISTORY TABLE CLEARED");
     }
 
     /*

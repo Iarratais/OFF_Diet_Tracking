@@ -26,6 +26,8 @@
 
     <!-- History fragment -->
     <string name="history_fragment_title">History</string>
+    <string name="more">more</string>
+    <string name="less">less</string>
 
     <!-- Lookup fragment -->
     <string name="lookup_fragment_title">Barcode Search</string>

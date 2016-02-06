@@ -95,7 +95,7 @@ public class HistoryFragment extends Fragment {
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getActivity(), "YAY + " + position, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Position: " + position, Toast.LENGTH_SHORT).show();
             }
         });
     }

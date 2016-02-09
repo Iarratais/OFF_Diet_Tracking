@@ -9,7 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class SearchFragment extends Fragment {
+public class SearchFragment extends android.support.v4.app.Fragment {
 
     @Nullable
     @Override

@@ -3,6 +3,7 @@
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="Records_and_goals">Records \u0026 Goals</string>
 
     <!-- MainActivity -->
     <string name="main_activity_new">New</string>
@@ -33,12 +34,15 @@
     <string name="lookup_fragment_title">Barcode Search</string>
     <string name="lookup_fragment_scan">Scan</string>
     <string name="lookup_fragment_your_barcode_needs_13_digits">Please enter a 13 digit barcode</string>
+    <string name="lookup_fragment_serving_size">Serving size :</string>
 
     <!-- Search fragment -->
     <string name="search_fragment_title">Search</string>
 
     <!-- Goals fragment -->
     <string name="goals_fragment_title">Goals</string>
+    <string name="goals_fragment_update_successful">Your goals have been updated</string>
+    <string name="goals_fragment_update_failure">Your goals have not been updated</string>
 
     <!-- Progress fragment -->
     <string name="progress_fragment_title">Progress</string>
@@ -54,6 +58,10 @@
 
     <!-- ResultPerServingFragment -->
 
+    <!-- Analysis fragment -->
+    <string name="analysis_fragment_title">Diet Analysis</string>
+    <string name="analysis_fragment_You_exceeded_goal">You exceeded your %1$s goal %1$d time</string>
+    <string name="analysis_fragment_You_exceeded_goals">You exceeded your %1$s goal %1$d times</string>
 
     <!-- Settings Activity -->
     <string name="settings_fragment_title">Settings</string>
@@ -68,7 +76,7 @@
     <string name="profile_fragment_male">Male</string>
     <string name="profile_fragment_female">Female</string>
     <string name="profile_fragment_weight">Weight (kgs)</string>
-    <string name="profile_fragment_height">Height (cms)</string>
+    <string name="profile_fragment_height">Height (m)</string>
     <string name="profile_fragment_save_changes">Save Changes</string>
     <string name="profile_fragment_saved">Profile updated</string>
 
@@ -97,23 +105,9 @@
     <string name="grams">grams</string>
     <string name="slash"> / </string>
     <string name="cancel">Cancel</string>
-
-    <!-- Misc strings -->
-    <string name="lorem_ipsum">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac ipsum magna. Nam at nunc pretium, aliquet mauris sed, efficitur ex.
-        Duis hendrerit, lorem quis laoreet feugiat, arcu velit interdum lorem, et commodo turpis ligula eu nisi. Mauris tempus tempor ultricies.
-        Sed vel finibus mauris. Suspendisse sed odio scelerisque, facilisis est sed, hendrerit lectus. In laoreet eros a lorem sagittis, sit amet
-        euismod turpis rhoncus.\n\n
-
-        Phasellus non pharetra ante. Duis et interdum enim, et condimentum eros. Vestibulum egestas felis non nisl lacinia, et eleifend metus
-        lacinia. Vestibulum ornare nibh sit amet lobortis volutpat. Vivamus consequat sollicitudin lacus in gravida. Pellentesque eget lectus
-        est. Fusce semper risus eros, eu eleifend purus commodo vitae.
-
-        Phasellus bibendum vel ante sit amet dapibus. Sed auctor sem turpis, et cursus augue porttitor scelerisque. Duis at gravida metus. Cum
-        sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus consectetur pellentesque ex vitae aliquet.
-        Aenean ipsum lectus, efficitur sit amet massa vitae, faucibus vulputate odio. Cras in sem vehicula, placerat nisl ac, lacinia enim. Sed
-        ut quam nulla.
-    </string>
+    <string name="save_changes">Save Changes</string>
+    <string name="month">Month</string>
+    <string name="year">Year</string>
 
     <!-- Errors -->
     <string name="error_sorry_check_your_network_settings">Please check your network settings</string>
@@ -122,8 +116,6 @@
 <!-- TODO: Remove or change this placeholder text -->
     <string name="title_activity_search_result">SearchResultActivity</string>
 
-<!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <string name="title_activity_barcode_scanner">BarcodeScannerActivity</string>
     <string name="dummy_button">Dummy Button</string>
@@ -156,5 +148,11 @@
     <string name="october">October</string>
     <string name="november">November</string>
     <string name="december">December</string>
+    <string name="title_activity_analysis">AnalysisActivity</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

@@ -33,7 +33,7 @@ import java.awt.font.TextAttribute;
  *
  * Copyright Karl Jones 2016
  */
-public class LookupFragment extends Fragment {
+public class LookupFragment extends android.support.v4.app.Fragment {
 
     View rootView;
 

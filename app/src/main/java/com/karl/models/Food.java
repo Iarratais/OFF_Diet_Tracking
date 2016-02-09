@@ -19,6 +19,7 @@ public class Food {
     private String protein = null;
     private String salt = null;
     private String sodium = null;
+    private String serving_size = null;
 
     public Food() {
     }
@@ -148,10 +149,19 @@ public class Food {
         this.sodium = sodium;
     }
 
+    public String getServing_size() {
+        return serving_size;
+    }
+
+    public void setServing_size(String serving_size) {
+        this.serving_size = serving_size;
+    }
+
     @Override
     public String toString() {
         return "Food{" +
-                "id='" + id + '\'' +
+                "date='" + date + '\'' +
+                ", id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", barcode_number='" + barcode_number + '\'' +
                 ", calories='" + calories + '\'' +
@@ -162,6 +172,7 @@ public class Food {
                 ", protein='" + protein + '\'' +
                 ", salt='" + salt + '\'' +
                 ", sodium='" + sodium + '\'' +
+                ", serving_size='" + serving_size + '\'' +
                 '}';
     }
 

@@ -1,6 +1,5 @@
 package com.karl.fragments;
 
-
 import android.app.DialogFragment;
 import android.graphics.Typeface;
 import com.karl.models.Food;
@@ -19,7 +18,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class DiaryFragment extends Fragment {
+public class DiaryFragment extends android.support.v4.app.Fragment {
 
     View rootView;
     ArrayList<Food> ef;
@@ -65,7 +64,7 @@ public class DiaryFragment extends Fragment {
      */
     public void makeAlert(String title, String message) {
         DialogFragment dialogFragment = MyAlertDialogFragment.newInstance(title, message);
-        dialogFragment.show(getFragmentManager(), "dialog");
+        dialogFragment.show(getActivity().getFragmentManager(), "dialog");
     }
 
     public void makeList() {

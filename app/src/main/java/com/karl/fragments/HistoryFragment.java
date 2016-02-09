@@ -25,7 +25,7 @@ import java.util.ArrayList;
  *
  * Copyright Karl Jones 2016
  */
-public class HistoryFragment extends Fragment {
+public class HistoryFragment extends android.support.v4.app.Fragment {
 
     MySQLiteHelper db;
 

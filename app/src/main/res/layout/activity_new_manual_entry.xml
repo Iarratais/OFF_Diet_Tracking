@@ -111,6 +111,54 @@
                 />
         </android.support.design.widget.TextInputLayout>
 
+        <!-- Salt -->
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/til8"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp">
+
+            <EditText
+                android:maxLength="55"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:paddingTop="20dp"
+                android:paddingBottom="20dp"
+                android:fontFamily="sans-serif"
+                android:id="@+id/new_salt"
+                android:hint="@string/salt"
+                android:inputType="textCapWords|numberDecimal"
+                android:imeOptions="actionNext"
+                />
+        </android.support.design.widget.TextInputLayout>
+
+        <!-- Sodium -->
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/til9"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp">
+
+            <EditText
+                android:maxLength="55"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:paddingTop="20dp"
+                android:paddingBottom="20dp"
+                android:fontFamily="sans-serif"
+                android:id="@+id/new_sodium"
+                android:hint="@string/sodium"
+                android:inputType="textCapWords|numberDecimal"
+                android:imeOptions="actionNext"
+                />
+        </android.support.design.widget.TextInputLayout>
+
         <!-- Carbohydrates -->
         <android.support.design.widget.TextInputLayout
             android:id="@+id/til5"
@@ -183,52 +231,6 @@
                 />
         </android.support.design.widget.TextInputLayout>
 
-        <!-- Salt -->
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/til8"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginLeft="10dp">
 
-            <EditText
-                android:maxLength="55"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:paddingTop="20dp"
-                android:paddingBottom="20dp"
-                android:fontFamily="sans-serif"
-                android:id="@+id/new_salt"
-                android:hint="@string/salt"
-                android:inputType="textCapWords|numberDecimal"
-                android:imeOptions="actionNext"
-                />
-        </android.support.design.widget.TextInputLayout>
-
-        <!-- Sodium -->
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/til9"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginLeft="10dp">
-
-            <EditText
-                android:maxLength="55"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:paddingTop="20dp"
-                android:paddingBottom="20dp"
-                android:fontFamily="sans-serif"
-                android:id="@+id/new_sodium"
-                android:hint="@string/sodium"
-                android:inputType="textCapWords|numberDecimal"
-                android:imeOptions="actionNext"
-                />
-        </android.support.design.widget.TextInputLayout>
     </LinearLayout>
 </ScrollView>

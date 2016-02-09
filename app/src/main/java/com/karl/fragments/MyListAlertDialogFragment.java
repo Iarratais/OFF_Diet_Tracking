@@ -19,7 +19,7 @@ import com.karl.fyp.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MyListAlertDialogFragment extends DialogFragment {
+public class MyListAlertDialogFragment extends android.support.v4.app.DialogFragment {
 
 
     public MyListAlertDialogFragment() {
@@ -54,7 +54,7 @@ public class MyListAlertDialogFragment extends DialogFragment {
                     public void onClick(DialogInterface dialog, int which) {
                         String itemClicked = arrayAdapter.getItem(which);
                         if(itemClicked.equals(getString(R.string.main_activity_new_entry_barcode))){
-                            getFragmentManager().beginTransaction().replace(R.id.content_frame, new LookupFragment()).commit();
+                            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new LookupFragment()).commit();
                         } else if (itemClicked.equals(getString(R.string.main_activity_new_entry_manual))){
                             startActivity(new Intent(getActivity(), NewManualEntryActivity.class));
                         }

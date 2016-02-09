@@ -1,20 +1,14 @@
 package com.karl.fragments;
 
-import android.content.Context;
-import android.database.Cursor;
-import com.karl.fyp.MainActivity;
-import com.karl.fyp.MySQLiteHelper;
-
-import android.os.Bundle;
 import android.app.Fragment;
+import android.database.Cursor;
+import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.karl.fyp.R;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -22,16 +16,13 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import com.karl.fyp.MainActivity;
+import com.karl.fyp.MySQLiteHelper;
+import com.karl.fyp.R;
 
-public class ProfileFragment extends Fragment {
+import java.text.DecimalFormat;
 
-    private static final String FILE_NAME = "user_profile";
-    private static final String READ_ERROR = "information could not be read";
+public class ProfileFragment extends android.support.v4.app.Fragment {
 
     // Spinners
     Spinner gender;
@@ -44,11 +35,6 @@ public class ProfileFragment extends Fragment {
     MySQLiteHelper db;
 
     View rootView;
-
-    String name_user;
-    String gender_user;
-    String height_user;
-    String weight_user;
 
     Button save_changes;
 
@@ -68,7 +54,7 @@ public class ProfileFragment extends Fragment {
 
         getInformationFromDatabase();
 
-
+        System.out.println("BMI: " + calculateBMI());
 
         hideSaveButton();
 
@@ -205,4 +191,17 @@ public class ProfileFragment extends Fragment {
         save_changes.setVisibility(View.GONE);
     }
 
+    // (weight in kg) / height in meters * height in meters
+
+    public String calculateBMI() {
+        String example_height = "1.90";      // meters
+        String example_weight = "80";
+
+        Double bmi;
+
+        bmi = Double.parseDouble(example_weight) / (Double.parseDouble(example_height) * Double.parseDouble(example_height));
+
+        DecimalFormat df = new DecimalFormat("#.00");
+        return String.valueOf(df.format(bmi));
+    }
 }

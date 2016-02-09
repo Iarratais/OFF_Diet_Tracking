@@ -118,6 +118,13 @@ public class ResultPer100Fragment extends android.support.v4.app.Fragment {
         text.setTextSize(20);
     }
 
+
+    public void pushInformationBack(Food food){
+        if(food != null) {
+            ((SearchResultActivity) getActivity()).setInformation(food);
+        }
+    }
+
     class BarcodeSearchTask extends AsyncTask<String, Integer, List<Food>> {
 
         @Override
@@ -167,6 +174,9 @@ public class ResultPer100Fragment extends android.support.v4.app.Fragment {
             final String proteins = df.format(Float.parseFloat(foods.get(0).getProtein())) + getString(R.string.grams_abbv);
 
             ((SearchResultActivity) getActivity()).setTitle(foods.get(0).getName());
+
+            // Send the serving size back to the activity
+            pushInformationBack(foods.get(0));
 
             calories_stats.setText(calories);
             fat_stats.setText(fats);

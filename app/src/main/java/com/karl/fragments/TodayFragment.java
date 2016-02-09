@@ -32,7 +32,7 @@ import java.util.ArrayList;
  *
  * Copyright Karl Jones 2016
  */
-public class TodayFragment extends Fragment {
+public class TodayFragment extends android.support.v4.app.Fragment {
 
     View rootView;
     ArrayList<Food> ef;
@@ -260,21 +260,21 @@ public class TodayFragment extends Fragment {
         sugar_stats.setText(sugars);
         protein_stats.setText(proteins);
 
-        setColorOfCalories(goals.getCalories(), calories_stats);
-        setColorOfFat(goals.getFat(), fat_stats);
-        setColorOfSatFat(goals.getSat_fat(), sat_fat_stats);
-        setColorOfSalt(goals.getSalt(), salt_stats);
-        setColorOfSodium(goals.getSodium(), sodium_stats);
-        setColorOfCarbs(goals.getCarbs(), carbs_stats);
-        setColorOfSugar(goals.getSugar(), sugar_stats);
-        setColorofProteins(goals.getProtein(), protein_stats);
+        setColorOfCalories(Float.parseFloat(goals.getCalories()), calories_stats);
+        setColorOfFat(Float.parseFloat(goals.getFat()), fat_stats);
+        setColorOfSatFat(Float.parseFloat(goals.getSat_fat()), sat_fat_stats);
+        setColorOfSalt(Float.parseFloat(goals.getSalt()), salt_stats);
+        setColorOfSodium(Float.parseFloat(goals.getSodium()), sodium_stats);
+        setColorOfCarbs(Float.parseFloat(goals.getCarbs()), carbs_stats);
+        setColorOfSugar(Float.parseFloat(goals.getSugar()), sugar_stats);
+        setColorofProteins(Float.parseFloat(goals.getProtein()), protein_stats);
 
         calories_stats.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String message = getString(R.string.today_fragment_your_calorie_goal) + " " + goals.getCalories();
-                if (Float.parseFloat(total_calories) > goals.getCalories()) {
-                    message += "\n" + getString(R.string.today_fragment_you_have_exceeded_your_goal) + " " + df.format(Float.parseFloat(total_calories) - goals.getCalories());
+                if (Float.parseFloat(total_calories) > Float.parseFloat(goals.getCalories())) {
+                    message += "\n" + getString(R.string.today_fragment_you_have_exceeded_your_goal) + " " + df.format(Float.parseFloat(total_calories) - Float.parseFloat(goals.getCalories()));
                 }
                 makeAlert(getString(R.string.calories), message);
             }
@@ -283,8 +283,8 @@ public class TodayFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 String message = getString(R.string.today_fragment_your_fat_goal) + " " + goals.getFat();
-                if (Float.parseFloat(total_fats) > goals.getFat()) {
-                    message += "\n" + getString(R.string.today_fragment_you_have_exceeded_your_goal) + " " + df.format(Float.parseFloat(total_fats) - goals.getFat());
+                if (Float.parseFloat(total_fats) > Float.parseFloat(goals.getFat())) {
+                    message += "\n" + getString(R.string.today_fragment_you_have_exceeded_your_goal) + " " + df.format(Float.parseFloat(total_fats) - Float.parseFloat(goals.getFat()));
                 }
                 makeAlert(getString(R.string.fat), message);
             }
@@ -293,8 +293,8 @@ public class TodayFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 String message = getString(R.string.today_fragment_your_sat_fat_goal) + " " + goals.getSat_fat();
-                if (Float.parseFloat(total_sat_fats) > goals.getSat_fat()) {
-                    message += "\n" + getString(R.string.today_fragment_you_have_exceeded_your_goal) + " " + df.format(Float.parseFloat(total_sat_fats) - goals.getSat_fat());
+                if (Float.parseFloat(total_sat_fats) > Float.parseFloat(goals.getSat_fat())) {
+                    message += "\n" + getString(R.string.today_fragment_you_have_exceeded_your_goal) + " " + df.format(Float.parseFloat(total_sat_fats) - Float.parseFloat(goals.getSat_fat()));
                 }
                 makeAlert(getString(R.string.saturated_fat), message);
             }
@@ -303,8 +303,8 @@ public class TodayFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 String message = getString(R.string.today_fragment_your_salt_goal) + " " + goals.getSalt();
-                if (Float.parseFloat(total_salt) > goals.getSalt()) {
-                    message += "\n" + getString(R.string.today_fragment_you_have_exceeded_your_goal) + " " + df.format(Float.parseFloat(total_salt) - goals.getSalt());
+                if (Float.parseFloat(total_salt) > Float.parseFloat(goals.getSalt())) {
+                    message += "\n" + getString(R.string.today_fragment_you_have_exceeded_your_goal) + " " + df.format(Float.parseFloat(total_salt) - Float.parseFloat(goals.getSalt()));
                 }
                 makeAlert(getString(R.string.salt), message);
             }
@@ -313,8 +313,8 @@ public class TodayFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 String message = getString(R.string.today_fragment_your_sodium_goal) + " " + goals.getSodium();
-                if (Float.parseFloat(total_sodium) > goals.getSodium()) {
-                    message += "\n" + getString(R.string.today_fragment_you_have_exceeded_your_goal) + " " + df.format(Float.parseFloat(total_sodium) - goals.getSodium());
+                if (Float.parseFloat(total_sodium) > Float.parseFloat(goals.getSodium())) {
+                    message += "\n" + getString(R.string.today_fragment_you_have_exceeded_your_goal) + " " + df.format(Float.parseFloat(total_sodium) - Float.parseFloat(goals.getSodium()));
                 }
                 makeAlert(getString(R.string.sodium), message);
             }
@@ -323,8 +323,8 @@ public class TodayFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 String message = getString(R.string.today_fragment_your_carbs_goal) + " " + goals.getCarbs();
-                if (Float.parseFloat(total_carbs) > goals.getCarbs()) {
-                    message += "\n" + getString(R.string.today_fragment_you_have_exceeded_your_goal) + " " + df.format(Float.parseFloat(total_carbs) - goals.getCarbs());
+                if (Float.parseFloat(total_carbs) > Float.parseFloat(goals.getCarbs())) {
+                    message += "\n" + getString(R.string.today_fragment_you_have_exceeded_your_goal) + " " + df.format(Float.parseFloat(total_carbs) - Float.parseFloat(goals.getCarbs()));
                 }
                 makeAlert(getString(R.string.carbohydrate), message);
             }
@@ -333,8 +333,8 @@ public class TodayFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 String message = getString(R.string.today_fragment_your_sugar_goal) + " " + goals.getSugar();
-                if (Float.parseFloat(total_sugar) > goals.getSugar()) {
-                    message += "\n" + getString(R.string.today_fragment_you_have_exceeded_your_goal) + " " + df.format(Float.parseFloat(total_sugar) - goals.getSugar());
+                if (Float.parseFloat(total_sugar) > Float.parseFloat(goals.getSugar())) {
+                    message += "\n" + getString(R.string.today_fragment_you_have_exceeded_your_goal) + " " + df.format(Float.parseFloat(total_sugar) - Float.parseFloat(goals.getSugar()));
                 }
                 makeAlert(getString(R.string.sugar), message);
             }
@@ -343,8 +343,8 @@ public class TodayFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 String message = getString(R.string.today_fragment_your_protein_goal) + " " + goals.getProtein();
-                if (Float.parseFloat(total_protein) > goals.getProtein()) {
-                    message += "\n" + getString(R.string.today_fragment_you_have_exceeded_your_goal) + " " + df.format(Float.parseFloat(total_protein) - goals.getProtein());
+                if (Float.parseFloat(total_protein) > Float.parseFloat(goals.getProtein())) {
+                    message += "\n" + getString(R.string.today_fragment_you_have_exceeded_your_goal) + " " + df.format(Float.parseFloat(total_protein) - Float.parseFloat(goals.getProtein()));
                 }
                 makeAlert(getString(R.string.protein), message);
             }
@@ -436,7 +436,7 @@ public class TodayFragment extends Fragment {
 
     public void makeAlert(String title, String message) {
         DialogFragment dialogFragment = MyAlertDialogFragment.newInstance(title, message);
-        dialogFragment.show(getFragmentManager(), "dialog");
+        dialogFragment.show(getActivity().getFragmentManager(), "dialog");
     }
 
     ArrayList<Food> foods;

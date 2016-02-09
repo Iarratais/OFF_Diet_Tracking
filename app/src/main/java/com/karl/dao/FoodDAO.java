@@ -53,6 +53,7 @@ public class FoodDAO implements IFoodDAO {
             String protein = "0";
             String salt = "0";
             String sodium = "0";
+            String serving_size = "0";
 
             try {
                 product_name = product.getString("product_name");
@@ -126,6 +127,14 @@ public class FoodDAO implements IFoodDAO {
                 e.printStackTrace();
             }
 
+            try{
+                serving_size = product.getString("serving_size");
+                if(serving_size.equals(""))
+                    serving_size = "0";
+            } catch (JSONException e){
+                e.printStackTrace();
+            }
+
             food.setName(product_name);
             food.setBarcode_number(searchBarcode);
             food.setCalories(energy);
@@ -136,6 +145,7 @@ public class FoodDAO implements IFoodDAO {
             food.setProtein(protein);
             food.setSalt(salt);
             food.setSodium(sodium);
+            food.setServing_size(serving_size);
             System.out.println("FOOD : " + food.toString());
 
             allFoods.add(food);
@@ -226,6 +236,7 @@ public class FoodDAO implements IFoodDAO {
             foodServing.setProtein(protein_serving);
             foodServing.setSalt(salt_serving);
             foodServing.setSodium(sodium_serving);
+            foodServing.setServing_size(serving_size);
             System.out.println("FOODSERVING : " + foodServing.toString());
 
             allFoods.add(foodServing);

@@ -90,7 +90,7 @@
         android:layout_width="283dp"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        android:text="Save Changes"
+        android:text="@string/save_changes"
         android:id="@+id/save_changes"
         style="?android:attr/borderlessButtonStyle"
         android:textColor="@color/colorAccent"

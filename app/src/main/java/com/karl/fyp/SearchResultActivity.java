@@ -1,13 +1,21 @@
 package com.karl.fyp;
 
+import android.app.Dialog;
+import android.app.DialogFragment;
+import android.content.DialogInterface;
 import android.content.Intent;
+
+import com.karl.fragments.MyInputAlertDialogFragment;
 import com.karl.fragments.ResultPer100Fragment;
 import com.karl.fragments.ResultServingFragment;
 
 import com.karl.fyp.R;
+import com.karl.models.Food;
+
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
@@ -17,10 +25,15 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import java.text.DecimalFormat;
 
 public class SearchResultActivity extends AppCompatActivity {
 
@@ -34,6 +47,9 @@ public class SearchResultActivity extends AppCompatActivity {
     public String section_2 = "Per Serving";
 
     private final static int NUM_PAGES = 2;
+
+    // Food information
+    Food food;
 
     public String barcode_number = "4260427290019";
 
@@ -54,6 +70,8 @@ public class SearchResultActivity extends AppCompatActivity {
             barcode_number = "4260427290019";
         }
 
+        food = new Food();
+
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -69,8 +87,7 @@ public class SearchResultActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Eventually add to today database - not implemented", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                showInputDialog();
             }
         });
     }
@@ -93,12 +110,24 @@ public class SearchResultActivity extends AppCompatActivity {
             MenuItem addButton = menu.findItem(R.id.action_save);
             addButton.setVisible(false);
         }
-
         return super.onPrepareOptionsMenu(menu);
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()) {
+            case R.id.action_save:
+                showInputDialog();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     public void setTitle(String title) {
-        getSupportActionBar().setTitle(title);
+        try {
+            getSupportActionBar().setTitle(title);
+        } catch (NullPointerException e){
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -155,6 +184,36 @@ public class SearchResultActivity extends AppCompatActivity {
         double x = Math.pow(wi, 2);
         double y = Math.pow(hi, 2);
         return Math.sqrt(x+y);
+    }
+
+    public void setInformation(Food foods){
+        food = foods;
+        calculateInformation(food, "160");
+    }
+
+    public void showInputDialog() {
+        android.support.v4.app.DialogFragment dialog = MyInputAlertDialogFragment.newInstance(getString(R.string.lookup_fragment_serving_size) + " " + food.getServing_size());
+        dialog.show(getSupportFragmentManager(), "dialog");
+    }
+
+    public void calculateInformation(Food foods, String amt){
+        Food gram = new Food();
+        final DecimalFormat df = new DecimalFormat("#.###");
+
+        gram.setName(foods.getName());
+        gram.setCalories(String.valueOf(df.format((Double.parseDouble(food.getCalories()) / 100) * Integer.valueOf(amt))));
+        gram.setFats(String.valueOf(df.format((Double.parseDouble(food.getFats()) / 100) * Integer.valueOf(amt))));
+        gram.setSaturated_fat(String.valueOf(df.format((Double.parseDouble(food.getSaturated_fat()) / 100) * Integer.valueOf(amt))));
+        gram.setCarbs(String.valueOf(df.format((Double.parseDouble(food.getCarbs()) / 100) * Integer.valueOf(amt))));
+        gram.setSugar(String.valueOf(df.format((Double.parseDouble(food.getSugar()) / 100) * Integer.valueOf(amt))));
+        gram.setProtein(String.valueOf(df.format((Double.parseDouble(food.getProtein()) / 100) * Integer.valueOf(amt))));
+        gram.setSalt(String.valueOf(df.format((Double.parseDouble(food.getSaturated_fat()) / 100) * Integer.valueOf(amt))));
+        gram.setSodium(String.valueOf(df.format((Double.parseDouble(food.getSodium()) / 100) * Integer.valueOf(amt))));
+        gram.setBarcode_number(food.getBarcode_number());
+
+        MySQLiteHelper db = new MySQLiteHelper(this);
+        db.createNewEntryToday(gram);
+        System.out.println(gram.toString());
     }
 }
 

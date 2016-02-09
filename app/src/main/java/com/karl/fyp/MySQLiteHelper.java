@@ -5,7 +5,10 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import com.google.android.gms.drive.Contents;
 import com.karl.models.Food;
+import com.karl.models.Goals;
 
 import java.util.Calendar;
 
@@ -17,7 +20,7 @@ import java.util.Calendar;
 public class MySQLiteHelper extends SQLiteOpenHelper{
 
     // Common
-    private static final int DATABASE_VERSION = 6;
+    private static final int DATABASE_VERSION = 7;
     private static final String DATABASE_NAME = "diet.db";
     private static final String USER_TABLE = "user";
     private static final String TODAY_TABLE = "today";
@@ -63,6 +66,17 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
     private static final String HISTORY_SUGAR = "sugar";
     private static final String HISTORY_PROTEIN = "protein";
 
+    // Goals table
+    private static final String GOAL_KEY_ID = "goal_id";
+    private static final String GOAL_CALORIES = "calories";
+    private static final String GOAL_FAT = "fat";
+    private static final String GOAL_SATURATED_FAT = "saturated_fat";
+    private static final String GOAL_SALT = "salt";
+    private static final String GOAL_SODIUM = "sodium";
+    private static final String GOAL_CARBS = "carbohydrates";
+    private static final String GOAL_SUGAR = "sugar";
+    private static final String GOAL_PROTEIN = "protein";
+
     public MySQLiteHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -76,6 +90,8 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
         createTodayStatsTable(db);
 
         createHistoryTable(db);
+
+        createGoalsTable(db);
     }
 
     @Override
@@ -84,6 +100,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
         db.execSQL("DROP TABLE IF EXISTS " + TODAY_TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + TODAY_STATS_TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + HISTORY_TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + GOALS_TABLE);
         onCreate(db);
     }
 
@@ -294,17 +311,74 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
         return db.rawQuery("SELECT * FROM " + HISTORY_TABLE, null);
     }
 
+    /**
+     * Clear the history table
+     */
     public void clearHistory(){
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("DELETE FROM " + HISTORY_TABLE);
         System.out.println("HISTORY TABLE CLEARED");
     }
 
-    /*
-    Create the Goals table
+    /**
+     * Create the goals table
+     * @param db the database object
      */
-    public void createGoalsTable() {
+    public void createGoalsTable(SQLiteDatabase db) {
+        db.execSQL("CREATE TABLE " + GOALS_TABLE + "("
+                + GOAL_KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + GOAL_CALORIES + " TEXT, "
+                + GOAL_FAT + " TEXT, "
+                + GOAL_SATURATED_FAT + " TEXT, "
+                + GOAL_SALT + " TEXT, "
+                + GOAL_SODIUM + " TEXT, "
+                + GOAL_CARBS + " TEXT, "
+                + GOAL_SUGAR + " TEXT, "
+                + GOAL_PROTEIN + " TEXT)");
+    }
 
+    /**
+     * Set the users default goals, based on the recommended daily allowance
+     */
+    public void setDefaultGoals() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(GOAL_CALORIES, "2000");
+        cv.put(GOAL_FAT, "65");
+        cv.put(GOAL_SATURATED_FAT, "20");
+        cv.put(GOAL_SALT, "5");
+        cv.put(GOAL_SODIUM, "2.4");
+        cv.put(GOAL_CARBS, "300");
+        cv.put(GOAL_SUGAR, "160");
+        cv.put(GOAL_PROTEIN, "50");
+
+        System.out.println("Default goals set in slow: " + db.insert(GOALS_TABLE, null, cv));
+    }
+
+    /**
+     * Update the goals table
+     * @param goal object containing information about the goals
+     */
+    public int updateGoals(Goals goal){
+        ContentValues cv = new ContentValues();
+        cv.put(GOAL_CALORIES, goal.getCalories());
+        cv.put(GOAL_FAT, goal.getFat());
+        cv.put(GOAL_SATURATED_FAT, goal.getSat_fat());
+        cv.put(GOAL_SALT, goal.getSalt());
+        cv.put(GOAL_SODIUM, goal.getSodium());
+        cv.put(GOAL_CARBS, goal.getCarbs());
+        cv.put(GOAL_SUGAR, goal.getSugar());
+        cv.put(GOAL_PROTEIN, goal.getProtein());
+
+        String selection = GOAL_KEY_ID + " LIKE ?";
+        String[] selectionArgs = {"1"};
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.update(GOALS_TABLE, cv, selection, selectionArgs);
+    }
+
+    public Cursor getGoals() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.rawQuery("SELECT * FROM " + GOALS_TABLE, null);
     }
 
     /*

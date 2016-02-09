@@ -21,7 +21,7 @@ import android.webkit.WebViewClient;
  *
  * Copyright Karl Jones 2016
  */
-public class AddToDatabaseFragment extends Fragment {
+public class AddToDatabaseFragment extends android.support.v4.app.Fragment {
 
     public static String url = "http://world.openfoodfacts.org/";
 
@@ -42,7 +42,7 @@ public class AddToDatabaseFragment extends Fragment {
     }
 
     public void goToWebsite() {
-        WebView wv = (WebView) rootView.findViewById(R.id.webView);
+        final WebView wv = (WebView) rootView.findViewById(R.id.webView);
         wv.getSettings().setJavaScriptEnabled(true);
         wv.getSettings().setAppCacheEnabled(true);
         wv.loadUrl(url);
@@ -66,14 +66,15 @@ public class AddToDatabaseFragment extends Fragment {
             // If the page hits an error, allow the user to go to the settings
             @Override
             public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
-//                Snackbar.make(rootView.findViewById(android.R.id.content), getString(R.string.sorry_check_your_network_settings), Snackbar.LENGTH_INDEFINITE)
-//                        .setAction(getString(R.string.settings_title), new View.OnClickListener() {
-//                            @Override
-//                            public void onClick(View v) {
-//                                startActivityForResult(new Intent(android.provider.Settings.ACTION_SETTINGS), 0);
-//                            }
-//                        })
-//                        .show();
+                Snackbar.make(rootView, getString(R.string.error_sorry_check_your_network_settings), Snackbar.LENGTH_INDEFINITE)
+                        .setAction(getString(R.string.settings_fragment_title), new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                startActivityForResult(new Intent(android.provider.Settings.ACTION_SETTINGS), 0);
+                            }
+                        })
+                        .show();
+                wv.setVisibility(View.GONE);
             }
         });
     }

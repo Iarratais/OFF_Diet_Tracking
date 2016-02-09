@@ -18,11 +18,13 @@ import com.karl.fragments.ProfileFragment;
 import com.karl.fragments.ProgressFragment;
 import com.karl.fragments.SearchFragment;
 import com.karl.fragments.TodayFragment;
+import com.karl.fragments.AnalysisActivityFragment;
 
 import com.karl.fyp.R;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -84,19 +86,28 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         View header = navigationView.getHeaderView(0);
+        header.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new ProfileFragment()).commit();
+                DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+                drawer.closeDrawer(GravityCompat.START);
+            }
+        });
         navigation_bar_name_space = (TextView) header.findViewById(R.id.nav_bar_name);
         setNameHeader();
 
-        getFragmentManager().beginTransaction().replace(R.id.content_frame, new TodayFragment()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new TodayFragment()).commit();
 
         Cursor res = db.returnTodaysEntries();
         System.out.println("Today entries: " + res.getCount());
         System.out.println("Res Column Count: " + res.getColumnCount());
 
         //db.createUser("Karl", "Male", "190", "180");
+        //db.setDefaultGoals();
 
         // Set up random data into the history database for testing purposes
-        //HistorySamples hist = new HistorySamples(db);
+        HistorySamples hist = new HistorySamples(db);
         //hist.setUpStatsJan();
         //hist.setUpStatsFeb();
         //db.clearHistory();
@@ -149,7 +160,7 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
 
         // Get the fragment manager
-        FragmentManager fm = getFragmentManager();
+        android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
 
         // Handle navigation view item clicks here.
         int id = item.getItemId();
@@ -220,14 +231,6 @@ public class MainActivity extends AppCompatActivity
             setNewEntryVisibility(true);
 
             hideFAB();
-        } else if (id == R.id.nav_profile) {
-
-            // Switch to the Profile tab
-            fm.beginTransaction().replace(R.id.content_frame, new ProfileFragment()).commit();
-
-            setNewEntryVisibility(false);
-
-            hideFAB();
         } else if (id == R.id.nav_diary) {
 
             // Switch to the Profile tab
@@ -236,6 +239,8 @@ public class MainActivity extends AppCompatActivity
             setNewEntryVisibility(true);
 
             hideFAB();
+        } else if (id == R.id.nav_analysis) {
+            fm.beginTransaction().replace(R.id.content_frame, new AnalysisActivityFragment()).commit();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -244,8 +249,8 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void userEntryChoice() {
-        DialogFragment newFrag = MyListAlertDialogFragment.newInstance(R.string.main_activity_new_entry_options_title);
-        newFrag.show(getFragmentManager(), "dialog");
+        android.support.v4.app.DialogFragment newFrag = MyListAlertDialogFragment.newInstance(R.string.main_activity_new_entry_options_title);
+        newFrag.show(getSupportFragmentManager(), "dialog");
     }
 
     /**

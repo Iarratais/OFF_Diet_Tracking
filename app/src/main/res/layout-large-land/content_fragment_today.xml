@@ -192,7 +192,6 @@
             android:layout_below="@id/today_entries_title"
             android:layout_toRightOf="@id/today_chart"
             android:id="@+id/today_chart_information"
-            android:text="@string/lorem_ipsum"
             />
 
     </RelativeLayout>

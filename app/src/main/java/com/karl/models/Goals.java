@@ -3,76 +3,76 @@ package com.karl.models;
 
 public class Goals {
 
-    private float calories;
-    private float fat;
-    private float sat_fat;
-    private float sodium;
-    private float carbs;
-    private float protein;
-    private float sugar;
-    private float salt;
+    private String calories;
+    private String fat;
+    private String sat_fat;
+    private String sodium;
+    private String carbs;
+    private String protein;
+    private String sugar;
+    private String salt;
 
-    public float getCalories() {
+    public String getCalories() {
         return calories;
     }
 
-    public void setCalories(float calories) {
+    public void setCalories(String calories) {
         this.calories = calories;
     }
 
-    public float getFat() {
+    public String getFat() {
         return fat;
     }
 
-    public void setFat(float fat) {
+    public void setFat(String fat) {
         this.fat = fat;
     }
 
-    public float getSat_fat() {
+    public String getSat_fat() {
         return sat_fat;
     }
 
-    public void setSat_fat(float sat_fat) {
+    public void setSat_fat(String sat_fat) {
         this.sat_fat = sat_fat;
     }
 
-    public float getSodium() {
+    public String getSodium() {
         return sodium;
     }
 
-    public void setSodium(float sodium) {
+    public void setSodium(String sodium) {
         this.sodium = sodium;
     }
 
-    public float getCarbs() {
+    public String getCarbs() {
         return carbs;
     }
 
-    public void setCarbs(float carbs) {
+    public void setCarbs(String carbs) {
         this.carbs = carbs;
     }
 
-    public float getProtein() {
+    public String getProtein() {
         return protein;
     }
 
-    public void setProtein(float protein) {
+    public void setProtein(String protein) {
         this.protein = protein;
     }
 
-    public float getSugar() {
+    public String getSugar() {
         return sugar;
     }
 
-    public void setSugar(float sugar) {
+    public void setSugar(String sugar) {
         this.sugar = sugar;
     }
 
-    public float getSalt() {
+    public String getSalt() {
         return salt;
     }
 
-    public void setSalt(float salt) {
+    public void setSalt(String salt) {
         this.salt = salt;
     }
 

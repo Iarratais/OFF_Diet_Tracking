@@ -4,6 +4,8 @@ package com.karl.fragments;
 import android.graphics.Typeface;
 import com.karl.dao.FoodDAO;
 import com.karl.dao.IFoodDAO;
+import com.karl.fyp.NewManualEntryActivity;
+import com.karl.fyp.SearchResultActivity;
 import com.karl.models.Food;
 
 import android.os.AsyncTask;
@@ -116,6 +118,8 @@ public class ResultServingFragment extends android.support.v4.app.Fragment {
         text.setTextSize(20);
     }
 
+
+
     class BarcodeSearchTask extends AsyncTask<String, Integer, List<Food>> {
 
         @Override
@@ -166,6 +170,8 @@ public class ResultServingFragment extends android.support.v4.app.Fragment {
             final String carbs = df.format(Float.parseFloat(foods.get(1).getCarbs())) + getString(R.string.grams_abbv);
             final String sugars = df.format(Float.parseFloat(foods.get(1).getSugar())) + getString(R.string.grams_abbv);
             final String proteins = df.format(Float.parseFloat(foods.get(1).getProtein())) + getString(R.string.grams_abbv);
+
+
 
             calories_stats.setText(calories);
             fat_stats.setText(fats);

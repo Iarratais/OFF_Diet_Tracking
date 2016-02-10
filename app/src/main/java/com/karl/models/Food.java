@@ -14,7 +14,7 @@ public class Food {
     private String calories = null;
     private String fats = null;
     private String saturated_fat = null;
-    private String carbs = null;
+    private String carbohydrates = null;
     private String sugar = null;
     private String protein = null;
     private String salt = null;
@@ -24,21 +24,21 @@ public class Food {
     public Food() {
     }
 
-    public Food(String name, String barcode_number, String calories, String fats, String saturated_fat, String salt, String sodium, String carbs, String sugar, String protein) {
+    public Food(String name, String barcode_number, String calories, String fats, String saturated_fat, String salt, String sodium, String carbohydrates, String sugar, String protein) {
         this.date = getCurrentDate();
         this.name = name;
         this.barcode_number = barcode_number;
         this.calories = calories;
         this.fats = fats;
         this.saturated_fat = saturated_fat;
-        this.carbs = carbs;
+        this.carbohydrates = carbohydrates;
         this.sugar = sugar;
         this.protein = protein;
         this.salt = salt;
         this.sodium = sodium;
     }
 
-    public Food(String id, String name, String barcode_number, String calories, String fats, String saturated_fat, String salt, String sodium, String carbs, String sugar, String protein) {
+    public Food(String id, String name, String barcode_number, String calories, String fats, String saturated_fat, String salt, String sodium, String carbohydrates, String sugar, String protein) {
         this.date = getCurrentDate();
         this.id = id;
         this.name = name;
@@ -46,7 +46,7 @@ public class Food {
         this.calories = calories;
         this.fats = fats;
         this.saturated_fat = saturated_fat;
-        this.carbs = carbs;
+        this.carbohydrates = carbohydrates;
         this.sugar = sugar;
         this.protein = protein;
         this.salt = salt;
@@ -109,12 +109,12 @@ public class Food {
         this.saturated_fat = saturated_fat;
     }
 
-    public String getCarbs() {
-        return carbs;
+    public String getCarbohydrates() {
+        return carbohydrates;
     }
 
-    public void setCarbs(String carbs) {
-        this.carbs = carbs;
+    public void setCarbohydrates(String carbohydrates) {
+        this.carbohydrates = carbohydrates;
     }
 
     public String getSugar() {
@@ -167,7 +167,7 @@ public class Food {
                 ", calories='" + calories + '\'' +
                 ", fats='" + fats + '\'' +
                 ", saturated_fat='" + saturated_fat + '\'' +
-                ", carbs='" + carbs + '\'' +
+                ", carbohydrates='" + carbohydrates + '\'' +
                 ", sugar='" + sugar + '\'' +
                 ", protein='" + protein + '\'' +
                 ", salt='" + salt + '\'' +

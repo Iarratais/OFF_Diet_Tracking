@@ -14,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.karl.fyp.MainActivity;
@@ -49,7 +50,6 @@ public class ProfileFragment extends android.support.v4.app.Fragment {
 
         db = new MySQLiteHelper((MainActivity) getActivity());
 
-
         setUpViews();
 
         getInformationFromDatabase();
@@ -61,6 +61,9 @@ public class ProfileFragment extends android.support.v4.app.Fragment {
         return rootView;
     }
 
+    /**
+     * Set up the views for the fragment.
+     */
     public void setUpViews() {
         save_changes = (Button) rootView.findViewById(R.id.save_changes);
         save_changes.setOnClickListener(new View.OnClickListener() {
@@ -125,6 +128,9 @@ public class ProfileFragment extends android.support.v4.app.Fragment {
         public void afterTextChanged(Editable s) {}
     };
 
+    /**
+     * Set up the spinners in the fragment.
+     */
     public void setUpSpinners() {
         String[] genders = getResources().getStringArray(R.array.gender);
         ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(getActivity(), android.R.layout.simple_spinner_dropdown_item, genders);
@@ -142,8 +148,10 @@ public class ProfileFragment extends android.support.v4.app.Fragment {
         });
     }
 
+    /**
+     * Get the information from the views.
+     */
     public void getInformationFromViews() {
-
         db.updateUser(user_name.getText().toString(), gender.getSelectedItem().toString(), user_weight.getText().toString(), user_height.getText().toString());
 
         ((MainActivity) getActivity()).setNameHeader();
@@ -154,16 +162,24 @@ public class ProfileFragment extends android.support.v4.app.Fragment {
 
     }
 
+    /**
+     * This saves the changes to the user profile and updates the users BMI display.
+     */
     public void updateUser() {
         getInformationFromViews();
+        calculateBMI();
+        ((MainActivity)getActivity()).setNameHeader();
     }
 
+    /**
+     * Get information from the database regarding the user.
+     */
     public void getInformationFromDatabase() {
         Cursor res = db.getUser();
 
         System.out.println(res.getColumnCount());
         if(res.getCount() == 0){
-
+            System.out.println("No users exist");
         } else {
             while (res.moveToNext()) {
                 user_name.setText(res.getString(1));
@@ -175,33 +191,45 @@ public class ProfileFragment extends android.support.v4.app.Fragment {
         }
     }
 
-    public void insertDataIntoViews(String name_, String gender_, String height_, String weight_) {
-        user_name.setText(name_);
-        user_height.setText(height_);
-        user_weight.setText(weight_);
-        ArrayAdapter adapter = (ArrayAdapter) gender.getAdapter();
-        gender.setSelection(adapter.getPosition(gender_));
-    }
-
+    /**
+     * Show ths save changes button.
+     */
     public void showSaveButton() {
         save_changes.setVisibility(View.VISIBLE);
     }
 
+    /**
+     * Hide the save changes button.
+     */
     public void hideSaveButton() {
         save_changes.setVisibility(View.GONE);
     }
 
-    // (weight in kg) / height in meters * height in meters
-
+    /**
+     * Calculate the users BMI and set the information for it.
+     * @return users BMI.
+     */
     public String calculateBMI() {
-        String example_height = "1.90";      // meters
-        String example_weight = "80";
-
-        Double bmi;
-
-        bmi = Double.parseDouble(example_weight) / (Double.parseDouble(example_height) * Double.parseDouble(example_height));
+        Double bmi = Double.parseDouble(user_weight.getText().toString()) / (Double.parseDouble(user_height.getText().toString()) * Double.parseDouble(user_height.getText().toString()));
 
         DecimalFormat df = new DecimalFormat("#.00");
+
+        TextView bmi_display = (TextView) rootView.findViewById(R.id.profile_bmi_display);
+        bmi_display.setText(getString(R.string.profile_fragment_your_BMI_is, String.valueOf(df.format(bmi))));
+
+        TextView bmi_display_information = (TextView) rootView.findViewById(R.id.profile_bmi_display_information);
+        if(bmi <= 18.4){
+            bmi_display_information.setText(getString(R.string.profile_fragment_BMI_underweight));
+        } else if (bmi >= 18.5 && bmi <= 24.9){
+            bmi_display_information.setText(getString(R.string.profile_fragment_BMI_normal));
+        } else if (bmi >= 25 && bmi <= 29.9){
+            bmi_display_information.setText(getString(R.string.profile_fragment_BMI_overweight));
+        } else if (bmi > 29.9) {
+            bmi_display_information.setText(getString(R.string.profile_fragment_BMI_obese));
+        } else {
+            bmi_display_information.setVisibility(View.GONE);
+        }
+
         return String.valueOf(df.format(bmi));
     }
 }

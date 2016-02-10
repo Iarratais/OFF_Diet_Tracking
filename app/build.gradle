@@ -9,8 +9,8 @@ android {
         applicationId "com.karl.fyp"
         minSdkVersion 16
         targetSdkVersion 23
-        versionCode 4
-        versionName "0.0.038"
+        versionCode 5
+        versionName "0.0.041"
     }
     buildTypes {
         release {

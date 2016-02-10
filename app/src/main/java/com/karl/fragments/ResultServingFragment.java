@@ -4,8 +4,6 @@ package com.karl.fragments;
 import android.graphics.Typeface;
 import com.karl.dao.FoodDAO;
 import com.karl.dao.IFoodDAO;
-import com.karl.fyp.NewManualEntryActivity;
-import com.karl.fyp.SearchResultActivity;
 import com.karl.models.Food;
 
 import android.os.AsyncTask;
@@ -118,8 +116,6 @@ public class ResultServingFragment extends android.support.v4.app.Fragment {
         text.setTextSize(20);
     }
 
-
-
     class BarcodeSearchTask extends AsyncTask<String, Integer, List<Food>> {
 
         @Override
@@ -167,7 +163,7 @@ public class ResultServingFragment extends android.support.v4.app.Fragment {
             final String sat_fats = df.format(Float.parseFloat(foods.get(1).getSaturated_fat())) + getString(R.string.grams_abbv);
             final String salts = df.format(Float.parseFloat(foods.get(1).getSalt())) + getString(R.string.grams_abbv);
             final String sodiums = df.format(Float.parseFloat(foods.get(1).getSodium())) + getString(R.string.grams_abbv);
-            final String carbs = df.format(Float.parseFloat(foods.get(1).getCarbs())) + getString(R.string.grams_abbv);
+            final String carbs = df.format(Float.parseFloat(foods.get(1).getCarbohydrates())) + getString(R.string.grams_abbv);
             final String sugars = df.format(Float.parseFloat(foods.get(1).getSugar())) + getString(R.string.grams_abbv);
             final String proteins = df.format(Float.parseFloat(foods.get(1).getProtein())) + getString(R.string.grams_abbv);
 
@@ -184,7 +180,7 @@ public class ResultServingFragment extends android.support.v4.app.Fragment {
 
             HorizontalBarChart chart = (HorizontalBarChart) rootView.findViewById(R.id.today_chart);
             BarData chartData = new BarData(getXAxisValues(), getDataSet(foods.get(1).getFats(), foods.get(1).getSaturated_fat(), foods.get(1).getProtein(),
-                    foods.get(1).getSodium(), foods.get(1).getSalt(), foods.get(1).getSugar(), foods.get(1).getCarbs()));
+                    foods.get(1).getSodium(), foods.get(1).getSalt(), foods.get(1).getSugar(), foods.get(1).getCarbohydrates()));
             chart.setData(chartData);
             chart.setDescription(" ");
             chart.animateXY(2000, 2000);

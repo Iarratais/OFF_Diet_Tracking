@@ -248,6 +248,9 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
+    /**
+     * Ask the user how they would like to add an entry.
+     */
     public void userEntryChoice() {
         android.support.v4.app.DialogFragment newFrag = MyListAlertDialogFragment.newInstance(R.string.main_activity_new_entry_options_title);
         newFrag.show(getSupportFragmentManager(), "dialog");
@@ -265,22 +268,35 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+    /**
+     * Show the floating action button.
+     */
     public void showFAB(){
         Animation bottomUp = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.bottom_up);
         fab.setAnimation(bottomUp);
         fab.setVisibility(View.VISIBLE);
     }
 
+    /**
+     * Hide the floating action button.
+     */
     public void hideFAB(){
         if(fab.isShown()){
             fab.setVisibility(View.GONE);
         }
     }
 
+    /**
+     * Set the menu item for a new entry to show or hide.
+     * @param visibility visible or gone.
+     */
     public void setNewEntryVisibility(boolean visibility) {
         menu.findItem(R.id.action_new_entry).setVisible(visibility);
     }
 
+    /**
+     * Get the users name from the database.
+     */
     public void getNameFromDatabase() {
         Cursor res = db.getUser();
 
@@ -289,6 +305,9 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+    /**
+     * Set the user's name into the drawers header.
+     */
     public void setNameHeader() {
         getNameFromDatabase();
         navigation_bar_name_space.setText(name_user);

@@ -86,6 +86,18 @@
             />
     </android.support.design.widget.TextInputLayout>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/profile_bmi_display"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/profile_bmi_display_information"/>
+
     <Button
         android:layout_width="283dp"
         android:layout_height="wrap_content"

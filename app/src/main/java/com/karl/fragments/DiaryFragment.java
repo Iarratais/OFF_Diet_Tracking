@@ -5,7 +5,6 @@ import android.graphics.Typeface;
 import com.karl.models.Food;
 import com.karl.fyp.MainActivity;
 import android.os.Bundle;
-import android.app.Fragment;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -75,7 +74,7 @@ public class DiaryFragment extends android.support.v4.app.Fragment {
                     + getString(R.string.calories) + " " + ef.get(i).getCalories()
                     + "\n" + getString(R.string.fat) + " " + ef.get(i).getFats()
                     + "\n" + getString(R.string.saturated_fat) + " " + ef.get(i).getSaturated_fat()
-                    + "\n" + getString(R.string.carbohydrate) + " " + ef.get(i).getCarbs()
+                    + "\n" + getString(R.string.carbohydrate) + " " + ef.get(i).getCarbohydrates()
                     + "\n" + getString(R.string.sugar) + " " + ef.get(i).getSugar()
                     + "\n" + getString(R.string.protein) + " " + ef.get(i).getProtein()
                     + "\n" + getString(R.string.salt) + " " + ef.get(i).getSalt()

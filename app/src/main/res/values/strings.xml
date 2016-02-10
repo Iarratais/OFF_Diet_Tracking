@@ -54,9 +54,8 @@
     <string name="diary_fragment_title">Diary</string>
     <string name="diary_fragment_todays_entries">Today\'s Entries</string>
 
-    <!-- ResultPer100Fragment -->
-
-    <!-- ResultPerServingFragment -->
+    <!-- SearchresultsActivity -->
+    <string name="search_results_result_added">%1$s has been added to your food diary</string>
 
     <!-- Analysis fragment -->
     <string name="analysis_fragment_title">Diet Analysis</string>
@@ -79,6 +78,11 @@
     <string name="profile_fragment_height">Height (m)</string>
     <string name="profile_fragment_save_changes">Save Changes</string>
     <string name="profile_fragment_saved">Profile updated</string>
+    <string name="profile_fragment_your_BMI_is">Your BMI is %1$s</string>
+    <string name="profile_fragment_BMI_underweight">Underweight: less than 18.5</string>
+    <string name="profile_fragment_BMI_normal">Healthy weight: 18.5 \u2013 24.9 (woohoo!)</string>
+    <string name="profile_fragment_BMI_overweight">Overweight: 25 \u2013 29.9</string>
+    <string name="profile_fragment_BMI_obese">Obesity: 30+</string>
 
     <!-- New Manual Entry Activity -->
     <string name="new_entry_food_name">Food Name</string>
@@ -112,16 +116,16 @@
     <!-- Errors -->
     <string name="error_sorry_check_your_network_settings">Please check your network settings</string>
     <string name="error_item_does_not_exist">Item does not exist</string>
+    <string name="error_please_set_goals_first">Sorry! It appears you have not set goals yet</string>
 
 <!-- TODO: Remove or change this placeholder text -->
     <string name="title_activity_search_result">SearchResultActivity</string>
 
-
     <string name="title_activity_barcode_scanner">BarcodeScannerActivity</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
-
-
+    
+    <!-- Barcode reader activity strings -->
     <string name="ok">OK</string>
     <string name="permission_camera_rationale">Access to the camera is needed for detection</string>
     <string name="no_camera_permission">This application cannot run because it does not have the camera permission.  The application will now exit.</string>

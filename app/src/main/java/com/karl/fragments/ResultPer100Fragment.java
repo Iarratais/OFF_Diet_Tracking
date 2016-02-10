@@ -169,7 +169,7 @@ public class ResultPer100Fragment extends android.support.v4.app.Fragment {
             final String sat_fats = df.format(Float.parseFloat(foods.get(0).getSaturated_fat())) + getString(R.string.grams_abbv);
             final String salts = df.format(Float.parseFloat(foods.get(0).getSalt())) + getString(R.string.grams_abbv);
             final String sodiums = df.format(Float.parseFloat(foods.get(0).getSodium())) + getString(R.string.grams_abbv);
-            final String carbs = df.format(Float.parseFloat(foods.get(0).getCarbs())) + getString(R.string.grams_abbv);
+            final String carbs = df.format(Float.parseFloat(foods.get(0).getCarbohydrates())) + getString(R.string.grams_abbv);
             final String sugars = df.format(Float.parseFloat(foods.get(0).getSugar())) + getString(R.string.grams_abbv);
             final String proteins = df.format(Float.parseFloat(foods.get(0).getProtein())) + getString(R.string.grams_abbv);
 
@@ -189,7 +189,7 @@ public class ResultPer100Fragment extends android.support.v4.app.Fragment {
 
             HorizontalBarChart chart = (HorizontalBarChart) rootView.findViewById(R.id.today_chart);
             BarData chartData = new BarData(getXAxisValues(), getDataSet(foods.get(0).getFats(), foods.get(0).getSaturated_fat(), foods.get(0).getProtein(),
-                    foods.get(0).getSodium(), foods.get(0).getSalt(), foods.get(0).getSugar(), foods.get(0).getCarbs()));
+                    foods.get(0).getSodium(), foods.get(0).getSalt(), foods.get(0).getSugar(), foods.get(0).getCarbohydrates()));
             chart.setData(chartData);
             chart.setDescription(" ");
             chart.animateXY(2000, 2000);

@@ -5,9 +5,9 @@ public class Goals {
 
     private String calories;
     private String fat;
-    private String sat_fat;
+    private String saturatedFat;
     private String sodium;
-    private String carbs;
+    private String carbohydrates;
     private String protein;
     private String sugar;
     private String salt;
@@ -28,12 +28,12 @@ public class Goals {
         this.fat = fat;
     }
 
-    public String getSat_fat() {
-        return sat_fat;
+    public String getSaturatedFat() {
+        return saturatedFat;
     }
 
-    public void setSat_fat(String sat_fat) {
-        this.sat_fat = sat_fat;
+    public void setSaturatedFat(String saturatedFat) {
+        this.saturatedFat = saturatedFat;
     }
 
     public String getSodium() {
@@ -44,12 +44,12 @@ public class Goals {
         this.sodium = sodium;
     }
 
-    public String getCarbs() {
-        return carbs;
+    public String getCarbohydrates() {
+        return carbohydrates;
     }
 
-    public void setCarbs(String carbs) {
-        this.carbs = carbs;
+    public void setCarbohydrates(String carbohydrates) {
+        this.carbohydrates = carbohydrates;
     }
 
     public String getProtein() {
@@ -86,9 +86,9 @@ public class Goals {
         return "Goals{" +
                 "calories=" + calories +
                 ", fat=" + fat +
-                ", sat_fat=" + sat_fat +
+                ", saturatedFat=" + saturatedFat +
                 ", sodium=" + sodium +
-                ", carbs=" + carbs +
+                ", carbohydrates=" + carbohydrates +
                 ", protein=" + protein +
                 ", sugar=" + sugar +
                 ", salt=" + salt +

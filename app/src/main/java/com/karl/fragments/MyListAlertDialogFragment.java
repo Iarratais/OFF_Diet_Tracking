@@ -16,6 +16,8 @@ import android.widget.ArrayAdapter;
 import com.karl.fyp.NewManualEntryActivity;
 import com.karl.fyp.R;
 
+import java.util.ArrayList;
+
 /**
  * A simple {@link Fragment} subclass.
  */

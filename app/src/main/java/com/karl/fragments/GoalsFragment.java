@@ -1,6 +1,5 @@
 package com.karl.fragments;
 
-import android.app.Fragment;
 import com.karl.fyp.MainActivity;
 import com.karl.fyp.MySQLiteHelper;
 import com.karl.fyp.R;
@@ -139,10 +138,10 @@ public class GoalsFragment extends android.support.v4.app.Fragment {
 
         goal.setCalories(calories_view.getText().toString());
         goal.setFat(fat_view.getText().toString());
-        goal.setSat_fat(sat_fat_view.getText().toString());
+        goal.setSaturatedFat(sat_fat_view.getText().toString());
         goal.setSalt(salt_view.getText().toString());
         goal.setSodium(sodium_view.getText().toString());
-        goal.setCarbs(carbs_view.getText().toString());
+        goal.setCarbohydrates(carbs_view.getText().toString());
         goal.setSugar(sugar_view.getText().toString());
         goal.setProtein(protein_view.getText().toString());
 

@@ -6,7 +6,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.google.android.gms.drive.Contents;
 import com.karl.models.Food;
 import com.karl.models.Goals;
 
@@ -241,7 +240,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
         today_stats.put(TODAY_STATS_KEY_CALORIES, food.getCalories());
         today_stats.put(TODAY_STATS_KEY_FAT, food.getFats());
         today_stats.put(TODAY_STATS_KEY_SATURATED_FAT, food.getSaturated_fat());
-        today_stats.put(TODAY_STATS_KEY_CARBOHYDRATES, food.getCarbs());
+        today_stats.put(TODAY_STATS_KEY_CARBOHYDRATES, food.getCarbohydrates());
         today_stats.put(TODAY_STATS_KEY_SUGAR, food.getSugar());
         today_stats.put(TODAY_STATS_KEY_PROTEIN, food.getProtein());
         today_stats.put(TODAY_STATS_KEY_SALT, food.getSalt());
@@ -250,7 +249,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
         db.insert(TODAY_STATS_TABLE, null, today_stats);
 
         System.out.println("DATE: " + getDate() + "\nFOOD NAME: " + food.getName() + "\nBARCODE NUMBER: " + food.getBarcode_number() + "\nCALORIES: " +
-        food.getCalories() + "\nFATS: " + food.getFats() + "\nSATURATED FATS: " + food.getSaturated_fat() + "\nCARBOHYDRATES: " + food.getCarbs() +
+        food.getCalories() + "\nFATS: " + food.getFats() + "\nSATURATED FATS: " + food.getSaturated_fat() + "\nCARBOHYDRATES: " + food.getCarbohydrates() +
         "\nSUGAR: " + food.getSugar() + "\nPROTEIN: " + food.getProtein() + "\nSALT: " + food.getSalt() + "\nSODIUM: " + food.getSodium() );
     }
 
@@ -298,7 +297,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
         cv.put(HISTORY_SAT_FAT, food.getSaturated_fat());
         cv.put(HISTORY_SALT, food.getSalt());
         cv.put(HISTORY_SODIUM, food.getSodium());
-        cv.put(HISTORY_CARBS, food.getCarbs());
+        cv.put(HISTORY_CARBS, food.getCarbohydrates());
         cv.put(HISTORY_SUGAR, food.getSugar());
         cv.put(HISTORY_PROTEIN, food.getProtein());
 
@@ -363,10 +362,10 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
         ContentValues cv = new ContentValues();
         cv.put(GOAL_CALORIES, goal.getCalories());
         cv.put(GOAL_FAT, goal.getFat());
-        cv.put(GOAL_SATURATED_FAT, goal.getSat_fat());
+        cv.put(GOAL_SATURATED_FAT, goal.getSaturatedFat());
         cv.put(GOAL_SALT, goal.getSalt());
         cv.put(GOAL_SODIUM, goal.getSodium());
-        cv.put(GOAL_CARBS, goal.getCarbs());
+        cv.put(GOAL_CARBS, goal.getCarbohydrates());
         cv.put(GOAL_SUGAR, goal.getSugar());
         cv.put(GOAL_PROTEIN, goal.getProtein());
 

@@ -13,6 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
+import com.karl.barcodereader.BarcodeCaptureActivity;
+import com.karl.fyp.BarcodeScannerActivity;
 import com.karl.fyp.NewManualEntryActivity;
 import com.karl.fyp.R;
 
@@ -56,7 +58,7 @@ public class MyListAlertDialogFragment extends android.support.v4.app.DialogFrag
                     public void onClick(DialogInterface dialog, int which) {
                         String itemClicked = arrayAdapter.getItem(which);
                         if(itemClicked.equals(getString(R.string.main_activity_new_entry_barcode))){
-                            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new LookupFragment()).commit();
+                            startActivity(new Intent(getActivity(), BarcodeScannerActivity.class));
                         } else if (itemClicked.equals(getString(R.string.main_activity_new_entry_manual))){
                             startActivity(new Intent(getActivity(), NewManualEntryActivity.class));
                         }

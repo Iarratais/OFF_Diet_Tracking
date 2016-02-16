@@ -3,14 +3,9 @@ package com.karl.fragments;
 import android.app.DialogFragment;
 import android.database.Cursor;
 import android.graphics.Typeface;
-import com.karl.models.Food;
-import com.karl.examples.ExampleGoals;
-import com.karl.models.Goals;
-import com.karl.fyp.MainActivity;
-import com.karl.fyp.MySQLiteHelper;
-import com.karl.fyp.R;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +17,11 @@ import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.karl.fyp.MainActivity;
+import com.karl.fyp.MySQLiteHelper;
+import com.karl.fyp.R;
+import com.karl.models.Food;
+import com.karl.models.Goals;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -33,9 +33,9 @@ import java.util.ArrayList;
  */
 public class TodayFragment extends android.support.v4.app.Fragment {
 
+    private static final String TAG = "TodayFragment";
+
     View rootView;
-    ArrayList<Food> ef;
-    Goals goals;
 
     MySQLiteHelper db;
 
@@ -110,7 +110,7 @@ public class TodayFragment extends android.support.v4.app.Fragment {
     }
 
     /**
-     *
+     * Give the x-axis names
      * @return ArrayList of data for the titles of the chart
      */
     private ArrayList<String> getXAxisValues() {
@@ -126,6 +126,9 @@ public class TodayFragment extends android.support.v4.app.Fragment {
         return xAxis;
     }
 
+    /**
+     * Set the typeface for the information displayed
+     */
     public void setTypeface() {
 
         Typeface titleTypeFace = Typeface.createFromAsset(getActivity().getAssets(), "fonts/CaviarDreams.ttf");
@@ -190,12 +193,19 @@ public class TodayFragment extends android.support.v4.app.Fragment {
         text.setTextSize(20);
     }
 
+    /**
+     * Deal with the information this fragment needs.
+     */
     public void getInformation() {
         getInfoFromToday();
         calculateTotals();
         setUpGoalsTable();
     }
 
+    /**
+     * Get the goals
+     * @return Goal, containing information about the users goals.
+     */
     public Goals getGoalsFromDatabase(){
         Cursor res = db.getGoals();
 
@@ -218,6 +228,9 @@ public class TodayFragment extends android.support.v4.app.Fragment {
         return null;
     }
 
+    /**
+     * Set the information into the buttons.
+     */
     public void setUpGoalsTable() {
         final Goals goals = getGoalsFromDatabase();
         final DecimalFormat df = new DecimalFormat("#.###");
@@ -388,6 +401,9 @@ public class TodayFragment extends android.support.v4.app.Fragment {
         }
     }
 
+    /**
+     * Calculate the totals to be able to display the information.
+     */
     public void calculateTotals() {
         float temp_calories = Float.parseFloat(total_calories);
         float temp_fat = Float.parseFloat(total_fats);
@@ -419,22 +435,33 @@ public class TodayFragment extends android.support.v4.app.Fragment {
         total_sodium = String.valueOf(temp_sodium);
     }
 
+    /**
+     * Create a toast
+     * @param message to be displayed
+     */
     public void makeToast(String message) {
         Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     * Create an alert dialog for the user.
+     * @param title of the alert.
+     * @param message to be contained in the alert.
+     */
     public void makeAlert(String title, String message) {
         DialogFragment dialogFragment = MyAlertDialogFragment.newInstance(title, message);
         dialogFragment.show(getActivity().getFragmentManager(), "dialog");
     }
 
-
+    /**
+     * Get information from the Today table.
+     */
     public void getInfoFromToday() {
         foods = new ArrayList<>();
 
         Cursor res = db.returnTodaysEntries();
         if(res.getCount() == 0) {
-            System.out.println("There is no information in todays entries");
+            Log.d(TAG, "There is no information in todays entries");
         } else {
             while(res.moveToNext()){
                 Food food = new Food();
@@ -447,11 +474,14 @@ public class TodayFragment extends android.support.v4.app.Fragment {
         getInfoFromTodayStats();
     }
 
+    /**
+     * Get information from the Today Stats table.
+     */
     public void getInfoFromTodayStats() {
         Cursor res = db.returnTodayStatsEntries();
         System.out.println(res.getColumnCount());
         if(res.getCount() == 0) {
-            System.out.println("There is no information in todays stat entries");
+            Log.d(TAG, "There is no information in todays stat entries");
         } else {
             int i = 0;
             while(res.moveToNext()){

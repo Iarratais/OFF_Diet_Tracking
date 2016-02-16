@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +25,8 @@ import com.karl.fyp.R;
 import java.text.DecimalFormat;
 
 public class ProfileFragment extends android.support.v4.app.Fragment {
+
+    private static final String TAG = "ProfileFragment";
 
     // Spinners
     Spinner gender;
@@ -179,7 +182,7 @@ public class ProfileFragment extends android.support.v4.app.Fragment {
 
         System.out.println(res.getColumnCount());
         if(res.getCount() == 0){
-            System.out.println("No users exist");
+            Log.d(TAG, "No users exist");
         } else {
             while (res.moveToNext()) {
                 user_name.setText(res.getString(1));

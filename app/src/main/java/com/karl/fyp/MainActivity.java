@@ -1,14 +1,28 @@
 package com.karl.fyp;
 
-import android.app.AlertDialog;
-import android.app.DialogFragment;
-import android.app.FragmentManager;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.util.DisplayMetrics;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.TextView;
 
 import com.karl.examples.HistorySamples;
 import com.karl.fragments.AddToDatabaseFragment;
+import com.karl.fragments.AnalysisActivityFragment;
 import com.karl.fragments.DiaryFragment;
 import com.karl.fragments.GoalsFragment;
 import com.karl.fragments.HistoryFragment;
@@ -18,33 +32,13 @@ import com.karl.fragments.ProfileFragment;
 import com.karl.fragments.ProgressFragment;
 import com.karl.fragments.SearchFragment;
 import com.karl.fragments.TodayFragment;
-import com.karl.fragments.AnalysisActivityFragment;
-
-import com.karl.fyp.R;
-import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.NavigationView;
-import android.support.v4.app.Fragment;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.util.DisplayMetrics;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.ArrayAdapter;
-import android.widget.TextView;
 
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private static final double SMALL_DEVICE_THRESHOLD = 4.9;
+    private static final String TAG = "MainActivity";
 
     FloatingActionButton fab;
 
@@ -100,8 +94,8 @@ public class MainActivity extends AppCompatActivity
         getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new TodayFragment()).commit();
 
         Cursor res = db.returnTodaysEntries();
-        System.out.println("Today entries: " + res.getCount());
-        System.out.println("Res Column Count: " + res.getColumnCount());
+        Log.d(TAG, "Today Entries: " + res.getCount());
+        Log.d(TAG, "Res Column Count: " + res.getColumnCount());
 
         //db.createUser("Karl", "Male", "190", "180");
         //db.setDefaultGoals();
@@ -264,7 +258,8 @@ public class MainActivity extends AppCompatActivity
         try {
             getSupportActionBar().setTitle(title);
         } catch (NullPointerException e){
-            System.out.println("MainActivity - setActionBarTitle(): " + e);
+            System.out.println(TAG + "setActionBarTitle(): " + e);
+
         }
     }
 

@@ -1,24 +1,15 @@
 package com.karl.fyp;
 
 import android.content.Intent;
-
-import com.karl.fragments.DiaryFragment;
-import com.karl.fragments.MyInputAlertDialogFragment;
-import com.karl.fragments.ResultPer100Fragment;
-import com.karl.fragments.ResultServingFragment;
-
-import com.karl.models.Food;
-
-import android.support.design.widget.TabLayout;
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -26,13 +17,16 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.karl.fragments.MyInputAlertDialogFragment;
+import com.karl.fragments.ResultPer100Fragment;
+import com.karl.fragments.ResultServingFragment;
+import com.karl.models.Food;
+
 import java.text.DecimalFormat;
 
 public class SearchResultActivity extends AppCompatActivity {
 
     private static final double SMALL_DEVICE_THRESHOLD = 4.4;
-
-    public static final int INPUT_DIALOG = 1;
 
     private SectionsPagerAdapter mSectionsPagerAdapter;
 
@@ -42,8 +36,6 @@ public class SearchResultActivity extends AppCompatActivity {
     public String section_2 = "Per Serving";
 
     private final static int NUM_PAGES = 2;
-
-    private static int AMOUNT = 0;
 
     // Food information
     Food food;

@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,8 @@ import android.widget.Toast;
  * Copyright Karl Jones 2016
  */
 public class GoalsFragment extends android.support.v4.app.Fragment {
+
+    private static final String TAG = "GoalsFragment";
 
     MySQLiteHelper db;
 
@@ -107,7 +110,7 @@ public class GoalsFragment extends android.support.v4.app.Fragment {
         Cursor res = db.getGoals();
 
         if(res.getCount() == 0) {
-            System.out.println("Nothing in goals table");
+            Log.d(TAG, "Nothing in goals table");
         } else {
             while(res.moveToNext()) {
                 calories_view.setText(res.getString(1));

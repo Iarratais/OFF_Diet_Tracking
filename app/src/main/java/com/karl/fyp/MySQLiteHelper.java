@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import com.karl.models.Food;
 import com.karl.models.Goals;
@@ -17,6 +18,8 @@ import java.util.Calendar;
  * Copyright Karl Jones 2016
  */
 public class MySQLiteHelper extends SQLiteOpenHelper{
+
+    private static final String TAG = "MySQLiteHelper";
 
     // Common
     private static final int DATABASE_VERSION = 7;
@@ -115,7 +118,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
                         + USER_KEY_WEIGHT + " TEXT, "
                         + USER_KEY_HEIGHT + " TEXT)"
         );
-        System.out.println("MySQLiteHelper: createUserTable() - run");
+        Log.d(TAG, "createuserTable run");
     }
 
     /**
@@ -204,7 +207,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
                         + TODAY_KEY_FOOD_NAME + " TEXT, "
                         + TODAY_KEY_BARCODE_NO + " TEXT)"
         );
-        System.out.println("MySQLiteHelper: createTodayTable() - run");
+        Log.d(TAG, "createTodayTable run");
     }
 
 
@@ -286,7 +289,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
                 + HISTORY_CARBS + " TEXT, "
                 + HISTORY_SUGAR + " TEXT, "
                 + HISTORY_PROTEIN + " TEXT)");
-        System.out.println("History table success");
+        Log.d(TAG, "createHistoryTable run");
     }
 
     public void createHistoryEntry(Food food){
@@ -302,7 +305,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
         cv.put(HISTORY_PROTEIN, food.getProtein());
 
         SQLiteDatabase db = this.getWritableDatabase();
-        System.out.println("HISTORY TABLE INSERTED: " + db.insert(HISTORY_TABLE, null, cv));
+        Log.d(TAG, "HISTORY TABLE INSERTED: " + db.insert(HISTORY_TABLE, null, cv));
     }
 
     public Cursor getHistory() {
@@ -316,7 +319,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
     public void clearHistory(){
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("DELETE FROM " + HISTORY_TABLE);
-        System.out.println("HISTORY TABLE CLEARED");
+        Log.d(TAG, "History database cleared");
     }
 
     /**
@@ -334,6 +337,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
                 + GOAL_CARBS + " TEXT, "
                 + GOAL_SUGAR + " TEXT, "
                 + GOAL_PROTEIN + " TEXT)");
+        Log.d(TAG, "createGoalsTable run");
     }
 
     /**

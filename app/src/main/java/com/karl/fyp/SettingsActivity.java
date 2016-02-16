@@ -1,6 +1,5 @@
 package com.karl.fyp;
 
-import com.karl.fyp.R;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
@@ -15,7 +14,7 @@ public class SettingsActivity extends AppCompatActivity {
         try {
             getSupportActionBar().setTitle(getString(R.string.settings_fragment_title));
         } catch (NullPointerException e) {
-            System.out.println("SettingsActivity - onCreate(): " + e);
+            e.printStackTrace();
         }
     }
 

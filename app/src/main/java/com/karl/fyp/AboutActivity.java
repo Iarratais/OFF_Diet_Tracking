@@ -1,9 +1,5 @@
 package com.karl.fyp;
 
-import com.karl.fyp.R;
-
-import android.content.pm.PackageInfo;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
@@ -19,7 +15,7 @@ public class AboutActivity extends AppCompatActivity {
         try {
             getSupportActionBar().setTitle(getString(R.string.about_fragment_title));
         } catch (NullPointerException e) {
-            System.out.println("AboutActivity - onCreate(): " + e);
+            e.printStackTrace();
         }
 
 

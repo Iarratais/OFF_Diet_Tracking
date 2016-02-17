@@ -118,7 +118,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
                         + USER_KEY_WEIGHT + " TEXT, "
                         + USER_KEY_HEIGHT + " TEXT)"
         );
-        Log.d(TAG, "createuserTable run");
+        Log.d(TAG, "createUserTable run");
     }
 
     /**
@@ -139,6 +139,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
         cv.put(USER_KEY_HEIGHT, height);
 
         long result = db.insert(USER_TABLE, null, cv);
+        Log.d(TAG, "User created: " + result);
 
         db.close();
 
@@ -193,6 +194,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
         String selection = USER_KEY_ID + " LIKE ?";
         String[] selectionArgs = { "1" };
         db.update(USER_TABLE, cv, selection, selectionArgs);
+        Log.d(TAG, "User updated");
         db.close();
     }
 
@@ -251,11 +253,15 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
 
         db.insert(TODAY_STATS_TABLE, null, today_stats);
 
-        System.out.println("DATE: " + getDate() + "\nFOOD NAME: " + food.getName() + "\nBARCODE NUMBER: " + food.getBarcode_number() + "\nCALORIES: " +
+        Log.d(TAG, "DATE: " + getDate() + "\nFOOD NAME: " + food.getName() + "\nBARCODE NUMBER: " + food.getBarcode_number() + "\nCALORIES: " +
         food.getCalories() + "\nFATS: " + food.getFats() + "\nSATURATED FATS: " + food.getSaturated_fat() + "\nCARBOHYDRATES: " + food.getCarbohydrates() +
         "\nSUGAR: " + food.getSugar() + "\nPROTEIN: " + food.getProtein() + "\nSALT: " + food.getSalt() + "\nSODIUM: " + food.getSodium() );
     }
 
+    /**
+     * Return all entries from the today table for current date.
+     * @return cursor with today table information.
+     */
     public Cursor returnTodaysEntries() {
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -264,14 +270,66 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
     }
 
     /**
-     *
-     * @return cursor containing todats stats
+     * Return all entries from the today table.
+     * @return cursor with today table information.
+     */
+    public Cursor returnAllTodayEntries() {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        String query = "SELECT * FROM " + TODAY_TABLE;
+        return db.rawQuery(query, null);
+    }
+
+    /**
+     * Return information from the today stats table for current date.
+     * @return cursor containing todas stats information.
      */
     public Cursor returnTodayStatsEntries() {
         SQLiteDatabase db = this.getWritableDatabase();
 
         String query = "SELECT * FROM " + TODAY_STATS_TABLE + " WHERE " + TODAY_STATS_KEY_DATE + " LIKE ?";
         return db.rawQuery(query, new String[]{String.valueOf(getDate())});
+    }
+
+    /**
+     * Clear information from the today table.
+     */
+    public void clearToday(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("DELETE FROM " + TODAY_TABLE);
+        db.close();
+    }
+
+    /**
+     * Return all information from today stats table.
+     * @return cursor with informatino from today stats.
+     */
+    public Cursor returnAllTodaysStats(){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        String query = "SELECT * FROM " + TODAY_STATS_TABLE;
+        return db.rawQuery(query, null);
+    }
+
+    /**
+     * Clear information from the today stats table.
+     */
+    public void clearTodayStats(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("DELETE FROM " + TODAY_STATS_TABLE);
+        db.close();
+    }
+
+    public void clearTodayStats(String date){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TODAY_STATS_TABLE, TODAY_STATS_KEY_DATE + " = ?", new String[]{date});
+        db.close();
+    }
+
+    public void clearToday(String date){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TODAY_TABLE, TODAY_KEY_DATE + " = ? ", new String[] { date });
+        db.close();
     }
 
     /*
@@ -322,6 +380,12 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
         Log.d(TAG, "History database cleared");
     }
 
+    public void deleteHistoryItem(String id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(HISTORY_TABLE, HISTORY_KEY_ID + " LIKE ?", new String[] { id });
+        db.close();
+    }
+
     /**
      * Create the goals table
      * @param db the database object
@@ -355,7 +419,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
         cv.put(GOAL_SUGAR, "160");
         cv.put(GOAL_PROTEIN, "50");
 
-        System.out.println("Default goals set in slow: " + db.insert(GOALS_TABLE, null, cv));
+        Log.d(TAG, "Default goals set: " + db.insert(GOALS_TABLE, null, cv));
     }
 
     /**
@@ -406,7 +470,6 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
             month = "0" + temp;
         }
 
-        System.out.println("Date: " + day + "-" + month + "-" + year);
         return day + month + year;
     }
 }

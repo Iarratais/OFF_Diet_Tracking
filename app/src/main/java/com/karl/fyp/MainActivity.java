@@ -251,7 +251,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     /**
-     *
+     * Set the title of the activity.
      * @param title the title of the page
      */
     public void setActionBarTitle(String title) {

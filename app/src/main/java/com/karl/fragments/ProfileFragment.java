@@ -57,8 +57,6 @@ public class ProfileFragment extends android.support.v4.app.Fragment {
 
         getInformationFromDatabase();
 
-        System.out.println("BMI: " + calculateBMI());
-
         hideSaveButton();
 
         return rootView;

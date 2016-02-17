@@ -27,8 +27,7 @@
 
     <!-- History fragment -->
     <string name="history_fragment_title">History</string>
-    <string name="more">more</string>
-    <string name="less">less</string>
+    <string name="history_fragment_are_you_sure">Are you sure you want to delete %1$s? This cannot be undone</string>
 
     <!-- Lookup fragment -->
     <string name="lookup_fragment_title">Barcode Search</string>
@@ -112,6 +111,7 @@
     <string name="save_changes">Save Changes</string>
     <string name="month">Month</string>
     <string name="year">Year</string>
+    <string name="delete">delete</string>
 
     <!-- Errors -->
     <string name="error_sorry_check_your_network_settings">Please check your network settings</string>

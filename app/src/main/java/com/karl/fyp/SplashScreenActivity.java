@@ -9,7 +9,9 @@ import android.util.Log;
 
 import com.karl.models.Food;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class SplashScreenActivity extends Activity {
 
@@ -57,8 +59,8 @@ public class SplashScreenActivity extends Activity {
     public void transferData(){
         MySQLiteHelper db = new MySQLiteHelper(this);
 
-        Cursor todayRes = db.returnTodaysEntries();
-        Cursor todayStatsRes = db.returnTodayStatsEntries();
+        Cursor todayRes = db.returnAllTodayEntries();
+        Cursor todayStatsRes = db.returnAllTodaysStats();
 
         ArrayList<Food> foods = new ArrayList<>();
 
@@ -88,44 +90,57 @@ public class SplashScreenActivity extends Activity {
 
             // 10 columns in todayStatsRes
             while(todayStatsRes.moveToNext()){
-                /**
-                 * Check if the ids match so that the food gets the right information put into the object
-                 */
-                if(String.valueOf(todayStatsRes.getInt(0)).equals(foods.get(i).getId())){
-                    String calories = todayStatsRes.getString(2);
-                    String fat = todayStatsRes.getString(3);
-                    String sat_fat = todayStatsRes.getString(4);
-                    String carbs = todayStatsRes.getString(5);
-                    String sugar = todayStatsRes.getString(6);
-                    String protein = todayStatsRes.getString(7);
-                    String salt = todayStatsRes.getString(8);
-                    String sodium = todayStatsRes.getString(9);
+                String calories = todayStatsRes.getString(2);
+                String fat = todayStatsRes.getString(3);
+                String sat_fat = todayStatsRes.getString(4);
+                String carbs = todayStatsRes.getString(5);
+                String sugar = todayStatsRes.getString(6);
+                String protein = todayStatsRes.getString(7);
+                String salt = todayStatsRes.getString(8);
+                String sodium = todayStatsRes.getString(9);
 
-                    foods.get(i).setCalories(calories);
-                    foods.get(i).setFats(fat);
-                    foods.get(i).setSaturated_fat(sat_fat);
-                    foods.get(i).setCarbohydrates(carbs);
-                    foods.get(i).setSugar(sugar);
-                    foods.get(i).setProtein(protein);
-                    foods.get(i).setSalt(salt);
-                    foods.get(i).setSodium(sodium);
-                } // End if(String.valueOf(todayStatsRes.getInt(0)).equals(foods.get(i).getId()))
+                foods.get(i).setCalories(calories);
+                foods.get(i).setFats(fat);
+                foods.get(i).setSaturated_fat(sat_fat);
+                foods.get(i).setCarbohydrates(carbs);
+                foods.get(i).setSugar(sugar);
+                foods.get(i).setProtein(protein);
+                foods.get(i).setSalt(salt);
+                foods.get(i).setSodium(sodium);
+
+                i++;
             } // End while(todayStatsRes.moveToNext())
         }
 
-        calculateTotals(foods);
+        for(int x = 0; x < foods.size(); x++) {
+            Log.d(TAG, "Transfer data: " + foods.get(x).toString());
+        }
+
+        if(foods.size() > 0) {
+            calculateTotals(foods);
+        } else {
+            Log.d(TAG, "There is no food items loaded from the system - not proceeding to calculating totals");
+            runSplash();
+        }
     } // End transferData()
 
+    /**
+     * Calculate the totals and pass them to the history database
+     * @param foods from the database.
+     */
     public void calculateTotals(ArrayList<Food> foods){
         ArrayList<String> dateRange = new ArrayList<>();
         ArrayList<Food> totals = new ArrayList<>();
 
         dateRange.add(foods.get(0).getDate());
+        totals.add(foods.get(0));
+
+        final DecimalFormat df = new DecimalFormat("#.###");
 
         if(foods.size() >= 1) {
             for (int i = 0; i < foods.size(); i++) {
 
-                totals.add(new Food());
+                boolean makeNew = false;
 
                 // Check if any of the values is null
                 if(foods.get(i).getCalories() == null)
@@ -148,6 +163,7 @@ public class SplashScreenActivity extends Activity {
                 for (int j = 0; j < dateRange.size(); j++) {
                     if (foods.get(i).getDate().equals(dateRange.get(j))) {
                         totals.get(j).setDate(foods.get(i).getDate());
+                        totals.get(j).setId(foods.get(i).getId());
 
                         // Set calories
                         if (totals.get(j).getCalories() == null)
@@ -155,7 +171,7 @@ public class SplashScreenActivity extends Activity {
                         Double calories1 = Double.parseDouble(foods.get(i).getCalories());
                         Double calories2 = Double.parseDouble(totals.get(j).getCalories());
                         Double calories = calories1 + calories2;
-                        totals.get(j).setCalories(String.valueOf(calories));
+                        totals.get(j).setCalories(String.valueOf(df.format(calories)));
 
                         // Set fats
                         if (totals.get(j).getFats() == null)
@@ -163,7 +179,7 @@ public class SplashScreenActivity extends Activity {
                         Double fats1 = Double.parseDouble(foods.get(i).getFats());
                         Double fats2 = Double.parseDouble(totals.get(j).getFats());
                         Double fats = fats1 + fats2;
-                        totals.get(j).setFats(String.valueOf(fats));
+                        totals.get(j).setFats(String.valueOf(df.format(fats)));
 
                         // Set saturated fats
                         if (totals.get(j).getSaturated_fat() == null)
@@ -179,7 +195,7 @@ public class SplashScreenActivity extends Activity {
                         Double carbs1 = Double.parseDouble(foods.get(i).getCarbohydrates());
                         Double carbs2 = Double.parseDouble(totals.get(j).getCarbohydrates());
                         Double carbs = carbs1 + carbs2;
-                        totals.get(j).setCarbohydrates(String.valueOf(carbs));
+                        totals.get(j).setCarbohydrates(String.valueOf(df.format(carbs)));
 
                         // Set sugars
                         if (totals.get(j).getSugar() == null)
@@ -187,7 +203,7 @@ public class SplashScreenActivity extends Activity {
                         Double sugars1 = Double.parseDouble(foods.get(i).getSugar());
                         Double sugars2 = Double.parseDouble(totals.get(j).getSugar());
                         Double sugars = sugars1 + sugars2;
-                        totals.get(j).setSugar(String.valueOf(sugars));
+                        totals.get(j).setSugar(String.valueOf(df.format(sugars)));
 
                         // Set proteins
                         if (totals.get(j).getProtein() == null)
@@ -195,7 +211,7 @@ public class SplashScreenActivity extends Activity {
                         Double proteins1 = Double.parseDouble(foods.get(i).getProtein());
                         Double proteins2 = Double.parseDouble(totals.get(j).getProtein());
                         Double proteins = proteins1 + proteins2;
-                        totals.get(j).setProtein(String.valueOf(proteins));
+                        totals.get(j).setProtein(String.valueOf(df.format(proteins)));
 
                         // Set salt
                         if (totals.get(j).getSalt() == null)
@@ -203,7 +219,7 @@ public class SplashScreenActivity extends Activity {
                         Double salts1 = Double.parseDouble(foods.get(i).getSalt());
                         Double salts2 = Double.parseDouble(totals.get(j).getSalt());
                         Double salts = salts1 + salts2;
-                        totals.get(j).setSalt(String.valueOf(salts));
+                        totals.get(j).setSalt(String.valueOf(df.format(salts)));
 
                         // Set sodium
                         if (totals.get(j).getSodium() == null)
@@ -211,16 +227,127 @@ public class SplashScreenActivity extends Activity {
                         Double sodiums1 = Double.parseDouble(foods.get(i).getSodium());
                         Double sodiums2 = Double.parseDouble(totals.get(j).getSodium());
                         Double sodiums = sodiums1 + sodiums2;
-                        totals.get(j).setSodium(String.valueOf(sodiums));
+                        totals.get(j).setSodium(String.valueOf(df.format(sodiums)));
 
-                        Log.d(TAG, totals.get(j).toString());
+                        makeNew = false;
                     } else {
-                        dateRange.add(foods.get(i).getDate());
-                        totals.add(foods.get(i));
-                        Log.d(TAG, totals.get(j).toString());
+                        makeNew = true;
                     }
+                }
+
+                if(makeNew) {
+                    dateRange.add(foods.get(i).getDate());
+                    Log.d(TAG, "Date added to dateRange, new size: " + dateRange.size());
+
+                    totals.add(new Food());
+
+                    int place = dateRange.size() - 1;
+
+                    totals.get(place).setDate(foods.get(i).getDate());
+                    totals.get(place).setId(foods.get(i).getId());
+
+                    // Set calories
+                    if (totals.get(place).getCalories() == null)
+                        totals.get(place).setCalories("0");
+                    Double calories1 = Double.parseDouble(foods.get(i).getCalories());
+                    Double calories2 = Double.parseDouble(totals.get(place).getCalories());
+                    Double calories = calories1 + calories2;
+                    totals.get(place).setCalories(String.valueOf(df.format(calories)));
+
+                    // Set fats
+                    if (totals.get(place).getFats() == null)
+                        totals.get(place).setFats("0");
+                    Double fats1 = Double.parseDouble(foods.get(i).getFats());
+                    Double fats2 = Double.parseDouble(totals.get(place).getFats());
+                    Double fats = fats1 + fats2;
+                    totals.get(place).setFats(String.valueOf(df.format(fats)));
+
+                    // Set saturated fats
+                    if (totals.get(place).getSaturated_fat() == null)
+                        totals.get(place).setSaturated_fat("0");
+                    Double satfats1 = Double.parseDouble(foods.get(i).getSaturated_fat());
+                    Double satfats2 = Double.parseDouble(totals.get(place).getSaturated_fat());
+                    Double satfats = satfats1 + satfats2;
+                    totals.get(place).setSaturated_fat(String.valueOf(df.format(satfats)));
+
+                    // Set carbohydrates
+                    if (totals.get(place).getCarbohydrates() == null)
+                        totals.get(place).setCarbohydrates("0");
+                    Double carbs1 = Double.parseDouble(foods.get(i).getCarbohydrates());
+                    Double carbs2 = Double.parseDouble(totals.get(place).getCarbohydrates());
+                    Double carbs = carbs1 + carbs2;
+                    totals.get(place).setCarbohydrates(String.valueOf(df.format(carbs)));
+
+                    // Set sugars
+                    if (totals.get(place).getSugar() == null)
+                        totals.get(place).setSugar("0");
+                    Double sugars1 = Double.parseDouble(foods.get(i).getSugar());
+                    Double sugars2 = Double.parseDouble(totals.get(place).getSugar());
+                    Double sugars = sugars1 + sugars2;
+                    totals.get(place).setSugar(String.valueOf(df.format(sugars)));
+
+                    // Set proteins
+                    if (totals.get(place).getProtein() == null)
+                        totals.get(place).setProtein("0");
+                    Double proteins1 = Double.parseDouble(foods.get(i).getProtein());
+                    Double proteins2 = Double.parseDouble(totals.get(place).getProtein());
+                    Double proteins = proteins1 + proteins2;
+                    totals.get(place).setProtein(String.valueOf(df.format(proteins)));
+
+                    // Set salt
+                    if (totals.get(place).getSalt() == null)
+                        totals.get(place).setSalt("0");
+                    Double salts1 = Double.parseDouble(foods.get(i).getSalt());
+                    Double salts2 = Double.parseDouble(totals.get(place).getSalt());
+                    Double salts = salts1 + salts2;
+                    totals.get(place).setSalt(String.valueOf(df.format(salts)));
+
+                    // Set sodium
+                    if (totals.get(place).getSodium() == null)
+                        totals.get(place).setSodium("0");
+                    Double sodiums1 = Double.parseDouble(foods.get(i).getSodium());
+                    Double sodiums2 = Double.parseDouble(totals.get(place).getSodium());
+                    Double sodiums = sodiums1 + sodiums2;
+                    totals.get(place).setSodium(String.valueOf(df.format(sodiums)));
                 }
             }
         }
+
+        // Create the entries in the history
+        MySQLiteHelper db = new MySQLiteHelper(this);
+
+        int amountMoved = 0;
+        for(int i = 0; i < dateRange.size(); i++){
+            if(!totals.get(i).getDate().equals(getDate())) {
+                db.createHistoryEntry(totals.get(i));
+                amountMoved++;
+                db.clearToday(totals.get(i).getDate());
+                db.clearTodayStats(totals.get(i).getDate());
+            }
+        }
+        Log.d(TAG, amountMoved + " item(s) moved to history");
+    }
+
+    /**
+     * Get the current date.
+     * @return String with todays date.
+     */
+    public String getDate(){
+        Calendar c = Calendar.getInstance();
+        String day = Integer.toString(c.get(Calendar.DAY_OF_MONTH));
+        String month = Integer.toString(c.get(Calendar.MONTH) + 1);
+        String year = Integer.toString(c.get(Calendar.YEAR));
+
+        if(day.length() < 2) {
+            String temp = day;
+            day = "0" + temp;
+        }
+        if(month.length() < 2) {
+            String temp = month;
+            month = "0" + temp;
+        }
+
+        Log.d(TAG, "Date: " + day + "-" + month + "-" + year);
+        return day + month + year;
     }
 }

@@ -22,7 +22,6 @@ public class ProgressFragment extends android.support.v4.app.Fragment {
         ((MainActivity) getActivity()).setActionBarTitle(getString(R.string.progress_fragment_title));
 
         return rootView;
-
     }
 
 }

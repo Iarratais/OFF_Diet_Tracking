@@ -240,13 +240,13 @@ public class ResultPer100Fragment extends android.support.v4.app.Fragment {
         // Set the values for the titles
         private ArrayList<String> getXAxisValues() {
             ArrayList<String> xAxis = new ArrayList<>();
-            xAxis.add("Sodium");
-            xAxis.add("Salt");
-            xAxis.add("Protein");
-            xAxis.add("Sugar");
-            xAxis.add("Carbs");
-            xAxis.add("Sat Fat");
-            xAxis.add("Fat");
+            xAxis.add(getString(R.string.sodium));
+            xAxis.add(getString(R.string.salt));
+            xAxis.add(getString(R.string.protein));
+            xAxis.add(getString(R.string.sugar));
+            xAxis.add(getString(R.string.carbohydrate));
+            xAxis.add(getString(R.string.saturated_fat));
+            xAxis.add(getString(R.string.fat));
 
             return xAxis;
         }

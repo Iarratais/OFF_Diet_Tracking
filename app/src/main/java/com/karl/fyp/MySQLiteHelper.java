@@ -79,6 +79,11 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
     private static final String GOAL_SUGAR = "sugar";
     private static final String GOAL_PROTEIN = "protein";
 
+    // Weight history table
+    private static final String WEIGHT_KEY_ID = "weight_id";
+    private static final String WEIGHT_DATE = "date";
+    private static final String WEIGHT_TOTAL = "weight";
+
     public MySQLiteHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -94,6 +99,8 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
         createHistoryTable(db);
 
         createGoalsTable(db);
+
+        createWeightHistoryTable(db);
     }
 
     @Override
@@ -103,6 +110,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
         db.execSQL("DROP TABLE IF EXISTS " + TODAY_STATS_TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + HISTORY_TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + GOALS_TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + WEIGHT_HISTORY_TABLE);
         onCreate(db);
     }
 
@@ -448,11 +456,16 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
         return db.rawQuery("SELECT * FROM " + GOALS_TABLE, null);
     }
 
-    /*
-    Create the Weight_History table
+    /**
+     * Create the weight history database.
+     * @param db database.
      */
-    public void createWeightHistoryTable() {
-
+    public void createWeightHistoryTable(SQLiteDatabase db) {
+        db.execSQL("CREATE TABLE " + WEIGHT_HISTORY_TABLE + " ( "
+            + WEIGHT_KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+            + WEIGHT_DATE + " TEXT, "
+            + WEIGHT_TOTAL + " TEXT)");
+        Log.d(TAG, "createWeightHistoryTable - run");
     }
 
     public String getDate() {

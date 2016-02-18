@@ -336,7 +336,19 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
 
     public void clearToday(String date){
         SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(TODAY_TABLE, TODAY_KEY_DATE + " = ? ", new String[] { date });
+        db.delete(TODAY_TABLE, TODAY_KEY_DATE + " = ? ", new String[]{date});
+        db.close();
+    }
+
+    public void deleteTodayEntry(String id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TODAY_TABLE, TODAY_KEY_ID + " = ?", new String[]{ id });
+        db.close();
+    }
+
+    public void deleteTodayStatsEntry(String id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TODAY_STATS_TABLE, TODAY_STATS_KEY_ID + " + ?", new String[] { id});
         db.close();
     }
 

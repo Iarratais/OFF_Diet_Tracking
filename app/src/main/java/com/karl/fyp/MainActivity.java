@@ -37,7 +37,7 @@ import com.karl.fragments.TodayFragment;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private static final double SMALL_DEVICE_THRESHOLD = 4.9;
+    private static final double SMALL_DEVICE_THRESHOLD = 4.4;
     private static final String TAG = "MainActivity";
 
     FloatingActionButton fab;
@@ -63,6 +63,7 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View view) {
                 userEntryChoice();
+                //startActivity(new Intent(getApplicationContext(), ProfileSetUp.class));
             }
         });
 
@@ -295,8 +296,12 @@ public class MainActivity extends AppCompatActivity
     public void getNameFromDatabase() {
         Cursor res = db.getUser();
 
-        while(res.moveToNext()) {
-            name_user = res.getString(1);
+        if(res == null) {
+            name_user = "Error";
+        } else {
+            while (res.moveToNext()) {
+                name_user = res.getString(1);
+            }
         }
     }
 

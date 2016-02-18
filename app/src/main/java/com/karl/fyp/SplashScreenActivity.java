@@ -1,7 +1,9 @@
 package com.karl.fyp;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Handler;
@@ -28,17 +30,26 @@ public class SplashScreenActivity extends Activity {
         transferData();
 
         runSplash();
+
+        checkIfFirstLaunch();
     }
 
     /**
      * Check if the application is being launched for the first time
      * @return true if first launch, false if not
      */
-    public boolean checkIfFirstLaunch(){
+    public void checkIfFirstLaunch(){
 
-        // Get user to create profile
-        // Set the default goals for the user
-        return false;
+        SharedPreferences prefs = this.getSharedPreferences("com.karl.fyp", Context.MODE_PRIVATE);
+        boolean isFirst = prefs.getBoolean("isFirst", true);
+
+        if(isFirst){
+            startActivity(new Intent(getApplicationContext(), ProfileSetUp.class));
+            MySQLiteHelper db = new MySQLiteHelper(this);
+            db.setDefaultGoals();
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putBoolean("isFirst", false);
+        }
     }
 
     public void runSplash() {

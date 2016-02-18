@@ -11,6 +11,11 @@
     <string name="main_activity_new_entry_barcode">Scan barcode</string>
     <string name="main_activity_new_entry_options_title">Choose method:</string>
 
+    <!-- Profile Set Up Fragments -->
+    <string name="profile_set_up_swipe_to_continue">Swipe to continue</string>
+    <string name="profile_set_up_welcome">Welcome!\nPlease begin by setting up a profile.</string>
+    <string name="profile_set_up_save_profile">Save Profile</string>
+
     <!-- Today fragment -->
     <string name="today_fragment_title">Today</string>
     <string name="today_fragment_daily_intake">Daily intake</string>
@@ -45,6 +50,7 @@
 
     <!-- Progress fragment -->
     <string name="progress_fragment_title">Progress</string>
+    <string name="progress_fragment_log_your_weight">Log your weight</string>
 
     <!-- AddToDatabase fragment -->
     <string name="addtodatabase_fragment_title">Add To Database</string>
@@ -158,5 +164,6 @@
 
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_profile_set_up">ProfileSetUp</string>
 
 </resources>

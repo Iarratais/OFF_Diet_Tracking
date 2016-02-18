@@ -28,7 +28,6 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
-
         <activity
             android:name=".SettingsActivity"
             android:screenOrientation="portrait" >
@@ -36,7 +35,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.karl.fyp.MainActivity" />
         </activity>
-
         <activity
             android:name=".AboutActivity"
             android:screenOrientation="portrait" >
@@ -44,16 +42,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.karl.fyp.MainActivity" />
         </activity>
-
         <activity
             android:name=".SplashScreenActivity"
             android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".NewManualEntryActivity"
             android:screenOrientation="portrait" >
@@ -61,7 +58,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.karl.fyp.MainActivity" />
         </activity>
-
         <activity
             android:name=".SearchResultActivity"
             android:label="@string/title_activity_search_result"
@@ -72,7 +68,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.karl.fyp.MainActivity" />
         </activity>
-
         <activity
             android:name=".BarcodeScannerActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
@@ -83,11 +78,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.karl.fyp.MainActivity" />
         </activity>
-
         <activity
             android:name="com.karl.barcodereader.BarcodeCaptureActivity"
             android:label="Read Barcode"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".ProfileSetUp"
+            android:label="@string/title_activity_profile_set_up"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
     </application>
 
 </manifest>

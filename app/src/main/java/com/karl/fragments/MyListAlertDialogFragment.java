@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Toast;
 
 import com.karl.barcodereader.BarcodeCaptureActivity;
 import com.karl.fyp.BarcodeScannerActivity;
@@ -44,6 +45,7 @@ public class MyListAlertDialogFragment extends android.support.v4.app.DialogFrag
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.select_dialog_item);
         arrayAdapter.add(getString(R.string.main_activity_new_entry_barcode));
         arrayAdapter.add(getString(R.string.main_activity_new_entry_manual));
+        arrayAdapter.add(getString(R.string.progress_fragment_log_your_weight));
 
         return new AlertDialog.Builder(getActivity())
                 .setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
@@ -57,10 +59,12 @@ public class MyListAlertDialogFragment extends android.support.v4.app.DialogFrag
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         String itemClicked = arrayAdapter.getItem(which);
-                        if(itemClicked.equals(getString(R.string.main_activity_new_entry_barcode))){
+                        if (itemClicked.equals(getString(R.string.main_activity_new_entry_barcode))) {
                             startActivity(new Intent(getActivity(), BarcodeScannerActivity.class));
-                        } else if (itemClicked.equals(getString(R.string.main_activity_new_entry_manual))){
+                        } else if (itemClicked.equals(getString(R.string.main_activity_new_entry_manual))) {
                             startActivity(new Intent(getActivity(), NewManualEntryActivity.class));
+                        } else if (itemClicked.equals(getString(R.string.progress_fragment_log_your_weight))) {
+                            Toast.makeText(getContext(), "Bloop", Toast.LENGTH_SHORT).show();
                         }
                     }
                 })

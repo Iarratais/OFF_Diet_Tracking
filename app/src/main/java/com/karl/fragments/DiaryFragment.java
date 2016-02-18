@@ -1,7 +1,11 @@
 package com.karl.fragments;
 
 import android.app.DialogFragment;
+import android.database.Cursor;
 import android.graphics.Typeface;
+
+import com.karl.adapters.DiaryListAdapter;
+import com.karl.fyp.MySQLiteHelper;
 import com.karl.models.Food;
 import com.karl.fyp.MainActivity;
 import android.os.Bundle;
@@ -34,19 +38,13 @@ public class DiaryFragment extends android.support.v4.app.Fragment {
         // Set the title
         ((MainActivity) getActivity()).setActionBarTitle(setDateTitle());
 
-        // Todays Entries title
-        Typeface titleTypeFace = Typeface.createFromAsset(getActivity().getAssets(), "fonts/CaviarDreams.ttf");
-        TextView todays_entries_title = (TextView) rootView.findViewById(R.id.today_entries_title);
-        todays_entries_title.setTypeface(titleTypeFace);
-        todays_entries_title.setTextSize(25);
-
         makeList();
 
         return rootView;
     }
 
     /**
-     *
+     * Create a dialog alert for the user.
      * @param title of the alert
      * @param message to be contained in the alert
      */
@@ -60,28 +58,75 @@ public class DiaryFragment extends android.support.v4.app.Fragment {
      */
     public void makeList() {
         ListView list = (ListView) rootView.findViewById(R.id.today_chart_information);
-        ArrayList<String> listItems = new ArrayList<>();
-        for (int i = 0; i < ef.size(); i++) {
-            String listItem = ef.get(i).getName() + "\n"
-                    + getString(R.string.calories) + " " + ef.get(i).getCalories()
-                    + "\n" + getString(R.string.fat) + " " + ef.get(i).getFats()
-                    + "\n" + getString(R.string.saturated_fat) + " " + ef.get(i).getSaturated_fat()
-                    + "\n" + getString(R.string.carbohydrate) + " " + ef.get(i).getCarbohydrates()
-                    + "\n" + getString(R.string.sugar) + " " + ef.get(i).getSugar()
-                    + "\n" + getString(R.string.protein) + " " + ef.get(i).getProtein()
-                    + "\n" + getString(R.string.salt) + " " + ef.get(i).getSalt()
-                    + "\n" + getString(R.string.sodium) + " " + ef.get(i).getSodium();
-            listItems.add(listItem);
-        }
+        ArrayList<Food> listItems;
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, listItems);
+        listItems = getInformation();
+
+        DiaryListAdapter adapter = new DiaryListAdapter(getActivity(), listItems);
         list.setAdapter(adapter);
-
     }
 
+    public ArrayList<Food> getInformation() {
+        MySQLiteHelper db = new MySQLiteHelper(getContext());
+
+        Cursor todayRes = db.returnAllTodayEntries();
+        Cursor todayStatsRes = db.returnAllTodaysStats();
+
+        ArrayList<Food> foods = new ArrayList<>();
+
+        if(todayRes ==  null) {
+            Log.d(TAG, "There is nothing in the today table");
+        } else if (todayStatsRes == null) {
+            Log.d(TAG, "There is nothing in the today stats table");
+        } else {
+
+            // 4 columns in todayRes
+            while(todayRes.moveToNext()) {
+                int today_id = todayRes.getInt(0);
+                String today_date = todayRes.getString(1);
+                String food_name = todayRes.getString(2);
+                String barcode_number = todayRes.getString(3);
+
+                Food f = new Food();
+                f.setId(String.valueOf(today_id));
+                f.setDate(today_date);
+                f.setName(food_name);
+                f.setBarcode_number(barcode_number);
+
+                foods.add(f);
+            } // End while(todayRes.moveToNext())
+
+            int i = 0;
+
+            // 10 columns in todayStatsRes
+            while(todayStatsRes.moveToNext()){
+                String calories = todayStatsRes.getString(2);
+                String fat = todayStatsRes.getString(3);
+                String sat_fat = todayStatsRes.getString(4);
+                String carbs = todayStatsRes.getString(5);
+                String sugar = todayStatsRes.getString(6);
+                String protein = todayStatsRes.getString(7);
+                String salt = todayStatsRes.getString(8);
+                String sodium = todayStatsRes.getString(9);
+
+                foods.get(i).setCalories(calories);
+                foods.get(i).setFats(fat);
+                foods.get(i).setSaturated_fat(sat_fat);
+                foods.get(i).setCarbohydrates(carbs);
+                foods.get(i).setSugar(sugar);
+                foods.get(i).setProtein(protein);
+                foods.get(i).setSalt(salt);
+                foods.get(i).setSodium(sodium);
+
+                i++;
+            } // End while(todayStatsRes.moveToNext())
+        }
+
+        return foods;
+    }
     /**
      * Set the title of the page using the current date.
-     * @return String title/
+     * @return String title.
      */
     public String setDateTitle(){
 
@@ -186,4 +231,5 @@ public class DiaryFragment extends android.support.v4.app.Fragment {
 
         return day + month + year;
     }
+
 }

@@ -340,8 +340,9 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
         db.close();
     }
 
-    /*
-    Create the History table
+    /**
+     * Create the history table.
+     * @param db database object.
      */
     public void createHistoryTable(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE " + HISTORY_TABLE + " ( "

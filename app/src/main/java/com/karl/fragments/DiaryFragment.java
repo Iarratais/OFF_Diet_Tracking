@@ -24,7 +24,6 @@ public class DiaryFragment extends android.support.v4.app.Fragment {
     View rootView;
 
     private static final String TAG = "DiaryFragment";
-    ArrayList<Food> ef;
 
     @Nullable
     @Override
@@ -40,20 +39,6 @@ public class DiaryFragment extends android.support.v4.app.Fragment {
         TextView todays_entries_title = (TextView) rootView.findViewById(R.id.today_entries_title);
         todays_entries_title.setTypeface(titleTypeFace);
         todays_entries_title.setTextSize(25);
-
-        ef = new ArrayList<>();
-
-        // Dairygold
-        ef.add(new Food("Dairygold", "000000", "57", "6.3", "2.3", "0", "0.1", "0", "0.199", "0.0787"));
-
-        // Nutella
-        ef.add(new Food("Nutella", "000000", "83", "4.75", "1.64", "8.59", "8.51", "0.9", "0.0141", "0.00555"));
-
-        // Royal Bacon - MCDonalds
-        ef.add(new Food("Royal Bacon", "000000", "504", "25.6", "12", "33.5", "8.08", "33.5", "1.6", "0.628"));
-
-        // Power crunch protein bar
-        ef.add(new Food("Power Crunch", "000000", "375", "11.9", "0", "33.8", "0", "34.7", "0", "0"));
 
         makeList();
 

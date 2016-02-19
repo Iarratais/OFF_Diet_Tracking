@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,8 @@ public class ProfileSetupTwo extends android.support.v4.app.Fragment {
 
     View rootView;
 
+    private static final String TAG = "ProfileSetup2";
+
     EditText username;
 
     public ProfileSetupTwo() {
@@ -35,11 +38,13 @@ public class ProfileSetupTwo extends android.support.v4.app.Fragment {
                              Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_profile_setup_two, container, false);
 
+        Log.d(TAG, "Created");
+
         final Spinner gender = (Spinner) rootView.findViewById(R.id.spinner);
         String[] genders = getResources().getStringArray(R.array.gender);
         ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(getActivity(), android.R.layout.simple_spinner_dropdown_item, genders);
         gender.setAdapter(adapter);
-        gender.setSelection(adapter.getPosition("Unspecified"));
+        gender.setSelection(adapter.getPosition("Male"));
         gender.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {

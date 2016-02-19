@@ -1,5 +1,6 @@
 package com.karl.fyp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -36,7 +37,6 @@ public class ProfileSetUp extends AppCompatActivity {
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
-
     }
 
 
@@ -90,9 +90,23 @@ public class ProfileSetUp extends AppCompatActivity {
     public void createNewUser(){
         MySQLiteHelper db = new MySQLiteHelper(this);
 
-        db.createUser(getUser_name(), getUser_gender(), getUser_height(), getUser_weight());
-
-        Toast.makeText(getApplicationContext(), "User created", Toast.LENGTH_SHORT).show();
+        if(getUser_name() == null || getUser_name().equals("")){
+            Toast.makeText(getApplicationContext(), getString(R.string.profile_set_up_you_need_to_enter, getString(R.string.profile_fragment_name)), Toast.LENGTH_SHORT).show();
+            mViewPager.setCurrentItem(1);
+        } else if (getUser_gender() == null || getUser_gender().equals("")) {
+            Toast.makeText(getApplicationContext(), getString(R.string.profile_set_up_you_need_to_enter, getString(R.string.profile_fragment_gender)), Toast.LENGTH_SHORT).show();
+            mViewPager.setCurrentItem(1);
+        } else if (getUser_height() == null || getUser_height().equals("")){
+            Toast.makeText(getApplicationContext(), getString(R.string.profile_set_up_you_need_to_enter, getString(R.string.profile_fragment_height)), Toast.LENGTH_SHORT).show();
+            mViewPager.setCurrentItem(2);
+        } else if (getUser_weight() == null || getUser_weight().equals("")){
+            Toast.makeText(getApplicationContext(), getString(R.string.profile_set_up_you_need_to_enter, getString(R.string.profile_fragment_weight)), Toast.LENGTH_SHORT).show();
+            mViewPager.setCurrentItem(2);
+        } else {
+            db.createUser(getUser_name(), getUser_gender(), getUser_height(), getUser_weight());
+            Toast.makeText(getApplicationContext(), "User created", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+        }
     }
 
 
@@ -101,7 +115,7 @@ public class ProfileSetUp extends AppCompatActivity {
     }
 
     public void setUser_weight(String user_weight) {
-        user_weight = user_weight;
+        this.user_weight = user_weight;
     }
 
     public String getUser_name() {
@@ -109,7 +123,7 @@ public class ProfileSetUp extends AppCompatActivity {
     }
 
     public void setUser_name(String user_name) {
-        user_name = user_name;
+        this.user_name = user_name;
     }
 
     public String getUser_gender() {
@@ -117,7 +131,7 @@ public class ProfileSetUp extends AppCompatActivity {
     }
 
     public void setUser_gender(String user_gender) {
-        user_gender = user_gender;
+        this.user_gender = user_gender;
     }
 
     public String getUser_height() {
@@ -125,6 +139,6 @@ public class ProfileSetUp extends AppCompatActivity {
     }
 
     public void setUser_height(String user_height) {
-        user_height = user_height;
+        this.user_height = user_height;
     }
 }

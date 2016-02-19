@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,7 @@ import com.karl.fyp.R;
  */
 public class ProfileSetupThree extends android.support.v4.app.Fragment {
 
+    private static final String TAG = "ProfileSetup3";
 
     View rootView;
 
@@ -33,6 +35,8 @@ public class ProfileSetupThree extends android.support.v4.app.Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_profile_setup_three, container, false);
+
+        Log.d(TAG, "Created");
 
         height = (EditText) rootView.findViewById(R.id.editText3);
         height.addTextChangedListener(user_height);

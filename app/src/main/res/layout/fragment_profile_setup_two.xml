@@ -16,7 +16,8 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="100dp"
-        android:hint="@string/profile_fragment_name" />
+        android:hint="@string/profile_fragment_name"
+        android:inputType="textCapWords" />
 
     <TextView
         android:layout_width="wrap_content"

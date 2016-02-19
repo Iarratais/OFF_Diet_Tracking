@@ -29,8 +29,6 @@ public class SplashScreenActivity extends Activity {
 
         transferData();
 
-        runSplash();
-
         checkIfFirstLaunch();
     }
 
@@ -43,15 +41,27 @@ public class SplashScreenActivity extends Activity {
         SharedPreferences prefs = this.getSharedPreferences("com.karl.fyp", Context.MODE_PRIVATE);
         boolean isFirst = prefs.getBoolean("isFirst", true);
 
+        MySQLiteHelper db = new MySQLiteHelper(this);
+
         if(isFirst){
-            startActivity(new Intent(getApplicationContext(), ProfileSetUp.class));
-            MySQLiteHelper db = new MySQLiteHelper(this);
+            db.clearAllUser();
+            db.clearGoals();
             db.setDefaultGoals();
+
+            // Update the SharedPreferences.
             SharedPreferences.Editor editor = prefs.edit();
             editor.putBoolean("isFirst", false);
+            editor.apply();
+
+            startActivity(new Intent(getApplicationContext(), ProfileSetUp.class));
+        } else {
+            runSplash();
         }
     }
 
+    /**
+     * Run the splash screen.
+     */
     public void runSplash() {
         new Handler().postDelayed(new Runnable() {
 
@@ -67,6 +77,11 @@ public class SplashScreenActivity extends Activity {
         }, SPLASH_TIME_OUT);
     }
 
+    /**
+     * This is used to find and to transfer data from the today and the today stats tables
+     * and transfer them into the history table while calculating the totals of each
+     * nutrient.
+     */
     public void transferData(){
         MySQLiteHelper db = new MySQLiteHelper(this);
 
@@ -131,7 +146,7 @@ public class SplashScreenActivity extends Activity {
             calculateTotals(foods);
         } else {
             Log.d(TAG, "There is no food items loaded from the system - not proceeding to calculating totals");
-            runSplash();
+
         }
     } // End transferData()
 

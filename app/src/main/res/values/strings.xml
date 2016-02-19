@@ -15,6 +15,7 @@
     <string name="profile_set_up_swipe_to_continue">Swipe to continue</string>
     <string name="profile_set_up_welcome">Welcome!\nPlease begin by setting up a profile.</string>
     <string name="profile_set_up_save_profile">Save Profile</string>
+    <string name="profile_set_up_you_need_to_enter">You need to enter the %1$s field</string>
 
     <!-- Today fragment -->
     <string name="today_fragment_title">Today</string>

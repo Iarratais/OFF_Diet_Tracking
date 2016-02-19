@@ -22,7 +22,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
     private static final String TAG = "MySQLiteHelper";
 
     // Common
-    private static final int DATABASE_VERSION = 7;
+    private static final int DATABASE_VERSION = 8;
     private static final String DATABASE_NAME = "diet.db";
     private static final String USER_TABLE = "user";
     private static final String TODAY_TABLE = "today";
@@ -403,7 +403,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
 
     public void deleteHistoryItem(String id){
         SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(HISTORY_TABLE, HISTORY_KEY_ID + " LIKE ?", new String[] { id });
+        db.delete(HISTORY_TABLE, HISTORY_KEY_ID + " LIKE ?", new String[]{id});
         db.close();
     }
 
@@ -423,6 +423,12 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
                 + GOAL_SUGAR + " TEXT, "
                 + GOAL_PROTEIN + " TEXT)");
         Log.d(TAG, "createGoalsTable run");
+    }
+
+    public void clearGoals(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("DELETE FROM " + GOALS_TABLE);
+        Log.d(TAG, "Goals table cleared");
     }
 
     /**

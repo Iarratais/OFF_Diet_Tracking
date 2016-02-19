@@ -1,0 +1,32 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" tools:context="com.karl.fragments.ProfileSetupFive" android:background="@color/colorPrimary">
+
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginTop="100dp"
+        android:background="@color/light_grey">
+
+        <EditText
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/editText4"
+            android:hint="@string/profile_set_up_desired_weight"
+            android:inputType="numberDecimal"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="91dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/profile_set_up_swipe_to_continue"
+            android:id="@+id/textView21"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="66dp"/>
+    </RelativeLayout>
+</RelativeLayout>

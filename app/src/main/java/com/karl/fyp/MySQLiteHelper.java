@@ -1,16 +1,21 @@
 package com.karl.fyp;
 
+import android.app.Application;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.karl.models.Food;
 import com.karl.models.Goals;
 
 import java.util.Calendar;
+
+import static android.preference.PreferenceManager.*;
 
 /**
  * Database Class
@@ -22,7 +27,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
     private static final String TAG = "MySQLiteHelper";
 
     // Common
-    private static final int DATABASE_VERSION = 8;
+    private static final int DATABASE_VERSION = 10;
     private static final String DATABASE_NAME = "diet.db";
     private static final String USER_TABLE = "user";
     private static final String TODAY_TABLE = "today";
@@ -78,11 +83,13 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
     private static final String GOAL_CARBS = "carbohydrates";
     private static final String GOAL_SUGAR = "sugar";
     private static final String GOAL_PROTEIN = "protein";
+    private static final String GOAL_WEIGHT = "weight";
 
     // Weight history table
     private static final String WEIGHT_KEY_ID = "weight_id";
     private static final String WEIGHT_DATE = "date";
     private static final String WEIGHT_TOTAL = "weight";
+    private static final String WEIGHT_CHANGE = "change";
 
     public MySQLiteHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -171,7 +178,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
      */
     public Cursor getUser() {
         SQLiteDatabase db = this.getWritableDatabase();
-        return db.rawQuery("SELECT * FROM " + USER_TABLE + " WHERE " + USER_KEY_ID + " = 1", null);
+        return db.rawQuery("SELECT * FROM " + USER_TABLE, null);
     }
 
     /**
@@ -421,8 +428,20 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
                 + GOAL_SODIUM + " TEXT, "
                 + GOAL_CARBS + " TEXT, "
                 + GOAL_SUGAR + " TEXT, "
-                + GOAL_PROTEIN + " TEXT)");
+                + GOAL_PROTEIN + " TEXT, "
+                + GOAL_WEIGHT + " TEXT)");
         Log.d(TAG, "createGoalsTable run");
+    }
+
+    public Cursor returnWeightGoal(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.rawQuery("SELECT " + GOAL_WEIGHT +" FROM " + GOALS_TABLE, null);
+    }
+
+    public void updateDesiredWeight(String desired){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "UPDATE " + GOALS_TABLE + " SET " + GOAL_WEIGHT + " = '" + desired + "'";
+        db.rawQuery(query, null);
     }
 
     public void clearGoals(){
@@ -434,7 +453,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
     /**
      * Set the users default goals, based on the recommended daily allowance
      */
-    public void setDefaultGoals() {
+    public void setDefaultGoals(String desiredWeight) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put(GOAL_CALORIES, "2000");
@@ -445,6 +464,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
         cv.put(GOAL_CARBS, "300");
         cv.put(GOAL_SUGAR, "160");
         cv.put(GOAL_PROTEIN, "50");
+        cv.put(GOAL_WEIGHT, desiredWeight);
 
         Log.d(TAG, "Default goals set: " + db.insert(GOALS_TABLE, null, cv));
     }
@@ -463,6 +483,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
         cv.put(GOAL_CARBS, goal.getCarbohydrates());
         cv.put(GOAL_SUGAR, goal.getSugar());
         cv.put(GOAL_PROTEIN, goal.getProtein());
+        cv.put(GOAL_WEIGHT, goal.getWeight());
 
         String selection = GOAL_KEY_ID + " LIKE ?";
         String[] selectionArgs = {"1"};
@@ -483,8 +504,20 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
         db.execSQL("CREATE TABLE " + WEIGHT_HISTORY_TABLE + " ( "
             + WEIGHT_KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + WEIGHT_DATE + " TEXT, "
-            + WEIGHT_TOTAL + " TEXT)");
+            + WEIGHT_TOTAL + " TEXT, "
+            + WEIGHT_CHANGE + " TEXT)");
         Log.d(TAG, "createWeightHistoryTable - run");
+    }
+
+    public void logWeight(String date, String total, String change){
+        ContentValues cv = new ContentValues();
+        cv.put(WEIGHT_DATE, date);
+        cv.put(WEIGHT_TOTAL, total);
+        cv.put(WEIGHT_CHANGE, change);
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        Log.d(TAG, "Weight logged: ID: " + db.insert(WEIGHT_HISTORY_TABLE, null, cv) + " DATE: " + date + " TOTAL: " + total + " CHANGE: " + change);
     }
 
     public String getDate() {

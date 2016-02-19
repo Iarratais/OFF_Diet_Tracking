@@ -11,6 +11,7 @@ public class Goals {
     private String protein;
     private String sugar;
     private String salt;
+    private String weight;
 
     public String getCalories() {
         return calories;
@@ -76,22 +77,26 @@ public class Goals {
         this.salt = salt;
     }
 
-    public void loadGoals() {
-        // This needs to be filled in with the database connection and gathering information
-        // about the goals set by the user
+    public String getWeight() {
+        return weight;
+    }
+
+    public void setWeight(String weight) {
+        this.weight = weight;
     }
 
     @Override
     public String toString() {
         return "Goals{" +
-                "calories=" + calories +
-                ", fat=" + fat +
-                ", saturatedFat=" + saturatedFat +
-                ", sodium=" + sodium +
-                ", carbohydrates=" + carbohydrates +
-                ", protein=" + protein +
-                ", sugar=" + sugar +
-                ", salt=" + salt +
+                "calories='" + calories + '\'' +
+                ", fat='" + fat + '\'' +
+                ", saturatedFat='" + saturatedFat + '\'' +
+                ", sodium='" + sodium + '\'' +
+                ", carbohydrates='" + carbohydrates + '\'' +
+                ", protein='" + protein + '\'' +
+                ", sugar='" + sugar + '\'' +
+                ", salt='" + salt + '\'' +
+                ", weight='" + weight + '\'' +
                 '}';
     }
 }

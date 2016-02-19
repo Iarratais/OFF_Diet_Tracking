@@ -26,8 +26,6 @@ public class ProfileSetupOne extends android.support.v4.app.Fragment {
                              Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_profile_setup_one, container, false);
 
-        Log.d(TAG, "Created");
-
         return rootView;
     }
 }

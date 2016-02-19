@@ -37,6 +37,7 @@ public class GoalsFragment extends android.support.v4.app.Fragment {
     EditText carbs_view;
     EditText sugar_view;
     EditText protein_view;
+    EditText weight_view;
 
     Button save_changes;
 
@@ -88,6 +89,9 @@ public class GoalsFragment extends android.support.v4.app.Fragment {
         protein_view = (EditText) rootView.findViewById(R.id.goals_protein);
         protein_view.addTextChangedListener(protein_view_listener);
 
+        weight_view = (EditText) rootView.findViewById(R.id.goals_weight);
+        weight_view.addTextChangedListener(weight_view_listener);
+
         save_changes = (Button) rootView.findViewById(R.id.save_changes_goals);
         save_changes.setVisibility(View.GONE);
         save_changes.setOnClickListener(new View.OnClickListener() {
@@ -121,6 +125,7 @@ public class GoalsFragment extends android.support.v4.app.Fragment {
                 carbs_view.setText(res.getString(6));
                 sugar_view.setText(res.getString(7));
                 protein_view.setText(res.getString(8));
+                weight_view.setText(res.getString(9));
             }
         }
     }
@@ -147,6 +152,7 @@ public class GoalsFragment extends android.support.v4.app.Fragment {
         goal.setCarbohydrates(carbs_view.getText().toString());
         goal.setSugar(sugar_view.getText().toString());
         goal.setProtein(protein_view.getText().toString());
+        goal.setWeight(weight_view.getText().toString());
 
         return goal;
     }
@@ -251,5 +257,21 @@ public class GoalsFragment extends android.support.v4.app.Fragment {
 
         @Override
         public void afterTextChanged(Editable s) {}
+    };
+    private final TextWatcher weight_view_listener = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            save_changes.setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+
+        }
     };
 }

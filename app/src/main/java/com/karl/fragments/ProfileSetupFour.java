@@ -33,8 +33,6 @@ public class ProfileSetupFour extends android.support.v4.app.Fragment {
                              Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_profile_setup_four, container, false);
 
-        Log.d(TAG, "Created");
-
         Button btn = (Button) rootView.findViewById(R.id.button);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override

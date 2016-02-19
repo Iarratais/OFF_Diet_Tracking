@@ -36,8 +36,6 @@ public class ProfileSetupThree extends android.support.v4.app.Fragment {
                              Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_profile_setup_three, container, false);
 
-        Log.d(TAG, "Created");
-
         height = (EditText) rootView.findViewById(R.id.editText3);
         height.addTextChangedListener(user_height);
         weight = (EditText) rootView.findViewById(R.id.edittext5);

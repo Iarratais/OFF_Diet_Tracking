@@ -46,14 +46,9 @@ public class SplashScreenActivity extends Activity {
         if(isFirst){
             db.clearAllUser();
             db.clearGoals();
-            db.setDefaultGoals();
-
-            // Update the SharedPreferences.
-            SharedPreferences.Editor editor = prefs.edit();
-            editor.putBoolean("isFirst", false);
-            editor.apply();
 
             startActivity(new Intent(getApplicationContext(), ProfileSetUp.class));
+            finish();
         } else {
             runSplash();
         }

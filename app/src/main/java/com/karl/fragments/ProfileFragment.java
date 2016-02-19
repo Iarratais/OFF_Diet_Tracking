@@ -211,7 +211,9 @@ public class ProfileFragment extends android.support.v4.app.Fragment {
      * @return users BMI.
      */
     public String calculateBMI() {
-        Double bmi = Double.parseDouble(user_weight.getText().toString()) / (Double.parseDouble(user_height.getText().toString()) * Double.parseDouble(user_height.getText().toString()));
+        Double bmi = Double.parseDouble(user_weight.getText().toString());
+
+        bmi = bmi / (Double.parseDouble(user_height.getText().toString()) * Double.parseDouble(user_height.getText().toString()));
 
         DecimalFormat df = new DecimalFormat("#.00");
 

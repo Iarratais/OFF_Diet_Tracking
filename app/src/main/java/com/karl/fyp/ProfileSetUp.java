@@ -1,6 +1,8 @@
 package com.karl.fyp;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -9,6 +11,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
+import com.karl.fragments.ProfileSetupFive;
 import com.karl.fragments.ProfileSetupFour;
 import com.karl.fragments.ProfileSetupOne;
 import com.karl.fragments.ProfileSetupThree;
@@ -22,6 +25,7 @@ public class ProfileSetUp extends AppCompatActivity {
     private String user_gender = null;
     private String user_height = null;
     private String user_weight = null;
+    private String user_desired = null;
 
     private ViewPager mViewPager;
 
@@ -38,7 +42,6 @@ public class ProfileSetUp extends AppCompatActivity {
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
     }
-
 
 
     /**
@@ -61,6 +64,8 @@ public class ProfileSetUp extends AppCompatActivity {
                 case 2:
                     return new ProfileSetupThree();
                 case 3:
+                    return new ProfileSetupFive();
+                case 4:
                     return new ProfileSetupFour();
             }
             return null;
@@ -68,7 +73,7 @@ public class ProfileSetUp extends AppCompatActivity {
 
         @Override
         public int getCount() {
-            return 4;
+            return 5;
         }
 
         @Override
@@ -82,6 +87,8 @@ public class ProfileSetUp extends AppCompatActivity {
                     return "SECTION 3";
                 case 3:
                     return "SECTION 4";
+                case 4:
+                    return "SECTION 5";
             }
             return null;
         }
@@ -102,10 +109,21 @@ public class ProfileSetUp extends AppCompatActivity {
         } else if (getUser_weight() == null || getUser_weight().equals("")){
             Toast.makeText(getApplicationContext(), getString(R.string.profile_set_up_you_need_to_enter, getString(R.string.profile_fragment_weight)), Toast.LENGTH_SHORT).show();
             mViewPager.setCurrentItem(2);
+        } else if (getUser_desired() == null || getUser_desired().equals("")) {
+            Toast.makeText(getApplicationContext(), getString(R.string.profile_set_up_you_need_to_enter, getString(R.string.profile_set_up_desired_weight)), Toast.LENGTH_SHORT).show();
+            mViewPager.setCurrentItem(3);
         } else {
             db.createUser(getUser_name(), getUser_gender(), getUser_height(), getUser_weight());
-            Toast.makeText(getApplicationContext(), "User created", Toast.LENGTH_SHORT).show();
+            db.setDefaultGoals(getUser_desired());
+
+
+            // Update the SharedPreferences so this screen is never shown again.
+            SharedPreferences prefs = this.getSharedPreferences("com.karl.fyp", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putBoolean("isFirst", false);
+            editor.apply();
             startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            finish();
         }
     }
 
@@ -140,5 +158,13 @@ public class ProfileSetUp extends AppCompatActivity {
 
     public void setUser_height(String user_height) {
         this.user_height = user_height;
+    }
+
+    public String getUser_desired() {
+        return user_desired;
+    }
+
+    public void setUser_desired(String user_desired) {
+        this.user_desired = user_desired;
     }
 }

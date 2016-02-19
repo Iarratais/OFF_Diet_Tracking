@@ -8,27 +8,17 @@
             android:title="@string/diary_fragment_title" />
         <item android:id="@+id/nav_analysis" android:icon="@drawable/ic_data_usage_black_24dp"
             android:title="@string/analysis_fragment_title" />
+        <item android:id="@+id/nav_lookup" android:icon="@drawable/icon_camera_black"
+            android:title="@string/lookup_fragment_title" />
+        <item android:id="@+id/nav_search" android:icon="@drawable/icon_search_black"
+            android:title="@string/search_fragment_title" />
+        <item android:id="@+id/nav_history" android:icon="@drawable/icon_history_black"
+            android:title="@string/history_fragment_title" />
+        <item android:id="@+id/nav_goals" android:icon="@drawable/icon_assessment_black"
+            android:title="@string/goals_fragment_title" />
+        <item android:id="@+id/nav_progress" android:icon="@drawable/icon_timeline_black"
+            android:title="@string/progress_fragment_title" />
     </group>
-
-    <item android:title="@string/search_fragment_title">
-        <menu>
-            <item android:id="@+id/nav_lookup" android:icon="@drawable/icon_camera_black"
-                android:title="@string/lookup_fragment_title" />
-            <item android:id="@+id/nav_search" android:icon="@drawable/icon_search_black"
-                android:title="@string/search_fragment_title" />
-        </menu>
-    </item>
-
-    <item android:title="@string/Records_and_goals">
-        <menu>
-            <item android:id="@+id/nav_history" android:icon="@drawable/icon_history_black"
-                android:title="@string/history_fragment_title" />
-            <item android:id="@+id/nav_goals" android:icon="@drawable/icon_assessment_black"
-                android:title="@string/goals_fragment_title" />
-            <item android:id="@+id/nav_progress" android:icon="@drawable/icon_timeline_black"
-                android:title="@string/progress_fragment_title" />
-        </menu>
-    </item>
 
     <item android:title="">
         <menu>

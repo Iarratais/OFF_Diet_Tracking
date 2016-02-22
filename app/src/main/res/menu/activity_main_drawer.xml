@@ -18,6 +18,8 @@
             android:title="@string/goals_fragment_title" />
         <item android:id="@+id/nav_progress" android:icon="@drawable/icon_timeline_black"
             android:title="@string/progress_fragment_title" />
+        <item android:id="@+id/nav_recipe_keep" android:icon="@drawable/ic_restaurant_black_24dp"
+            android:title="@string/recipe_keep" />
     </group>
 
     <item android:title="">

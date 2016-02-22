@@ -14,6 +14,8 @@ import com.karl.fyp.MainActivity;
 import com.karl.fyp.ProfileSetUp;
 import com.karl.fyp.R;
 
+import tyrantgit.explosionfield.ExplosionField;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -33,15 +35,19 @@ public class ProfileSetupFour extends android.support.v4.app.Fragment {
                              Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_profile_setup_four, container, false);
 
-        Button btn = (Button) rootView.findViewById(R.id.button);
+        final ExplosionField explosionField = ExplosionField.attach2Window(getActivity());
+
+        final Button btn = (Button) rootView.findViewById(R.id.button);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((ProfileSetUp) getActivity()).createNewUser();
+                ((ProfileSetUp) getActivity()).createNewUser(btn);
                 //startActivity(new Intent(getActivity(), MainActivity.class));
                 //getActivity().finish();
             }
         });
+
+
         // Inflate the layout for this fragment
         return rootView;
     }

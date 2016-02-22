@@ -30,6 +30,7 @@ import com.karl.fragments.LookupFragment;
 import com.karl.fragments.MyListAlertDialogFragment;
 import com.karl.fragments.ProfileFragment;
 import com.karl.fragments.ProgressFragment;
+import com.karl.fragments.RecipeKeepFragment;
 import com.karl.fragments.SearchFragment;
 import com.karl.fragments.TodayFragment;
 
@@ -63,7 +64,6 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View view) {
                 userEntryChoice();
-                //startActivity(new Intent(getApplicationContext(), ProfileSetUp.class));
             }
         });
 
@@ -87,6 +87,7 @@ public class MainActivity extends AppCompatActivity
                 getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new ProfileFragment()).commit();
                 DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
                 drawer.closeDrawer(GravityCompat.START);
+                setNewEntryVisibility(false);
             }
         });
         navigation_bar_name_space = (TextView) header.findViewById(R.id.nav_bar_name);
@@ -102,7 +103,7 @@ public class MainActivity extends AppCompatActivity
         //db.setDefaultGoals();
 
         // Set up random data into the history database for testing purposes
-        HistorySamples hist = new HistorySamples(db);
+        //HistorySamples hist = new HistorySamples(db);
         //hist.setUpStatsJan();
         //hist.setUpStatsFeb();
         //db.clearHistory();
@@ -130,12 +131,14 @@ public class MainActivity extends AppCompatActivity
     public boolean onPrepareOptionsMenu(Menu menu) {
         // Check the screen size of the device
         if(getScreenSize() < SMALL_DEVICE_THRESHOLD) {
-            fab.setVisibility(View.GONE);
+            hideFab();
             MenuItem addButton = menu.findItem(R.id.action_new_entry);
             addButton.setVisible(true);
-        } else {
+        }
+        if(getScreenSize() > SMALL_DEVICE_THRESHOLD) {
             MenuItem addButton = menu.findItem(R.id.action_new_entry);
             addButton.setVisible(false);
+            showFab();
         }
 
         return super.onPrepareOptionsMenu(menu);
@@ -167,7 +170,7 @@ public class MainActivity extends AppCompatActivity
 
             setNewEntryVisibility(true);
 
-            showFAB();
+            showFab();
         } else if (id == R.id.nav_history) {
 
             // Switch to the History tab
@@ -175,7 +178,7 @@ public class MainActivity extends AppCompatActivity
 
             setNewEntryVisibility(true);
 
-            hideFAB();
+            hideFab();
         } else if (id == R.id.nav_lookup) {
 
             // Switch to the Lookup tab
@@ -183,7 +186,7 @@ public class MainActivity extends AppCompatActivity
 
             setNewEntryVisibility(false);
 
-            hideFAB();
+            hideFab();
         } else if (id == R.id.nav_addtodatabase){
 
             // Switch to the goals tab
@@ -191,7 +194,7 @@ public class MainActivity extends AppCompatActivity
 
             setNewEntryVisibility(true);
 
-            hideFAB();
+            hideFab();
         } else if (id == R.id.nav_goals){
 
             // Switch to the goals tab
@@ -199,7 +202,7 @@ public class MainActivity extends AppCompatActivity
 
             setNewEntryVisibility(true);
 
-            hideFAB();
+            hideFab();
         } else if (id == R.id.nav_settings) {
 
             // Switch to the settings
@@ -217,7 +220,7 @@ public class MainActivity extends AppCompatActivity
 
             setNewEntryVisibility(false);
 
-            hideFAB();
+            hideFab();
         } else if (id == R.id.nav_progress){
 
             // Switch to the goals tab
@@ -225,7 +228,7 @@ public class MainActivity extends AppCompatActivity
 
             setNewEntryVisibility(true);
 
-            hideFAB();
+            hideFab();
         } else if (id == R.id.nav_diary) {
 
             // Switch to the Profile tab
@@ -233,9 +236,13 @@ public class MainActivity extends AppCompatActivity
 
             setNewEntryVisibility(true);
 
-            hideFAB();
+            hideFab();
         } else if (id == R.id.nav_analysis) {
             fm.beginTransaction().replace(R.id.content_frame, new AnalysisActivityFragment()).commit();
+        } else if (id == R.id.nav_recipe_keep){
+            fm.beginTransaction().replace(R.id.content_frame, new RecipeKeepFragment()).commit();
+            setNewEntryVisibility(false);
+            hideFab();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -267,17 +274,19 @@ public class MainActivity extends AppCompatActivity
     /**
      * Show the floating action button.
      */
-    public void showFAB(){
-        Animation bottomUp = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.bottom_up);
-        fab.setAnimation(bottomUp);
+    public void showFab() {
+        Animation rollLeft = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.roll_from_right);
+        fab.setAnimation(rollLeft);
         fab.setVisibility(View.VISIBLE);
     }
 
     /**
      * Hide the floating action button.
      */
-    public void hideFAB(){
-        if(fab.isShown()){
+    public void hideFab() {
+        if(fab.isShown()) {
+            Animation rollRight = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.roll_to_right);
+            fab.setAnimation(rollRight);
             fab.setVisibility(View.GONE);
         }
     }

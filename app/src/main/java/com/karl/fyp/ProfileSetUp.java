@@ -4,11 +4,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.Toast;
 
 import com.karl.fragments.ProfileSetupFive;
@@ -16,6 +18,8 @@ import com.karl.fragments.ProfileSetupFour;
 import com.karl.fragments.ProfileSetupOne;
 import com.karl.fragments.ProfileSetupThree;
 import com.karl.fragments.ProfileSetupTwo;
+
+import tyrantgit.explosionfield.ExplosionField;
 
 public class ProfileSetUp extends AppCompatActivity {
 
@@ -94,8 +98,10 @@ public class ProfileSetUp extends AppCompatActivity {
         }
     }
 
-    public void createNewUser(){
+    public void createNewUser(View v){
         MySQLiteHelper db = new MySQLiteHelper(this);
+
+        final ExplosionField explosionField = ExplosionField.attach2Window(this);
 
         if(getUser_name() == null || getUser_name().equals("")){
             Toast.makeText(getApplicationContext(), getString(R.string.profile_set_up_you_need_to_enter, getString(R.string.profile_fragment_name)), Toast.LENGTH_SHORT).show();
@@ -116,14 +122,22 @@ public class ProfileSetUp extends AppCompatActivity {
             db.createUser(getUser_name(), getUser_gender(), getUser_height(), getUser_weight());
             db.setDefaultGoals(getUser_desired());
 
-
             // Update the SharedPreferences so this screen is never shown again.
             SharedPreferences prefs = this.getSharedPreferences("com.karl.fyp", Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = prefs.edit();
             editor.putBoolean("isFirst", false);
             editor.apply();
-            startActivity(new Intent(getApplicationContext(), MainActivity.class));
-            finish();
+
+            explosionField.explode(v);
+            new Handler().postDelayed(new Runnable() {
+
+                // This method is run after the timer has expired
+                @Override
+                public void run() {
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                    finish();
+                }
+            }, 1000);
         }
     }
 

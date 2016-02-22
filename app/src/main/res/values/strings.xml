@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">FYP</string>
+    <string name="app_name">Snack Keep</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -9,14 +9,14 @@
     <string name="main_activity_new">New</string>
     <string name="main_activity_new_entry_manual">Manual</string>
     <string name="main_activity_new_entry_barcode">Scan barcode</string>
-    <string name="main_activity_new_entry_options_title">Choose method:</string>
+    <string name="main_activity_new_entry_options_title">Choose action:</string>
 
     <!-- Profile Set Up Fragments -->
     <string name="profile_set_up_swipe_to_continue">Swipe to continue</string>
-    <string name="profile_set_up_welcome">Welcome!\nPlease begin by setting up a profile.</string>
+    <string name="profile_set_up_welcome">Welcome!\n\nPlease begin by setting up a profile.</string>
     <string name="profile_set_up_save_profile">Save Profile</string>
     <string name="profile_set_up_you_need_to_enter">You need to enter the %1$s field</string>
-    <string name="profile_set_up_desired_weight">Your weight goal</string>
+    <string name="profile_set_up_desired_weight">Your weight goal (kgs)</string>
 
     <!-- Today fragment -->
     <string name="today_fragment_title">Today</string>
@@ -74,6 +74,7 @@
 
     <!-- About Activity -->
     <string name="about_fragment_title">About</string>
+    <string name="about_fragment_version">Version: </string>
 
     <!-- Profile Activity -->
     <string name="profile_fragment_title">Profile</string>
@@ -94,6 +95,12 @@
     <!-- New Manual Entry Activity -->
     <string name="new_entry_food_name">Food Name</string>
     <string name="new_entry_save">Save</string>
+
+    <!-- Recipe Keep Fragment -->
+    <string name="recipe_keep">Recipe Keep</string>
+    <string name="recipe_keep_click_to_download">Click the icon to download \nRecipe Keep</string>
+    <string name="recipe_keep_an_easy_way_to_store">An easy way to store your recipes</string>
+    <string name="recipe_keep_now_leaving_application">The Google Play store will now be opened, are you sure?</string>
 
     <!-- Common strings -->
     <string name="calories">Calories</string>

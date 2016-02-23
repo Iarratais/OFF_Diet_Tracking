@@ -306,7 +306,8 @@ public class MainActivity extends AppCompatActivity
         Cursor res = db.getUser();
 
         if(res == null) {
-            name_user = "Error";
+            startActivity(new Intent(getApplicationContext(), ProfileSetUp.class));
+            finish();
         } else {
             while (res.moveToNext()) {
                 name_user = res.getString(1);

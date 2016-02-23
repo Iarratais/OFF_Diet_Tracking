@@ -45,10 +45,12 @@
     <!-- Search fragment -->
     <string name="search_fragment_title">Search</string>
 
-    <!-- Goals fragment -->
-    <string name="goals_fragment_title">Goals</string>
+    <!-- Goals fragment and edit goals -->
+    <string name="goals_fragment_title">Your Goals</string>
     <string name="goals_fragment_update_successful">Your goals have been updated</string>
     <string name="goals_fragment_update_failure">Your goals have not been updated</string>
+    <string name="goals_fragment_your_goals">Your goals:</string>
+    <string name="goals_fragment_edit_goals">Edit</string>
 
     <!-- Progress fragment -->
     <string name="progress_fragment_title">Progress</string>
@@ -121,12 +123,15 @@
     <string name="salt_abbv">Sa:</string>
     <string name="grams_abbv">g</string>
     <string name="grams">grams</string>
+    <string name="kg">kg</string>
+    <string name="weigh">Weight</string>
     <string name="slash"> / </string>
     <string name="cancel">Cancel</string>
     <string name="save_changes">Save Changes</string>
     <string name="month">Month</string>
     <string name="year">Year</string>
     <string name="delete">delete</string>
+    <string name="colon">:</string>
 
     <!-- Errors -->
     <string name="error_sorry_check_your_network_settings">Please check your network settings</string>

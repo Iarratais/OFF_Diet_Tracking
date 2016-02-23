@@ -87,6 +87,11 @@
             android:label="@string/title_activity_profile_set_up"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
+        <activity android:name=".EditGoalsActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.karl.fyp.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

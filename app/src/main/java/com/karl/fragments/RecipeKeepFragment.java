@@ -21,8 +21,8 @@ import com.karl.fyp.R;
  */
 public class RecipeKeepFragment extends android.support.v4.app.Fragment {
 
-
     View rootView;
+
     public RecipeKeepFragment() {
         // Required empty public constructor
     }

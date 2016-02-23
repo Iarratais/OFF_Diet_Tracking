@@ -1,10 +1,12 @@
 package com.karl.fragments;
 
+import com.karl.fyp.EditGoalsActivity;
 import com.karl.fyp.MainActivity;
 import com.karl.fyp.MySQLiteHelper;
 import com.karl.fyp.R;
 import com.karl.models.Goals;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -16,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 /**
@@ -27,19 +30,17 @@ public class GoalsFragment extends android.support.v4.app.Fragment {
 
     private static final String TAG = "GoalsFragment";
 
+    TextView calories_view;
+    TextView fat_view;
+    TextView sat_fat_view;
+    TextView salt_view;
+    TextView sodium_view;
+    TextView carbs_view;
+    TextView sugar_view;
+    TextView protein_view;
+    TextView weight_view;
+
     MySQLiteHelper db;
-
-    EditText calories_view;
-    EditText fat_view;
-    EditText sat_fat_view;
-    EditText salt_view;
-    EditText sodium_view;
-    EditText carbs_view;
-    EditText sugar_view;
-    EditText protein_view;
-    EditText weight_view;
-
-    Button save_changes;
 
     View rootView;
 
@@ -49,12 +50,20 @@ public class GoalsFragment extends android.support.v4.app.Fragment {
 
         rootView = inflater.inflate(R.layout.fragment_goals, container, false);
 
+        db = new MySQLiteHelper(getActivity());
+
         // Set the title
         ((MainActivity) getActivity()).setActionBarTitle(getString(R.string.goals_fragment_title));
 
-        db = new MySQLiteHelper(getActivity());
+        Button edit_button = (Button) rootView.findViewById(R.id.edit_goals_button);
+        edit_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), EditGoalsActivity.class));
+            }
+        });
 
-        setUpViews();
+        setupViews();
 
         getInformationFromDB();
 
@@ -62,49 +71,26 @@ public class GoalsFragment extends android.support.v4.app.Fragment {
     }
 
     /**
-     * Set up the layout views
+     * Set up the views.
      */
-    public void setUpViews(){
-        calories_view = (EditText) rootView.findViewById(R.id.goals_calories);
-        calories_view.addTextChangedListener(calories_view_listener);
+    public void setupViews(){
+        calories_view = (TextView) rootView.findViewById(R.id.calorie_goal);
 
-        fat_view = (EditText) rootView.findViewById(R.id.goals_fat);
-        fat_view.addTextChangedListener(fat_view_listener);
+        fat_view = (TextView) rootView.findViewById(R.id.fat_goal);
 
-        sat_fat_view = (EditText) rootView.findViewById(R.id.goals_sat_fat);
-        sat_fat_view.addTextChangedListener(sat_fat_view_listener);
+        sat_fat_view = (TextView) rootView.findViewById(R.id.sat_fat_goal);
 
-        salt_view = (EditText) rootView.findViewById(R.id.goals_salt);
-        salt_view.addTextChangedListener(salt_view_listener);
+        salt_view = (TextView) rootView.findViewById(R.id.salt_goal);
 
-        sodium_view = (EditText) rootView.findViewById(R.id.goals_sodium);
-        sodium_view.addTextChangedListener(sodium_view_listener);
+        sodium_view = (TextView) rootView.findViewById(R.id.sodium_goal);
 
-        carbs_view = (EditText) rootView.findViewById(R.id.goals_carbohydrates);
-        carbs_view.addTextChangedListener(carbs_view_listener);
+        carbs_view = (TextView) rootView.findViewById(R.id.carbohydrates_goal);
 
-        sugar_view = (EditText) rootView.findViewById(R.id.goals_sugar);
-        sugar_view.addTextChangedListener(sugar_view_listener);
+        sugar_view = (TextView) rootView.findViewById(R.id.sugar_goal);
 
-        protein_view = (EditText) rootView.findViewById(R.id.goals_protein);
-        protein_view.addTextChangedListener(protein_view_listener);
+        protein_view = (TextView) rootView.findViewById(R.id.protein_goal);
 
-        weight_view = (EditText) rootView.findViewById(R.id.goals_weight);
-        weight_view.addTextChangedListener(weight_view_listener);
-
-        save_changes = (Button) rootView.findViewById(R.id.save_changes_goals);
-        save_changes.setVisibility(View.GONE);
-        save_changes.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                save_changes.setVisibility(View.GONE);
-                if(updateDatabase() == 1){
-                    showToast(getString(R.string.goals_fragment_update_successful));
-                } else {
-                    showToast(getString(R.string.goals_fragment_update_failure));
-                }
-            }
-        });
+        weight_view = (TextView) rootView.findViewById(R.id.weight_goal);
     }
 
     /**
@@ -117,161 +103,42 @@ public class GoalsFragment extends android.support.v4.app.Fragment {
             Log.d(TAG, "Nothing in goals table");
         } else {
             while(res.moveToNext()) {
-                calories_view.setText(res.getString(1));
-                fat_view.setText(res.getString(2));
-                sat_fat_view.setText(res.getString(3));
-                salt_view.setText(res.getString(4));
-                sodium_view.setText(res.getString(5));
-                carbs_view.setText(res.getString(6));
-                sugar_view.setText(res.getString(7));
-                protein_view.setText(res.getString(8));
-                weight_view.setText(res.getString(9));
+                // Calories
+                String calories = getString(R.string.calories) + getString(R.string.colon) + " " + res.getString(1);
+                calories_view.setText(calories);
+
+                // Fat
+                String fat = getString(R.string.fat) + getString(R.string.colon) + " " + res.getString(2) + getString(R.string.grams_abbv);
+                fat_view.setText(fat);
+
+                // Sat fat
+                String sat_fat = getString(R.string.saturated_fat) + getString(R.string.colon) + " " + res.getString(3) + getString(R.string.grams_abbv);
+                sat_fat_view.setText(sat_fat);
+
+                // Salt
+                String salt = getString(R.string.salt) + getString(R.string.colon) + " " + res.getString(4) + getString(R.string.grams_abbv);
+                salt_view.setText(salt);
+
+                // Sodium
+                String sodium = getString(R.string.sodium) + getString(R.string.colon) + " " + res.getString(5) + getString(R.string.grams_abbv);
+                sodium_view.setText(sodium);
+
+                // Carbohydrates
+                String carbohydrates = getString(R.string.carbohydrate) + getString(R.string.colon) + " " + res.getString(6) + getString(R.string.grams_abbv);
+                carbs_view.setText(carbohydrates);
+
+                // Sugar
+                String sugar = getString(R.string.sugar) + getString(R.string.colon) + " " + res.getString(7) + getString(R.string.grams_abbv);
+                sugar_view.setText(sugar);
+
+                // Protein
+                String protein = getString(R.string.protein) + getString(R.string.colon) + " " + res.getString(8) + getString(R.string.grams_abbv);
+                protein_view.setText(protein);
+
+                // Weight
+                String weight = getString(R.string.weigh) + getString(R.string.colon) + " " + res.getString(9) + getString(R.string.kg);
+                weight_view.setText(weight);
             }
         }
     }
-
-    /**
-     * Update the database with new information.
-     */
-    public int updateDatabase() {
-        return db.updateGoals(getInformationFromViews());
-    }
-
-    /**
-     * This method gets the information from the views and puts in into a Goals object.
-     * @return Goals object.
-     */
-    public Goals getInformationFromViews(){
-        Goals goal = new Goals();
-
-        goal.setCalories(calories_view.getText().toString());
-        goal.setFat(fat_view.getText().toString());
-        goal.setSaturatedFat(sat_fat_view.getText().toString());
-        goal.setSalt(salt_view.getText().toString());
-        goal.setSodium(sodium_view.getText().toString());
-        goal.setCarbohydrates(carbs_view.getText().toString());
-        goal.setSugar(sugar_view.getText().toString());
-        goal.setProtein(protein_view.getText().toString());
-        goal.setWeight(weight_view.getText().toString());
-
-        return goal;
-    }
-
-    public void showToast(String message){
-        Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
-    }
-
-    // Text changed listeners
-    private final TextWatcher calories_view_listener = new TextWatcher() {
-        @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-
-        @Override
-        public void onTextChanged(CharSequence s, int start, int before, int count) {
-            save_changes.setVisibility(View.VISIBLE);
-        }
-
-        @Override
-        public void afterTextChanged(Editable s) {}
-    };
-    private final TextWatcher fat_view_listener = new TextWatcher() {
-        @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-
-        @Override
-        public void onTextChanged(CharSequence s, int start, int before, int count) {
-            save_changes.setVisibility(View.VISIBLE);
-        }
-
-        @Override
-        public void afterTextChanged(Editable s) {}
-    };
-    private final TextWatcher sat_fat_view_listener = new TextWatcher() {
-        @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-
-        @Override
-        public void onTextChanged(CharSequence s, int start, int before, int count) {
-            save_changes.setVisibility(View.VISIBLE);
-        }
-
-        @Override
-        public void afterTextChanged(Editable s) {}
-    };
-    private final TextWatcher salt_view_listener = new TextWatcher() {
-        @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-
-        @Override
-        public void onTextChanged(CharSequence s, int start, int before, int count) {
-            save_changes.setVisibility(View.VISIBLE);
-        }
-
-        @Override
-        public void afterTextChanged(Editable s) {}
-    };
-    private final TextWatcher sodium_view_listener = new TextWatcher() {
-        @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-
-        @Override
-        public void onTextChanged(CharSequence s, int start, int before, int count) {
-            save_changes.setVisibility(View.VISIBLE);
-        }
-
-        @Override
-        public void afterTextChanged(Editable s) {}
-    };
-    private final TextWatcher carbs_view_listener = new TextWatcher() {
-        @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-
-        @Override
-        public void onTextChanged(CharSequence s, int start, int before, int count) {
-            save_changes.setVisibility(View.VISIBLE);
-        }
-
-        @Override
-        public void afterTextChanged(Editable s) {}
-    };
-    private final TextWatcher sugar_view_listener = new TextWatcher() {
-        @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-
-        @Override
-        public void onTextChanged(CharSequence s, int start, int before, int count) {
-            save_changes.setVisibility(View.VISIBLE);
-        }
-
-        @Override
-        public void afterTextChanged(Editable s) {}
-    };
-    private final TextWatcher protein_view_listener = new TextWatcher() {
-        @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-
-        @Override
-        public void onTextChanged(CharSequence s, int start, int before, int count) {
-            save_changes.setVisibility(View.VISIBLE);
-        }
-
-        @Override
-        public void afterTextChanged(Editable s) {}
-    };
-    private final TextWatcher weight_view_listener = new TextWatcher() {
-        @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-        }
-
-        @Override
-        public void onTextChanged(CharSequence s, int start, int before, int count) {
-            save_changes.setVisibility(View.VISIBLE);
-        }
-
-        @Override
-        public void afterTextChanged(Editable s) {
-
-        }
-    };
 }

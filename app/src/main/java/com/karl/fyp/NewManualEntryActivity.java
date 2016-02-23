@@ -35,6 +35,9 @@ public class NewManualEntryActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Save the food item into the database.
+     */
     public void saveFood() {
         TextView food_name_text_view = (TextView) findViewById(R.id.new_food_name);
         TextView calories_text_view = (TextView) findViewById(R.id.new_calories);

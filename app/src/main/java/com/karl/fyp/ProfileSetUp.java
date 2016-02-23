@@ -98,6 +98,11 @@ public class ProfileSetUp extends AppCompatActivity {
         }
     }
 
+    /**
+     * This method controls the "save profile" button, the animation and the checking of
+     * information that is entered into the system.
+     * @param v view to explode.
+     */
     public void createNewUser(View v){
         MySQLiteHelper db = new MySQLiteHelper(this);
 
@@ -129,9 +134,11 @@ public class ProfileSetUp extends AppCompatActivity {
             editor.apply();
 
             explosionField.explode(v);
-            new Handler().postDelayed(new Runnable() {
 
-                // This method is run after the timer has expired
+            /**
+             * Delay the changing of the activity for 1000 milliseconds.
+             */
+            new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));

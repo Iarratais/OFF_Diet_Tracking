@@ -111,6 +111,10 @@ public class SearchResultActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Set the title of the actionbar.
+     * @param title of the actionbar.
+     */
     public void setTitle(String title) {
         try {
             getSupportActionBar().setTitle(title);
@@ -162,6 +166,10 @@ public class SearchResultActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Calculate the screen size.
+     * @return the screen size in inches.
+     */
     public double getScreenSize(){
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);

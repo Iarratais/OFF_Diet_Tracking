@@ -262,7 +262,6 @@ public class FoodDAO implements IFoodDAO {
         for(int i = 0 ; i < 1 ; i++) {
             String exists = root.getString("status");
             if(exists.equals("1")){
-                System.out.println("Item exists");
                 return true;
             }
         }

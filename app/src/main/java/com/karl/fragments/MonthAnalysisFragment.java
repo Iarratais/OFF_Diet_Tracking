@@ -24,7 +24,7 @@ public class MonthAnalysisFragment extends android.support.v4.app.Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_month_analysis, container, false);
+        return inflater.inflate(R.layout.fragment_year_analysis, container, false);
     }
 
 

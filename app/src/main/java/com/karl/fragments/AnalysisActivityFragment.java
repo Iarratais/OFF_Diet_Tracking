@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 
 import com.karl.fyp.MainActivity;
 import com.karl.fyp.R;
-import com.karl.fyp.SearchResultActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -40,7 +39,7 @@ public class AnalysisActivityFragment extends android.support.v4.app.Fragment {
 
         rootView = inflater.inflate(R.layout.fragment_analysis_activity, container, false);
 
-        setSECTION1(getString(R.string.month));
+        setSECTION1(getString(R.string.last_month));
         setSECTION2(getString(R.string.year));
 
         ((MainActivity)getActivity()).setActionBarTitle(getString(R.string.analysis_fragment_title));

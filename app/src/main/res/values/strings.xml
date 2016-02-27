@@ -40,7 +40,7 @@
     <string name="lookup_fragment_title">Barcode Search</string>
     <string name="lookup_fragment_scan">Scan</string>
     <string name="lookup_fragment_your_barcode_needs_13_digits">Please enter a 13 digit barcode</string>
-    <string name="lookup_fragment_serving_size">Serving size :</string>
+    <string name="lookup_fragment_serving_size">Serving size:</string>
 
     <!-- Search fragment -->
     <string name="search_fragment_title">Search</string>
@@ -128,7 +128,7 @@
     <string name="slash"> / </string>
     <string name="cancel">Cancel</string>
     <string name="save_changes">Save Changes</string>
-    <string name="month">Month</string>
+    <string name="last_month">Last Month</string>
     <string name="year">Year</string>
     <string name="delete">delete</string>
     <string name="colon">:</string>

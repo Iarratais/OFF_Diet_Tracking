@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 
 import com.karl.fyp.R;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -74,10 +75,17 @@ public class DiaryFragment extends android.support.v4.app.Fragment {
 
         ArrayList<Food> foods = new ArrayList<>();
 
-        if(todayRes ==  null) {
-            Log.d(TAG, "There is nothing in the today table");
-        } else if (todayStatsRes == null) {
-            Log.d(TAG, "There is nothing in the today stats table");
+        if(todayRes == null || todayStatsRes == null || todayRes.getCount() == 0) {
+            Log.d(TAG, "There is nothing in today");
+
+            ListView list = (ListView) rootView.findViewById(R.id.today_chart_information);
+            list.setVisibility(View.GONE);
+
+            ImageView nothing_to_show = (ImageView) rootView.findViewById(R.id.nothing_to_show_diary);
+            nothing_to_show.setVisibility(View.VISIBLE);
+            TextView nothing_to_show_txt = (TextView) rootView.findViewById(R.id.nothing_to_show_text_diary);
+            nothing_to_show_txt.setVisibility(View.VISIBLE);
+
         } else {
 
             // 4 columns in todayRes

@@ -1,6 +1,5 @@
 package com.karl.fragments;
 
-import android.app.Fragment;
 import com.karl.fyp.MainActivity;
 import com.karl.fyp.R;
 import android.os.Bundle;

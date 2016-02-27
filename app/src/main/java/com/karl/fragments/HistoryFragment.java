@@ -17,7 +17,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -64,7 +66,13 @@ public class HistoryFragment extends android.support.v4.app.Fragment {
         dates = new ArrayList<>();
 
         if(res.getCount() == 0) {
-            Toast.makeText(getActivity(), "No history", Toast.LENGTH_SHORT).show();
+            ListView list = (ListView) rootView.findViewById(R.id.history_list);
+            list.setVisibility(View.GONE);
+
+            ImageView nothingtoshow = (ImageView) rootView.findViewById(R.id.nothing_to_show_history);
+            nothingtoshow.setVisibility(View.VISIBLE);
+            TextView nothingtoshowtext = (TextView) rootView.findViewById(R.id.nothing_to_show_text_history);
+            nothingtoshowtext.setVisibility(View.VISIBLE);
         } else {
             while(res.moveToNext()) {
                 // Column count = 10
@@ -101,30 +109,6 @@ public class HistoryFragment extends android.support.v4.app.Fragment {
                 Toast.makeText(getActivity(), "Position: " + position, Toast.LENGTH_SHORT).show();
             }
         });
-
-//        list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-//            @Override
-//            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-//                final int pos = position;
-//                new AlertDialog.Builder(getContext())
-//                        .setCancelable(true)
-//                        .setMessage(getString(R.string.history_fragment_are_you_sure, setDateTitle(days.get(position).getDate())))
-//                        .setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface dialog, int which) {
-//                                db.deleteHistoryItem(days.get(pos).getId());
-//                            }
-//                        })
-//                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface dialog, int which) {
-//                                dialog.dismiss();
-//                            }
-//                        })
-//                        .show();
-//                return false;
-//            }
-//        });
     }
 
     /**

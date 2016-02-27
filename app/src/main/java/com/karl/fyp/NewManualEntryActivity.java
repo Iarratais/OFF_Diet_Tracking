@@ -9,6 +9,10 @@ import android.widget.TextView;
 
 import com.karl.models.Food;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
+
 public class NewManualEntryActivity extends AppCompatActivity {
 
     @Override
@@ -56,5 +60,27 @@ public class NewManualEntryActivity extends AppCompatActivity {
 
         MySQLiteHelper db = new MySQLiteHelper(getApplicationContext());
         db.createNewEntryToday(food);
+    }
+
+    public String getDate() {
+        Calendar c = Calendar.getInstance();
+        String day = Integer.toString(c.get(Calendar.DAY_OF_MONTH));
+        String month = Integer.toString(c.get(Calendar.MONTH) + 1);
+        String year = Integer.toString(c.get(Calendar.YEAR));
+
+        String weekDay;
+        SimpleDateFormat dayFormat = new SimpleDateFormat("EEEE", Locale.US);
+        weekDay = dayFormat.format(c.getTime());
+
+        if(day.length() < 2) {
+            String temp = day;
+            day = "0" + temp;
+        }
+        if(month.length() < 2) {
+            String temp = month;
+            month = "0" + temp;
+        }
+
+        return weekDay.substring(0, 3) + day + month + year;
     }
 }

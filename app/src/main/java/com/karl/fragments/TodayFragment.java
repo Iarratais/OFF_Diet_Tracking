@@ -462,6 +462,7 @@ public class TodayFragment extends android.support.v4.app.Fragment {
         Cursor res = db.returnTodaysEntries();
         if(res.getCount() == 0) {
             Log.d(TAG, "There is no information in todays entries");
+            nothingToShow();
         } else {
             while(res.moveToNext()){
                 Food food = new Food();
@@ -479,9 +480,9 @@ public class TodayFragment extends android.support.v4.app.Fragment {
      */
     public void getInfoFromTodayStats() {
         Cursor res = db.returnTodayStatsEntries();
-        System.out.println(res.getColumnCount());
         if(res.getCount() == 0) {
             Log.d(TAG, "There is no information in todays stat entries");
+            nothingToShow();
         } else {
             int i = 0;
             while(res.moveToNext()){
@@ -495,9 +496,81 @@ public class TodayFragment extends android.support.v4.app.Fragment {
                     foods.get(i).setSalt(res.getString(8));
                     foods.get(i).setSodium(res.getString(9));
                 }
-                System.out.println(foods.get(i).toString());
                 i++;
             }
+        }
+    }
+
+    public void nothingToShow(){
+        ArrayList<View> views = new ArrayList<>();
+
+        // Title of the chart
+        View view = rootView.findViewById(R.id.today_chart_title);
+        views.add(view);
+
+        // Today chart
+        view = rootView.findViewById(R.id.today_chart);
+        views.add(view);
+
+        // Calories
+        view = rootView.findViewById(R.id.today_calories_text_view);
+        views.add(view);
+        view = rootView.findViewById(R.id.today_calories_stats);
+        views.add(view);
+
+        // Fats
+        view = rootView.findViewById(R.id.today_fat_text_view);
+        views.add(view);
+        view = rootView.findViewById(R.id.today_fat_stats);
+        views.add(view);
+
+        // Sat fats
+        view = rootView.findViewById(R.id.today_sat_fat_text_view);
+        views.add(view);
+        view = rootView.findViewById(R.id.today_sat_fat_stats);
+        views.add(view);
+
+        // Salt
+        view = rootView.findViewById(R.id.today_salt_text_view);
+        views.add(view);
+        view = rootView.findViewById(R.id.today_salt_stats);
+        views.add(view);
+
+        // Sodium
+        view = rootView.findViewById(R.id.today_sodium_text_view);
+        views.add(view);
+        view = rootView.findViewById(R.id.today_sodium_stats);
+        views.add(view);
+
+        // Carbohydrates
+        view = rootView.findViewById(R.id.today_carbohydrate_text_view);
+        views.add(view);
+        view = rootView.findViewById(R.id.today_carbs_stats);
+        views.add(view);
+
+        // Sugar
+        view = rootView.findViewById(R.id.today_sugar_text_view);
+        views.add(view);
+        view = rootView.findViewById(R.id.today_sugar_stats);
+        views.add(view);
+
+        // Protein
+        view = rootView.findViewById(R.id.today_protein_text_view);
+        views.add(view);
+        view = rootView.findViewById(R.id.today_protein_stats);
+        views.add(view);
+
+        view = rootView.findViewById(R.id.nothing_to_show_today);
+        view.setVisibility(View.VISIBLE);
+        view = rootView.findViewById(R.id.nothing_to_show_text_today);
+        view.setVisibility(View.VISIBLE);
+
+        setViewVisibilityFalse(views);
+    }
+
+    public void setViewVisibilityFalse(ArrayList<View> v){
+        for(int i = 0; i < v.size(); i++){
+            v.get(i).setVisibility(View.GONE);
         }
     }
 }

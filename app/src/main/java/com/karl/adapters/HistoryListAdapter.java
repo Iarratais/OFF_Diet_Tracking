@@ -54,9 +54,11 @@ public class HistoryListAdapter extends ArrayAdapter<String> {
         StringBuilder daysDate = new StringBuilder();
         StringBuffer date = new StringBuffer(dates[position]);
 
+
+
         // Day
-        char char1 = date.charAt(0);
-        char char2 = date.charAt(1);
+        char char1 = date.charAt(3);
+        char char2 = date.charAt(4);
         if(char1 == '0'){
             daysDate.append(char2);
             if(char2 == '1'){
@@ -95,8 +97,8 @@ public class HistoryListAdapter extends ArrayAdapter<String> {
         }
 
         // Month
-        char char3 = date.charAt(2);
-        char char4 = date.charAt(3);
+        char char3 = date.charAt(5);
+        char char4 = date.charAt(6);
         StringBuilder month = new StringBuilder().append(char3).append(char4);
         String mon = month.toString();
         if(mon.equals("01")) {
@@ -211,9 +213,14 @@ public class HistoryListAdapter extends ArrayAdapter<String> {
         StringBuilder daysDate = new StringBuilder();
         StringBuffer date = new StringBuffer(dates);
 
+        char char5 = date.charAt(0);
+        char char6 = date.charAt(1);
+        char char7 = date.charAt(2);
+        daysDate.append(char5).append(char6).append(char7).append(" ");
+
         // Day
-        char char1 = date.charAt(0);
-        char char2 = date.charAt(1);
+        char char1 = date.charAt(3);
+        char char2 = date.charAt(4);
         if(char1 == '0'){
             daysDate.append(char2);
             if(char2 == '1'){
@@ -252,8 +259,8 @@ public class HistoryListAdapter extends ArrayAdapter<String> {
         }
 
         // Month
-        char char3 = date.charAt(2);
-        char char4 = date.charAt(3);
+        char char3 = date.charAt(5);
+        char char4 = date.charAt(6);
         StringBuilder month = new StringBuilder().append(char3).append(char4);
         String mon = month.toString();
         if(mon.equals("01")) {

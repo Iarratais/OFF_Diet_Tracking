@@ -13,7 +13,9 @@ import android.util.Log;
 import com.karl.models.Food;
 import com.karl.models.Goals;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Locale;
 
 import static android.preference.PreferenceManager.*;
 
@@ -526,6 +528,10 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
         String month = Integer.toString(c.get(Calendar.MONTH) + 1);
         String year = Integer.toString(c.get(Calendar.YEAR));
 
+        String weekDay;
+        SimpleDateFormat dayFormat = new SimpleDateFormat("EEEE", Locale.US);
+        weekDay = dayFormat.format(c.getTime());
+
         if(day.length() < 2) {
             String temp = day;
             day = "0" + temp;
@@ -535,6 +541,6 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
             month = "0" + temp;
         }
 
-        return day + month + year;
+        return weekDay.substring(0, 3) + day + month + year;
     }
 }

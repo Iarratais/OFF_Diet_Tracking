@@ -132,6 +132,7 @@
     <string name="year">Year</string>
     <string name="delete">delete</string>
     <string name="colon">:</string>
+    <string name="there_is_nothing_here">There doesn\'t seem to be anything here yet</string>
 
     <!-- Errors -->
     <string name="error_sorry_check_your_network_settings">Please check your network settings</string>

@@ -12,8 +12,10 @@ import android.util.Log;
 import com.karl.models.Food;
 
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Locale;
 
 public class SplashScreenActivity extends Activity {
 
@@ -353,11 +355,15 @@ public class SplashScreenActivity extends Activity {
      * Get the current date.
      * @return String with todays date.
      */
-    public String getDate(){
+    public String getDate() {
         Calendar c = Calendar.getInstance();
         String day = Integer.toString(c.get(Calendar.DAY_OF_MONTH));
         String month = Integer.toString(c.get(Calendar.MONTH) + 1);
         String year = Integer.toString(c.get(Calendar.YEAR));
+
+        String weekDay;
+        SimpleDateFormat dayFormat = new SimpleDateFormat("EEEE", Locale.US);
+        weekDay = dayFormat.format(c.getTime());
 
         if(day.length() < 2) {
             String temp = day;
@@ -368,7 +374,6 @@ public class SplashScreenActivity extends Activity {
             month = "0" + temp;
         }
 
-        Log.d(TAG, "Date: " + day + "-" + month + "-" + year);
-        return day + month + year;
+        return weekDay.substring(0, 3) + day + month + year;
     }
 }

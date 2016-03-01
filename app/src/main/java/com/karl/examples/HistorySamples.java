@@ -1,6 +1,11 @@
 package com.karl.examples;
 
+import android.content.Context;
+import android.content.res.Resources;
+import android.util.Log;
+
 import com.karl.fyp.MySQLiteHelper;
+import com.karl.fyp.R;
 import com.karl.models.Food;
 
 import java.text.DecimalFormat;
@@ -10,6 +15,8 @@ import java.util.Random;
  * This is just to populate the history database with dummy data
  */
 public class HistorySamples {
+
+    private static final String TAG = "HistorySamples";
 
     private static final String START_DATE = "1012016";
     private static final String START_DATE_FEB = "01022016";
@@ -32,11 +39,22 @@ public class HistorySamples {
         this.db = db;
     }
 
-    public void setUpStatsJan(){
+    /**
+     * Set up the stats for january.
+     * @param context of the application.
+     */
+    public void setUpStatsJan(Context context){
+
+        // Get the identifiers for the days.
+        Resources res = context.getResources();
+        final String[] days = new String[] {res.getString(R.string.monday).substring(0,3).toUpperCase(), res.getString(R.string.tuesday).substring(0,3).toUpperCase(),
+                res.getString(R.string.wednesday).substring(0,3).toUpperCase(), res.getString(R.string.thursday).substring(0,3).toUpperCase(),
+                res.getString(R.string.friday).substring(0,3).toUpperCase(), res.getString(R.string.saturday).substring(0,3).toUpperCase(),
+                res.getString(R.string.sunday).substring(0,3).toUpperCase()};
 
         final DecimalFormat df = new DecimalFormat("#.###");
 
-        System.out.println("START DATE " + Integer.parseInt(START_DATE));
+        Log.d(TAG, "START DATE " + Integer.parseInt(START_DATE));
         System.out.println("INCREMENT " + INCREMENT);
 
         Random r = new Random();
@@ -47,11 +65,18 @@ public class HistorySamples {
 
             food = new Food();
 
+            // The first day of january is a friday
+            int day_num = 4;
+
             // Set the date
             if(Integer.toString(i).length() < 8) {
-                food.setDate("0" + Integer.toString(i));
+                food.setDate(days[day_num] + "0" + Integer.toString(i));
             } else {
-                food.setDate(Integer.toString(i));
+                food.setDate(days[day_num] + Integer.toString(i));
+            }
+            day_num++;
+            if(day_num == 7){
+                day_num = 0;
             }
 
             // Set up calories

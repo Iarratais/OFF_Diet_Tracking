@@ -1,6 +1,7 @@
 package com.karl.fyp;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -99,14 +100,19 @@ public class MainActivity extends AppCompatActivity
         Log.d(TAG, "Today Entries: " + res.getCount());
         Log.d(TAG, "Res Column Count: " + res.getColumnCount());
 
-        //db.createUser("Karl", "Male", "190", "180");
-        //db.setDefaultGoals();
-
         // Set up random data into the history database for testing purposes
-        //HistorySamples hist = new HistorySamples(db);
-        //hist.setUpStatsJan();
+        HistorySamples hist = new HistorySamples(db);
+        //hist.setUpStatsJan(getApplicationContext());
         //hist.setUpStatsFeb();
         //db.clearHistory();
+
+        Boolean recipeKeepInstalled = appInstalledOrNot("com.karl.recipekeeper");
+        if(recipeKeepInstalled){
+            Log.d(TAG, "Recipe Keep is installed - hiding menuitem");
+            Menu menu = navigationView.getMenu();
+            MenuItem target = menu.findItem(R.id.nav_recipe_keep);
+            target.setVisible(false);
+        }
     }
 
     @Override
@@ -338,5 +344,18 @@ public class MainActivity extends AppCompatActivity
         double x = Math.pow(wi, 2);
         double y = Math.pow(hi, 2);
         return Math.sqrt(x+y);
+    }
+
+    private boolean appInstalledOrNot(String uri) {
+        PackageManager pm = getPackageManager();
+        boolean app_installed;
+        try {
+            pm.getPackageInfo(uri, PackageManager.GET_ACTIVITIES);
+            app_installed = true;
+        }
+        catch (PackageManager.NameNotFoundException e) {
+            app_installed = false;
+        }
+        return app_installed;
     }
 }

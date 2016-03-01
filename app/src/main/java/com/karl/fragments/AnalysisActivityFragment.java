@@ -14,6 +14,8 @@ import android.view.ViewGroup;
 import com.karl.fyp.MainActivity;
 import com.karl.fyp.R;
 
+import java.util.Calendar;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -39,8 +41,8 @@ public class AnalysisActivityFragment extends android.support.v4.app.Fragment {
 
         rootView = inflater.inflate(R.layout.fragment_analysis_activity, container, false);
 
-        setSECTION1(getString(R.string.last_month));
-        setSECTION2(getString(R.string.year));
+        setSECTION1(getPreviousMonth());
+        setSECTION2(getYear());
 
         ((MainActivity)getActivity()).setActionBarTitle(getString(R.string.analysis_fragment_title));
 
@@ -54,6 +56,63 @@ public class AnalysisActivityFragment extends android.support.v4.app.Fragment {
 
         // Inflate the layout for this fragment
         return rootView;
+    }
+
+    /**
+     * Get the previous month.
+     * @return String : previous month.
+     */
+    public String getPreviousMonth(){
+        Calendar calendar = Calendar.getInstance();
+        int thisMonth = calendar.get(Calendar.MONTH);
+
+        // We want the previous month.
+        thisMonth -= 1;
+
+        if(thisMonth < 0) {
+            thisMonth = 11;
+        }
+
+        // Give back the month as a full word.
+        switch(thisMonth) {
+            case 0:
+                return getString(R.string.january);
+            case 1:
+                return getString(R.string.february);
+            case 2:
+                return getString(R.string.march);
+            case 3:
+                return getString(R.string.april);
+            case 4:
+                return getString(R.string.may);
+            case 5:
+                return getString(R.string.june);
+            case 6:
+                return getString(R.string.july);
+            case 7:
+                return getString(R.string.august);
+            case 8:
+                return getString(R.string.september);
+            case 9:
+                return getString(R.string.october);
+            case 10:
+                return getString(R.string.november);
+            case 11:
+                return getString(R.string.december);
+            default:
+                return getString(R.string.last_month);
+        }
+    }
+
+    /**
+     * Get the current year.
+     * @return String : current year.
+     */
+    public String getYear(){
+        Calendar calendar = Calendar.getInstance();
+        int thisYear = calendar.get(Calendar.YEAR);
+
+        return String.valueOf(thisYear);
     }
 
     public String getSECTION1() {
@@ -86,11 +145,11 @@ public class AnalysisActivityFragment extends android.support.v4.app.Fragment {
         public android.support.v4.app.Fragment getItem(int position) {
             switch(position) {
                 case 0:
-                    return new DayAnalysisFragment();
-                case 1:
                     return new MonthAnalysisFragment();
+                case 1:
+                    return new YearAnalysisFragment();
             }
-            return new DayAnalysisFragment();
+            return new MonthAnalysisFragment();
         }
 
         @Override

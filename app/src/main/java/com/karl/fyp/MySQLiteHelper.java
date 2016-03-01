@@ -357,7 +357,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
 
     public void deleteTodayStatsEntry(String id) {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(TODAY_STATS_TABLE, TODAY_STATS_KEY_ID + " + ?", new String[] { id});
+        db.delete(TODAY_STATS_TABLE, TODAY_STATS_KEY_ID + " + ?", new String[]{id});
         db.close();
     }
 
@@ -396,9 +396,18 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
         Log.d(TAG, "HISTORY TABLE INSERTED: " + db.insert(HISTORY_TABLE, null, cv));
     }
 
+    /**
+     * Return all history.
+     * @return Cursor: history from the user.
+     */
     public Cursor getHistory() {
         SQLiteDatabase db = this.getWritableDatabase();
         return db.rawQuery("SELECT * FROM " + HISTORY_TABLE, null);
+    }
+
+    public Cursor getHistoryByDate(String query){
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.rawQuery("SELECT * FROM " + HISTORY_TABLE + " WHERE " + HISTORY_DATE + " LIKE '%" + query + "%'", null);
     }
 
     /**
@@ -433,17 +442,6 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
                 + GOAL_PROTEIN + " TEXT, "
                 + GOAL_WEIGHT + " TEXT)");
         Log.d(TAG, "createGoalsTable run");
-    }
-
-    public Cursor returnWeightGoal(){
-        SQLiteDatabase db = this.getWritableDatabase();
-        return db.rawQuery("SELECT " + GOAL_WEIGHT +" FROM " + GOALS_TABLE, null);
-    }
-
-    public void updateDesiredWeight(String desired){
-        SQLiteDatabase db = this.getWritableDatabase();
-        String query = "UPDATE " + GOALS_TABLE + " SET " + GOAL_WEIGHT + " = '" + desired + "'";
-        db.rawQuery(query, null);
     }
 
     public void clearGoals(){
@@ -541,6 +539,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
             month = "0" + temp;
         }
 
-        return weekDay.substring(0, 3) + day + month + year;
+        Log.d(TAG, weekDay.substring(0, 3).toUpperCase() + day + month + year);
+        return weekDay.substring(0, 3).toUpperCase() + day + month + year;
     }
 }

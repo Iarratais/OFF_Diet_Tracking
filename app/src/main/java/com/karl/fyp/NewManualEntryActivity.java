@@ -1,7 +1,9 @@
 package com.karl.fyp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -15,10 +17,30 @@ import java.util.Locale;
 
 public class NewManualEntryActivity extends AppCompatActivity {
 
+    private static final String TAG = "NewManualEntryActivity";
+
+    String barcode = null;
+    Boolean scan_success = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_manual_entry);
+
+        Intent from_barcode = getIntent();
+        if(from_barcode != null){
+            scan_success = from_barcode.getBooleanExtra("scan_success", false);
+            barcode = from_barcode.getStringExtra("barcode");
+            if(barcode != null) {
+                Log.d(TAG, barcode);
+            }
+        }
+
+        try {
+            getSupportActionBar().setTitle(getString(R.string.new_entry_title));
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

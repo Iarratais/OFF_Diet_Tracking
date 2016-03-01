@@ -213,7 +213,11 @@ public class BarcodeScannerActivity extends Activity implements View.OnClickList
             if(exists)
                 getResults(barcode);
             else {
-                Toast.makeText(getApplicationContext(), getString(R.string.error_item_does_not_exist), Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(getApplicationContext(), NewManualEntryActivity.class);
+                i.putExtra("scan_successs", false);
+                i.putExtra("barcode", barcode);
+                startActivity(i);
+                //Toast.makeText(getApplicationContext(), getString(R.string.error_item_does_not_exist), Toast.LENGTH_SHORT).show();
             }
             progressBar.setVisibility(View.GONE);
 

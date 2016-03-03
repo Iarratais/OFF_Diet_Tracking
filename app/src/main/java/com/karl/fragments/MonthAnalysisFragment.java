@@ -11,10 +11,16 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
 
+import com.karl.analysis.Analyse;
 import com.karl.fyp.MySQLiteHelper;
 import com.karl.fyp.R;
+import com.karl.models.Day;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 /**
@@ -23,6 +29,8 @@ import java.util.Calendar;
 public class MonthAnalysisFragment extends android.support.v4.app.Fragment {
 
     private static final String TAG = "MonthAnalysisFragment";
+
+    Analyse analyse;
 
     View rootView;
 
@@ -35,7 +43,9 @@ public class MonthAnalysisFragment extends android.support.v4.app.Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_month_analysis, container, false);
 
-        getInformationFromDatabase();
+
+        Monthly_Analysis ma = new Monthly_Analysis();
+        ma.execute();
 
         return rootView;
     }
@@ -47,15 +57,37 @@ public class MonthAnalysisFragment extends android.support.v4.app.Fragment {
                 getString(R.string.sunday).substring(0, 3).toUpperCase()};
     }
 
-    public void getInformationFromDatabase(){
+    public ArrayList<Day> getInformationFromDatabase(){
         MySQLiteHelper db = new MySQLiteHelper(getContext());
+
+        ArrayList<Day> historydays = new ArrayList<>();
+
         Log.d(TAG, generateTimeQuery());
         Cursor res = db.getHistoryByDate(generateTimeQuery());
-        if(res.getCount() > 0) {
-            Log.d(TAG, "IT FOUND SOMETHING");
-        } else {
+
+        if(res.getCount() == 0) {
             Log.d(TAG, "You should be ashamed that this code does not work");
+        } else {
+            while(res.moveToNext()) {
+                // Column count = 10
+                // history_id date calories fats sat_fat salt sodium carbohydrates sugar protein
+                Day day = new Day();
+                day.setId(res.getString(0));
+                day.setDate(res.getString(1));
+                day.setCalories(res.getString(2));
+                day.setFats(res.getString(3));
+                day.setSaturated_fat(res.getString(4));
+                day.setSalt(res.getString(5));
+                day.setSodium(res.getString(6));
+                day.setCarbs(res.getString(7));
+                day.setSugar(res.getString(8));
+                day.setProtein(res.getString(9));
+
+                historydays.add(day);
+            }
         }
+
+        return historydays;
     }
 
     /**
@@ -75,16 +107,12 @@ public class MonthAnalysisFragment extends android.support.v4.app.Fragment {
         Calendar calendar = Calendar.getInstance();
         int thisMonth = calendar.get(Calendar.MONTH);
 
-        // We want the previous month.
-        int lastMonth = thisMonth - 1;
-
         String lastmonth = "";
 
-        if (lastMonth < 1) {
-            lastmonth = "12";
-        }
-        if (lastMonth < 10) {
-            lastmonth = "0" + lastMonth;
+        if (thisMonth < 10) {
+            lastmonth = "0" + thisMonth;
+        } else {
+            lastmonth = String.valueOf(thisMonth);
         }
 
         return lastmonth;
@@ -101,16 +129,37 @@ public class MonthAnalysisFragment extends android.support.v4.app.Fragment {
         return String.valueOf(thisYear);
     }
 
-    class Monthly_Analysis extends AsyncTask<Void, Void, Void> {
 
-        private String[] days;
+    class Monthly_Analysis extends AsyncTask<Void, Void, Void> {
 
         @Override
         protected Void doInBackground(Void... params) {
 
-            days = makeDaysArray();
+            analyse = new Analyse(getContext(), getInformationFromDatabase());
 
+            Log.d(TAG, "Calories: "  + analyse.getMostCalories());
+            Log.d(TAG, "Day with most calories consumed: " + analyse.getDayMostCalories());
 
+            Log.d(TAG, "Fats: " + analyse.getMostFats());
+            Log.d(TAG, "Day with most fats consumed: " + analyse.getDayMostFats());
+
+            Log.d(TAG, "Sat Fats: " + analyse.getMostSatFat());
+            Log.d(TAG, "Day with most saturated fats: " + analyse.getDayMostSatFat());
+
+            Log.d(TAG, "Salts: " + analyse.getMostSalt());
+            Log.d(TAG, "Day with most salts: " + analyse.getDayMostSalt());
+
+            Log.d(TAG, "Sodium: " + analyse.getMostSodium());
+            Log.d(TAG, "Day with most sodium: " + analyse.getDayMostSodium());
+
+            Log.d(TAG, "Carbohydrates: " + analyse.getMostCarbohydrates());
+            Log.d(TAG, "Day with most carbs: " + analyse.getDayMostCarbohydrates());
+
+            Log.d(TAG, "Sugar: " + analyse.getMostSugar());
+            Log.d(TAG, "Day with most sugar: " + analyse.getDayMostSugar());
+
+            Log.d(TAG, "Protein: " + analyse.getMostProtein());
+            Log.d(TAG, "Day with most protein: " + analyse.getDayMostProtein());
 
             return null;
         }
@@ -120,4 +169,6 @@ public class MonthAnalysisFragment extends android.support.v4.app.Fragment {
             super.onPostExecute(aVoid);
         }
     }
+
+
 }

@@ -54,7 +54,10 @@ public class HistoryListAdapter extends ArrayAdapter<String> {
         StringBuilder daysDate = new StringBuilder();
         StringBuffer date = new StringBuffer(dates[position]);
 
-
+        char char5 = date.charAt(0);
+        char char6 = date.charAt(1);
+        char char7 = date.charAt(2);
+        daysDate.append(char5).append(char6).append(char7).append(" ");
 
         // Day
         char char1 = date.charAt(3);
@@ -205,7 +208,7 @@ public class HistoryListAdapter extends ArrayAdapter<String> {
 
     /**
      * Set the title of the page using the current date.
-     * @return String title/
+     * @return String title.
      */
     public String setDateTitle(String dates){
 

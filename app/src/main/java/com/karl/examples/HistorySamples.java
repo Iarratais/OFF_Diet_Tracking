@@ -47,7 +47,7 @@ public class HistorySamples {
 
         // Get the identifiers for the days.
         Resources res = context.getResources();
-        final String[] days = new String[] {res.getString(R.string.monday).substring(0,3).toUpperCase(), res.getString(R.string.tuesday).substring(0,3).toUpperCase(),
+        final String[] days = new String[]{res.getString(R.string.monday).substring(0,3).toUpperCase(), res.getString(R.string.tuesday).substring(0,3).toUpperCase(),
                 res.getString(R.string.wednesday).substring(0,3).toUpperCase(), res.getString(R.string.thursday).substring(0,3).toUpperCase(),
                 res.getString(R.string.friday).substring(0,3).toUpperCase(), res.getString(R.string.saturday).substring(0,3).toUpperCase(),
                 res.getString(R.string.sunday).substring(0,3).toUpperCase()};
@@ -57,7 +57,9 @@ public class HistorySamples {
         Log.d(TAG, "START DATE " + Integer.parseInt(START_DATE));
         System.out.println("INCREMENT " + INCREMENT);
 
-        Random r = new Random();
+        // The first day of january is a friday
+        int day_num = 4;
+
         /**
          * Loop through 30 days
          */
@@ -65,8 +67,6 @@ public class HistorySamples {
 
             food = new Food();
 
-            // The first day of january is a friday
-            int day_num = 4;
 
             // Set the date
             if(Integer.toString(i).length() < 8) {
@@ -75,6 +75,7 @@ public class HistorySamples {
                 food.setDate(days[day_num] + Integer.toString(i));
             }
             day_num++;
+
             if(day_num == 7){
                 day_num = 0;
             }

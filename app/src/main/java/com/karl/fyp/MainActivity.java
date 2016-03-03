@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity
         Log.d(TAG, "Res Column Count: " + res.getColumnCount());
 
         // Set up random data into the history database for testing purposes
-        HistorySamples hist = new HistorySamples(db);
+        //HistorySamples hist = new HistorySamples(db);
         //hist.setUpStatsJan(getApplicationContext());
         //hist.setUpStatsFeb();
         //db.clearHistory();

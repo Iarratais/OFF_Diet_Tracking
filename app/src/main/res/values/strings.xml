@@ -9,7 +9,7 @@
     <string name="main_activity_new">New</string>
     <string name="main_activity_new_entry_manual">Manual</string>
     <string name="main_activity_new_entry_barcode">Scan barcode</string>
-    <string name="main_activity_new_entry_options_title">Choose action:</string>
+    <string name="main_activity_new_entry_options_title">Choose method:</string>
 
     <!-- Profile Set Up Fragments -->
     <string name="profile_set_up_swipe_to_continue">Swipe to continue</string>
@@ -80,6 +80,7 @@
     <!-- About Activity -->
     <string name="about_fragment_title">About</string>
     <string name="about_fragment_version">Version: </string>
+    <string name="faq">Frequently Asked Questions</string>
 
     <!-- Profile Activity -->
     <string name="profile_fragment_title">Profile</string>

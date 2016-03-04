@@ -237,7 +237,6 @@ public class FoodDAO implements IFoodDAO {
             foodServing.setSalt(salt_serving);
             foodServing.setSodium(sodium_serving);
             foodServing.setServing_size(serving_size);
-            System.out.println("FOODSERVING : " + foodServing.toString());
 
             allFoods.add(foodServing);
         }
@@ -246,7 +245,7 @@ public class FoodDAO implements IFoodDAO {
     }
 
     /**
-     *
+     * This method checks if the product exists on the database or not.
      * @param barcode of the product.
      * @return true or false if the product is found.
      * @throws IOException

@@ -136,29 +136,29 @@ public class YearAnalysisFragment extends android.support.v4.app.Fragment {
 
             analyse = new Analyse(getContext(), getInformationFromDatabase());
 
-            Log.d(TAG, "Calories: " + analyse.getMostCalories());
-            Log.d(TAG, "Day with most calories consumed: " + analyse.getDayMostCalories());
-
-            Log.d(TAG, "Fats: " + analyse.getMostFats());
-            Log.d(TAG, "Day with most fats consumed: " + analyse.getDayMostFats());
-
-            Log.d(TAG, "Sat Fats: " + analyse.getMostSatFat());
-            Log.d(TAG, "Day with most saturated fats: " + analyse.getDayMostSatFat());
-
-            Log.d(TAG, "Salts: " + analyse.getMostSalt());
-            Log.d(TAG, "Day with most salts: " + analyse.getDayMostSalt());
-
-            Log.d(TAG, "Sodium: " + analyse.getMostSodium());
-            Log.d(TAG, "Day with most sodium: " + analyse.getDayMostSodium());
-
-            Log.d(TAG, "Carbohydrates: " + analyse.getMostCarbohydrates());
-            Log.d(TAG, "Day with most carbs: " + analyse.getDayMostCarbohydrates());
-
-            Log.d(TAG, "Sugar: " + analyse.getMostSugar());
-            Log.d(TAG, "Day with most sugar: " + analyse.getDayMostSugar());
-
-            Log.d(TAG, "Protein: " + analyse.getMostProtein());
-            Log.d(TAG, "Day with most protein: " + analyse.getDayMostProtein());
+//            Log.d(TAG, "Calories: " + analyse.getMostCalories());
+//            Log.d(TAG, "Day with most calories consumed: " + analyse.getDayMostCalories());
+//
+//            Log.d(TAG, "Fats: " + analyse.getMostFats());
+//            Log.d(TAG, "Day with most fats consumed: " + analyse.getDayMostFats());
+//
+//            Log.d(TAG, "Sat Fats: " + analyse.getMostSatFat());
+//            Log.d(TAG, "Day with most saturated fats: " + analyse.getDayMostSatFat());
+//
+//            Log.d(TAG, "Salts: " + analyse.getMostSalt());
+//            Log.d(TAG, "Day with most salts: " + analyse.getDayMostSalt());
+//
+//            Log.d(TAG, "Sodium: " + analyse.getMostSodium());
+//            Log.d(TAG, "Day with most sodium: " + analyse.getDayMostSodium());
+//
+//            Log.d(TAG, "Carbohydrates: " + analyse.getMostCarbohydrates());
+//            Log.d(TAG, "Day with most carbs: " + analyse.getDayMostCarbohydrates());
+//
+//            Log.d(TAG, "Sugar: " + analyse.getMostSugar());
+//            Log.d(TAG, "Day with most sugar: " + analyse.getDayMostSugar());
+//
+//            Log.d(TAG, "Protein: " + analyse.getMostProtein());
+//            Log.d(TAG, "Day with most protein: " + analyse.getDayMostProtein());
 
             return null;
         }

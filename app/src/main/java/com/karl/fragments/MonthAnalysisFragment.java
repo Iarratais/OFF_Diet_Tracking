@@ -10,6 +10,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.karl.analysis.Analyse;
@@ -26,6 +28,8 @@ import java.util.Calendar;
 public class MonthAnalysisFragment extends android.support.v4.app.Fragment {
 
     private static final String TAG = "MonthAnalysisFragment";
+
+    private static final int HISTORY_THRESHOLD = 4;
 
     Analyse analyse;
 
@@ -67,11 +71,10 @@ public class MonthAnalysisFragment extends android.support.v4.app.Fragment {
 
         ArrayList<Day> historydays = new ArrayList<>();
 
-        Log.d(TAG, generateTimeQuery());
         Cursor res = db.getHistoryByDate(generateTimeQuery());
 
-        if(res.getCount() == 0) {
-            Log.d(TAG, "You should be ashamed that this code does not work");
+        if(res.getCount() < HISTORY_THRESHOLD) {
+            return null;
         } else {
             while(res.moveToNext()) {
                 // Column count = 10
@@ -139,8 +142,6 @@ public class MonthAnalysisFragment extends android.support.v4.app.Fragment {
     public void setAnalysisTitle(){
         TextView analysis_title = (TextView) rootView.findViewById(R.id.analysis_month_title);
         analysis_title.setText(getString(R.string.analysis_fragment_during_month_year, getPreviousMonthTitle()));
-        Log.d(TAG, " " + analysis_title.getText());
-        Log.d(TAG, getString(R.string.analysis_fragment_during_month_year, getPreviousMonthTitle()));
     }
 
     /**
@@ -191,7 +192,11 @@ public class MonthAnalysisFragment extends android.support.v4.app.Fragment {
         protein_analysis.setTextSize(18);
 
         TextView analysis_subtext = (TextView) rootView.findViewById(R.id.analysis_subtext);
-        analysis_subtext.setText(getString(R.string.analysis_fragment_based_on, entry_count));
+        if(entry_count < 10){
+            analysis_subtext.setText(getString(R.string.analysis_fragment_based_on, entry_count) + ". " + getString(R.string.analysis_fragment_low_entries_warning));
+        } else {
+            analysis_subtext.setText(getString(R.string.analysis_fragment_based_on, entry_count));
+        }
     }
 
     /**
@@ -205,7 +210,22 @@ public class MonthAnalysisFragment extends android.support.v4.app.Fragment {
     }
 
     public void nothingToShow(){
-        // Hide and show the appropriate components of the layout.
+        ScrollView sv = (ScrollView) rootView.findViewById(R.id.month_scroll_view);
+        hideView(sv);
+
+        ImageView nothing_to_show = (ImageView) rootView.findViewById(R.id.nothing_to_show_month_analysis);
+        showView(nothing_to_show);
+
+        TextView nothing_to_show_text = (TextView) rootView.findViewById(R.id.nothing_to_show_text_month_analysis);
+        showView(nothing_to_show_text);
+    }
+
+    public void hideView(View view){
+        view.setVisibility(View.GONE);
+    }
+
+    public void showView(View view){
+        view.setVisibility(View.VISIBLE);
     }
 
     class Monthly_Analysis extends AsyncTask<Void, Void, String[]> {
@@ -222,10 +242,8 @@ public class MonthAnalysisFragment extends android.support.v4.app.Fragment {
                 return null;
             }
 
-            String[] days = new String[] {analyse.getDayMostCalories(), analyse.getDayMostFats(), analyse.getDayMostSatFat(), analyse.getDayMostSalt(), analyse.getDayMostSodium(),
+            return new String[] {analyse.getDayMostCalories(), analyse.getDayMostFats(), analyse.getDayMostSatFat(), analyse.getDayMostSalt(), analyse.getDayMostSodium(),
                     analyse.getDayMostCarbohydrates(), analyse.getDayMostSugar(), analyse.getDayMostProtein()};
-
-            return days;
         }
 
         @Override
@@ -235,8 +253,9 @@ public class MonthAnalysisFragment extends android.support.v4.app.Fragment {
 
                 setUpInformation(days);
                 super.onPostExecute(days);
-            } else {
-                // Hide and show stuff
+            } else{
+                nothingToShow();
+                Log.d(TAG, "Nothing to show on post execute");
             }
         }
     }

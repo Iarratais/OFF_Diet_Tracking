@@ -15,6 +15,6 @@
         android:layout_height="wrap_content"
         android:hint="Enter text here.."
         android:padding="10dp"
-        android:inputType="number"
+        android:inputType="numberDecimal"
         android:minEms="13"/>
 </LinearLayout>

@@ -1,5 +1,7 @@
 package com.karl.dao;
 
+import android.util.Log;
+
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.methods.HttpGet;
@@ -12,6 +14,8 @@ import java.io.IOException;
  * Created by Karl on 29/01/2016.
  */
 public class NetworkDAO {
+
+    private static final String TAG = "NetworkDAO";
 
     /**
      * Execute the given URI, and return the data from the URI.
@@ -30,7 +34,7 @@ public class NetworkDAO {
 
         returnString = httpClient.execute(httpGet, responseHandler);
 
-        System.out.println("NETWORK DAO : " + returnString);
+        Log.d(TAG, returnString);
         return returnString;
     }
 }

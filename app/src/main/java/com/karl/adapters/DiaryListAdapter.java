@@ -2,6 +2,7 @@ package com.karl.adapters;
 
 import android.app.Activity;
 import android.content.DialogInterface;
+import android.graphics.Typeface;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,8 +44,11 @@ public class DiaryListAdapter extends ArrayAdapter<Food> {
             view = inflater.inflate(R.layout.history_list_item, null);
         }
 
+        Typeface normalTypeface = Typeface.createFromAsset(getContext().getAssets(), "fonts/New_Cicle_Gordita.ttf");
+
         final TextView dateView = (TextView) view.findViewById(R.id.textView3);
         dateView.setText(foods.get(position).getName());
+        dateView.setTypeface(normalTypeface);
 
         final RelativeLayout layout = (RelativeLayout) view.findViewById(R.id.relative_layout1);
         final RelativeLayout fullItem = (RelativeLayout) view.findViewById(R.id.relative_layout_history_list_item);

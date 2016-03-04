@@ -21,8 +21,10 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Locale;
 
 public class DiaryFragment extends android.support.v4.app.Fragment {
 
@@ -76,8 +78,6 @@ public class DiaryFragment extends android.support.v4.app.Fragment {
         ArrayList<Food> foods = new ArrayList<>();
 
         if(todayRes == null || todayStatsRes == null || todayRes.getCount() == 0) {
-            Log.d(TAG, "There is nothing in today");
-
             ListView list = (ListView) rootView.findViewById(R.id.today_chart_information);
             list.setVisibility(View.GONE);
 
@@ -85,7 +85,6 @@ public class DiaryFragment extends android.support.v4.app.Fragment {
             nothing_to_show.setVisibility(View.VISIBLE);
             TextView nothing_to_show_txt = (TextView) rootView.findViewById(R.id.nothing_to_show_text_diary);
             nothing_to_show_txt.setVisibility(View.VISIBLE);
-
         } else {
 
             // 4 columns in todayRes
@@ -143,8 +142,8 @@ public class DiaryFragment extends android.support.v4.app.Fragment {
         StringBuffer date = new StringBuffer(getDate());
 
         // Day
-        char char1 = date.charAt(0);
-        char char2 = date.charAt(1);
+        char char1 = date.charAt(3);
+        char char2 = date.charAt(4);
         if(char1 == '0'){
             daysDate.append(char2);
             if(char2 == '1'){
@@ -183,8 +182,8 @@ public class DiaryFragment extends android.support.v4.app.Fragment {
         }
 
         // Month
-        char char3 = date.charAt(2);
-        char char4 = date.charAt(3);
+        char char3 = date.charAt(5);
+        char char4 = date.charAt(6);
         StringBuilder month = new StringBuilder().append(char3).append(char4);
         String mon = month.toString();
         if(mon.equals("01")) {
@@ -218,15 +217,15 @@ public class DiaryFragment extends android.support.v4.app.Fragment {
         return daysDate.toString();
     }
 
-    /**
-     * Get the current date.
-     * @return string of current date. For example, 02012016.
-     */
-    public String getDate(){
+    public String getDate() {
         Calendar c = Calendar.getInstance();
         String day = Integer.toString(c.get(Calendar.DAY_OF_MONTH));
         String month = Integer.toString(c.get(Calendar.MONTH) + 1);
         String year = Integer.toString(c.get(Calendar.YEAR));
+
+        String weekDay;
+        SimpleDateFormat dayFormat = new SimpleDateFormat("EEEE", Locale.US);
+        weekDay = dayFormat.format(c.getTime());
 
         if(day.length() < 2) {
             String temp = day;
@@ -237,7 +236,7 @@ public class DiaryFragment extends android.support.v4.app.Fragment {
             month = "0" + temp;
         }
 
-        return day + month + year;
+        return weekDay.substring(0, 3).toUpperCase() + day + month + year;
     }
 
 }

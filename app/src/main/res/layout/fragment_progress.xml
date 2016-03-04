@@ -5,6 +5,12 @@
     android:layout_height="match_parent" tools:context="com.karl.fragments.ProgressFragment">
 
 
+    <ListView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/weight_progress_list">
+    </ListView>
+
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -13,7 +19,7 @@
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
         android:tint="#999999"
-        android:visibility="visible"
+        android:visibility="gone"
         />
 
     <TextView
@@ -26,5 +32,5 @@
         android:layout_centerHorizontal="true"
         android:textColor="#999999"
         android:textAlignment="center"
-        android:visibility="visible"/>
+        android:visibility="gone"/>
 </RelativeLayout>

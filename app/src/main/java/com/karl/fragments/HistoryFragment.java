@@ -108,12 +108,6 @@ public class HistoryFragment extends android.support.v4.app.Fragment {
         HistoryListAdapter adapter = new HistoryListAdapter(getActivity(), datestrings, days, showDays);
         ListView list = (ListView) rootView.findViewById(R.id.history_list);
         list.setAdapter(adapter);
-        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getActivity(), "Position: " + position, Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 
     /**

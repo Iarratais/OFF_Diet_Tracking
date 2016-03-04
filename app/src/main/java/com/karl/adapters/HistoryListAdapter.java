@@ -1,21 +1,13 @@
 package com.karl.adapters;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.DialogInterface;
-import android.content.SharedPreferences;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.LinearInterpolator;
-import android.view.animation.RotateAnimation;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -24,7 +16,6 @@ import com.karl.fyp.R;
 import com.karl.models.Day;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 
 public class HistoryListAdapter extends ArrayAdapter<String> {
     private static final String TAG = "HistoryListAdapter";

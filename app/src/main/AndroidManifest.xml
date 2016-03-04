@@ -28,6 +28,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
+
         <activity
             android:name=".SettingsActivity"
             android:screenOrientation="portrait" >
@@ -35,6 +36,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.karl.fyp.MainActivity" />
         </activity>
+
         <activity
             android:name=".AboutActivity"
             android:screenOrientation="portrait" >
@@ -42,6 +44,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.karl.fyp.MainActivity" />
         </activity>
+
         <activity
             android:name=".SplashScreenActivity"
             android:screenOrientation="portrait" >
@@ -51,6 +54,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".NewManualEntryActivity"
             android:screenOrientation="portrait" >
@@ -58,6 +62,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.karl.fyp.MainActivity" />
         </activity>
+
         <activity
             android:name=".SearchResultActivity"
             android:label="@string/title_activity_search_result"
@@ -68,6 +73,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.karl.fyp.MainActivity" />
         </activity>
+
         <activity
             android:name=".BarcodeScannerActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
@@ -78,6 +84,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.karl.fyp.MainActivity" />
         </activity>
+
         <activity
             android:name="com.karl.barcodereader.BarcodeCaptureActivity"
             android:label="Read Barcode"
@@ -101,5 +108,4 @@
                 android:value="com.karl.fyp.AboutActivity" />
         </activity>
     </application>
-
 </manifest>

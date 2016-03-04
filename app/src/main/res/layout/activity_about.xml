@@ -72,7 +72,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/faq_button"
-        android:text="@string/faq"
+        android:text="@string/about_fragment_faq"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         style="?android:attr/borderlessButtonStyle"

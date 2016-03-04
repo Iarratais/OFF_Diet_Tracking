@@ -461,7 +461,6 @@ public class TodayFragment extends android.support.v4.app.Fragment {
 
         Cursor res = db.returnTodaysEntries();
         if(res.getCount() == 0) {
-            Log.d(TAG, "There is no information in todays entries");
             nothingToShow();
         } else {
             while(res.moveToNext()){
@@ -481,7 +480,6 @@ public class TodayFragment extends android.support.v4.app.Fragment {
     public void getInfoFromTodayStats() {
         Cursor res = db.returnTodayStatsEntries();
         if(res.getCount() == 0) {
-            Log.d(TAG, "There is no information in todays stat entries");
             nothingToShow();
         } else {
             int i = 0;

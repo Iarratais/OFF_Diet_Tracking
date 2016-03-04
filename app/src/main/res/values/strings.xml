@@ -71,16 +71,17 @@
     <string name="analysis_fragment_during_month_year">During %1$s,</string>
     <string name="analysis_fragment_you_ate_the_most_on">You consumed the most %1$s on %2$s</string>
     <string name="analysis_fragment_based_on">Based on %1$s items</string>
+    <string name="analysis_fragment_low_entries_warning">This information may not be reliable due to the low number of entries.</string>
 
     <!-- Settings Activity -->
     <string name="settings_fragment_title">Settings</string>
-    <string name="settings_show_full_days">Show days in history</string>
-    <string name="settings_show_full_days_explained">Enable this to allow for the showing of the full day text in the history layout</string>
+    <string name="settings_show_full_days">Show days in lists</string>
+    <string name="settings_show_full_days_explained">Enable this to allow for the showing of the day in lists</string>
 
     <!-- About Activity -->
     <string name="about_fragment_title">About</string>
     <string name="about_fragment_version">Version: </string>
-    <string name="faq">Frequently Asked Questions</string>
+    <string name="about_fragment_faq">Frequently Asked Questions</string>
 
     <!-- Profile Activity -->
     <string name="profile_fragment_title">Profile</string>

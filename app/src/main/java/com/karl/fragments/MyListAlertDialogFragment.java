@@ -64,7 +64,8 @@ public class MyListAlertDialogFragment extends android.support.v4.app.DialogFrag
                         } else if (itemClicked.equals(getString(R.string.main_activity_new_entry_manual))) {
                             startActivity(new Intent(getActivity(), NewManualEntryActivity.class));
                         } else if (itemClicked.equals(getString(R.string.progress_fragment_log_your_weight))) {
-                            Toast.makeText(getContext(), "Bloop", Toast.LENGTH_SHORT).show();
+                            android.support.v4.app.DialogFragment inputdialog = MyInputAlertDialogFragment.newInstance(getString(R.string.progress_fragment_log_your_weight));
+                            inputdialog.show(getFragmentManager().beginTransaction(), "dialog");
                         }
                     }
                 })

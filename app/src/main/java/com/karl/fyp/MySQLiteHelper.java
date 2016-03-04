@@ -520,6 +520,17 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
         Log.d(TAG, "Weight logged: ID: " + db.insert(WEIGHT_HISTORY_TABLE, null, cv) + " DATE: " + date + " TOTAL: " + total + " CHANGE: " + change);
     }
 
+    public Cursor getWeightInformation(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.rawQuery("SELECT * FROM " + WEIGHT_HISTORY_TABLE, null);
+    }
+
+    public void clearWeightTable(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("DELETE FROM " + WEIGHT_HISTORY_TABLE);
+        Log.d(TAG, "Weight table cleared");
+    }
+
     public String getDate() {
         Calendar c = Calendar.getInstance();
         String day = Integer.toString(c.get(Calendar.DAY_OF_MONTH));
@@ -539,7 +550,6 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
             month = "0" + temp;
         }
 
-        Log.d(TAG, weekDay.substring(0, 3).toUpperCase() + day + month + year);
         return weekDay.substring(0, 3).toUpperCase() + day + month + year;
     }
 }

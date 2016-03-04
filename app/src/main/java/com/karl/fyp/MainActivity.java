@@ -96,15 +96,12 @@ public class MainActivity extends AppCompatActivity
 
         getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new TodayFragment()).commit();
 
-        Cursor res = db.returnTodaysEntries();
-        Log.d(TAG, "Today Entries: " + res.getCount());
-        Log.d(TAG, "Res Column Count: " + res.getColumnCount());
-
         // Set up random data into the history database for testing purposes
         HistorySamples hist = new HistorySamples(db);
         //hist.setUpStatsJan(getApplicationContext());
         //hist.setUpStatsFeb(getApplicationContext());
         //db.clearHistory();
+        //db.clearWeightTable();
 
         Boolean recipeKeepInstalled = appInstalledOrNot("com.karl.recipekeeper");
         if(recipeKeepInstalled){
@@ -274,8 +271,7 @@ public class MainActivity extends AppCompatActivity
         try {
             getSupportActionBar().setTitle(title);
         } catch (NullPointerException e){
-            System.out.println(TAG + "setActionBarTitle(): " + e);
-
+            Log.d(TAG, "setActionBarTitle(): " + e);
         }
     }
 

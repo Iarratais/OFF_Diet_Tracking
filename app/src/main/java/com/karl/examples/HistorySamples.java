@@ -109,12 +109,22 @@ public class HistorySamples {
         }
     }
 
-    public void setUpStatsFeb(){
+    public void setUpStatsFeb(Context context){
+
+        // Get the identifiers for the days.
+        Resources res = context.getResources();
+        final String[] days = new String[]{res.getString(R.string.monday).substring(0,3).toUpperCase(), res.getString(R.string.tuesday).substring(0,3).toUpperCase(),
+                res.getString(R.string.wednesday).substring(0,3).toUpperCase(), res.getString(R.string.thursday).substring(0,3).toUpperCase(),
+                res.getString(R.string.friday).substring(0,3).toUpperCase(), res.getString(R.string.saturday).substring(0,3).toUpperCase(),
+                res.getString(R.string.sunday).substring(0,3).toUpperCase()};
 
         final DecimalFormat df = new DecimalFormat("#.###");
 
         System.out.println("START DATE " + Integer.parseInt(START_DATE));
         System.out.println("INCREMENT " + INCREMENT);
+
+        // The first day of january is a friday
+        int day_num = 0;
 
         Random r = new Random();
         /**
@@ -126,9 +136,14 @@ public class HistorySamples {
 
             // Set the date
             if(Integer.toString(i).length() < 8) {
-                food.setDate("0" + Integer.toString(i));
+                food.setDate(days[day_num] + "0" + Integer.toString(i));
             } else {
-                food.setDate(Integer.toString(i));
+                food.setDate(days[day_num] + Integer.toString(i));
+            }
+            day_num++;
+
+            if(day_num == 7){
+                day_num = 0;
             }
 
             // Set up calories

@@ -4,6 +4,188 @@
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent" tools:context="com.karl.fragments.MonthAnalysisFragment">
 
+    <ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:background="@color/light_grey"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/analysis_month_title"
+                style="?android:attr/borderlessButtonStyle"
+                android:textColor="@color/colorAccent"
+                android:layout_gravity="start" />
+
+            <!-- Calories -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="#FFFFFF"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp"
+                android:elevation="6dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:id="@+id/calorie_analysis"
+                    android:layout_margin="10dp"/>
+            </LinearLayout>
+
+            <!-- Fat -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="#FFFFFF"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp"
+                android:elevation="6dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:id="@+id/fat_analysis"
+                    android:layout_margin="10dp"/>
+            </LinearLayout>
+
+            <!-- Saturated Fat -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="#FFFFFF"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp"
+                android:elevation="6dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:id="@+id/sat_fat_analysis"
+                    android:layout_margin="10dp"/>
+            </LinearLayout>
+
+            <!-- Salt -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="#FFFFFF"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp"
+                android:elevation="6dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:id="@+id/salt_analysis"
+                    android:layout_margin="10dp"/>
+            </LinearLayout>
+
+            <!-- Sodium -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="#FFFFFF"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp"
+                android:elevation="6dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:id="@+id/sodium_analysis"
+                    android:layout_margin="10dp"/>
+            </LinearLayout>
+
+            <!-- Carbohydrates -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="#FFFFFF"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp"
+                android:elevation="6dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:id="@+id/carbohydrates_analysis"
+                    android:layout_margin="10dp"/>
+            </LinearLayout>
+
+            <!-- Sugar -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="#FFFFFF"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp"
+                android:elevation="6dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:id="@+id/sugar_analysis"
+                    android:layout_margin="10dp"/>
+            </LinearLayout>
+
+            <!-- Protein -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="#FFFFFF"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp"
+                android:elevation="6dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:id="@+id/protein_analysis"
+                    android:layout_margin="10dp"/>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/goals_fragment_edit_goals"
+                android:id="@+id/analysis_subtext"
+                style="?android:attr/borderlessButtonStyle"
+                android:textColor="@color/colorAccent"
+                android:layout_gravity="start" />
+        </LinearLayout>
+    </ScrollView>
 
     <ImageView
         android:layout_width="wrap_content"
@@ -13,7 +195,7 @@
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
         android:tint="#999999"
-        android:visibility="visible"
+        android:visibility="gone"
         />
 
     <TextView
@@ -26,6 +208,6 @@
         android:layout_centerHorizontal="true"
         android:textColor="#999999"
         android:textAlignment="center"
-        android:visibility="visible"/>
+        android:visibility="gone"/>
 
 </RelativeLayout>

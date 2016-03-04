@@ -1,9 +1,8 @@
 package com.karl.fragments;
 
 
-import android.content.Context;
-import android.content.res.Resources;
 import android.database.Cursor;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -11,8 +10,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.karl.analysis.Analyse;
@@ -43,19 +40,27 @@ public class MonthAnalysisFragment extends android.support.v4.app.Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_month_analysis, container, false);
 
-
         Monthly_Analysis ma = new Monthly_Analysis();
         ma.execute();
 
         return rootView;
     }
 
-    public String[] makeDaysArray(){
-        return new String[]{getString(R.string.monday).substring(0, 3).toUpperCase(), getString(R.string.tuesday).substring(0, 3).toUpperCase(),
-                getString(R.string.wednesday).substring(0, 3).toUpperCase(), getString(R.string.thursday).substring(0, 3).toUpperCase(),
-                getString(R.string.friday).substring(0, 3).toUpperCase(), getString(R.string.saturday).substring(0, 3).toUpperCase(),
-                getString(R.string.sunday).substring(0, 3).toUpperCase()};
+    @Override
+    public void onResume() {
+        Monthly_Analysis ma = new Monthly_Analysis();
+        ma.execute();
+        super.onResume();
     }
+
+    public String[] makeDaysArray(){
+        return new String[]{getString(R.string.mondays).substring(0, 3).toUpperCase(), getString(R.string.tuesdays).substring(0, 3).toUpperCase(),
+                getString(R.string.wednesdays).substring(0, 3).toUpperCase(), getString(R.string.thursdays).substring(0, 3).toUpperCase(),
+                getString(R.string.fridays).substring(0, 3).toUpperCase(), getString(R.string.saturdays).substring(0, 3).toUpperCase(),
+                getString(R.string.sundays).substring(0, 3).toUpperCase()};
+    }
+
+    int entry_count = 0;
 
     public ArrayList<Day> getInformationFromDatabase(){
         MySQLiteHelper db = new MySQLiteHelper(getContext());
@@ -86,6 +91,8 @@ public class MonthAnalysisFragment extends android.support.v4.app.Fragment {
                 historydays.add(day);
             }
         }
+
+        entry_count = res.getCount();
 
         return historydays;
     }
@@ -129,46 +136,154 @@ public class MonthAnalysisFragment extends android.support.v4.app.Fragment {
         return String.valueOf(thisYear);
     }
 
+    public void setAnalysisTitle(){
+        TextView analysis_title = (TextView) rootView.findViewById(R.id.analysis_month_title);
+        analysis_title.setText(getString(R.string.analysis_fragment_during_month_year, getPreviousMonthTitle()));
+        Log.d(TAG, " " + analysis_title.getText());
+        Log.d(TAG, getString(R.string.analysis_fragment_during_month_year, getPreviousMonthTitle()));
+    }
 
-    class Monthly_Analysis extends AsyncTask<Void, Void, Void> {
+    /**
+     * Set the information into the cards and the typeface.
+     * @param information String[]: information to fill into the layout.
+     */
+    public void setUpInformation(String[] information){
+        Typeface normalTypeface = Typeface.createFromAsset(getActivity().getAssets(), "fonts/New_Cicle_Gordita.ttf");
+
+        TextView calorie_analysis = (TextView) rootView.findViewById(R.id.calorie_analysis);
+        calorie_analysis.setText(putTogetherString(getString(R.string.calories), information[0]));
+        calorie_analysis.setTypeface(normalTypeface);
+        calorie_analysis.setTextSize(18);
+
+        TextView fat_analysis = (TextView) rootView.findViewById(R.id.fat_analysis);
+        fat_analysis.setText(putTogetherString(getString(R.string.fats), information[1]));
+        fat_analysis.setTypeface(normalTypeface);
+        fat_analysis.setTextSize(18);
+
+        TextView sat_fat_analysis = (TextView) rootView.findViewById(R.id.sat_fat_analysis);
+        sat_fat_analysis.setText(putTogetherString(getString(R.string.saturated_fats), information[2]));
+        sat_fat_analysis.setTypeface(normalTypeface);
+        sat_fat_analysis.setTextSize(18);
+
+        TextView salt_analysis = (TextView) rootView.findViewById(R.id.salt_analysis);
+        salt_analysis.setText(putTogetherString(getString(R.string.salt), information[3]));
+        salt_analysis.setTypeface(normalTypeface);
+        salt_analysis.setTextSize(18);
+
+        TextView sodium_analysis = (TextView) rootView.findViewById(R.id.sodium_analysis);
+        sodium_analysis.setText(putTogetherString(getString(R.string.sodium), information[4]));
+        sodium_analysis.setTypeface(normalTypeface);
+        sodium_analysis.setTextSize(18);
+
+        TextView carbohydrates_analysis = (TextView) rootView.findViewById(R.id.carbohydrates_analysis);
+        carbohydrates_analysis.setText(putTogetherString(getString(R.string.carbohydrates), information[5]));
+        carbohydrates_analysis.setTypeface(normalTypeface);
+        carbohydrates_analysis.setTextSize(18);
+
+        TextView sugar_analysis = (TextView) rootView.findViewById(R.id.sugar_analysis);
+        sugar_analysis.setText(putTogetherString(getString(R.string.sugar), information[6]));
+        sugar_analysis.setTypeface(normalTypeface);
+        sugar_analysis.setTextSize(18);
+
+        TextView protein_analysis = (TextView) rootView.findViewById(R.id.protein_analysis);
+        protein_analysis.setText(putTogetherString(getString(R.string.protein), information[7]));
+        protein_analysis.setTypeface(normalTypeface);
+        protein_analysis.setTextSize(18);
+
+        TextView analysis_subtext = (TextView) rootView.findViewById(R.id.analysis_subtext);
+        analysis_subtext.setText(getString(R.string.analysis_fragment_based_on, entry_count));
+    }
+
+    /**
+     * Put together the string to put in the component.
+     * @param one the nutrient.
+     * @param two the day.
+     * @return nutrient and day.
+     */
+    public String putTogetherString(String one, String two){
+        return getString(R.string.analysis_fragment_you_ate_the_most_on, one.toLowerCase(), two);
+    }
+
+    public void nothingToShow(){
+        // Hide and show the appropriate components of the layout.
+    }
+
+    class Monthly_Analysis extends AsyncTask<Void, Void, String[]> {
+
 
         @Override
-        protected Void doInBackground(Void... params) {
+        protected String[] doInBackground(Void... params) {
 
-            analyse = new Analyse(getContext(), getInformationFromDatabase());
+            ArrayList<Day> history = getInformationFromDatabase();
 
-            Log.d(TAG, "Calories: "  + analyse.getMostCalories());
-            Log.d(TAG, "Day with most calories consumed: " + analyse.getDayMostCalories());
+            if(history != null) {
+                analyse = new Analyse(getContext(), history);
+            } else {
+                return null;
+            }
 
-            Log.d(TAG, "Fats: " + analyse.getMostFats());
-            Log.d(TAG, "Day with most fats consumed: " + analyse.getDayMostFats());
+            String[] days = new String[] {analyse.getDayMostCalories(), analyse.getDayMostFats(), analyse.getDayMostSatFat(), analyse.getDayMostSalt(), analyse.getDayMostSodium(),
+                    analyse.getDayMostCarbohydrates(), analyse.getDayMostSugar(), analyse.getDayMostProtein()};
 
-            Log.d(TAG, "Sat Fats: " + analyse.getMostSatFat());
-            Log.d(TAG, "Day with most saturated fats: " + analyse.getDayMostSatFat());
-
-            Log.d(TAG, "Salts: " + analyse.getMostSalt());
-            Log.d(TAG, "Day with most salts: " + analyse.getDayMostSalt());
-
-            Log.d(TAG, "Sodium: " + analyse.getMostSodium());
-            Log.d(TAG, "Day with most sodium: " + analyse.getDayMostSodium());
-
-            Log.d(TAG, "Carbohydrates: " + analyse.getMostCarbohydrates());
-            Log.d(TAG, "Day with most carbs: " + analyse.getDayMostCarbohydrates());
-
-            Log.d(TAG, "Sugar: " + analyse.getMostSugar());
-            Log.d(TAG, "Day with most sugar: " + analyse.getDayMostSugar());
-
-            Log.d(TAG, "Protein: " + analyse.getMostProtein());
-            Log.d(TAG, "Day with most protein: " + analyse.getDayMostProtein());
-
-            return null;
+            return days;
         }
 
         @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
+        protected void onPostExecute(String[] days) {
+            if(days != null) {
+                setAnalysisTitle();
+
+                setUpInformation(days);
+                super.onPostExecute(days);
+            } else {
+                // Hide and show stuff
+            }
         }
     }
 
+    /**
+     * Get the previous month.
+     * @return String : previous month.
+     */
+    public String getPreviousMonthTitle(){
+        Calendar calendar = Calendar.getInstance();
+        int thisMonth = calendar.get(Calendar.MONTH);
 
+        // We want the previous month.
+        thisMonth -= 1;
+
+        if(thisMonth < 0) {
+            thisMonth = 11;
+        }
+
+        // Give back the month as a full word.
+        switch(thisMonth) {
+            case 0:
+                return getString(R.string.january);
+            case 1:
+                return getString(R.string.february);
+            case 2:
+                return getString(R.string.march);
+            case 3:
+                return getString(R.string.april);
+            case 4:
+                return getString(R.string.may);
+            case 5:
+                return getString(R.string.june);
+            case 6:
+                return getString(R.string.july);
+            case 7:
+                return getString(R.string.august);
+            case 8:
+                return getString(R.string.september);
+            case 9:
+                return getString(R.string.october);
+            case 10:
+                return getString(R.string.november);
+            case 11:
+                return getString(R.string.december);
+            default:
+                return getString(R.string.last_month);
+        }
+    }
 }

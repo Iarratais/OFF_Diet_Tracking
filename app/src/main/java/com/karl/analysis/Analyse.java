@@ -472,19 +472,19 @@ public class Analyse {
      */
     public String getFullDay(String day){
         if(day.equals(days[0])){
-            return context.getString(R.string.monday);
+            return context.getString(R.string.mondays);
         } else if(day.equals(days[1])){
-            return context.getString(R.string.tuesday);
+            return context.getString(R.string.tuesdays);
         } else if(day.equals(days[2])){
-            return context.getString(R.string.wednesday);
+            return context.getString(R.string.wednesdays);
         } else if(day.equals(days[3])){
-            return context.getString(R.string.thursday);
+            return context.getString(R.string.thursdays);
         } else if(day.equals(days[4])){
-            return context.getString(R.string.friday);
+            return context.getString(R.string.fridays);
         } else if(day.equals(days[5])){
-            return context.getString(R.string.saturday);
+            return context.getString(R.string.saturdays);
         } else if(day.equals(days[6])){
-            return context.getString(R.string.sunday);
+            return context.getString(R.string.sundays);
         }
 
         return null;

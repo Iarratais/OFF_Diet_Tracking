@@ -1,7 +1,9 @@
 package com.karl.adapters;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,15 +32,17 @@ public class HistoryListAdapter extends ArrayAdapter<String> {
     private final Activity context;
     private final ArrayList<Day> days;
     private final String[] dates;
+    private final boolean showDays;
 
     public LayoutInflater inflater;
 
-    public HistoryListAdapter(Activity context, String[] dates, ArrayList<Day> days) {
+    public HistoryListAdapter(Activity context, String[] dates, ArrayList<Day> days, boolean showDays) {
         super(context, R.layout.history_list_item, dates);
 
         this.context = context;
         this.dates = dates;
         this.days = days;
+        this.showDays = showDays;
 
         inflater = LayoutInflater.from(this.context);
     }
@@ -57,7 +61,11 @@ public class HistoryListAdapter extends ArrayAdapter<String> {
         char char5 = date.charAt(0);
         char char6 = date.charAt(1);
         char char7 = date.charAt(2);
-        daysDate.append(char5).append(char6).append(char7).append(" ");
+        StringBuilder sb = new StringBuilder();
+        sb.append(char5).append(char6).append(char7);
+        if(showDays){
+            daysDate.append(getFullDay(sb.toString())).append(" ");
+        }
 
         // Day
         char char1 = date.charAt(3);
@@ -219,7 +227,11 @@ public class HistoryListAdapter extends ArrayAdapter<String> {
         char char5 = date.charAt(0);
         char char6 = date.charAt(1);
         char char7 = date.charAt(2);
-        daysDate.append(char5).append(char6).append(char7).append(" ");
+        StringBuilder sb = new StringBuilder();
+        sb.append(char5).append(char6).append(char7);
+        if(showDays){
+            daysDate.append(getFullDay(sb.toString())).append(" ");
+        }
 
         // Day
         char char1 = date.charAt(3);
@@ -297,5 +309,40 @@ public class HistoryListAdapter extends ArrayAdapter<String> {
         String date_ = daysDate.toString();
 
         return date_;
+    }
+
+    String[] days_string;
+    /**
+     * Returns the full spelling of the day when given a three letter code.
+     * @param day string: three letter day code.
+     * @return String: day of the week.
+     */
+    public String getFullDay(String day){
+        days_string = makeDaysArray();
+
+        if(day.equals(days_string[0])){
+            return context.getString(R.string.monday);
+        } else if(day.equals(days_string[1])){
+            return context.getString(R.string.tuesday);
+        } else if(day.equals(days_string[2])){
+            return context.getString(R.string.wednesday);
+        } else if(day.equals(days_string[3])){
+            return context.getString(R.string.thursday);
+        } else if(day.equals(days_string[4])){
+            return context.getString(R.string.friday);
+        } else if(day.equals(days_string[5])){
+            return context.getString(R.string.saturday);
+        } else if(day.equals(days_string[6])){
+            return context.getString(R.string.sunday);
+        }
+
+        return null;
+    }
+
+    public String[] makeDaysArray(){
+        return new String[]{context.getString(R.string.mondays).substring(0, 3).toUpperCase(), context.getString(R.string.tuesdays).substring(0, 3).toUpperCase(),
+                context.getString(R.string.wednesdays).substring(0, 3).toUpperCase(), context.getString(R.string.thursdays).substring(0, 3).toUpperCase(),
+                context.getString(R.string.fridays).substring(0, 3).toUpperCase(), context.getString(R.string.saturdays).substring(0, 3).toUpperCase(),
+                context.getString(R.string.sundays).substring(0, 3).toUpperCase()};
     }
 }

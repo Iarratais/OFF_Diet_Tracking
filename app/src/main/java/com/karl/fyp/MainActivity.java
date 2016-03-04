@@ -101,9 +101,9 @@ public class MainActivity extends AppCompatActivity
         Log.d(TAG, "Res Column Count: " + res.getColumnCount());
 
         // Set up random data into the history database for testing purposes
-        //HistorySamples hist = new HistorySamples(db);
+        HistorySamples hist = new HistorySamples(db);
         //hist.setUpStatsJan(getApplicationContext());
-        //hist.setUpStatsFeb();
+        //hist.setUpStatsFeb(getApplicationContext());
         //db.clearHistory();
 
         Boolean recipeKeepInstalled = appInstalledOrNot("com.karl.recipekeeper");
@@ -245,6 +245,8 @@ public class MainActivity extends AppCompatActivity
             hideFab();
         } else if (id == R.id.nav_analysis) {
             fm.beginTransaction().replace(R.id.content_frame, new AnalysisActivityFragment()).commit();
+            hideFab();
+            setNewEntryVisibility(false);
         } else if (id == R.id.nav_recipe_keep){
             fm.beginTransaction().replace(R.id.content_frame, new RecipeKeepFragment()).commit();
             setNewEntryVisibility(false);

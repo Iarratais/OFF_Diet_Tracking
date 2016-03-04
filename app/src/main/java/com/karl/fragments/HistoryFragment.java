@@ -8,7 +8,9 @@ import com.karl.fyp.MySQLiteHelper;
 import com.karl.fyp.R;
 import com.karl.models.Day;
 
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -98,9 +100,12 @@ public class HistoryFragment extends android.support.v4.app.Fragment {
      * Add the information to the list in the fragment
      */
     public void makeList() {
+        final SharedPreferences prefs = getContext().getSharedPreferences("com.karl.fyp", Context.MODE_PRIVATE);
+        boolean showDays = prefs.getBoolean("showDays", false);
+
         String[] datestrings = new String[dates.size()];
         dates.toArray(datestrings);
-        HistoryListAdapter adapter = new HistoryListAdapter(getActivity(), datestrings, days);
+        HistoryListAdapter adapter = new HistoryListAdapter(getActivity(), datestrings, days, showDays);
         ListView list = (ListView) rootView.findViewById(R.id.history_list);
         list.setAdapter(adapter);
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {

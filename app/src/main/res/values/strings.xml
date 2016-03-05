@@ -104,6 +104,8 @@
     <string name="new_entry_title">New Entry</string>
     <string name="new_entry_food_name">Food Name</string>
     <string name="new_entry_save">Save</string>
+    <string name="new_entry_barcode_number">Barcode Number</string>
+    <string name="new_entry_attribute_missing">Please enter the %1$s</string>
 
     <!-- Recipe Keep Fragment -->
     <string name="recipe_keep">Recipe Keep</string>

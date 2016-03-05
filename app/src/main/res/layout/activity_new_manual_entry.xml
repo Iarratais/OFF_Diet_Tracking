@@ -42,6 +42,30 @@
                 />
         </android.support.design.widget.TextInputLayout>
 
+        <!-- barcode number -->
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/til12"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp">
+
+            <EditText
+                android:maxLength="55"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:paddingTop="20dp"
+                android:paddingBottom="20dp"
+                android:fontFamily="sans-serif"
+                android:id="@+id/new_barcode_number"
+                android:hint="@string/new_entry_barcode_number"
+                android:inputType="number"
+                android:imeOptions="actionNext"
+                />
+        </android.support.design.widget.TextInputLayout>
+
         <!-- Calories -->
         <android.support.design.widget.TextInputLayout
             android:id="@+id/til2"

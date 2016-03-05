@@ -7,7 +7,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.karl.models.Food;
 
@@ -31,8 +33,10 @@ public class NewManualEntryActivity extends AppCompatActivity {
         if(from_barcode != null){
             scan_success = from_barcode.getBooleanExtra("scan_success", false);
             barcode = from_barcode.getStringExtra("barcode");
-            if(barcode != null) {
-                Log.d(TAG, barcode);
+            if(barcode != null && !scan_success) {
+                TextView barcode_textview = (TextView) findViewById(R.id.new_barcode_number);
+                barcode_textview.setText(barcode);
+                Toast.makeText(getApplicationContext(), getString(R.string.error_item_does_not_exist), Toast.LENGTH_SHORT).show();
             }
         }
 
@@ -54,8 +58,10 @@ public class NewManualEntryActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()){
             case R.id.nav_save:
-                saveFood();
-                return true;
+                if(validateEntry()){
+                    //saveFood();
+                    return true;
+                }
             default:
                 return false;
         }
@@ -74,8 +80,9 @@ public class NewManualEntryActivity extends AppCompatActivity {
         TextView protein_text_view = (TextView) findViewById(R.id.new_protein);
         TextView salt_text_view = (TextView) findViewById(R.id.new_salt);
         TextView sodium_text_view = (TextView) findViewById(R.id.new_sodium);
+        TextView barcode_number_view = (TextView) findViewById(R.id.new_barcode_number);
 
-        Food food = new Food(food_name_text_view.getText().toString(), "000000", calories_text_view.getText().toString(),
+        Food food = new Food(food_name_text_view.getText().toString(), barcode_number_view.getText().toString(), calories_text_view.getText().toString(),
                 fat_text_view.getText().toString(), sat_fat_text_view.getText().toString(), carbs_text_view.getText().toString(),
                 sugar_text_view.getText().toString(), protein_text_view.getText().toString(), salt_text_view.getText().toString(),
                 sodium_text_view.getText().toString());
@@ -104,5 +111,97 @@ public class NewManualEntryActivity extends AppCompatActivity {
         }
 
         return weekDay.substring(0, 3) + day + month + year;
+    }
+
+    /**
+     * Validate the entries
+     * @return
+     */
+    public boolean validateEntry(){
+        TextView food_name_text_view = (TextView) findViewById(R.id.new_food_name);
+        if(!checkIfViewIsFilled(food_name_text_view)){
+            setViewFocus(food_name_text_view);
+            makeToast(getString(R.string.new_entry_food_name));
+            return false;
+        }
+
+        TextView calories_text_view = (TextView) findViewById(R.id.new_calories);
+        if(!checkIfViewIsFilled(calories_text_view)){
+            setViewFocus(calories_text_view);
+            makeToast(getString(R.string.calories));
+            return false;
+        }
+
+        TextView fat_text_view = (TextView) findViewById(R.id.new_fat);
+        if(!checkIfViewIsFilled(fat_text_view)){
+            setViewFocus(fat_text_view);
+            makeToast(getString(R.string.fat));
+            return false;
+        }
+
+        TextView sat_fat_text_view = (TextView) findViewById(R.id.new_sat_fat);
+        if(!checkIfViewIsFilled(sat_fat_text_view)){
+            setViewFocus(sat_fat_text_view);
+            makeToast(getString(R.string.saturated_fat));
+            return false;
+        }
+
+        TextView carbs_text_view = (TextView) findViewById(R.id.new_carbohydrates);
+        if(!checkIfViewIsFilled(carbs_text_view)){
+            setViewFocus(carbs_text_view);
+            makeToast(getString(R.string.carbohydrate));
+            return false;
+        }
+
+        TextView sugar_text_view = (TextView) findViewById(R.id.new_sugar);
+        if(!checkIfViewIsFilled(sugar_text_view)){
+            setViewFocus(sugar_text_view);
+            makeToast(getString(R.string.sugar));
+            return false;
+        }
+
+        TextView protein_text_view = (TextView) findViewById(R.id.new_protein);
+        if(!checkIfViewIsFilled(protein_text_view)){
+            setViewFocus(protein_text_view);
+            makeToast(getString(R.string.protein));
+            return false;
+        }
+
+        TextView salt_text_view = (TextView) findViewById(R.id.new_salt);
+        if(!checkIfViewIsFilled(salt_text_view)){
+            setViewFocus(salt_text_view);
+            makeToast(getString(R.string.salt));
+            return false;
+        }
+
+        TextView sodium_text_view = (TextView) findViewById(R.id.new_sodium);
+        if(!checkIfViewIsFilled(sodium_text_view)){
+            setViewFocus(sodium_text_view);
+            makeToast(getString(R.string.sodium));
+            return false;
+        }
+
+        TextView barcode_number_view = (TextView) findViewById(R.id.new_barcode_number);
+        if(barcode_number_view.getText().toString().equals("")){
+            barcode_number_view.setText("0000000000000");
+        }
+        return true;
+    }
+
+    public void setViewFocus(View view){
+        view.requestFocus();
+    }
+
+    public void makeToast(String attribute){
+        Toast.makeText(getApplicationContext(), getString(R.string.new_entry_attribute_missing, attribute.toLowerCase()), Toast.LENGTH_SHORT).show();
+    }
+
+    /**
+     * Check if the view has text in it.
+     * @param view: view to check.
+     * @return false if it equals "".
+     */
+    public boolean checkIfViewIsFilled(TextView view){
+        return !view.getText().toString().equals("");
     }
 }

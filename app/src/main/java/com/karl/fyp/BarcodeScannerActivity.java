@@ -31,7 +31,7 @@ public class BarcodeScannerActivity extends Activity implements View.OnClickList
     private ProgressBar progressBar;
 
     private static final int RC_BARCODE_CAPTURE = 9001;
-    private static final String TAG = "BarcodeMain";
+    private static final String TAG = "BarcodeScannerActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -214,7 +214,7 @@ public class BarcodeScannerActivity extends Activity implements View.OnClickList
                 getResults(barcode);
             else {
                 Intent i = new Intent(getApplicationContext(), NewManualEntryActivity.class);
-                i.putExtra("scan_successs", false);
+                i.putExtra("scan_success", false);
                 i.putExtra("barcode", barcode);
                 startActivity(i);
                 //Toast.makeText(getApplicationContext(), getString(R.string.error_item_does_not_exist), Toast.LENGTH_SHORT).show();

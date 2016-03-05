@@ -34,7 +34,6 @@ public class NetworkDAO {
 
         returnString = httpClient.execute(httpGet, responseHandler);
 
-        Log.d(TAG, returnString);
         return returnString;
     }
 }

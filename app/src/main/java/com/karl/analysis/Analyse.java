@@ -32,7 +32,6 @@ public class Analyse {
 
     /**
      * Get the day with the most calories.
-     * @param day_information arraylist: information from database.
      * @return String: day with the most calories.
      */
     public String getMostCalories(){
@@ -50,7 +49,6 @@ public class Analyse {
 
     /**
      * Get the day with the most calories from the previous month.
-     * @param day_information arraylist: information from database.
      * @return string: day that has the most calories.
      */
     public String getDayMostCalories() {

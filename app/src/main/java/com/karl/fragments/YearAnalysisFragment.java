@@ -31,6 +31,8 @@ public class YearAnalysisFragment extends android.support.v4.app.Fragment {
 
     private static final String TAG = "YearAnalysisFragment";
 
+    private static final int HISTORY_THRESHOLD = 21;
+
     Analyse analyse;
 
     View rootView;
@@ -77,7 +79,7 @@ public class YearAnalysisFragment extends android.support.v4.app.Fragment {
         Cursor res = db.getHistoryByDate(generateTimeQuery());
 
         // If there is less than three weeks worth of data, then there is nothing to show.
-        if(res.getCount() < 21) {
+        if(res.getCount() < HISTORY_THRESHOLD) {
             return null;
         } else {
             while(res.moveToNext()) {

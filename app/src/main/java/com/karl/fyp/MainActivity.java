@@ -28,7 +28,7 @@ import com.karl.fragments.DiaryFragment;
 import com.karl.fragments.GoalsFragment;
 import com.karl.fragments.HistoryFragment;
 import com.karl.fragments.LookupFragment;
-import com.karl.fragments.MyListAlertDialogFragment;
+import com.karl.alerts.MyListAlertDialogFragment;
 import com.karl.fragments.ProfileFragment;
 import com.karl.fragments.ProgressFragment;
 import com.karl.fragments.RecipeKeepFragment;

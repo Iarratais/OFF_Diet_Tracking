@@ -8,6 +8,7 @@ import com.karl.models.Goals;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.Editable;
@@ -103,41 +104,52 @@ public class GoalsFragment extends android.support.v4.app.Fragment {
             Log.d(TAG, "Nothing in goals table");
         } else {
             while(res.moveToNext()) {
+                Typeface normalTypeface = Typeface.createFromAsset(getActivity().getAssets(), "fonts/New_Cicle_Gordita.ttf");
+
                 // Calories
                 String calories = getString(R.string.calories) + getString(R.string.colon) + " " + res.getString(1);
                 calories_view.setText(calories);
+                calories_view.setTypeface(normalTypeface);
 
                 // Fat
                 String fat = getString(R.string.fat) + getString(R.string.colon) + " " + res.getString(2) + getString(R.string.grams_abbv);
                 fat_view.setText(fat);
+                fat_view.setTypeface(normalTypeface);
 
                 // Sat fat
                 String sat_fat = getString(R.string.saturated_fat) + getString(R.string.colon) + " " + res.getString(3) + getString(R.string.grams_abbv);
                 sat_fat_view.setText(sat_fat);
+                sat_fat_view.setTypeface(normalTypeface);
 
                 // Salt
                 String salt = getString(R.string.salt) + getString(R.string.colon) + " " + res.getString(4) + getString(R.string.grams_abbv);
                 salt_view.setText(salt);
+                salt_view.setTypeface(normalTypeface);
 
                 // Sodium
                 String sodium = getString(R.string.sodium) + getString(R.string.colon) + " " + res.getString(5) + getString(R.string.grams_abbv);
                 sodium_view.setText(sodium);
+                sodium_view.setTypeface(normalTypeface);
 
                 // Carbohydrates
                 String carbohydrates = getString(R.string.carbohydrate) + getString(R.string.colon) + " " + res.getString(6) + getString(R.string.grams_abbv);
                 carbs_view.setText(carbohydrates);
+                carbs_view.setTypeface(normalTypeface);
 
                 // Sugar
                 String sugar = getString(R.string.sugar) + getString(R.string.colon) + " " + res.getString(7) + getString(R.string.grams_abbv);
                 sugar_view.setText(sugar);
+                sugar_view.setTypeface(normalTypeface);
 
                 // Protein
                 String protein = getString(R.string.protein) + getString(R.string.colon) + " " + res.getString(8) + getString(R.string.grams_abbv);
                 protein_view.setText(protein);
+                protein_view.setTypeface(normalTypeface);
 
                 // Weight
                 String weight = getString(R.string.weigh) + getString(R.string.colon) + " " + res.getString(9) + getString(R.string.kg);
                 weight_view.setText(weight);
+                weight_view.setTypeface(normalTypeface);
             }
         }
     }

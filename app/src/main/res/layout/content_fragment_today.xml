@@ -199,6 +199,7 @@
             android:layout_centerHorizontal="true"
             android:textColor="#999999"
             android:textAlignment="center"
+            android:fontFeatureSettings="smcp"
             android:visibility="gone"/>
 
 </RelativeLayout>

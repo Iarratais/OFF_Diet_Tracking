@@ -22,6 +22,7 @@ import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -57,7 +58,7 @@ public class LookupFragment extends android.support.v4.app.Fragment {
             }
         });
 
-        TextView manualEntryTextView = (TextView) rootView.findViewById(R.id.manual_entry_button);
+        Button manualEntryTextView = (Button) rootView.findViewById(R.id.manual_entry_button);
         manualEntryTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -1,25 +1,17 @@
-package com.karl.fragments;
+package com.karl.alerts;
 
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Toast;
 
-import com.karl.barcodereader.BarcodeCaptureActivity;
 import com.karl.fyp.BarcodeScannerActivity;
 import com.karl.fyp.NewManualEntryActivity;
 import com.karl.fyp.R;
-
-import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.

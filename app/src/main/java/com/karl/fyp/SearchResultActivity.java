@@ -17,7 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import com.karl.fragments.MyInputAlertDialogFragment;
+import com.karl.alerts.MyInputAlertDialogFragment;
 import com.karl.fragments.ResultPer100Fragment;
 import com.karl.fragments.ResultServingFragment;
 import com.karl.models.Food;

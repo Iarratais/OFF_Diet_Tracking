@@ -41,6 +41,7 @@
     <string name="lookup_fragment_scan">Scan</string>
     <string name="lookup_fragment_your_barcode_needs_13_digits">Please enter a 13 digit barcode</string>
     <string name="lookup_fragment_serving_size">Serving size:</string>
+    <string name="lookup_fragment_manual_barcode_entry">Manual barcode entry</string>
 
     <!-- Search fragment -->
     <string name="search_fragment_title">Search</string>
@@ -68,8 +69,8 @@
 
     <!-- Analysis fragment -->
     <string name="analysis_fragment_title">Diet Analysis</string>
-    <string name="analysis_fragment_during_month_year">During %1$s,</string>
-    <string name="analysis_fragment_you_ate_the_most_on">You consumed the most %1$s on %2$s</string>
+    <string name="analysis_fragment_during_month_year">During %1$s, you consumed the most: </string>
+    <string name="analysis_fragment_you_ate_the_most_on">%1$s on %2$s</string>
     <string name="analysis_fragment_based_on">Based on %1$s items</string>
     <string name="analysis_fragment_low_entries_warning">This information may not be reliable due to the low number of entries.</string>
 

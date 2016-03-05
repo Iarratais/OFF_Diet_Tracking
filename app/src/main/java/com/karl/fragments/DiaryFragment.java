@@ -2,21 +2,20 @@ package com.karl.fragments;
 
 import android.app.DialogFragment;
 import android.database.Cursor;
-import android.graphics.Typeface;
 
 import com.karl.adapters.DiaryListAdapter;
+import com.karl.alerts.MyAlertDialogFragment;
 import com.karl.fyp.MySQLiteHelper;
 import com.karl.models.Food;
 import com.karl.fyp.MainActivity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.karl.fyp.R;
-import android.widget.ArrayAdapter;
+
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;

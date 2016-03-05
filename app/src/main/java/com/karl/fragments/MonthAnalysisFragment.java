@@ -206,7 +206,7 @@ public class MonthAnalysisFragment extends android.support.v4.app.Fragment {
      * @return nutrient and day.
      */
     public String putTogetherString(String one, String two){
-        return getString(R.string.analysis_fragment_you_ate_the_most_on, one.toLowerCase(), two);
+        return getString(R.string.analysis_fragment_you_ate_the_most_on, one, two);
     }
 
     public void nothingToShow(){

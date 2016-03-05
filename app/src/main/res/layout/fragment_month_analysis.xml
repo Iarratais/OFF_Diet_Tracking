@@ -2,7 +2,8 @@
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" tools:context="com.karl.fragments.MonthAnalysisFragment">
+    android:layout_height="match_parent" tools:context="com.karl.fragments.MonthAnalysisFragment"
+    android:background="@color/light_grey">
 
     <ScrollView
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -209,6 +210,7 @@
         android:layout_centerHorizontal="true"
         android:textColor="#999999"
         android:textAlignment="center"
+        android:fontFeatureSettings="smcp"
         android:visibility="gone"/>
 
 </RelativeLayout>

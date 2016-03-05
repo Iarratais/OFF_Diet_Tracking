@@ -4,6 +4,7 @@ package com.karl.fragments;
 import android.content.Context;
 import android.content.res.Resources;
 import android.database.Cursor;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -11,6 +12,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.ScrollView;
+import android.widget.TextView;
 
 import com.karl.analysis.Analyse;
 import com.karl.fyp.MySQLiteHelper;
@@ -48,12 +52,21 @@ public class YearAnalysisFragment extends android.support.v4.app.Fragment {
         return rootView;
     }
 
+    @Override
+    public void onResume() {
+        Yearly_Analysis ya = new Yearly_Analysis();
+        ya.execute();
+        super.onResume();
+    }
+
     public String[] makeDaysArray(){
         return new String[]{getString(R.string.monday).substring(0, 3).toUpperCase(), getString(R.string.tuesday).substring(0, 3).toUpperCase(),
                 getString(R.string.wednesday).substring(0, 3).toUpperCase(), getString(R.string.thursday).substring(0, 3).toUpperCase(),
                 getString(R.string.friday).substring(0, 3).toUpperCase(), getString(R.string.saturday).substring(0, 3).toUpperCase(),
                 getString(R.string.sunday).substring(0, 3).toUpperCase()};
     }
+
+    private int entry_count = 0;
 
     public ArrayList<Day> getInformationFromDatabase(){
         MySQLiteHelper db = new MySQLiteHelper(getContext());
@@ -63,12 +76,12 @@ public class YearAnalysisFragment extends android.support.v4.app.Fragment {
         Log.d(TAG, generateTimeQuery());
         Cursor res = db.getHistoryByDate(generateTimeQuery());
 
-        if(res.getCount() == 0) {
-            Log.d(TAG, "You should be ashamed that this code does not work");
+        // If there is less than three weeks worth of data, then there is nothing to show.
+        if(res.getCount() < 21) {
+            return null;
         } else {
             while(res.moveToNext()) {
                 // Column count = 10
-                // history_id date calories fats sat_fat salt sodium carbohydrates sugar protein
                 Day day = new Day();
                 day.setId(res.getString(0));
                 day.setDate(res.getString(1));
@@ -84,8 +97,7 @@ public class YearAnalysisFragment extends android.support.v4.app.Fragment {
                 historydays.add(day);
             }
         }
-
-        Log.d(TAG, "Based off: " + res.getCount() + " entries");
+        entry_count = res.getCount();
 
         return historydays;
     }
@@ -129,43 +141,132 @@ public class YearAnalysisFragment extends android.support.v4.app.Fragment {
         return String.valueOf(thisYear);
     }
 
-    class Yearly_Analysis extends AsyncTask<Void, Void, Void> {
+    /**
+     * Set the title of the section, for example, During 2016.
+     */
+    public void setAnalysisTitle(){
+        TextView analysis_title = (TextView) rootView.findViewById(R.id.analysis_year_title);
+        analysis_title.setText(getString(R.string.analysis_fragment_during_month_year, getYear()));
+    }
+
+    /**
+     * Set the information into the cards and the typeface.
+     * @param information String[]: information to fill into the layout.
+     */
+    public void setUpInformation(String[] information){
+        Typeface normalTypeface = Typeface.createFromAsset(getActivity().getAssets(), "fonts/New_Cicle_Gordita.ttf");
+
+        TextView calorie_analysis = (TextView) rootView.findViewById(R.id.calorie_analysis_year);
+        calorie_analysis.setText(putTogetherString(getString(R.string.calories), information[0]));
+        calorie_analysis.setTypeface(normalTypeface);
+        calorie_analysis.setTextSize(18);
+
+        TextView fat_analysis = (TextView) rootView.findViewById(R.id.fat_analysis_year);
+        fat_analysis.setText(putTogetherString(getString(R.string.fats), information[1]));
+        fat_analysis.setTypeface(normalTypeface);
+        fat_analysis.setTextSize(18);
+
+        TextView sat_fat_analysis = (TextView) rootView.findViewById(R.id.sat_fat_analysis_year);
+        sat_fat_analysis.setText(putTogetherString(getString(R.string.saturated_fats), information[2]));
+        sat_fat_analysis.setTypeface(normalTypeface);
+        sat_fat_analysis.setTextSize(18);
+
+        TextView salt_analysis = (TextView) rootView.findViewById(R.id.salt_analysis_year);
+        salt_analysis.setText(putTogetherString(getString(R.string.salt), information[3]));
+        salt_analysis.setTypeface(normalTypeface);
+        salt_analysis.setTextSize(18);
+
+        TextView sodium_analysis = (TextView) rootView.findViewById(R.id.sodium_analysis_year);
+        sodium_analysis.setText(putTogetherString(getString(R.string.sodium), information[4]));
+        sodium_analysis.setTypeface(normalTypeface);
+        sodium_analysis.setTextSize(18);
+
+        TextView carbohydrates_analysis = (TextView) rootView.findViewById(R.id.carbohydrates_analysis_year);
+        carbohydrates_analysis.setText(putTogetherString(getString(R.string.carbohydrates), information[5]));
+        carbohydrates_analysis.setTypeface(normalTypeface);
+        carbohydrates_analysis.setTextSize(18);
+
+        TextView sugar_analysis = (TextView) rootView.findViewById(R.id.sugar_analysis_year);
+        sugar_analysis.setText(putTogetherString(getString(R.string.sugar), information[6]));
+        sugar_analysis.setTypeface(normalTypeface);
+        sugar_analysis.setTextSize(18);
+
+        TextView protein_analysis = (TextView) rootView.findViewById(R.id.protein_analysis_year);
+        protein_analysis.setText(putTogetherString(getString(R.string.protein), information[7]));
+        protein_analysis.setTypeface(normalTypeface);
+        protein_analysis.setTextSize(18);
+
+        TextView analysis_subtext = (TextView) rootView.findViewById(R.id.analysis_subtext_year);
+        if(entry_count < 10){
+            analysis_subtext.setText(getString(R.string.analysis_fragment_based_on, entry_count) + ". " + getString(R.string.analysis_fragment_low_entries_warning));
+        } else {
+            analysis_subtext.setText(getString(R.string.analysis_fragment_based_on, entry_count));
+        }
+    }
+
+    /**
+     * Put together the string to put in the component.
+     * @param one the nutrient.
+     * @param two the day.
+     * @return nutrient and day.
+     */
+    public String putTogetherString(String one, String two){
+        return getString(R.string.analysis_fragment_you_ate_the_most_on, one, two);
+    }
+
+    /**
+     * When there is no information, the application needs to show this.
+     */
+    public void nothingToShow(){
+        ScrollView sv = (ScrollView) rootView.findViewById(R.id.month_scroll_view);
+        hideView(sv);
+
+        ImageView nothing_to_show = (ImageView) rootView.findViewById(R.id.nothing_to_show_year_analysis);
+        showView(nothing_to_show);
+
+        TextView nothing_to_show_text = (TextView) rootView.findViewById(R.id.nothing_to_show_text_year_analysis);
+        showView(nothing_to_show_text);
+    }
+
+    /**
+     * Hide a view.
+     * @param view View: to be hidden
+     */
+    public void hideView(View view){
+        view.setVisibility(View.GONE);
+    }
+
+    public void showView(View view){
+        view.setVisibility(View.VISIBLE);
+    }
+
+    class Yearly_Analysis extends AsyncTask<Void, Void, String[]> {
 
         @Override
-        protected Void doInBackground(Void... params) {
+        protected String[] doInBackground(Void... params) {
 
-            analyse = new Analyse(getContext(), getInformationFromDatabase());
+            ArrayList<Day> history = getInformationFromDatabase();
 
-//            Log.d(TAG, "Calories: " + analyse.getMostCalories());
-//            Log.d(TAG, "Day with most calories consumed: " + analyse.getDayMostCalories());
-//
-//            Log.d(TAG, "Fats: " + analyse.getMostFats());
-//            Log.d(TAG, "Day with most fats consumed: " + analyse.getDayMostFats());
-//
-//            Log.d(TAG, "Sat Fats: " + analyse.getMostSatFat());
-//            Log.d(TAG, "Day with most saturated fats: " + analyse.getDayMostSatFat());
-//
-//            Log.d(TAG, "Salts: " + analyse.getMostSalt());
-//            Log.d(TAG, "Day with most salts: " + analyse.getDayMostSalt());
-//
-//            Log.d(TAG, "Sodium: " + analyse.getMostSodium());
-//            Log.d(TAG, "Day with most sodium: " + analyse.getDayMostSodium());
-//
-//            Log.d(TAG, "Carbohydrates: " + analyse.getMostCarbohydrates());
-//            Log.d(TAG, "Day with most carbs: " + analyse.getDayMostCarbohydrates());
-//
-//            Log.d(TAG, "Sugar: " + analyse.getMostSugar());
-//            Log.d(TAG, "Day with most sugar: " + analyse.getDayMostSugar());
-//
-//            Log.d(TAG, "Protein: " + analyse.getMostProtein());
-//            Log.d(TAG, "Day with most protein: " + analyse.getDayMostProtein());
+            if(history != null){
+                analyse = new Analyse(getContext(), history);
+            } else {
+                return null;
+            }
 
-            return null;
+            return new String[] {analyse.getDayMostCalories(), analyse.getDayMostFats(), analyse.getDayMostSatFat(), analyse.getDayMostSalt(), analyse.getDayMostSodium(),
+                    analyse.getDayMostCarbohydrates(), analyse.getDayMostSugar(), analyse.getDayMostProtein()};
         }
 
         @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
+        protected void onPostExecute(String[] days) {
+            if(days != null) {
+                setAnalysisTitle();
+
+                setUpInformation(days);
+                super.onPostExecute(days);
+            } else{
+                nothingToShow();
+            }
         }
     }
 }

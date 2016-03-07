@@ -220,7 +220,7 @@ public class YearAnalysisFragment extends android.support.v4.app.Fragment {
      * When there is no information, the application needs to show this.
      */
     public void nothingToShow(){
-        ScrollView sv = (ScrollView) rootView.findViewById(R.id.month_scroll_view);
+        ScrollView sv = (ScrollView) rootView.findViewById(R.id.year_scroll_view);
         hideView(sv);
 
         ImageView nothing_to_show = (ImageView) rootView.findViewById(R.id.nothing_to_show_year_analysis);

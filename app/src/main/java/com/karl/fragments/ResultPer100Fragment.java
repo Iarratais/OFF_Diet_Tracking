@@ -30,18 +30,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * A placeholder fragment containing a simple view.
+ * Copyright Karl jones 2016.
+ * ResultPer100Fragment
+ *
+ * This fragment shows the user information about a food type by 100g/ml.
  */
+
 public class ResultPer100Fragment extends android.support.v4.app.Fragment {
 
     View rootView;
 
     ProgressBar progressBar;
 
-    private String barcode = "0000000000000";
+    private String inputBarcode = "0000000000000";
 
-    public ResultPer100Fragment(String barcode) {
-        this.barcode = barcode;
+    public ResultPer100Fragment(){}
+
+    public ResultPer100Fragment(String inputBarcode) {
+        this.inputBarcode = inputBarcode;
     }
 
     @Override
@@ -53,69 +59,69 @@ public class ResultPer100Fragment extends android.support.v4.app.Fragment {
         progressBar.setVisibility(View.GONE);
 
         BarcodeSearchTask bst = new BarcodeSearchTask();
-        bst.execute(barcode);
+        bst.execute(inputBarcode);
 
-        setTypeface();
+        setViewTypeface();
 
         return rootView;
     }
 
-    public void setTypeface() {
-
-        Typeface titleTypeFace = Typeface.createFromAsset(getActivity().getAssets(), "fonts/CaviarDreams.ttf");
+    /**
+     * Set the typeface for the TextViews in the layout.
+     */
+    public void setViewTypeface() {
         Typeface normalTypeface = Typeface.createFromAsset(getActivity().getAssets(), "fonts/New_Cicle_Gordita.ttf");
 
-        // Stats textviews
-        TextView text  = (TextView) rootView.findViewById(R.id.today_calories_stats);
-        text.setTypeface(normalTypeface);
-        text.setTextSize(20);
-        text = (TextView) rootView.findViewById(R.id.today_fat_stats);
-        text.setTypeface(normalTypeface);
-        text.setTextSize(20);
-        text = (TextView) rootView.findViewById(R.id.today_sat_fat_stats);
-        text.setTypeface(normalTypeface);
-        text.setTextSize(20);
-        text = (TextView) rootView.findViewById(R.id.today_salt_stats);
-        text.setTypeface(normalTypeface);
-        text.setTextSize(20);
-        text = (TextView) rootView.findViewById(R.id.today_sodium_stats);
-        text.setTypeface(normalTypeface);
-        text.setTextSize(20);
-        text = (TextView) rootView.findViewById(R.id.today_carbs_stats);
-        text.setTypeface(normalTypeface);
-        text.setTextSize(20);
-        text = (TextView) rootView.findViewById(R.id.today_sugar_stats);
-        text.setTypeface(normalTypeface);
-        text.setTextSize(20);
-        text = (TextView) rootView.findViewById(R.id.today_protein_stats);
-        text.setTypeface(normalTypeface);
-        text.setTextSize(20);
+        TextView layoutTextView  = (TextView) rootView.findViewById(R.id.today_calories_stats);
+        layoutTextView.setTypeface(normalTypeface);
+        layoutTextView.setTextSize(20);
+        layoutTextView = (TextView) rootView.findViewById(R.id.today_fat_stats);
+        layoutTextView.setTypeface(normalTypeface);
+        layoutTextView.setTextSize(20);
+        layoutTextView = (TextView) rootView.findViewById(R.id.today_sat_fat_stats);
+        layoutTextView.setTypeface(normalTypeface);
+        layoutTextView.setTextSize(20);
+        layoutTextView = (TextView) rootView.findViewById(R.id.today_salt_stats);
+        layoutTextView.setTypeface(normalTypeface);
+        layoutTextView.setTextSize(20);
+        layoutTextView = (TextView) rootView.findViewById(R.id.today_sodium_stats);
+        layoutTextView.setTypeface(normalTypeface);
+        layoutTextView.setTextSize(20);
+        layoutTextView = (TextView) rootView.findViewById(R.id.today_carbs_stats);
+        layoutTextView.setTypeface(normalTypeface);
+        layoutTextView.setTextSize(20);
+        layoutTextView = (TextView) rootView.findViewById(R.id.today_sugar_stats);
+        layoutTextView.setTypeface(normalTypeface);
+        layoutTextView.setTextSize(20);
+        layoutTextView = (TextView) rootView.findViewById(R.id.today_protein_stats);
+        layoutTextView.setTypeface(normalTypeface);
+        layoutTextView.setTextSize(20);
 
         // Nutrients
-        text = (TextView) rootView.findViewById(R.id.today_calories_text_view);
-        text.setTypeface(normalTypeface);
-        text.setTextSize(20);
-        text = (TextView) rootView.findViewById(R.id.today_fat_text_view);
-        text.setTypeface(normalTypeface);
-        text.setTextSize(20);
-        text = (TextView) rootView.findViewById(R.id.today_sat_fat_text_view);
-        text.setTypeface(normalTypeface);
-        text.setTextSize(20);
-        text = (TextView) rootView.findViewById(R.id.today_salt_text_view);
-        text.setTypeface(normalTypeface);
-        text.setTextSize(20);
-        text = (TextView) rootView.findViewById(R.id.today_sodium_text_view);
-        text.setTypeface(normalTypeface);
-        text.setTextSize(20);
-        text = (TextView) rootView.findViewById(R.id.today_carbohydrate_text_view);
-        text.setTypeface(normalTypeface);
-        text.setTextSize(20);
-        text = (TextView) rootView.findViewById(R.id.today_sugar_text_view);
-        text.setTypeface(normalTypeface);
-        text.setTextSize(20);
-        text = (TextView) rootView.findViewById(R.id.today_protein_text_view);
-        text.setTypeface(normalTypeface);
-        text.setTextSize(20);
+        layoutTextView = (TextView) rootView.findViewById(R.id.today_calories_text_view);
+        layoutTextView.setTypeface(normalTypeface);
+        layoutTextView.setTextSize(20);
+        layoutTextView = (TextView) rootView.findViewById(R.id.today_fat_text_view);
+        layoutTextView.setTypeface(normalTypeface);
+        layoutTextView.setTextSize(20);
+        layoutTextView = (TextView) rootView.findViewById(R.id.today_sat_fat_text_view);
+        layoutTextView.setTypeface(normalTypeface);
+        layoutTextView.setTextSize(20);
+        layoutTextView = (TextView) rootView.findViewById(R.id.today_salt_text_view);
+        layoutTextView.setTypeface(normalTypeface);
+        layoutTextView.setTextSize(20);
+        layoutTextView = (TextView) rootView.findViewById(R.id.today_sodium_text_view);
+        layoutTextView.setTypeface(normalTypeface);
+        layoutTextView.setTextSize(20);
+        layoutTextView = (TextView) rootView.findViewById(R.id.today_carbohydrate_text_view);
+        layoutTextView.setTypeface(normalTypeface);
+        layoutTextView.setTextSize(20);
+        layoutTextView = (TextView) rootView.findViewById(R.id.today_sugar_text_view);
+        layoutTextView.setTypeface(normalTypeface);
+        layoutTextView.setTextSize(20);
+        layoutTextView = (TextView) rootView.findViewById(R.id.today_protein_text_view);
+        layoutTextView.setTypeface(normalTypeface);
+        layoutTextView.setTextSize(20);
     }
 
 
@@ -155,37 +161,44 @@ public class ResultPer100Fragment extends android.support.v4.app.Fragment {
 
             final DecimalFormat df = new DecimalFormat("#.###");
 
-            TextView calories_stats  = (TextView) rootView.findViewById(R.id.today_calories_stats);
-            TextView fat_stats = (TextView) rootView.findViewById(R.id.today_fat_stats);
-            TextView sat_fat_stats = (TextView) rootView.findViewById(R.id.today_sat_fat_stats);
-            TextView salt_stats = (TextView) rootView.findViewById(R.id.today_salt_stats);
-            TextView sodium_stats = (TextView) rootView.findViewById(R.id.today_sodium_stats);
-            TextView carbs_stats = (TextView) rootView.findViewById(R.id.today_carbs_stats);
-            TextView sugar_stats = (TextView) rootView.findViewById(R.id.today_sugar_stats);
-            TextView protein_stats = (TextView) rootView.findViewById(R.id.today_protein_stats);
+            TextView resultCalorieStatsTextView         = (TextView) rootView.findViewById(R.id.today_calories_stats);
+            TextView resultFatStatsTextView             = (TextView) rootView.findViewById(R.id.today_fat_stats);
+            TextView resultSatFatStatsTextView          = (TextView) rootView.findViewById(R.id.today_sat_fat_stats);
+            TextView resultSaltStatsTextView            = (TextView) rootView.findViewById(R.id.today_salt_stats);
+            TextView resultSodiumStatsTextView          = (TextView) rootView.findViewById(R.id.today_sodium_stats);
+            TextView resultCarbohydratesStatsTextView   = (TextView) rootView.findViewById(R.id.today_carbs_stats);
+            TextView resultSugarStatsTextView           = (TextView) rootView.findViewById(R.id.today_sugar_stats);
+            TextView resultProteinStatsTextView         = (TextView) rootView.findViewById(R.id.today_protein_stats);
 
-            final String calories = df.format(Float.parseFloat(foods.get(0).getCalories()));
-            final String fats = df.format(Float.parseFloat(foods.get(0).getFats())) + getString(R.string.grams_abbv);
-            final String sat_fats = df.format(Float.parseFloat(foods.get(0).getSaturated_fat())) + getString(R.string.grams_abbv);
-            final String salts = df.format(Float.parseFloat(foods.get(0).getSalt())) + getString(R.string.grams_abbv);
-            final String sodiums = df.format(Float.parseFloat(foods.get(0).getSodium())) + getString(R.string.grams_abbv);
-            final String carbs = df.format(Float.parseFloat(foods.get(0).getCarbohydrates())) + getString(R.string.grams_abbv);
-            final String sugars = df.format(Float.parseFloat(foods.get(0).getSugar())) + getString(R.string.grams_abbv);
-            final String proteins = df.format(Float.parseFloat(foods.get(0).getProtein())) + getString(R.string.grams_abbv);
+            final String resultCalories   = df.format(Float.parseFloat(foods.get(0).getCalories()));
+            final String resultFats       = df.format(Float.parseFloat(foods.get(0).getFats())) +
+                    getString(R.string.grams_abbv);
+            final String resultSatFats    = df.format(Float.parseFloat(foods.get(0)
+                    .getSaturated_fat())) + getString(R.string.grams_abbv);
+            final String resultSalts      = df.format(Float.parseFloat(foods.get(0).getSalt())) +
+                    getString(R.string.grams_abbv);
+            final String resultSodium     = df.format(Float.parseFloat(foods.get(0).getSodium())) +
+                    getString(R.string.grams_abbv);
+            final String resultCarbohydrates      = df.format(Float.parseFloat(foods.get(0)
+                    .getCarbohydrates())) + getString(R.string.grams_abbv);
+            final String resultSugars     = df.format(Float.parseFloat(foods.get(0).getSugar())) +
+                    getString(R.string.grams_abbv);
+            final String resultProteins   = df.format(Float.parseFloat(foods.get(0).getProtein())
+            ) + getString(R.string.grams_abbv);
 
-            ((SearchResultActivity) getActivity()).setTitle(foods.get(0).getName());
+            ((SearchResultActivity) getActivity()).setActionbarTitle(foods.get(0).getName());
 
             // Send the serving size back to the activity
             pushInformationBack(foods.get(0));
 
-            calories_stats.setText(calories);
-            fat_stats.setText(fats);
-            sat_fat_stats.setText(sat_fats);
-            salt_stats.setText(salts);
-            sodium_stats.setText(sodiums);
-            carbs_stats.setText(carbs);
-            sugar_stats.setText(sugars);
-            protein_stats.setText(proteins);
+            resultCalorieStatsTextView.setText(resultCalories);
+            resultFatStatsTextView.setText(resultFats);
+            resultSatFatStatsTextView.setText(resultSatFats);
+            resultSaltStatsTextView.setText(resultSalts);
+            resultSodiumStatsTextView.setText(resultSodium);
+            resultCarbohydratesStatsTextView.setText(resultCarbohydrates);
+            resultSugarStatsTextView.setText(resultSugars);
+            resultProteinStatsTextView.setText(resultProteins);
 
             HorizontalBarChart chart = (HorizontalBarChart) rootView.findViewById(R.id.today_chart);
             BarData chartData = new BarData(getXAxisValues(), getDataSet(foods.get(0).getFats(), foods.get(0).getSaturated_fat(), foods.get(0).getProtein(),
@@ -199,7 +212,7 @@ public class ResultPer100Fragment extends android.support.v4.app.Fragment {
         }
 
         /**
-         *
+         * Get the dataset that is to be used in the barchart.
          * @param total_fats fats
          * @param total_sat_fats saturated fats
          * @param total_protein protein
@@ -237,7 +250,10 @@ public class ResultPer100Fragment extends android.support.v4.app.Fragment {
             return dataSets;
         }
 
-        // Set the values for the titles
+        /**
+         * Get the labels for the X-axis of the barchart.
+         * @return arraylist with labels.
+         */
         private ArrayList<String> getXAxisValues() {
             ArrayList<String> xAxis = new ArrayList<>();
             xAxis.add(getString(R.string.sodium));

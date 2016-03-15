@@ -13,74 +13,81 @@ import android.widget.Toast;
 
 import com.karl.models.Goals;
 
+/**
+ * Copyright Karl jones 2016.
+ * EditGoalsActivity
+ *
+ * This activity is used to allow the user to edit their goals that they set within the application.
+ */
+
 public class EditGoalsActivity extends AppCompatActivity {
 
     private static final String TAG = "GoalsFragment";
 
     MySQLiteHelper db;
 
-    EditText calories_view;
-    EditText fat_view;
-    EditText sat_fat_view;
-    EditText salt_view;
-    EditText sodium_view;
-    EditText carbs_view;
-    EditText sugar_view;
-    EditText protein_view;
-    EditText weight_view;
+    EditText caloriesEditText;
+    EditText fatEditText;
+    EditText saturatedFatsEditText;
+    EditText saltEditText;
+    EditText sodiumEditText;
+    EditText carbohydratesEditText;
+    EditText sugarEditText;
+    EditText proteinEditText;
+    EditText weightEditText;
 
-    Button save_changes;
+    Button saveChangesButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_goals);
 
-        setUpViews();
+        addTextChangedListenersToViews();
 
         db = new MySQLiteHelper(getApplicationContext());
 
-        getInformationFromDB();
+        getInformationFromDatabase();
     }
 
     /**
      * Set up the layout views
      */
-    public void setUpViews(){
-        calories_view = (EditText) findViewById(R.id.goals_calories);
-        calories_view.addTextChangedListener(calories_view_listener);
+    public void addTextChangedListenersToViews(){
+        caloriesEditText = (EditText) findViewById(R.id.goals_calories);
+        caloriesEditText.addTextChangedListener(calories_view_listener);
 
-        fat_view = (EditText) findViewById(R.id.goals_fat);
-        fat_view.addTextChangedListener(fat_view_listener);
+        fatEditText = (EditText) findViewById(R.id.goals_fat);
+        fatEditText.addTextChangedListener(fat_view_listener);
 
-        sat_fat_view = (EditText) findViewById(R.id.goals_sat_fat);
-        sat_fat_view.addTextChangedListener(sat_fat_view_listener);
+        saturatedFatsEditText = (EditText) findViewById(R.id.goals_sat_fat);
+        saturatedFatsEditText.addTextChangedListener(sat_fat_view_listener);
 
-        salt_view = (EditText) findViewById(R.id.goals_salt);
-        salt_view.addTextChangedListener(salt_view_listener);
+        saltEditText = (EditText) findViewById(R.id.goals_salt);
+        saltEditText.addTextChangedListener(salt_view_listener);
 
-        sodium_view = (EditText) findViewById(R.id.goals_sodium);
-        sodium_view.addTextChangedListener(sodium_view_listener);
+        sodiumEditText = (EditText) findViewById(R.id.goals_sodium);
+        sodiumEditText.addTextChangedListener(sodium_view_listener);
 
-        carbs_view = (EditText) findViewById(R.id.goals_carbohydrates);
-        carbs_view.addTextChangedListener(carbs_view_listener);
+        carbohydratesEditText = (EditText) findViewById(R.id.goals_carbohydrates);
+        carbohydratesEditText.addTextChangedListener(carbs_view_listener);
 
-        sugar_view = (EditText) findViewById(R.id.goals_sugar);
-        sugar_view.addTextChangedListener(sugar_view_listener);
+        sugarEditText = (EditText) findViewById(R.id.goals_sugar);
+        sugarEditText.addTextChangedListener(sugar_view_listener);
 
-        protein_view = (EditText) findViewById(R.id.goals_protein);
-        protein_view.addTextChangedListener(protein_view_listener);
+        proteinEditText = (EditText) findViewById(R.id.goals_protein);
+        proteinEditText.addTextChangedListener(protein_view_listener);
 
-        weight_view = (EditText) findViewById(R.id.goals_weight);
-        weight_view.addTextChangedListener(weight_view_listener);
+        weightEditText = (EditText) findViewById(R.id.goals_weight);
+        weightEditText.addTextChangedListener(weight_view_listener);
 
-        save_changes = (Button) findViewById(R.id.save_changes_goals);
-        save_changes.setVisibility(View.GONE);
-        save_changes.setOnClickListener(new View.OnClickListener() {
+        saveChangesButton = (Button) findViewById(R.id.save_changes_goals);
+        saveChangesButton.setVisibility(View.GONE);
+        saveChangesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                save_changes.setVisibility(View.GONE);
-                if(updateDatabase() == 1){
+                saveChangesButton.setVisibility(View.GONE);
+                if (updateUserGoals() == 1) {
                     showToast(getString(R.string.goals_fragment_update_successful));
                 } else {
                     showToast(getString(R.string.goals_fragment_update_failure));
@@ -92,22 +99,22 @@ public class EditGoalsActivity extends AppCompatActivity {
     /**
      * Get the information of the goals from the database.
      */
-    public void getInformationFromDB(){
-        Cursor res = db.getGoals();
+    public void getInformationFromDatabase(){
+        Cursor goalsInformation = db.getGoals();
 
-        if(res.getCount() == 0) {
+        if(goalsInformation.getCount() == 0) {
             Log.d(TAG, "Nothing in goals table");
         } else {
-            while(res.moveToNext()) {
-                calories_view.setText(res.getString(1));
-                fat_view.setText(res.getString(2));
-                sat_fat_view.setText(res.getString(3));
-                salt_view.setText(res.getString(4));
-                sodium_view.setText(res.getString(5));
-                carbs_view.setText(res.getString(6));
-                sugar_view.setText(res.getString(7));
-                protein_view.setText(res.getString(8));
-                weight_view.setText(res.getString(9));
+            while(goalsInformation.moveToNext()) {
+                caloriesEditText.setText(goalsInformation.getString(1));
+                fatEditText.setText(goalsInformation.getString(2));
+                saturatedFatsEditText.setText(goalsInformation.getString(3));
+                saltEditText.setText(goalsInformation.getString(4));
+                sodiumEditText.setText(goalsInformation.getString(5));
+                carbohydratesEditText.setText(goalsInformation.getString(6));
+                sugarEditText.setText(goalsInformation.getString(7));
+                proteinEditText.setText(goalsInformation.getString(8));
+                weightEditText.setText(goalsInformation.getString(9));
             }
         }
     }
@@ -115,7 +122,7 @@ public class EditGoalsActivity extends AppCompatActivity {
     /**
      * Update the database with new information.
      */
-    public int updateDatabase() {
+    public int updateUserGoals() {
         return db.updateGoals(getInformationFromViews());
     }
 
@@ -126,15 +133,15 @@ public class EditGoalsActivity extends AppCompatActivity {
     public Goals getInformationFromViews(){
         Goals goal = new Goals();
 
-        goal.setCalories(calories_view.getText().toString());
-        goal.setFat(fat_view.getText().toString());
-        goal.setSaturatedFat(sat_fat_view.getText().toString());
-        goal.setSalt(salt_view.getText().toString());
-        goal.setSodium(sodium_view.getText().toString());
-        goal.setCarbohydrates(carbs_view.getText().toString());
-        goal.setSugar(sugar_view.getText().toString());
-        goal.setProtein(protein_view.getText().toString());
-        goal.setWeight(weight_view.getText().toString());
+        goal.setCalories(caloriesEditText.getText().toString());
+        goal.setFat(fatEditText.getText().toString());
+        goal.setSaturatedFat(saturatedFatsEditText.getText().toString());
+        goal.setSalt(saltEditText.getText().toString());
+        goal.setSodium(sodiumEditText.getText().toString());
+        goal.setCarbohydrates(carbohydratesEditText.getText().toString());
+        goal.setSugar(sugarEditText.getText().toString());
+        goal.setProtein(proteinEditText.getText().toString());
+        goal.setWeight(weightEditText.getText().toString());
 
         return goal;
     }
@@ -154,7 +161,7 @@ public class EditGoalsActivity extends AppCompatActivity {
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-            save_changes.setVisibility(View.VISIBLE);
+            saveChangesButton.setVisibility(View.VISIBLE);
         }
 
         @Override
@@ -166,7 +173,7 @@ public class EditGoalsActivity extends AppCompatActivity {
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-            save_changes.setVisibility(View.VISIBLE);
+            saveChangesButton.setVisibility(View.VISIBLE);
         }
 
         @Override
@@ -178,7 +185,7 @@ public class EditGoalsActivity extends AppCompatActivity {
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-            save_changes.setVisibility(View.VISIBLE);
+            saveChangesButton.setVisibility(View.VISIBLE);
         }
 
         @Override
@@ -190,7 +197,7 @@ public class EditGoalsActivity extends AppCompatActivity {
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-            save_changes.setVisibility(View.VISIBLE);
+            saveChangesButton.setVisibility(View.VISIBLE);
         }
 
         @Override
@@ -202,7 +209,7 @@ public class EditGoalsActivity extends AppCompatActivity {
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-            save_changes.setVisibility(View.VISIBLE);
+            saveChangesButton.setVisibility(View.VISIBLE);
         }
 
         @Override
@@ -214,7 +221,7 @@ public class EditGoalsActivity extends AppCompatActivity {
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-            save_changes.setVisibility(View.VISIBLE);
+            saveChangesButton.setVisibility(View.VISIBLE);
         }
 
         @Override
@@ -226,7 +233,7 @@ public class EditGoalsActivity extends AppCompatActivity {
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-            save_changes.setVisibility(View.VISIBLE);
+            saveChangesButton.setVisibility(View.VISIBLE);
         }
 
         @Override
@@ -238,7 +245,7 @@ public class EditGoalsActivity extends AppCompatActivity {
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-            save_changes.setVisibility(View.VISIBLE);
+            saveChangesButton.setVisibility(View.VISIBLE);
         }
 
         @Override
@@ -250,7 +257,7 @@ public class EditGoalsActivity extends AppCompatActivity {
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-            save_changes.setVisibility(View.VISIBLE);
+            saveChangesButton.setVisibility(View.VISIBLE);
         }
 
         @Override

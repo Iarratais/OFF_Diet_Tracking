@@ -1,27 +1,26 @@
 package com.karl.analysis;
 
 import android.content.Context;
-import android.content.res.Resources;
-import android.util.Log;
 
 import com.karl.fyp.R;
 import com.karl.models.Day;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
- * Analysis model.
- * Created by Karl on 03/03/2016.
+ * Copyright Karl jones 2016.
+ *
+ * The analysis class is the core for the analysis in the application. This has the ability to:
+ * Find the day that has the most calories given a range of data.
+ * Get the "most common" day for a nutrient to be consumed.
  */
+
 public class Analyse {
 
     private static final String TAG = "Analyse";
 
     private String[] days;
-
     private ArrayList<Day> day_information;
-
     private Context context;
 
     public Analyse(Context context, ArrayList<Day> day_information){
@@ -48,7 +47,7 @@ public class Analyse {
     }
 
     /**
-     * Get the day with the most calories from the previous month.
+     * Get the day with the most nutrient from the previous month.
      * @return string: day that has the most calories.
      */
     public String getDayMostCalories() {
@@ -92,6 +91,10 @@ public class Analyse {
         return getFullDay(days[day]);
     }
 
+    /**
+     * Get the day with the most fats.
+     * @return String: day with the most fats.
+     */
     public String getMostFats(){
         double max_fats = 0.0;
         String date = "";
@@ -105,6 +108,10 @@ public class Analyse {
         return String.valueOf(max_fats) + "|" + date;
     }
 
+    /**
+     * Get the day with the most nutrient from the previous month.
+     * @return string: day that has the most fats.
+     */
     public String getDayMostFats(){
         // One total for each day of the week
         Double[] totals = new Double[7];
@@ -145,6 +152,10 @@ public class Analyse {
         return getFullDay(days[day]);
     }
 
+    /**
+     * Get the day with the most saturated fats.
+     * @return String: day with the most saturated fats.
+     */
     public String getMostSatFat(){
         double max_satfat = 0.0;
         String date = "";
@@ -158,6 +169,10 @@ public class Analyse {
         return String.valueOf(max_satfat) + "|" + date;
     }
 
+    /**
+     * Get the day with the most nutrient from the previous month.
+     * @return string: day that has the most saturated fats.
+     */
     public String getDayMostSatFat(){
         // One total for each day of the week
         Double[] totals = new Double[7];
@@ -198,6 +213,10 @@ public class Analyse {
         return getFullDay(days[day]);
     }
 
+    /**
+     * Get the day with the most salt.
+     * @return String: day with the most salt.
+     */
     public String getMostSalt(){
         double max_salt = 0.0;
         String date = "";
@@ -211,6 +230,10 @@ public class Analyse {
         return String.valueOf(max_salt) + "|" + date;
     }
 
+    /**
+     * Get the day with the most nutrient from the previous month.
+     * @return string: day that has the most salt.
+     */
     public String getDayMostSalt(){
         // One total for each day of the week
         Double[] totals = new Double[7];
@@ -251,6 +274,10 @@ public class Analyse {
         return getFullDay(days[day]);
     }
 
+    /**
+     * Get the day with the most sodium.
+     * @return String: day with the most sodium.
+     */
     public String getMostSodium(){
         double max_sodium = 0.0;
         String date = "";
@@ -264,6 +291,10 @@ public class Analyse {
         return String.valueOf(max_sodium) + "|" + date;
     }
 
+    /**
+     * Get the day with the most nutrient from the previous month.
+     * @return string: day that has the most sodium.
+     */
     public String getDayMostSodium(){
         // One total for each day of the week
         Double[] totals = new Double[7];
@@ -304,6 +335,10 @@ public class Analyse {
         return getFullDay(days[day]);
     }
 
+    /**
+     * Get the day with the most carbohydrates.
+     * @return String: day with the most carbohydrates.
+     */
     public String getMostCarbohydrates(){
         double max_carbohydrates = 0.0;
         String date = "";
@@ -317,6 +352,10 @@ public class Analyse {
         return String.valueOf(max_carbohydrates) + "|" + date;
     }
 
+    /**
+     * Get the day with the most nutrient from the previous month.
+     * @return string: day that has the most carbohydrates.
+     */
     public String getDayMostCarbohydrates(){
         // One total for each day of the week
         Double[] totals = new Double[7];
@@ -357,6 +396,10 @@ public class Analyse {
         return getFullDay(days[day]);
     }
 
+    /**
+     * Get the day with the most sugar.
+     * @return String: day with the most sugar.
+     */
     public String getMostSugar(){
         double max_sugar = 0.0;
         String date = "";
@@ -370,6 +413,10 @@ public class Analyse {
         return String.valueOf(max_sugar) + "|" + date;
     }
 
+    /**
+     * Get the day with the most nutrient from the previous month.
+     * @return string: day that has the most sugar.
+     */
     public String getDayMostSugar(){
         // One total for each day of the week
         Double[] totals = new Double[7];
@@ -410,6 +457,10 @@ public class Analyse {
         return getFullDay(days[day]);
     }
 
+    /**
+     * Get the day with the most proteins.
+     * @return String: day with the most proteins.
+     */
     public String getMostProtein(){
         double max_protein = 0.0;
         String date = "";
@@ -423,6 +474,10 @@ public class Analyse {
         return String.valueOf(max_protein) + "|" + date;
     }
 
+    /**
+     * Get the day with the most nutrient from the previous month.
+     * @return string: day that has the most protein.
+     */
     public String getDayMostProtein(){
         // One total for each day of the week
         Double[] totals = new Double[7];

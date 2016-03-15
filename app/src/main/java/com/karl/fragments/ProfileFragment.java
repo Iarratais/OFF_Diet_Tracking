@@ -1,6 +1,5 @@
 package com.karl.fragments;
 
-import android.app.Fragment;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -24,23 +23,29 @@ import com.karl.fyp.R;
 
 import java.text.DecimalFormat;
 
+/**
+ * Copyright Karl jones 2016.
+ *
+ * This class handles the creation of a new user profile.
+ */
+
 public class ProfileFragment extends android.support.v4.app.Fragment {
 
     private static final String TAG = "ProfileFragment";
 
     // Spinners
-    Spinner gender;
+    Spinner genderSpinner;
 
     // EditText
-    EditText user_name;
-    EditText user_height;
-    EditText user_weight;
+    EditText userNameEditText;
+    EditText userHeightEditText;
+    EditText userWeightEditText;
 
     MySQLiteHelper db;
 
     View rootView;
 
-    Button save_changes;
+    Button saveChangesButton;
 
     @Nullable
     @Override
@@ -48,12 +53,12 @@ public class ProfileFragment extends android.support.v4.app.Fragment {
 
         rootView = inflater.inflate(R.layout.fragment_profile, container, false);
 
-        // Set the title
+        // Set the title of the activity.
         ((MainActivity) getActivity()).setActionBarTitle(getString(R.string.profile_fragment_title));
 
-        db = new MySQLiteHelper((MainActivity) getActivity());
+        db = new MySQLiteHelper(getActivity());
 
-        setUpViews();
+        initialiseViews();
 
         getInformationFromDatabase();
 
@@ -65,32 +70,32 @@ public class ProfileFragment extends android.support.v4.app.Fragment {
     /**
      * Set up the views for the fragment.
      */
-    public void setUpViews() {
-        save_changes = (Button) rootView.findViewById(R.id.save_changes);
-        save_changes.setOnClickListener(new View.OnClickListener() {
+    public void initialiseViews() {
+        saveChangesButton = (Button) rootView.findViewById(R.id.save_changes);
+        saveChangesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                updateUser();
+                updateUserProfile();
             }
         });
 
-        gender = (Spinner) rootView.findViewById(R.id.user_gender);
+        genderSpinner = (Spinner) rootView.findViewById(R.id.userGender);
 
-        setUpSpinners();
+        setUpSpinnerViews();
 
-        user_name = (EditText) rootView.findViewById(R.id.user_name);
-        user_name.addTextChangedListener(user_name_listener);
+        userNameEditText = (EditText) rootView.findViewById(R.id.userName);
+        userNameEditText.addTextChangedListener(userNameEditTextListener);
 
-        user_height = (EditText) rootView.findViewById(R.id.user_height);
-        user_height.addTextChangedListener(user_height_listener);
+        userHeightEditText = (EditText) rootView.findViewById(R.id.userHeight);
+        userHeightEditText.addTextChangedListener(userHeightEditTextListener);
 
-        user_weight = (EditText) rootView.findViewById(R.id.user_weight);
-        user_weight.addTextChangedListener(user_weight_listener);
+        userWeightEditText = (EditText) rootView.findViewById(R.id.userWeight);
+        userWeightEditText.addTextChangedListener(userWeightEditTextListener);
 
         hideSaveButton();
     }
 
-    private final TextWatcher user_name_listener = new TextWatcher() {
+    private final TextWatcher userNameEditTextListener = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 
@@ -103,7 +108,7 @@ public class ProfileFragment extends android.support.v4.app.Fragment {
         public void afterTextChanged(Editable s) {}
     };
 
-    private final TextWatcher user_height_listener = new TextWatcher() {
+    private final TextWatcher userHeightEditTextListener = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 
@@ -116,7 +121,7 @@ public class ProfileFragment extends android.support.v4.app.Fragment {
         public void afterTextChanged(Editable s) {}
     };
 
-    private final TextWatcher user_weight_listener = new TextWatcher() {
+    private final TextWatcher userWeightEditTextListener = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 
@@ -132,62 +137,58 @@ public class ProfileFragment extends android.support.v4.app.Fragment {
     /**
      * Set up the spinners in the fragment.
      */
-    public void setUpSpinners() {
+    public void setUpSpinnerViews() {
         String[] genders = getResources().getStringArray(R.array.gender);
         ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(getActivity(), android.R.layout.simple_spinner_dropdown_item, genders);
-        gender.setAdapter(adapter);
-        gender.setSelection(adapter.getPosition("Unspecified"));
-        gender.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        genderSpinner.setAdapter(adapter);
+        genderSpinner.setSelection(adapter.getPosition("Unspecified"));
+        genderSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                updateUser();
+                updateUserProfile();
             }
-
             @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
+            public void onNothingSelected(AdapterView<?> parent) {}
         });
     }
 
     /**
-     * Get the information from the views.
+     * Get the information from the views and update the users profile.
      */
-    public void getInformationFromViews() {
-        db.updateUser(user_name.getText().toString(), gender.getSelectedItem().toString(), user_weight.getText().toString(), user_height.getText().toString());
+    public void updateUserFromViewInformation() {
+        db.updateUser(userNameEditText.getText().toString(), genderSpinner.getSelectedItem().toString(), userWeightEditText.getText().toString(), userHeightEditText.getText().toString());
 
-        ((MainActivity) getActivity()).setNameHeader();
+        ((MainActivity) getActivity()).setNameNavigationHeader();
 
         hideSaveButton();
 
         Toast.makeText(this.getActivity(), getString(R.string.profile_fragment_saved), Toast.LENGTH_SHORT).show();
-
     }
 
     /**
      * This saves the changes to the user profile and updates the users BMI display.
      */
-    public void updateUser() {
-        getInformationFromViews();
-        calculateBMI();
-        ((MainActivity)getActivity()).setNameHeader();
+    public void updateUserProfile() {
+        updateUserFromViewInformation();
+        calculateUserBMI();
+        ((MainActivity)getActivity()).setNameNavigationHeader();
     }
 
     /**
      * Get information from the database regarding the user.
      */
     public void getInformationFromDatabase() {
-        Cursor res = db.getUser();
+        Cursor userInformation = db.getUser();
 
-        System.out.println(res.getColumnCount());
-        if(res.getCount() == 0){
+        if(userInformation.getCount() == 0){
             Log.d(TAG, "No users exist");
         } else {
-            while (res.moveToNext()) {
-                user_name.setText(res.getString(1));
-                ArrayAdapter adapter = (ArrayAdapter) gender.getAdapter();
-                gender.setSelection(adapter.getPosition(res.getString(2)));
-                user_height.setText(res.getString(4));
-                user_weight.setText(res.getString(3));
+            while (userInformation.moveToNext()) {
+                userNameEditText.setText(userInformation.getString(1));
+                ArrayAdapter adapter = (ArrayAdapter) genderSpinner.getAdapter();
+                genderSpinner.setSelection(adapter.getPosition(userInformation.getString(2)));
+                userHeightEditText.setText(userInformation.getString(4));
+                userWeightEditText.setText(userInformation.getString(3));
             }
         }
     }
@@ -196,43 +197,43 @@ public class ProfileFragment extends android.support.v4.app.Fragment {
      * Show ths save changes button.
      */
     public void showSaveButton() {
-        save_changes.setVisibility(View.VISIBLE);
+        saveChangesButton.setVisibility(View.VISIBLE);
     }
 
     /**
      * Hide the save changes button.
      */
     public void hideSaveButton() {
-        save_changes.setVisibility(View.GONE);
+        saveChangesButton.setVisibility(View.GONE);
     }
 
     /**
      * Calculate the users BMI and set the information for it.
      * @return users BMI.
      */
-    public String calculateBMI() {
-        Double bmi = Double.parseDouble(user_weight.getText().toString());
+    public String calculateUserBMI() {
+        Double bodyMassIndex = Double.parseDouble(userWeightEditText.getText().toString());
 
-        bmi = bmi / (Double.parseDouble(user_height.getText().toString()) * Double.parseDouble(user_height.getText().toString()));
+        bodyMassIndex = bodyMassIndex / (Double.parseDouble(userHeightEditText.getText().toString()) * Double.parseDouble(userHeightEditText.getText().toString()));
 
         DecimalFormat df = new DecimalFormat("#.00");
 
-        TextView bmi_display = (TextView) rootView.findViewById(R.id.profile_bmi_display);
-        bmi_display.setText(getString(R.string.profile_fragment_your_BMI_is, String.valueOf(df.format(bmi))));
+        TextView BMIDisplayTextView = (TextView) rootView.findViewById(R.id.profile_bmi_display);
+        BMIDisplayTextView.setText(getString(R.string.profile_fragment_your_BMI_is, String.valueOf(df.format(bodyMassIndex))));
 
-        TextView bmi_display_information = (TextView) rootView.findViewById(R.id.profile_bmi_display_information);
-        if(bmi <= 18.4){
-            bmi_display_information.setText(getString(R.string.profile_fragment_BMI_underweight));
-        } else if (bmi >= 18.5 && bmi <= 24.9){
-            bmi_display_information.setText(getString(R.string.profile_fragment_BMI_normal));
-        } else if (bmi >= 25 && bmi <= 29.9){
-            bmi_display_information.setText(getString(R.string.profile_fragment_BMI_overweight));
-        } else if (bmi > 29.9) {
-            bmi_display_information.setText(getString(R.string.profile_fragment_BMI_obese));
+        TextView BMIDisplayInformationTextView = (TextView) rootView.findViewById(R.id
+                .profile_bmi_display_information);
+        if(bodyMassIndex <= 18.4){
+            BMIDisplayInformationTextView.setText(getString(R.string.profile_fragment_BMI_underweight));
+        } else if (bodyMassIndex >= 18.5 && bodyMassIndex <= 24.9){
+            BMIDisplayInformationTextView.setText(getString(R.string.profile_fragment_BMI_normal));
+        } else if (bodyMassIndex >= 25 && bodyMassIndex <= 29.9){
+            BMIDisplayInformationTextView.setText(getString(R.string.profile_fragment_BMI_overweight));
+        } else if (bodyMassIndex > 29.9) {
+            BMIDisplayInformationTextView.setText(getString(R.string.profile_fragment_BMI_obese));
         } else {
-            bmi_display_information.setVisibility(View.GONE);
+            BMIDisplayInformationTextView.setVisibility(View.GONE);
         }
-
-        return String.valueOf(df.format(bmi));
+        return String.valueOf(df.format(bodyMassIndex));
     }
 }

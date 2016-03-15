@@ -1,5 +1,12 @@
 package com.karl.examples;
 
+/**
+ * Copyright Karl jones 2016.
+ *
+ * Example goals are used as a Mock Object in the testing of the application. This is set to
+ * return values that the application is expecting and is used for testing purposes only.
+ */
+
 public class ExampleGoals {
 
     private String example_goal_calories = "2000";

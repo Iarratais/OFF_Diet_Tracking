@@ -2,10 +2,8 @@ package com.karl.fragments;
 
 
 import android.os.Bundle;
-import android.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,19 +13,20 @@ import com.karl.fyp.ProfileSetUp;
 import com.karl.fyp.R;
 
 /**
- * A simple {@link Fragment} subclass.
+ * Copyright Karl jones 2016.
+ * ProfileSetupFive
+ *
+ * This class controls the fifth profile page.
  */
 public class ProfileSetupFive extends android.support.v4.app.Fragment {
 
     private static final String TAG = "ProfileSetupFive";
+
     View rootView;
 
-    EditText desired_weight;
+    EditText desiredWeightEditText;
 
-    public ProfileSetupFive() {
-        // Required empty public constructor
-    }
-
+    public ProfileSetupFive() {}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -35,27 +34,23 @@ public class ProfileSetupFive extends android.support.v4.app.Fragment {
 
         rootView = inflater.inflate(R.layout.fragment_profile_setup_five, container, false);
 
-        desired_weight = (EditText) rootView.findViewById(R.id.editText4);
-        desired_weight.addTextChangedListener(desired_weight_listener);
+        desiredWeightEditText = (EditText) rootView.findViewById(R.id.editText4);
+        desiredWeightEditText.addTextChangedListener(desiredWeightEditTextListener);
 
         // Inflate the layout for this fragment
         return rootView;
     }
 
-    private final TextWatcher desired_weight_listener = new TextWatcher() {
+    private final TextWatcher desiredWeightEditTextListener = new TextWatcher() {
         @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-        }
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-            ((ProfileSetUp) getActivity()).setUser_desired(desired_weight.getText().toString());
+            ((ProfileSetUp) getActivity()).setUserDesired(desiredWeightEditText.getText().toString());
         }
 
         @Override
-        public void afterTextChanged(Editable s) {
-
-        }
+        public void afterTextChanged(Editable s) {}
     };
 }

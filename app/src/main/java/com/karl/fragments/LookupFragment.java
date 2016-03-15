@@ -1,17 +1,8 @@
 package com.karl.fragments;
 
-import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-
-import com.karl.dao.FoodDAO;
-import com.karl.dao.IFoodDAO;
-import com.karl.fyp.BarcodeScannerActivity;
-import com.karl.fyp.MainActivity;
-import com.karl.fyp.R;
-import com.karl.fyp.SearchResultActivity;
-
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -25,15 +16,21 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 
-import java.awt.font.TextAttribute;
+import com.karl.dao.FoodDAO;
+import com.karl.dao.IFoodDAO;
+import com.karl.fyp.BarcodeScannerActivity;
+import com.karl.fyp.MainActivity;
+import com.karl.fyp.R;
+import com.karl.fyp.SearchResultActivity;
 
 /**
- * Search fragment
+ * Copyright Karl jones 2016.
  *
- * Copyright Karl Jones 2016
+ * This method controls the user being able to scan barcodes, and to input them into the system
+ * manually so that they can get information about foods that they might need.
  */
+
 public class LookupFragment extends android.support.v4.app.Fragment {
 
     View rootView;
@@ -54,7 +51,6 @@ public class LookupFragment extends android.support.v4.app.Fragment {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getActivity(), BarcodeScannerActivity.class));
-                //showInputDialog();
             }
         });
 
@@ -73,8 +69,8 @@ public class LookupFragment extends android.support.v4.app.Fragment {
     }
 
     /**
-     * Temporary method while the user can not scan barcodes
-     * @return barcode string
+     * Allow the user to manually input the barcode into the system to allow for searching.
+     * @return barcode string that the user input.
      */
     protected String showInputDialog() {
 
@@ -188,9 +184,9 @@ public class LookupFragment extends android.support.v4.app.Fragment {
         String barcode = "0000000000000";
 
         /**
-         *
+         * Things to be done in the background of the UI thread.
          * @param params string put into the task
-         * @return exists
+         * @return exists, true if exits, false otherwise.
          */
         @Override
         protected Boolean doInBackground(String... params) {
@@ -198,17 +194,13 @@ public class LookupFragment extends android.support.v4.app.Fragment {
 
             barcode = params[0];
 
-            try {
-                return foodDAO.checkProduct(params[0]);
-            } catch (Exception e) {
-                e.printStackTrace();
-                return false;
-            }
+            try {return foodDAO.checkProduct(params[0]);}
+            catch (Exception e) {e.printStackTrace(); return false;}
         }
 
         /**
-         * UI thread interaction
-         * @param exists if the product exists of not
+         * UI thread interaction.
+         * @param exists if the product exists of not.
          */
         protected void onPostExecute(Boolean exists) {
             super.onPostExecute(exists);
@@ -219,7 +211,6 @@ public class LookupFragment extends android.support.v4.app.Fragment {
                 Snackbar.make(getView(), getString(R.string.error_item_does_not_exist), Snackbar.LENGTH_SHORT).show();
 
             progressBar.setVisibility(View.GONE);
-
         }
     }
 }

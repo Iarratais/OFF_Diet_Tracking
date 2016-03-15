@@ -46,14 +46,17 @@ public class BarcodeGraphic extends GraphicOverlay.Graphic {
     BarcodeGraphic(GraphicOverlay overlay) {
         super(overlay);
 
+        // The color changes each time a barcode is detected.
         mCurrentColorIndex = (mCurrentColorIndex + 1) % COLOR_CHOICES.length;
         final int selectedColor = COLOR_CHOICES[mCurrentColorIndex];
 
+        // This handles the rectangle that appears when the barcode is detected
         mRectPaint = new Paint();
         mRectPaint.setColor(selectedColor);
         mRectPaint.setStyle(Paint.Style.STROKE);
         mRectPaint.setStrokeWidth(4.0f);
 
+        // Show the barcode that the program is detecting.
         mTextPaint = new Paint();
         mTextPaint.setColor(selectedColor);
         mTextPaint.setTextSize(36.0f);

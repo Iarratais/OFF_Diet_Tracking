@@ -9,14 +9,15 @@ import android.os.Bundle;
 import android.app.Fragment;
 
 /**
- * A simple {@link Fragment} subclass.
+ * Copyright Karl jones 2016.
+ *
+ * This class creates an alert dialog fragment. It will apply the title and the message to the
+ * fragment.
  */
+
 public class MyAlertDialogFragment extends DialogFragment {
 
-
-    public MyAlertDialogFragment() {
-        // Required empty public constructor
-    }
+    public MyAlertDialogFragment() {}
 
     public static MyAlertDialogFragment newInstance(String title, String message){
         MyAlertDialogFragment fragment = new MyAlertDialogFragment();
@@ -27,6 +28,11 @@ public class MyAlertDialogFragment extends DialogFragment {
         return fragment;
     }
 
+    /**
+     * Return a new alert dialog fragment.
+     * @param savedInstanceState: bundle passed from constructor.
+     * @return dialog: new alert dialog.
+     */
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         String title = getArguments().getString("title");
         String message = getArguments().getString("message");
@@ -42,5 +48,4 @@ public class MyAlertDialogFragment extends DialogFragment {
                 })
                 .create();
     }
-
 }

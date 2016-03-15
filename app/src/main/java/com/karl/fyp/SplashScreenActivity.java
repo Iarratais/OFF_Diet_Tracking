@@ -29,7 +29,7 @@ public class SplashScreenActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
 
-        transferData();
+        moveDataToHistoryDatabase();
 
         checkIfFirstLaunch();
     }
@@ -46,7 +46,7 @@ public class SplashScreenActivity extends Activity {
         MySQLiteHelper db = new MySQLiteHelper(this);
 
         if(isFirst){
-            db.clearAllUser();
+            db.wipeUserTable();
             db.clearGoals();
 
             startActivity(new Intent(getApplicationContext(), ProfileSetUp.class));
@@ -79,7 +79,7 @@ public class SplashScreenActivity extends Activity {
      * and transfer them into the history table while calculating the totals of each
      * nutrient.
      */
-    public void transferData(){
+    public void moveDataToHistoryDatabase(){
         MySQLiteHelper db = new MySQLiteHelper(this);
 
         Cursor todayRes = db.returnAllTodayEntries();
@@ -92,52 +92,32 @@ public class SplashScreenActivity extends Activity {
         } else if (todayStatsRes == null) {
             Log.d(TAG, "There is nothing in the today stats table");
         } else {
-
-            // 4 columns in todayRes
             while(todayRes.moveToNext()) {
-                int today_id = todayRes.getInt(0);
-                String today_date = todayRes.getString(1);
-                String food_name = todayRes.getString(2);
-                String barcode_number = todayRes.getString(3);
-
                 Food f = new Food();
-                f.setId(String.valueOf(today_id));
-                f.setDate(today_date);
-                f.setName(food_name);
-                f.setBarcode_number(barcode_number);
+                f.setId(String.valueOf(todayRes.getInt(0)));
+                f.setDate(todayRes.getString(1));
+                f.setName(todayRes.getString(2));
+                f.setBarcode_number(todayRes.getString(3));
 
                 foods.add(f);
             } // End while(todayRes.moveToNext())
 
             int i = 0;
 
-            // 10 columns in todayStatsRes
             while(todayStatsRes.moveToNext()){
-                String calories = todayStatsRes.getString(2);
-                String fat = todayStatsRes.getString(3);
-                String sat_fat = todayStatsRes.getString(4);
-                String carbs = todayStatsRes.getString(5);
-                String sugar = todayStatsRes.getString(6);
-                String protein = todayStatsRes.getString(7);
-                String salt = todayStatsRes.getString(8);
-                String sodium = todayStatsRes.getString(9);
-
-                foods.get(i).setCalories(calories);
-                foods.get(i).setFats(fat);
-                foods.get(i).setSaturated_fat(sat_fat);
-                foods.get(i).setCarbohydrates(carbs);
-                foods.get(i).setSugar(sugar);
-                foods.get(i).setProtein(protein);
-                foods.get(i).setSalt(salt);
-                foods.get(i).setSodium(sodium);
+                foods.get(i).setCalories(todayStatsRes.getString(2));
+                foods.get(i).setFats(todayStatsRes.getString(3));
+                foods.get(i).setSaturated_fat(todayStatsRes.getString(4));
+                foods.get(i).setCarbohydrates(todayStatsRes.getString(5));
+                foods.get(i).setSugar(todayStatsRes.getString(6));
+                foods.get(i).setProtein(todayStatsRes.getString(7));
+                foods.get(i).setSalt(todayStatsRes.getString(8));
+                foods.get(i).setSodium(todayStatsRes.getString(9));
 
                 i++;
             } // End while(todayStatsRes.moveToNext())
         }
 
-        for(int x = 0; x < foods.size(); x++) {
-            Log.d(TAG, "Transfer data: " + foods.get(x).toString());
-        }
 
         if(foods.size() > 0) {
             calculateTotals(foods);
@@ -145,7 +125,7 @@ public class SplashScreenActivity extends Activity {
             Log.d(TAG, "There is no food items loaded from the system - not proceeding to calculating totals");
 
         }
-    } // End transferData()
+    } // End moveDataToHistoryDatabase()
 
     /**
      * Calculate the totals and pass them to the history database

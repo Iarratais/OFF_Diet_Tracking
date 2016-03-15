@@ -1,46 +1,32 @@
 package com.karl.fragments;
 
-
-import com.karl.fyp.EditGoalsActivity;
-import com.karl.fyp.MainActivity;
-import com.karl.fyp.MySQLiteHelper;
-import com.karl.fyp.R;
-import com.karl.models.Goals;
-
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.karl.fyp.EditGoalsActivity;
+import com.karl.fyp.MainActivity;
+import com.karl.fyp.MySQLiteHelper;
+import com.karl.fyp.R;
 
 /**
- * Goals fragment
+ * Copyright Karl jones 2016.
  *
- * Copyright Karl Jones 2016
+ * This class controls the GoalsFragment, which displays the users goals to them and allows them
+ * to move onto editing them.
  */
+
 public class GoalsFragment extends android.support.v4.app.Fragment {
 
     private static final String TAG = "GoalsFragment";
-
-    TextView calories_view;
-    TextView fat_view;
-    TextView sat_fat_view;
-    TextView salt_view;
-    TextView sodium_view;
-    TextView carbs_view;
-    TextView sugar_view;
-    TextView protein_view;
-    TextView weight_view;
 
     MySQLiteHelper db;
 
@@ -65,34 +51,9 @@ public class GoalsFragment extends android.support.v4.app.Fragment {
             }
         });
 
-        setupViews();
-
         getInformationFromDB();
 
         return rootView;
-    }
-
-    /**
-     * Set up the views.
-     */
-    public void setupViews(){
-        calories_view = (TextView) rootView.findViewById(R.id.calorie_goal);
-
-        fat_view = (TextView) rootView.findViewById(R.id.fat_goal);
-
-        sat_fat_view = (TextView) rootView.findViewById(R.id.sat_fat_goal);
-
-        salt_view = (TextView) rootView.findViewById(R.id.salt_goal);
-
-        sodium_view = (TextView) rootView.findViewById(R.id.sodium_goal);
-
-        carbs_view = (TextView) rootView.findViewById(R.id.carbohydrates_goal);
-
-        sugar_view = (TextView) rootView.findViewById(R.id.sugar_goal);
-
-        protein_view = (TextView) rootView.findViewById(R.id.protein_goal);
-
-        weight_view = (TextView) rootView.findViewById(R.id.weight_goal);
     }
 
     /**
@@ -102,6 +63,7 @@ public class GoalsFragment extends android.support.v4.app.Fragment {
         Cursor res = db.getGoals();
 
         if(res.getCount() == 0) {
+            // This should NEVER happen.
             Log.d(TAG, "Nothing in goals table");
         } else {
             while(res.moveToNext()) {
@@ -109,46 +71,55 @@ public class GoalsFragment extends android.support.v4.app.Fragment {
 
                 // Calories
                 String calories = getString(R.string.calories) + getString(R.string.colon) + " " + res.getString(1);
+                TextView calories_view = (TextView) rootView.findViewById(R.id.calorie_goal);
                 calories_view.setText(calories);
                 calories_view.setTypeface(normalTypeface);
 
                 // Fat
                 String fat = getString(R.string.fat) + getString(R.string.colon) + " " + res.getString(2) + getString(R.string.grams_abbv);
+                TextView fat_view = (TextView) rootView.findViewById(R.id.fat_goal);
                 fat_view.setText(fat);
                 fat_view.setTypeface(normalTypeface);
 
                 // Sat fat
                 String sat_fat = getString(R.string.saturated_fat) + getString(R.string.colon) + " " + res.getString(3) + getString(R.string.grams_abbv);
+                TextView sat_fat_view = (TextView) rootView.findViewById(R.id.sat_fat_goal);
                 sat_fat_view.setText(sat_fat);
                 sat_fat_view.setTypeface(normalTypeface);
 
                 // Salt
                 String salt = getString(R.string.salt) + getString(R.string.colon) + " " + res.getString(4) + getString(R.string.grams_abbv);
+                TextView salt_view = (TextView) rootView.findViewById(R.id.salt_goal);
                 salt_view.setText(salt);
                 salt_view.setTypeface(normalTypeface);
 
                 // Sodium
                 String sodium = getString(R.string.sodium) + getString(R.string.colon) + " " + res.getString(5) + getString(R.string.grams_abbv);
+                TextView sodium_view = (TextView) rootView.findViewById(R.id.sodium_goal);
                 sodium_view.setText(sodium);
                 sodium_view.setTypeface(normalTypeface);
 
                 // Carbohydrates
                 String carbohydrates = getString(R.string.carbohydrate) + getString(R.string.colon) + " " + res.getString(6) + getString(R.string.grams_abbv);
+                TextView carbs_view = (TextView) rootView.findViewById(R.id.carbohydrates_goal);
                 carbs_view.setText(carbohydrates);
                 carbs_view.setTypeface(normalTypeface);
 
                 // Sugar
                 String sugar = getString(R.string.sugar) + getString(R.string.colon) + " " + res.getString(7) + getString(R.string.grams_abbv);
+                TextView sugar_view = (TextView) rootView.findViewById(R.id.sugar_goal);
                 sugar_view.setText(sugar);
                 sugar_view.setTypeface(normalTypeface);
 
                 // Protein
                 String protein = getString(R.string.protein) + getString(R.string.colon) + " " + res.getString(8) + getString(R.string.grams_abbv);
+                TextView protein_view = (TextView) rootView.findViewById(R.id.protein_goal);
                 protein_view.setText(protein);
                 protein_view.setTypeface(normalTypeface);
 
                 // Weight
                 String weight = getString(R.string.weigh) + getString(R.string.colon) + " " + res.getString(9) + getString(R.string.kg);
+                TextView weight_view = (TextView) rootView.findViewById(R.id.weight_goal);
                 weight_view.setText(weight);
                 weight_view.setTypeface(normalTypeface);
             }

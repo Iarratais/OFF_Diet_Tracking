@@ -8,7 +8,7 @@
     <!-- MainActivity -->
     <string name="main_activity_new">New</string>
     <string name="main_activity_new_entry_manual">Manual</string>
-    <string name="main_activity_new_entry_barcode">Scan barcode</string>
+    <string name="main_activity_new_entry_barcode">Scan inputBarcode</string>
     <string name="main_activity_new_entry_options_title">What would you like to do?</string>
 
     <!-- Profile Set Up Fragments -->
@@ -39,9 +39,9 @@
     <!-- Lookup fragment -->
     <string name="lookup_fragment_title">Barcode Search</string>
     <string name="lookup_fragment_scan">Scan</string>
-    <string name="lookup_fragment_your_barcode_needs_13_digits">Please enter a 13 digit barcode</string>
+    <string name="lookup_fragment_your_barcode_needs_13_digits">Please enter a 13 digit inputBarcode</string>
     <string name="lookup_fragment_serving_size">Serving size:</string>
-    <string name="lookup_fragment_manual_barcode_entry">Manual barcode entry</string>
+    <string name="lookup_fragment_manual_barcode_entry">Manual inputBarcode entry</string>
 
     <!-- Search fragment -->
     <string name="search_fragment_title">Search</string>
@@ -172,13 +172,15 @@
     <string name="no_camera_permission">This application cannot run because it does not have the camera permission.  The application will now exit.</string>
     <string name="low_storage_error">Face detector dependencies cannot be downloaded due to low device storage</string>
     <string name="title_activity_main">Barcode Reader Sample</string>
-    <string name="barcode_header">Click &quot;Read Barcode&quot; to read a barcode</string>
+    <string name="barcode_header">Click &quot;Read Barcode&quot; to read a inputBarcode</string>
     <string name="read_barcode">Read Barcode</string>
     <string name="auto_focus">Auto Focus</string>
     <string name="use_flash">Use Flash</string>
     <string name="barcode_success">Barcode read successfully</string>
-    <string name="barcode_failure">No barcode captured</string>
-    <string name="barcode_error">"Error reading barcode: %1$s"</string>
+    <string name="barcode_failure">No inputBarcode captured</string>
+    <string name="barcode_error">"Error reading inputBarcode: %1$s"</string>
+    <string name="barcode_reader_tap_to_capture">Tap to capture when the inputBarcode is
+        detected</string>
 
     <!-- Months -->
     <string name="january">January</string>

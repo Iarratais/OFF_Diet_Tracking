@@ -17,8 +17,12 @@ import com.karl.fyp.R;
 import java.util.Calendar;
 
 /**
- * A simple {@link Fragment} subclass.
+ * Copyright Karl jones 2016.
+ *
+ * This fragment is in charge of the fragments that slot into the analysis fragments. It is
+ * solely in charge of the MonthAnalysisFragment and the YearAnalysisFragment.
  */
+
 public class AnalysisActivityFragment extends android.support.v4.app.Fragment {
 
     View rootView;
@@ -31,9 +35,7 @@ public class AnalysisActivityFragment extends android.support.v4.app.Fragment {
     private SectionsPagerAdapter sectionsPagerAdapter;
     private ViewPager viewPager;
 
-    public AnalysisActivityFragment() {
-        // Required empty public constructor
-    }
+    public AnalysisActivityFragment() {}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -158,7 +160,7 @@ public class AnalysisActivityFragment extends android.support.v4.app.Fragment {
         }
 
         /**
-         *
+         * Set the title of the fragments.
          * @param position that the page is at
          * @return the title of the page
          */

@@ -16,11 +16,13 @@ import java.util.Calendar;
 import java.util.Locale;
 
 /**
- * Created by Karl on 07/02/2016.
+ * Copyright Karl jones 2016.
+ *
+ * Create an input alert dialog. This will apply the title to the alert dialog. You must specify
+ * the action that the application will take given a certain title in the code below (see line 48).
  */
-public class MyInputAlertDialogFragment extends android.support.v4.app.DialogFragment{
 
-    private static int amount = 0;
+public class MyInputAlertDialogFragment extends android.support.v4.app.DialogFragment{
 
     public MyInputAlertDialogFragment(){}
 
@@ -34,7 +36,6 @@ public class MyInputAlertDialogFragment extends android.support.v4.app.DialogFra
 
     public Dialog onCreateDialog(Bundle savedInstanceState){
         final String title = getArguments().getString("title");
-
         AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
         final View view = getActivity().getLayoutInflater().inflate(R.layout.input_dialog_2, null);
         alert.setView(view);
@@ -44,6 +45,8 @@ public class MyInputAlertDialogFragment extends android.support.v4.app.DialogFra
                 EditText text = (EditText) view.findViewById(R.id.edittext);
                 String message = text.getText().toString();
 
+                // This checks which input it is taking. It may be logging weight or taking in a
+                // weight of food.
                 if (title != null) {
                     if(title.equals(getString(R.string.progress_fragment_log_your_weight))){
                         MySQLiteHelper db = new MySQLiteHelper(getContext());
@@ -65,15 +68,18 @@ public class MyInputAlertDialogFragment extends android.support.v4.app.DialogFra
         return alert.create();
     }
 
+    /**
+     * Get the current date.
+     * @return String: date in format - DAY00000000
+     */
     public String getDate() {
         Calendar c = Calendar.getInstance();
         String day = Integer.toString(c.get(Calendar.DAY_OF_MONTH));
         String month = Integer.toString(c.get(Calendar.MONTH) + 1);
         String year = Integer.toString(c.get(Calendar.YEAR));
 
-        String weekDay;
         SimpleDateFormat dayFormat = new SimpleDateFormat("EEEE", Locale.US);
-        weekDay = dayFormat.format(c.getTime());
+        String weekDay = dayFormat.format(c.getTime());
 
         if(day.length() < 2) {
             String temp = day;
@@ -83,7 +89,6 @@ public class MyInputAlertDialogFragment extends android.support.v4.app.DialogFra
             String temp = month;
             month = "0" + temp;
         }
-
         return weekDay.substring(0, 3).toUpperCase() + day + month + year;
     }
 }

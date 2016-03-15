@@ -13,16 +13,19 @@ import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.common.api.CommonStatusCodes;
 import com.google.android.gms.vision.barcode.Barcode;
 import com.karl.barcodereader.BarcodeCaptureActivity;
 import com.karl.dao.FoodDAO;
 import com.karl.dao.IFoodDAO;
-import com.karl.models.Food;
 
-import java.io.IOException;
+/**
+ * Copyright Karl jones 2016.
+ * BarcodeScannerActivity
+ *
+ * This controls the barcode scanner in the application.
+ */
 
 public class BarcodeScannerActivity extends Activity implements View.OnClickListener {
 
@@ -57,7 +60,6 @@ public class BarcodeScannerActivity extends Activity implements View.OnClickList
 
     /**
      * Called when a view has been clicked.
-     *
      * @param v The view that was clicked.
      */
     @Override
@@ -70,7 +72,6 @@ public class BarcodeScannerActivity extends Activity implements View.OnClickList
 
             startActivityForResult(intent, RC_BARCODE_CAPTURE);
         }
-
     }
 
     /**
@@ -79,10 +80,6 @@ public class BarcodeScannerActivity extends Activity implements View.OnClickList
      * data from it.  The <var>resultCode</var> will be
      * {@link #RESULT_CANCELED} if the activity explicitly returned that,
      * didn't return any result, or crashed during its operation.
-     * <p/>
-     * <p>You will receive this call immediately before onResume() when your
-     * activity is re-starting.
-     * <p/>
      *
      * @param requestCode The integer request code originally supplied to
      *                    startActivityForResult(), allowing you to identify who this
@@ -91,9 +88,6 @@ public class BarcodeScannerActivity extends Activity implements View.OnClickList
      *                    through its setResult().
      * @param data        An Intent, which can return result data to the caller
      *                    (various data can be attached to Intent "extras").
-     * @see #startActivityForResult
-     * @see #createPendingResult
-     * @see #setResult(int)
      */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -103,9 +97,9 @@ public class BarcodeScannerActivity extends Activity implements View.OnClickList
                     Barcode barcode = data.getParcelableExtra(BarcodeCaptureActivity.BarcodeObject);
                     statusMessage.setText(R.string.barcode_success);
                     barcodeValue.setText(barcode.displayValue);
-                    if(isNetworkOnline() && checkLength(barcode.displayValue)){
+                    if(isDeviceOnline() && checkLength(barcode.displayValue)){
                         setUpTask(barcode.displayValue);
-                    } else if (!isNetworkOnline()) {
+                    } else if (!isDeviceOnline()) {
                         Snackbar.make(findViewById(android.R.id.content), getString(R.string.error_sorry_check_your_network_settings), Snackbar.LENGTH_INDEFINITE)
                                 .setAction(getString(R.string.settings_fragment_title), new View.OnClickListener() {
                                     @Override
@@ -131,40 +125,47 @@ public class BarcodeScannerActivity extends Activity implements View.OnClickList
     }
 
     /**
-     *
-     * @return network connected status
+     * Check if the device is online.
+     * @return network connected status.
      */
-    public boolean isNetworkOnline() {
-        boolean status = false;
-
+    public boolean isDeviceOnline() {
+        boolean networkStatus = false;
         try{
             ConnectivityManager connectivityManager = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
             NetworkInfo networkInfo = connectivityManager.getNetworkInfo(0);
             if(networkInfo != null && networkInfo.getState() == NetworkInfo.State.CONNECTED){
-                status = true;
+                networkStatus = true;
             } else {
                 networkInfo = connectivityManager.getNetworkInfo(1);
                 if(networkInfo != null && networkInfo.getState() == NetworkInfo.State.CONNECTED) {
-                    status = true;
+                    networkStatus = true;
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
-            status = false;
+            networkStatus = false;
         }
 
-        return status;
+        return networkStatus;
     }
 
+    /**
+     * Check the length of the barcode.
+     * @param barcode to be checked.
+     * @return true if right amount.
+     */
     public boolean checkLength(String barcode) {
-        boolean is13 = false;
+        boolean isCorrectLength = false;
         if(barcode.length() == 13) {
-            is13 = true;
+            isCorrectLength = true;
         }
-        return is13;
+        return isCorrectLength;
     }
 
-
+    /**
+     * Set up the task.
+     * @param barcode to be passed to task.
+     */
     public void setUpTask(String barcode) {
         BarcodeSearchTask bst = new BarcodeSearchTask();
         bst.execute(barcode);
@@ -173,10 +174,10 @@ public class BarcodeScannerActivity extends Activity implements View.OnClickList
     }
 
     /**
-     *
-     * @param barcode to pass to the results activity
+     * Send the user to get the results.
+     * @param barcode to pass to the results activity.
      */
-    public void getResults(String barcode) {
+    public void sendUserToResultsPage(String barcode) {
         Intent i = new Intent(getApplicationContext(), SearchResultActivity.class);
         i.putExtra("barcode", barcode);
         startActivity(i);
@@ -188,7 +189,6 @@ public class BarcodeScannerActivity extends Activity implements View.OnClickList
         String barcode = "0000000000000";
 
         /**
-         *
          * @param params string put into the task
          * @return exists
          */
@@ -213,8 +213,10 @@ public class BarcodeScannerActivity extends Activity implements View.OnClickList
         protected void onPostExecute(Boolean exists) {
             super.onPostExecute(exists);
 
+            // If the item does not exist, send the user with the barcode to the manual entry
+            // points.
             if(exists)
-                getResults(barcode);
+                sendUserToResultsPage(barcode);
             else {
                 Intent i = new Intent(getApplicationContext(), NewManualEntryActivity.class);
                 i.putExtra("scan_success", false);
@@ -222,7 +224,6 @@ public class BarcodeScannerActivity extends Activity implements View.OnClickList
                 startActivity(i);
             }
             progressBar.setVisibility(View.GONE);
-
         }
     }
 }

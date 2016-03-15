@@ -14,8 +14,11 @@ import com.karl.models.Weight;
 import java.util.ArrayList;
 
 /**
- * Created by Karl on 04/03/2016.
+ * Copyright Karl jones 2016.
+ *
+ * This adapter deals with the list in the progress fragment.
  */
+
 public class ProgressListAdapter extends ArrayAdapter<Weight> {
 
     private static final String TAG = "ProgressListAdapter";
@@ -24,14 +27,12 @@ public class ProgressListAdapter extends ArrayAdapter<Weight> {
 
     private Context context;
     private ArrayList<Weight> weights;
-    private boolean showDays;
 
-    public ProgressListAdapter(Context context, ArrayList<Weight> weights, boolean showDays){
+    public ProgressListAdapter(Context context, ArrayList<Weight> weights){
         super(context, R.layout.weight_list_item, weights);
 
         this.context = context;
         this.weights = weights;
-        this.showDays = showDays;
 
         inflater = LayoutInflater.from(this.context);
     }
@@ -52,9 +53,9 @@ public class ProgressListAdapter extends ArrayAdapter<Weight> {
         char char7 = date.charAt(2);
         StringBuilder sb = new StringBuilder();
         sb.append(char5).append(char6).append(char7);
-        if(showDays){
-            daysDate.append(getFullDay(sb.toString())).append(" ");
-        }
+
+        daysDate.append(getFullDay(sb.toString())).append(" ");
+
 
         // Day
         char char1 = date.charAt(3);
@@ -170,6 +171,10 @@ public class ProgressListAdapter extends ArrayAdapter<Weight> {
         return null;
     }
 
+    /**
+     * Make the array with the three letter day codes.
+     * @return string[]: days.
+     */
     public String[] makeDaysArray(){
         return new String[]{context.getString(R.string.mondays).substring(0, 3).toUpperCase(), context.getString(R.string.tuesdays).substring(0, 3).toUpperCase(),
                 context.getString(R.string.wednesdays).substring(0, 3).toUpperCase(), context.getString(R.string.thursdays).substring(0, 3).toUpperCase(),

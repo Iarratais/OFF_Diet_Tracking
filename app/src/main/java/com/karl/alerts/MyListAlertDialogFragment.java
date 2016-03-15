@@ -14,8 +14,12 @@ import com.karl.fyp.NewManualEntryActivity;
 import com.karl.fyp.R;
 
 /**
- * A simple {@link Fragment} subclass.
+ * Copyright Karl jones 2016.
+ *
+ * Create a list alert dialog. Currently only takes in the title and provides the list dialog
+ * that appears when the user are given the option to do multiple actions from the home screen.
  */
+
 public class MyListAlertDialogFragment extends android.support.v4.app.DialogFragment {
 
 

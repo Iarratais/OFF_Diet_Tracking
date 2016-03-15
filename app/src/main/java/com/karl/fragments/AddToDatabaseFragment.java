@@ -1,6 +1,5 @@
 package com.karl.fragments;
 
-import android.app.Fragment;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import com.karl.fyp.MainActivity;
@@ -17,12 +16,14 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 /**
- * Goals fragment
+ * Copyright Karl jones 2016.
  *
- * Copyright Karl Jones 2016
+ * This fragment is used to display the OpenFoodFacts website to the user so that they can log in
+ * and input information from their devices if they are so inclined to.
  */
 public class AddToDatabaseFragment extends android.support.v4.app.Fragment {
 
+    // The URL for the openfoodfacts database website.
     public static String url = "http://world.openfoodfacts.org/";
 
     View rootView;
@@ -41,6 +42,9 @@ public class AddToDatabaseFragment extends android.support.v4.app.Fragment {
         return rootView;
     }
 
+    /**
+     * This loads the website for the user to be able to use.
+     */
     public void goToWebsite() {
         final WebView wv = (WebView) rootView.findViewById(R.id.webView);
         wv.getSettings().setJavaScriptEnabled(true);
@@ -63,7 +67,8 @@ public class AddToDatabaseFragment extends android.support.v4.app.Fragment {
             public void onPageFinished(WebView view, String url) {
             }
 
-            // If the page hits an error, allow the user to go to the settings
+            // If the page hits an error, allow the user to go to the settings and also hides the
+            // webview.
             @Override
             public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
                 Snackbar.make(rootView, getString(R.string.error_sorry_check_your_network_settings), Snackbar.LENGTH_INDEFINITE)

@@ -3,6 +3,7 @@ package com.karl.adapters;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.graphics.Typeface;
+import android.os.Build;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,23 +19,28 @@ import com.karl.models.Day;
 
 import java.util.ArrayList;
 
+/**
+ * Copyright Karl jones 2016.
+ *
+ * This adapter deals with the list in the history fragment.
+ */
+
 public class HistoryListAdapter extends ArrayAdapter<String> {
+
     private static final String TAG = "HistoryListAdapter";
 
     private final Activity context;
     private final ArrayList<Day> days;
     private final String[] dates;
-    private final boolean showDays;
 
     public LayoutInflater inflater;
 
-    public HistoryListAdapter(Activity context, String[] dates, ArrayList<Day> days, boolean showDays) {
+    public HistoryListAdapter(Activity context, String[] dates, ArrayList<Day> days) {
         super(context, R.layout.history_list_item, dates);
 
         this.context = context;
         this.dates = dates;
         this.days = days;
-        this.showDays = showDays;
 
         inflater = LayoutInflater.from(this.context);
     }
@@ -46,7 +52,7 @@ public class HistoryListAdapter extends ArrayAdapter<String> {
             view = inflater.inflate(R.layout.history_list_item, null);
         }
 
-        // Chop up the date and give back formatted date
+        // Chop up the date and give back formatted date to be displayed to the user.
         StringBuilder daysDate = new StringBuilder();
         StringBuffer date = new StringBuffer(dates[position]);
 
@@ -55,9 +61,6 @@ public class HistoryListAdapter extends ArrayAdapter<String> {
         char char7 = date.charAt(2);
         StringBuilder sb = new StringBuilder();
         sb.append(char5).append(char6).append(char7);
-        if(showDays){
-            daysDate.append(getFullDay(sb.toString())).append(" ");
-        }
 
         // Day
         char char1 = date.charAt(3);
@@ -132,6 +135,7 @@ public class HistoryListAdapter extends ArrayAdapter<String> {
             daysDate.append(mon);
         }
 
+        // Set the typeface for the layout.
         Typeface normalTypeface = Typeface.createFromAsset(getContext().getAssets(), "fonts/New_Cicle_Gordita.ttf");
 
         final TextView dateView = (TextView) view.findViewById(R.id.textView3);
@@ -189,6 +193,7 @@ public class HistoryListAdapter extends ArrayAdapter<String> {
         proteinView.setText(days.get(position).getProtein() + context.getString(R.string.grams_abbv));
         proteinView.setTypeface(normalTypeface);
 
+        // Handle entry deletions.
         final MySQLiteHelper db = new MySQLiteHelper(getContext());
         TextView delete = (TextView) view.findViewById(R.id.textView12);
         delete.setOnClickListener(new View.OnClickListener() {
@@ -201,7 +206,9 @@ public class HistoryListAdapter extends ArrayAdapter<String> {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 db.deleteHistoryItem(days.get(position).getId());
-                                dateView.setTextColor(context.getColor(R.color.light_grey));
+                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                                    dateView.setTextColor(context.getColor(R.color.light_grey));
+                                }
                             }
                         })
                         .setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -232,9 +239,6 @@ public class HistoryListAdapter extends ArrayAdapter<String> {
         char char7 = date.charAt(2);
         StringBuilder sb = new StringBuilder();
         sb.append(char5).append(char6).append(char7);
-        if(showDays){
-            daysDate.append(getFullDay(sb.toString())).append(" ");
-        }
 
         // Day
         char char1 = date.charAt(3);
@@ -342,6 +346,10 @@ public class HistoryListAdapter extends ArrayAdapter<String> {
         return null;
     }
 
+    /**
+     * Make the array with the three letter day codes.
+     * @return string[]: days.
+     */
     public String[] makeDaysArray(){
         return new String[]{context.getString(R.string.mondays).substring(0, 3).toUpperCase(), context.getString(R.string.tuesdays).substring(0, 3).toUpperCase(),
                 context.getString(R.string.wednesdays).substring(0, 3).toUpperCase(), context.getString(R.string.thursdays).substring(0, 3).toUpperCase(),

@@ -11,6 +11,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+/**
+ * Copyright Karl jones 2016.
+ * AboutActivity
+ *
+ * This gives the user information about the application.
+ */
+
 public class AboutActivity extends Fragment {
 
     View rootView;
@@ -21,12 +28,11 @@ public class AboutActivity extends Fragment {
 
         rootView = inflater.inflate(R.layout.activity_about, container, false);
 
+        TextView versionNumberTextView = (TextView) rootView.findViewById(R.id.version_number_textview);
+        versionNumberTextView.setText("Version " + BuildConfig.VERSION_NAME);
 
-        TextView versionNumber = (TextView) rootView.findViewById(R.id.version_number_textview);
-        versionNumber.setText("Version " + BuildConfig.VERSION_NAME);
-
-        Button faq = (Button) rootView.findViewById(R.id.faq_button);
-        faq.setOnClickListener(new View.OnClickListener() {
+        Button FAQButton = (Button) rootView.findViewById(R.id.faq_button);
+        FAQButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getActivity(), FAQActivity.class));
@@ -35,5 +41,4 @@ public class AboutActivity extends Fragment {
 
         return rootView;
     }
-
 }

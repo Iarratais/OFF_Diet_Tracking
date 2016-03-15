@@ -19,7 +19,9 @@ import com.karl.models.Food;
 import java.util.ArrayList;
 
 /**
- * Created by Karl on 18/02/2016.
+ * Copyright Karl jones 2016.
+ *
+ * This adapter deals with the diary fragment list.
  */
 public class DiaryListAdapter extends ArrayAdapter<Food> {
 
@@ -44,6 +46,7 @@ public class DiaryListAdapter extends ArrayAdapter<Food> {
             view = inflater.inflate(R.layout.history_list_item, null);
         }
 
+        // The typeface for the interface.
         Typeface normalTypeface = Typeface.createFromAsset(getContext().getAssets(), "fonts/New_Cicle_Gordita.ttf");
 
         final TextView dateView = (TextView) view.findViewById(R.id.textView3);
@@ -56,6 +59,7 @@ public class DiaryListAdapter extends ArrayAdapter<Food> {
 
         final ImageView button = (ImageView) view.findViewById(R.id.dropdownarrow);
 
+        // This allows for the showing of more information for the user.
         fullItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -101,6 +105,7 @@ public class DiaryListAdapter extends ArrayAdapter<Food> {
         proteinView.setText(foods.get(position).getProtein() + context.getString(R.string.grams_abbv));
         proteinView.setTypeface(normalTypeface);
 
+        // Handle the deletion of entries.
         final MySQLiteHelper db = new MySQLiteHelper(getContext());
         TextView delete = (TextView) view.findViewById(R.id.textView12);
         delete.setOnClickListener(new View.OnClickListener() {

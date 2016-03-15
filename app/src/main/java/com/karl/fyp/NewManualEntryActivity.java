@@ -3,7 +3,6 @@ package com.karl.fyp;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -16,6 +15,13 @@ import com.karl.models.Food;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
+
+/**
+ * Copyright Karl jones 2016.
+ * NewManualEntryActivity
+ *
+ * This activity allows a user to input a food type manually.
+ */
 
 public class NewManualEntryActivity extends AppCompatActivity {
 
@@ -34,8 +40,8 @@ public class NewManualEntryActivity extends AppCompatActivity {
             scan_success = from_barcode.getBooleanExtra("scan_success", false);
             barcode = from_barcode.getStringExtra("barcode");
             if(barcode != null && !scan_success) {
-                TextView barcode_textview = (TextView) findViewById(R.id.new_barcode_number);
-                barcode_textview.setText(barcode);
+                TextView barcodeTextView = (TextView) findViewById(R.id.new_barcode_number);
+                barcodeTextView.setText(barcode);
                 Toast.makeText(getApplicationContext(), getString(R.string.error_item_does_not_exist), Toast.LENGTH_SHORT).show();
             }
         }
@@ -58,8 +64,8 @@ public class NewManualEntryActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()){
             case R.id.nav_save:
-                if(validateEntry()){
-                    //saveFood();
+                if(validateSaveEntry()){
+                    saveFood();
                     return true;
                 }
             default:
@@ -71,24 +77,24 @@ public class NewManualEntryActivity extends AppCompatActivity {
      * Save the food item into the database.
      */
     public void saveFood() {
-        TextView food_name_text_view = (TextView) findViewById(R.id.new_food_name);
-        TextView calories_text_view = (TextView) findViewById(R.id.new_calories);
-        TextView fat_text_view = (TextView) findViewById(R.id.new_fat);
-        TextView sat_fat_text_view = (TextView) findViewById(R.id.new_sat_fat);
-        TextView carbs_text_view = (TextView) findViewById(R.id.new_carbohydrates);
-        TextView sugar_text_view = (TextView) findViewById(R.id.new_sugar);
-        TextView protein_text_view = (TextView) findViewById(R.id.new_protein);
-        TextView salt_text_view = (TextView) findViewById(R.id.new_salt);
-        TextView sodium_text_view = (TextView) findViewById(R.id.new_sodium);
-        TextView barcode_number_view = (TextView) findViewById(R.id.new_barcode_number);
+        TextView foodNameTextView = (TextView) findViewById(R.id.new_food_name);
+        TextView caloriesTextView = (TextView) findViewById(R.id.new_calories);
+        TextView fatTextView = (TextView) findViewById(R.id.new_fat);
+        TextView saturatedFatTextView = (TextView) findViewById(R.id.new_sat_fat);
+        TextView carbohydratesTextView = (TextView) findViewById(R.id.new_carbohydrates);
+        TextView sugarTextView = (TextView) findViewById(R.id.new_sugar);
+        TextView proteinTextView = (TextView) findViewById(R.id.new_protein);
+        TextView saltTextView = (TextView) findViewById(R.id.new_salt);
+        TextView sodiumTextView = (TextView) findViewById(R.id.new_sodium);
+        TextView barcodeNumberTextView = (TextView) findViewById(R.id.new_barcode_number);
 
-        Food food = new Food(food_name_text_view.getText().toString(), barcode_number_view.getText().toString(), calories_text_view.getText().toString(),
-                fat_text_view.getText().toString(), sat_fat_text_view.getText().toString(), carbs_text_view.getText().toString(),
-                sugar_text_view.getText().toString(), protein_text_view.getText().toString(), salt_text_view.getText().toString(),
-                sodium_text_view.getText().toString());
+        Food food = new Food(foodNameTextView.getText().toString(), barcodeNumberTextView.getText().toString(), caloriesTextView.getText().toString(),
+                fatTextView.getText().toString(), saturatedFatTextView.getText().toString(), carbohydratesTextView.getText().toString(),
+                sugarTextView.getText().toString(), proteinTextView.getText().toString(), saltTextView.getText().toString(),
+                sodiumTextView.getText().toString());
 
         MySQLiteHelper db = new MySQLiteHelper(getApplicationContext());
-        db.createNewEntryToday(food);
+        db.createNewTodayEntry(food);
     }
 
     public String getDate() {
@@ -114,10 +120,10 @@ public class NewManualEntryActivity extends AppCompatActivity {
     }
 
     /**
-     * Validate the entries
-     * @return
+     * Validate the entries.
+     * @return true is ok.
      */
-    public boolean validateEntry(){
+    public boolean validateSaveEntry(){
         TextView food_name_text_view = (TextView) findViewById(R.id.new_food_name);
         if(!checkIfViewIsFilled(food_name_text_view)){
             setViewFocus(food_name_text_view);

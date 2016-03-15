@@ -8,8 +8,11 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * Created by Karl on 29/01/2016.
+ * Copyright Karl jones 2016.
+ *
+ * Interface for the food data access object.
  */
+
 public interface IFoodDAO {
     List<Food> fetchFood(String searchBarcode) throws IOException, JSONException;
     boolean checkProduct(String barcode) throws IOException, JSONException;

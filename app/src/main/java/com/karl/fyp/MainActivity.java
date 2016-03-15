@@ -1,8 +1,6 @@
 package com.karl.fyp;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -23,7 +21,6 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
-import com.karl.examples.HistorySamples;
 import com.karl.fragments.AddToDatabaseFragment;
 import com.karl.fragments.AnalysisActivityFragment;
 import com.karl.fragments.DiaryFragment;
@@ -34,9 +31,14 @@ import com.karl.alerts.MyListAlertDialogFragment;
 import com.karl.fragments.ProfileFragment;
 import com.karl.fragments.ProgressFragment;
 import com.karl.fragments.RecipeKeepFragment;
-import com.karl.fragments.SearchFragment;
 import com.karl.fragments.TodayFragment;
 
+/**
+ * Copyright Karl jones 2016.
+ * MainActivity
+ *
+ * This is the mainactivity that controls the whole application.
+ */
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -44,13 +46,13 @@ public class MainActivity extends AppCompatActivity
     private static final double SMALL_DEVICE_THRESHOLD = 4.4;
     private static final String TAG = "MainActivity";
 
-    FloatingActionButton fab;
+    FloatingActionButton floatingActionButton;
 
     MySQLiteHelper db;
 
-    String name_user;
+    String usersName;
 
-    TextView navigation_bar_name_space;
+    TextView navigationBarNameSpaceTextView;
 
     private Menu menu;
 
@@ -62,11 +64,11 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         // Floating action button
-        fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        floatingActionButton = (FloatingActionButton) findViewById(R.id.fab);
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                userEntryChoice();
+                presentUserOptions();
             }
         });
 
@@ -78,7 +80,7 @@ public class MainActivity extends AppCompatActivity
 
         db = new MySQLiteHelper(this);
 
-        getNameFromDatabase();
+        getTheUsersNameFromDatabase();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -93,27 +95,14 @@ public class MainActivity extends AppCompatActivity
                 setNewEntryVisibility(false);
             }
         });
-        navigation_bar_name_space = (TextView) header.findViewById(R.id.nav_bar_name);
-        setNameHeader();
+        navigationBarNameSpaceTextView = (TextView) header.findViewById(R.id.nav_bar_name);
+        setNameNavigationHeader();
 
         getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new TodayFragment()).commit();
 
-        // Set up random data into the history database for testing purposes
-        HistorySamples hist = new HistorySamples(db);
-        //hist.setUpStatsJan(getApplicationContext());
-        //hist.setUpStatsFeb(getApplicationContext());
-        //db.clearHistory();
-        //db.clearWeightTable();
-
-//        db.clearAllUser();
-//        final SharedPreferences prefs = getApplicationContext().getSharedPreferences("com.karl.fyp", Context.MODE_PRIVATE);
-//        SharedPreferences.Editor editor = prefs.edit();
-//        editor.clear();
-//        editor.commit();
-
+        // Check if Recipe Keep is installed on the device. If it is, hide the menu item.
         Boolean recipeKeepInstalled = appInstalledOrNot("com.karl.recipekeeper");
         if(recipeKeepInstalled){
-            Log.d(TAG, "Recipe Keep is installed - hiding menuitem");
             Menu menu = navigationView.getMenu();
             MenuItem target = menu.findItem(R.id.nav_recipe_keep);
             target.setVisible(false);
@@ -142,14 +131,14 @@ public class MainActivity extends AppCompatActivity
     public boolean onPrepareOptionsMenu(Menu menu) {
         // Check the screen size of the device
         if(getScreenSize() < SMALL_DEVICE_THRESHOLD) {
-            hideFab();
+            hideFloatingActionButton();
             MenuItem addButton = menu.findItem(R.id.action_new_entry);
             addButton.setVisible(true);
         }
         if(getScreenSize() > SMALL_DEVICE_THRESHOLD) {
             MenuItem addButton = menu.findItem(R.id.action_new_entry);
             addButton.setVisible(false);
-            showFab();
+            showFloatingActionButton();
         }
 
         return super.onPrepareOptionsMenu(menu);
@@ -159,7 +148,7 @@ public class MainActivity extends AppCompatActivity
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()) {
             case R.id.action_new_entry:
-                userEntryChoice();
+                presentUserOptions();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -181,7 +170,7 @@ public class MainActivity extends AppCompatActivity
 
             setNewEntryVisibility(true);
 
-            showFab();
+            showFloatingActionButton();
         } else if (id == R.id.nav_history) {
 
             // Switch to the History tab
@@ -189,7 +178,7 @@ public class MainActivity extends AppCompatActivity
 
             setNewEntryVisibility(true);
 
-            hideFab();
+            hideFloatingActionButton();
         } else if (id == R.id.nav_lookup) {
 
             // Switch to the Lookup tab
@@ -197,7 +186,7 @@ public class MainActivity extends AppCompatActivity
 
             setNewEntryVisibility(false);
 
-            hideFab();
+            hideFloatingActionButton();
         } else if (id == R.id.nav_addtodatabase){
 
             // Switch to the goals tab
@@ -205,7 +194,7 @@ public class MainActivity extends AppCompatActivity
 
             setNewEntryVisibility(true);
 
-            hideFab();
+            hideFloatingActionButton();
         } else if (id == R.id.nav_goals){
 
             // Switch to the goals tab
@@ -213,7 +202,7 @@ public class MainActivity extends AppCompatActivity
 
             setNewEntryVisibility(true);
 
-            hideFab();
+            hideFloatingActionButton();
         }else if (id == R.id.nav_about) {
 
             // Switch to the about section
@@ -226,7 +215,7 @@ public class MainActivity extends AppCompatActivity
 
             setNewEntryVisibility(true);
 
-            hideFab();
+            hideFloatingActionButton();
         } else if (id == R.id.nav_diary) {
 
             // Switch to the Profile tab
@@ -234,15 +223,15 @@ public class MainActivity extends AppCompatActivity
 
             setNewEntryVisibility(true);
 
-            hideFab();
+            hideFloatingActionButton();
         } else if (id == R.id.nav_analysis) {
             fm.beginTransaction().replace(R.id.content_frame, new AnalysisActivityFragment()).commit();
-            hideFab();
+            hideFloatingActionButton();
             setNewEntryVisibility(false);
         } else if (id == R.id.nav_recipe_keep){
             fm.beginTransaction().replace(R.id.content_frame, new RecipeKeepFragment()).commit();
             setNewEntryVisibility(false);
-            hideFab();
+            hideFloatingActionButton();
         }
 //        else if (id == R.id.nav_search){
 //
@@ -251,7 +240,7 @@ public class MainActivity extends AppCompatActivity
 //
 //            setNewEntryVisibility(false);
 //
-//            hideFab();
+//            hideFloatingActionButton();
 //        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -262,7 +251,7 @@ public class MainActivity extends AppCompatActivity
     /**
      * Ask the user how they would like to add an entry.
      */
-    public void userEntryChoice() {
+    public void presentUserOptions() {
         android.support.v4.app.DialogFragment newFrag = MyListAlertDialogFragment.newInstance(R.string.main_activity_new_entry_options_title);
         newFrag.show(getSupportFragmentManager(), "dialog");
     }
@@ -282,20 +271,20 @@ public class MainActivity extends AppCompatActivity
     /**
      * Show the floating action button.
      */
-    public void showFab() {
+    public void showFloatingActionButton() {
         Animation rollLeft = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.roll_from_right);
-        fab.setAnimation(rollLeft);
-        fab.setVisibility(View.VISIBLE);
+        floatingActionButton.setAnimation(rollLeft);
+        floatingActionButton.setVisibility(View.VISIBLE);
     }
 
     /**
      * Hide the floating action button.
      */
-    public void hideFab() {
-        if(fab.isShown()) {
+    public void hideFloatingActionButton() {
+        if(floatingActionButton.isShown()) {
             Animation rollRight = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.roll_to_right);
-            fab.setAnimation(rollRight);
-            fab.setVisibility(View.GONE);
+            floatingActionButton.setAnimation(rollRight);
+            floatingActionButton.setVisibility(View.GONE);
         }
     }
 
@@ -310,7 +299,7 @@ public class MainActivity extends AppCompatActivity
     /**
      * Get the users name from the database.
      */
-    public void getNameFromDatabase() {
+    public void getTheUsersNameFromDatabase() {
         Cursor res = db.getUser();
 
         if(res == null) {
@@ -318,7 +307,7 @@ public class MainActivity extends AppCompatActivity
             finish();
         } else {
             while (res.moveToNext()) {
-                name_user = res.getString(1);
+                usersName = res.getString(1);
             }
         }
     }
@@ -326,14 +315,14 @@ public class MainActivity extends AppCompatActivity
     /**
      * Set the user's name into the drawers header.
      */
-    public void setNameHeader() {
-        getNameFromDatabase();
-        navigation_bar_name_space.setText(name_user);
+    public void setNameNavigationHeader() {
+        getTheUsersNameFromDatabase();
+        navigationBarNameSpaceTextView.setText(usersName);
     }
 
     /**
-     * Get the screen size
-     * @return screen size in inches
+     * Get the screen size.
+     * @return screen size in inches.
      */
     public double getScreenSize(){
         DisplayMetrics displayMetrics = new DisplayMetrics();
@@ -348,6 +337,11 @@ public class MainActivity extends AppCompatActivity
         return Math.sqrt(x+y);
     }
 
+    /**
+     * Check if an application is installed on the device or not.
+     * @param uri package name of application to check.
+     * @return true if installed.
+     */
     private boolean appInstalledOrNot(String uri) {
         PackageManager pm = getPackageManager();
         boolean app_installed;

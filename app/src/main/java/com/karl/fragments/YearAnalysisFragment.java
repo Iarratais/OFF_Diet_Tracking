@@ -1,8 +1,6 @@
 package com.karl.fragments;
 
 
-import android.content.Context;
-import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
@@ -25,8 +23,13 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 /**
- * A simple {@link Fragment} subclass.
+ * Copyright Karl jones 2016.
+ * YearAnalysisFragment
+ *
+ * This fragment gets all of the users history for the current year and calculates information
+ * based on this information.
  */
+
 public class YearAnalysisFragment extends android.support.v4.app.Fragment {
 
     private static final String TAG = "YearAnalysisFragment";
@@ -37,10 +40,7 @@ public class YearAnalysisFragment extends android.support.v4.app.Fragment {
 
     View rootView;
 
-    public YearAnalysisFragment() {
-        // Required empty public constructor
-    }
-
+    public YearAnalysisFragment() {}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -61,86 +61,45 @@ public class YearAnalysisFragment extends android.support.v4.app.Fragment {
         super.onResume();
     }
 
-    public String[] makeDaysArray(){
-        return new String[]{getString(R.string.monday).substring(0, 3).toUpperCase(), getString(R.string.tuesday).substring(0, 3).toUpperCase(),
-                getString(R.string.wednesday).substring(0, 3).toUpperCase(), getString(R.string.thursday).substring(0, 3).toUpperCase(),
-                getString(R.string.friday).substring(0, 3).toUpperCase(), getString(R.string.saturday).substring(0, 3).toUpperCase(),
-                getString(R.string.sunday).substring(0, 3).toUpperCase()};
-    }
-
     private int entry_count = 0;
 
     public ArrayList<Day> getInformationFromDatabase(){
         MySQLiteHelper db = new MySQLiteHelper(getContext());
 
-        ArrayList<Day> historydays = new ArrayList<>();
+        ArrayList<Day> historyDaysInformation = new ArrayList<>();
 
-        Log.d(TAG, generateTimeQuery());
-        Cursor res = db.getHistoryByDate(generateTimeQuery());
+        Cursor yearlyHistory = db.getHistoryByDate(getCurrentYear());
 
         // If there is less than three weeks worth of data, then there is nothing to show.
-        if(res.getCount() < HISTORY_THRESHOLD) {
+        if(yearlyHistory.getCount() < HISTORY_THRESHOLD) {
             return null;
         } else {
-            while(res.moveToNext()) {
-                // Column count = 10
+            while(yearlyHistory.moveToNext()) {
                 Day day = new Day();
-                day.setId(res.getString(0));
-                day.setDate(res.getString(1));
-                day.setCalories(res.getString(2));
-                day.setFats(res.getString(3));
-                day.setSaturated_fat(res.getString(4));
-                day.setSalt(res.getString(5));
-                day.setSodium(res.getString(6));
-                day.setCarbs(res.getString(7));
-                day.setSugar(res.getString(8));
-                day.setProtein(res.getString(9));
-
-                historydays.add(day);
+                day.setId(yearlyHistory.getString(0));
+                day.setDate(yearlyHistory.getString(1));
+                day.setCalories(yearlyHistory.getString(2));
+                day.setFats(yearlyHistory.getString(3));
+                day.setSaturated_fat(yearlyHistory.getString(4));
+                day.setSalt(yearlyHistory.getString(5));
+                day.setSodium(yearlyHistory.getString(6));
+                day.setCarbs(yearlyHistory.getString(7));
+                day.setSugar(yearlyHistory.getString(8));
+                day.setProtein(yearlyHistory.getString(9));
+                historyDaysInformation.add(day);
             }
         }
-        entry_count = res.getCount();
-
-        return historydays;
-    }
-
-    /**
-     * This gets the month and the year that needs to be queried from
-     * the database.
-     * @return String: time query to get the information.
-     */
-    public String generateTimeQuery(){
-        return getYear();
-    }
-
-    /**
-     * Get the previous month.
-     * @return String : previous month.
-     */
-    public String getPreviousMonth() {
-        Calendar calendar = Calendar.getInstance();
-        int thisMonth = calendar.get(Calendar.MONTH);
-
-        String lastmonth = "";
-
-        if (thisMonth < 10) {
-            lastmonth = "0" + thisMonth;
-        } else {
-            lastmonth = String.valueOf(thisMonth);
-        }
-
-        return lastmonth;
+        entry_count = yearlyHistory.getCount();
+        return historyDaysInformation;
     }
 
     /**
      * Get the current year.
      * @return String : current year.
      */
-    public String getYear(){
+    public String getCurrentYear(){
         Calendar calendar = Calendar.getInstance();
-        int thisYear = calendar.get(Calendar.YEAR);
-
-        return String.valueOf(thisYear);
+        return String.valueOf(calendar.get(Calendar.YEAR));
     }
 
     /**
@@ -148,53 +107,53 @@ public class YearAnalysisFragment extends android.support.v4.app.Fragment {
      */
     public void setAnalysisTitle(){
         TextView analysis_title = (TextView) rootView.findViewById(R.id.analysis_year_title);
-        analysis_title.setText(getString(R.string.analysis_fragment_during_month_year, getYear()));
+        analysis_title.setText(getString(R.string.analysis_fragment_during_month_year, getCurrentYear()));
     }
 
     /**
      * Set the information into the cards and the typeface.
      * @param information String[]: information to fill into the layout.
      */
-    public void setUpInformation(String[] information){
+    public void insertDataIntoLayoutComponents(String[] information){
         Typeface normalTypeface = Typeface.createFromAsset(getActivity().getAssets(), "fonts/New_Cicle_Gordita.ttf");
 
         TextView calorie_analysis = (TextView) rootView.findViewById(R.id.calorie_analysis_year);
-        calorie_analysis.setText(putTogetherString(getString(R.string.calories), information[0]));
+        calorie_analysis.setText(constructString(getString(R.string.calories), information[0]));
         calorie_analysis.setTypeface(normalTypeface);
         calorie_analysis.setTextSize(18);
 
         TextView fat_analysis = (TextView) rootView.findViewById(R.id.fat_analysis_year);
-        fat_analysis.setText(putTogetherString(getString(R.string.fats), information[1]));
+        fat_analysis.setText(constructString(getString(R.string.fats), information[1]));
         fat_analysis.setTypeface(normalTypeface);
         fat_analysis.setTextSize(18);
 
         TextView sat_fat_analysis = (TextView) rootView.findViewById(R.id.sat_fat_analysis_year);
-        sat_fat_analysis.setText(putTogetherString(getString(R.string.saturated_fats), information[2]));
+        sat_fat_analysis.setText(constructString(getString(R.string.saturated_fats), information[2]));
         sat_fat_analysis.setTypeface(normalTypeface);
         sat_fat_analysis.setTextSize(18);
 
         TextView salt_analysis = (TextView) rootView.findViewById(R.id.salt_analysis_year);
-        salt_analysis.setText(putTogetherString(getString(R.string.salt), information[3]));
+        salt_analysis.setText(constructString(getString(R.string.salt), information[3]));
         salt_analysis.setTypeface(normalTypeface);
         salt_analysis.setTextSize(18);
 
         TextView sodium_analysis = (TextView) rootView.findViewById(R.id.sodium_analysis_year);
-        sodium_analysis.setText(putTogetherString(getString(R.string.sodium), information[4]));
+        sodium_analysis.setText(constructString(getString(R.string.sodium), information[4]));
         sodium_analysis.setTypeface(normalTypeface);
         sodium_analysis.setTextSize(18);
 
         TextView carbohydrates_analysis = (TextView) rootView.findViewById(R.id.carbohydrates_analysis_year);
-        carbohydrates_analysis.setText(putTogetherString(getString(R.string.carbohydrates), information[5]));
+        carbohydrates_analysis.setText(constructString(getString(R.string.carbohydrates), information[5]));
         carbohydrates_analysis.setTypeface(normalTypeface);
         carbohydrates_analysis.setTextSize(18);
 
         TextView sugar_analysis = (TextView) rootView.findViewById(R.id.sugar_analysis_year);
-        sugar_analysis.setText(putTogetherString(getString(R.string.sugar), information[6]));
+        sugar_analysis.setText(constructString(getString(R.string.sugar), information[6]));
         sugar_analysis.setTypeface(normalTypeface);
         sugar_analysis.setTextSize(18);
 
         TextView protein_analysis = (TextView) rootView.findViewById(R.id.protein_analysis_year);
-        protein_analysis.setText(putTogetherString(getString(R.string.protein), information[7]));
+        protein_analysis.setText(constructString(getString(R.string.protein), information[7]));
         protein_analysis.setTypeface(normalTypeface);
         protein_analysis.setTextSize(18);
 
@@ -212,28 +171,24 @@ public class YearAnalysisFragment extends android.support.v4.app.Fragment {
      * @param two the day.
      * @return nutrient and day.
      */
-    public String putTogetherString(String one, String two){
+    public String constructString(String one, String two){
         return getString(R.string.analysis_fragment_you_ate_the_most_on, one, two);
     }
 
     /**
      * When there is no information, the application needs to show this.
      */
-    public void nothingToShow(){
+    public void noInformationToShowUser(){
         ScrollView sv = (ScrollView) rootView.findViewById(R.id.year_scroll_view);
         hideView(sv);
 
-        ImageView nothing_to_show = (ImageView) rootView.findViewById(R.id.nothing_to_show_year_analysis);
-        showView(nothing_to_show);
+        ImageView nothingToShowImageView = (ImageView) rootView.findViewById(R.id.nothing_to_show_year_analysis);
+        showView(nothingToShowImageView);
 
-        TextView nothing_to_show_text = (TextView) rootView.findViewById(R.id.nothing_to_show_text_year_analysis);
-        showView(nothing_to_show_text);
+        TextView nothingToShowTextView = (TextView) rootView.findViewById(R.id.nothing_to_show_text_year_analysis);
+        showView(nothingToShowTextView);
     }
 
-    /**
-     * Hide a view.
-     * @param view View: to be hidden
-     */
     public void hideView(View view){
         view.setVisibility(View.GONE);
     }
@@ -263,11 +218,10 @@ public class YearAnalysisFragment extends android.support.v4.app.Fragment {
         protected void onPostExecute(String[] days) {
             if(days != null) {
                 setAnalysisTitle();
-
-                setUpInformation(days);
+                insertDataIntoLayoutComponents(days);
                 super.onPostExecute(days);
             } else{
-                nothingToShow();
+                noInformationToShowUser();
             }
         }
     }

@@ -27,9 +27,11 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 /**
- * Today fragment
+ * Copyright Karl jones 2016.
+ * TodayFragment
  *
- * Copyright Karl Jones 2016
+ * This shows the user a barchart with information of the foods that they have consumed and
+ * entered into the system for the day.
  */
 public class TodayFragment extends android.support.v4.app.Fragment {
 
@@ -59,7 +61,7 @@ public class TodayFragment extends android.support.v4.app.Fragment {
         db = new MySQLiteHelper(getActivity());
 
         // Set the fonts of the UI
-        setTypeface();
+        setViewTypeface();
 
         // Set the title
         ((MainActivity) getActivity()).setActionBarTitle(getString(R.string.today_fragment_title));
@@ -129,7 +131,7 @@ public class TodayFragment extends android.support.v4.app.Fragment {
     /**
      * Set the typeface for the information displayed
      */
-    public void setTypeface() {
+    public void setViewTypeface() {
 
         Typeface titleTypeFace = Typeface.createFromAsset(getActivity().getAssets(), "fonts/CaviarDreams.ttf");
         Typeface normalTypeface = Typeface.createFromAsset(getActivity().getAssets(), "fonts/New_Cicle_Gordita.ttf");
@@ -197,8 +199,8 @@ public class TodayFragment extends android.support.v4.app.Fragment {
      * Deal with the information this fragment needs.
      */
     public void getInformation() {
-        getInfoFromToday();
-        calculateTotals();
+        getInformationFromToday();
+        calculateNutrientTotalsForToday();
         setUpGoalsTable();
     }
 
@@ -235,120 +237,126 @@ public class TodayFragment extends android.support.v4.app.Fragment {
         final Goals goals = getGoalsFromDatabase();
         final DecimalFormat df = new DecimalFormat("#.###");
 
-        TextView calories_stats  = (TextView) rootView.findViewById(R.id.today_calories_stats);
-        TextView fat_stats = (TextView) rootView.findViewById(R.id.today_fat_stats);
-        TextView sat_fat_stats = (TextView) rootView.findViewById(R.id.today_sat_fat_stats);
-        TextView salt_stats = (TextView) rootView.findViewById(R.id.today_salt_stats);
-        TextView sodium_stats = (TextView) rootView.findViewById(R.id.today_sodium_stats);
-        TextView carbs_stats = (TextView) rootView.findViewById(R.id.today_carbs_stats);
-        TextView sugar_stats = (TextView) rootView.findViewById(R.id.today_sugar_stats);
-        TextView protein_stats = (TextView) rootView.findViewById(R.id.today_protein_stats);
+        TextView resultCalorieStatsTextView         = (TextView) rootView.findViewById(R.id.today_calories_stats);
+        TextView resultFatStatsTextView             = (TextView) rootView.findViewById(R.id.today_fat_stats);
+        TextView resultSatFatStatsTextView          = (TextView) rootView.findViewById(R.id.today_sat_fat_stats);
+        TextView resultSaltStatsTextView            = (TextView) rootView.findViewById(R.id.today_salt_stats);
+        TextView resultSodiumStatsTextView          = (TextView) rootView.findViewById(R.id.today_sodium_stats);
+        TextView resultCarbohydratesStatsTextView   = (TextView) rootView.findViewById(R.id.today_carbs_stats);
+        TextView resultSugarStatsTextView           = (TextView) rootView.findViewById(R.id.today_sugar_stats);
+        TextView resultProteinStatsTextView         = (TextView) rootView.findViewById(R.id.today_protein_stats);
 
-        final String calories = df.format(Float.parseFloat(total_calories));
-        final String fats = df.format(Float.parseFloat(total_fats)) + getString(R.string.grams_abbv);
-        final String sat_fats = df.format(Float.parseFloat(total_sat_fats)) + getString(R.string.grams_abbv);
-        final String salts = df.format(Float.parseFloat(total_salt)) + getString(R.string.grams_abbv);
-        final String sodiums = df.format(Float.parseFloat(total_sodium)) + getString(R.string.grams_abbv);
-        final String carbs = df.format(Float.parseFloat(total_carbs)) + getString(R.string.grams_abbv);
-        final String sugars = df.format(Float.parseFloat(total_sugar)) + getString(R.string.grams_abbv);
-        final String proteins = df.format(Float.parseFloat(total_protein)) + getString(R.string.grams_abbv);
+        final String resultCalories   = df.format(Float.parseFloat(goals.getCalories()));
+        final String resultFats       = df.format(Float.parseFloat(goals.getFat())) +
+                getString(R.string.grams_abbv);
+        final String resultSatFats    = df.format(Float.parseFloat(goals.getSaturatedFat())) + getString(R.string.grams_abbv);
+        final String resultSalts      = df.format(Float.parseFloat(goals.getSalt())) +
+                getString(R.string.grams_abbv);
+        final String resultSodium     = df.format(Float.parseFloat(goals.getSodium())) +
+                getString(R.string.grams_abbv);
+        final String resultCarbohydrates      = df.format(Float.parseFloat(goals.getCarbohydrates())) + getString(R.string.grams_abbv);
+        final String resultSugars     = df.format(Float.parseFloat(goals.getSugar())) +
+                getString(R.string.grams_abbv);
+        final String resultProteins   = df.format(Float.parseFloat(goals.getProtein())
+        ) + getString(R.string.grams_abbv);
 
-        calories_stats.setText(calories);
-        fat_stats.setText(fats);
-        sat_fat_stats.setText(sat_fats);
-        salt_stats.setText(salts);
-        sodium_stats.setText(sodiums);
-        carbs_stats.setText(carbs);
-        sugar_stats.setText(sugars);
-        protein_stats.setText(proteins);
 
-        setColorOfCalories(Float.parseFloat(goals.getCalories()), calories_stats);
-        setColorOfFat(Float.parseFloat(goals.getFat()), fat_stats);
-        setColorOfSatFat(Float.parseFloat(goals.getSaturatedFat()), sat_fat_stats);
-        setColorOfSalt(Float.parseFloat(goals.getSalt()), salt_stats);
-        setColorOfSodium(Float.parseFloat(goals.getSodium()), sodium_stats);
-        setColorOfCarbs(Float.parseFloat(goals.getCarbohydrates()), carbs_stats);
-        setColorOfSugar(Float.parseFloat(goals.getSugar()), sugar_stats);
-        setColorofProteins(Float.parseFloat(goals.getProtein()), protein_stats);
+        resultCalorieStatsTextView.setText(resultCalories);
+        resultFatStatsTextView.setText(resultFats);
+        resultSatFatStatsTextView.setText(resultSatFats);
+        resultSaltStatsTextView.setText(resultSalts);
+        resultSodiumStatsTextView.setText(resultSodium);
+        resultCarbohydratesStatsTextView.setText(resultCarbohydrates);
+        resultSugarStatsTextView.setText(resultSugars);
+        resultProteinStatsTextView.setText(resultProteins);
 
-        calories_stats.setOnClickListener(new View.OnClickListener() {
+        setColorOfCalories(Float.parseFloat(goals.getCalories()), resultCalorieStatsTextView);
+        setColorOfFat(Float.parseFloat(goals.getFat()), resultFatStatsTextView);
+        setColorOfSatFat(Float.parseFloat(goals.getSaturatedFat()), resultSatFatStatsTextView);
+        setColorOfSalt(Float.parseFloat(goals.getSalt()), resultSaltStatsTextView);
+        setColorOfSodium(Float.parseFloat(goals.getSodium()), resultSodiumStatsTextView);
+        setColorOfCarbs(Float.parseFloat(goals.getCarbohydrates()), resultCarbohydratesStatsTextView);
+        setColorOfSugar(Float.parseFloat(goals.getSugar()), resultSugarStatsTextView);
+        setColorofProteins(Float.parseFloat(goals.getProtein()), resultProteinStatsTextView);
+
+        resultCalorieStatsTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String message = getString(R.string.today_fragment_your_calorie_goal) + " " + goals.getCalories();
                 if (Float.parseFloat(total_calories) > Float.parseFloat(goals.getCalories())) {
                     message += "\n" + getString(R.string.today_fragment_you_have_exceeded_your_goal) + " " + df.format(Float.parseFloat(total_calories) - Float.parseFloat(goals.getCalories()));
                 }
-                makeAlert(getString(R.string.calories), message);
+                createAlertDialog(getString(R.string.calories), message);
             }
         });
-        fat_stats.setOnClickListener(new View.OnClickListener() {
+        resultFatStatsTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String message = getString(R.string.today_fragment_your_fat_goal) + " " + goals.getFat();
                 if (Float.parseFloat(total_fats) > Float.parseFloat(goals.getFat())) {
                     message += "\n" + getString(R.string.today_fragment_you_have_exceeded_your_goal) + " " + df.format(Float.parseFloat(total_fats) - Float.parseFloat(goals.getFat()));
                 }
-                makeAlert(getString(R.string.fat), message);
+                createAlertDialog(getString(R.string.fat), message);
             }
         });
-        sat_fat_stats.setOnClickListener(new View.OnClickListener() {
+        resultSatFatStatsTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String message = getString(R.string.today_fragment_your_sat_fat_goal) + " " + goals.getSaturatedFat();
                 if (Float.parseFloat(total_sat_fats) > Float.parseFloat(goals.getSaturatedFat())) {
                     message += "\n" + getString(R.string.today_fragment_you_have_exceeded_your_goal) + " " + df.format(Float.parseFloat(total_sat_fats) - Float.parseFloat(goals.getSaturatedFat()));
                 }
-                makeAlert(getString(R.string.saturated_fat), message);
+                createAlertDialog(getString(R.string.saturated_fat), message);
             }
         });
-        salt_stats.setOnClickListener(new View.OnClickListener() {
+        resultSaltStatsTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String message = getString(R.string.today_fragment_your_salt_goal) + " " + goals.getSalt();
                 if (Float.parseFloat(total_salt) > Float.parseFloat(goals.getSalt())) {
                     message += "\n" + getString(R.string.today_fragment_you_have_exceeded_your_goal) + " " + df.format(Float.parseFloat(total_salt) - Float.parseFloat(goals.getSalt()));
                 }
-                makeAlert(getString(R.string.salt), message);
+                createAlertDialog(getString(R.string.salt), message);
             }
         });
-        sodium_stats.setOnClickListener(new View.OnClickListener() {
+        resultSodiumStatsTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String message = getString(R.string.today_fragment_your_sodium_goal) + " " + goals.getSodium();
                 if (Float.parseFloat(total_sodium) > Float.parseFloat(goals.getSodium())) {
                     message += "\n" + getString(R.string.today_fragment_you_have_exceeded_your_goal) + " " + df.format(Float.parseFloat(total_sodium) - Float.parseFloat(goals.getSodium()));
                 }
-                makeAlert(getString(R.string.sodium), message);
+                createAlertDialog(getString(R.string.sodium), message);
             }
         });
-        carbs_stats.setOnClickListener(new View.OnClickListener() {
+        resultCarbohydratesStatsTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String message = getString(R.string.today_fragment_your_carbs_goal) + " " + goals.getCarbohydrates();
                 if (Float.parseFloat(total_carbs) > Float.parseFloat(goals.getCarbohydrates())) {
                     message += "\n" + getString(R.string.today_fragment_you_have_exceeded_your_goal) + " " + df.format(Float.parseFloat(total_carbs) - Float.parseFloat(goals.getCarbohydrates()));
                 }
-                makeAlert(getString(R.string.carbohydrate), message);
+                createAlertDialog(getString(R.string.carbohydrate), message);
             }
         });
-        sugar_stats.setOnClickListener(new View.OnClickListener() {
+        resultSugarStatsTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String message = getString(R.string.today_fragment_your_sugar_goal) + " " + goals.getSugar();
                 if (Float.parseFloat(total_sugar) > Float.parseFloat(goals.getSugar())) {
                     message += "\n" + getString(R.string.today_fragment_you_have_exceeded_your_goal) + " " + df.format(Float.parseFloat(total_sugar) - Float.parseFloat(goals.getSugar()));
                 }
-                makeAlert(getString(R.string.sugar), message);
+                createAlertDialog(getString(R.string.sugar), message);
             }
         });
-        protein_stats.setOnClickListener(new View.OnClickListener() {
+        resultProteinStatsTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String message = getString(R.string.today_fragment_your_protein_goal) + " " + goals.getProtein();
                 if (Float.parseFloat(total_protein) > Float.parseFloat(goals.getProtein())) {
                     message += "\n" + getString(R.string.today_fragment_you_have_exceeded_your_goal) + " " + df.format(Float.parseFloat(total_protein) - Float.parseFloat(goals.getProtein()));
                 }
-                makeAlert(getString(R.string.protein), message);
+                createAlertDialog(getString(R.string.protein), message);
             }
         });
     }
@@ -404,7 +412,7 @@ public class TodayFragment extends android.support.v4.app.Fragment {
     /**
      * Calculate the totals to be able to display the information.
      */
-    public void calculateTotals() {
+    public void calculateNutrientTotalsForToday() {
         float temp_calories = Float.parseFloat(total_calories);
         float temp_fat = Float.parseFloat(total_fats);
         float temp_sat_fat = Float.parseFloat(total_sat_fats);
@@ -448,7 +456,7 @@ public class TodayFragment extends android.support.v4.app.Fragment {
      * @param title of the alert.
      * @param message to be contained in the alert.
      */
-    public void makeAlert(String title, String message) {
+    public void createAlertDialog(String title, String message) {
         DialogFragment dialogFragment = MyAlertDialogFragment.newInstance(title, message);
         dialogFragment.show(getActivity().getFragmentManager(), "dialog");
     }
@@ -456,50 +464,50 @@ public class TodayFragment extends android.support.v4.app.Fragment {
     /**
      * Get information from the Today table.
      */
-    public void getInfoFromToday() {
+    public void getInformationFromToday() {
         foods = new ArrayList<>();
 
-        Cursor res = db.returnTodaysEntries();
-        if(res.getCount() == 0) {
-            nothingToShow();
+        Cursor todaysEntries = db.returnTodaysEntries();
+        if(todaysEntries.getCount() == 0) {
+            noInformationToShowUser();
         } else {
-            while(res.moveToNext()){
+            while(todaysEntries.moveToNext()){
                 Food food = new Food();
-                food.setId(res.getString(0));
-                food.setName(res.getString(2));
-                food.setBarcode_number(res.getString(3));
+                food.setId(todaysEntries.getString(0));
+                food.setName(todaysEntries.getString(2));
+                food.setBarcode_number(todaysEntries.getString(3));
                 foods.add(food);
             }
         }
-        getInfoFromTodayStats();
+        getInformationFromTodayStats();
     }
 
     /**
      * Get information from the Today Stats table.
      */
-    public void getInfoFromTodayStats() {
-        Cursor res = db.returnTodayStatsEntries();
-        if(res.getCount() == 0) {
-            nothingToShow();
+    public void getInformationFromTodayStats() {
+        Cursor todayStatEntries = db.returnTodayStatsEntries();
+        if(todayStatEntries.getCount() == 0) {
+            noInformationToShowUser();
         } else {
             int i = 0;
-            while(res.moveToNext()){
-                if(res.getString(0).equals(foods.get(i).getId())){
-                    foods.get(i).setCalories(res.getString(2));
-                    foods.get(i).setFats(res.getString(3));
-                    foods.get(i).setSaturated_fat(res.getString(4));
-                    foods.get(i).setCarbohydrates(res.getString(5));
-                    foods.get(i).setSugar(res.getString(6));
-                    foods.get(i).setProtein(res.getString(7));
-                    foods.get(i).setSalt(res.getString(8));
-                    foods.get(i).setSodium(res.getString(9));
+            while(todayStatEntries.moveToNext()){
+                if(todayStatEntries.getString(0).equals(foods.get(i).getId())){
+                    foods.get(i).setCalories(todayStatEntries.getString(2));
+                    foods.get(i).setFats(todayStatEntries.getString(3));
+                    foods.get(i).setSaturated_fat(todayStatEntries.getString(4));
+                    foods.get(i).setCarbohydrates(todayStatEntries.getString(5));
+                    foods.get(i).setSugar(todayStatEntries.getString(6));
+                    foods.get(i).setProtein(todayStatEntries.getString(7));
+                    foods.get(i).setSalt(todayStatEntries.getString(8));
+                    foods.get(i).setSodium(todayStatEntries.getString(9));
                 }
                 i++;
             }
         }
     }
 
-    public void nothingToShow(){
+    public void noInformationToShowUser(){
         ArrayList<View> views = new ArrayList<>();
 
         // Title of the chart

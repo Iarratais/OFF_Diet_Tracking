@@ -23,15 +23,22 @@ import com.karl.fragments.ProfileSetupTwo;
 
 import tyrantgit.explosionfield.ExplosionField;
 
+/**
+ * Copyright Karl jones 2016.
+ * ProfileSetUp
+ *
+ * This controls the fragments that are used to ask a user to set up a new profile on first launch.
+ */
+
 public class ProfileSetUp extends AppCompatActivity {
 
     private SectionsPagerAdapter mSectionsPagerAdapter;
 
-    private String user_name = null;
-    private String user_gender = null;
-    private String user_height = null;
-    private String user_weight = null;
-    private String user_desired = null;
+    private String userName = null;
+    private String userGender = null;
+    private String userHeight = null;
+    private String userWeight = null;
+    private String userDesired = null;
 
     private ViewPager mViewPager;
 
@@ -113,24 +120,24 @@ public class ProfileSetUp extends AppCompatActivity {
 
         final ExplosionField explosionField = ExplosionField.attach2Window(this);
 
-        if(getUser_name() == null || getUser_name().equals("")){
+        if(getUserName() == null || getUserName().equals("")){
             Toast.makeText(getApplicationContext(), getString(R.string.profile_set_up_you_need_to_enter, getString(R.string.profile_fragment_name).toLowerCase()), Toast.LENGTH_SHORT).show();
             mViewPager.setCurrentItem(1);
-        } else if (getUser_gender() == null || getUser_gender().equals("")) {
+        } else if (getUserGender() == null || getUserGender().equals("")) {
             Toast.makeText(getApplicationContext(), getString(R.string.profile_set_up_you_need_to_enter, getString(R.string.profile_fragment_gender).toLowerCase()), Toast.LENGTH_SHORT).show();
             mViewPager.setCurrentItem(1);
-        } else if (getUser_height() == null || getUser_height().equals("")){
+        } else if (getUserHeight() == null || getUserHeight().equals("")){
             Toast.makeText(getApplicationContext(), getString(R.string.profile_set_up_you_need_to_enter, getString(R.string.profile_fragment_height).toLowerCase()), Toast.LENGTH_SHORT).show();
             mViewPager.setCurrentItem(2);
-        } else if (getUser_weight() == null || getUser_weight().equals("")){
+        } else if (getUserWeight() == null || getUserWeight().equals("")){
             Toast.makeText(getApplicationContext(), getString(R.string.profile_set_up_you_need_to_enter, getString(R.string.profile_fragment_weight).toLowerCase()), Toast.LENGTH_SHORT).show();
             mViewPager.setCurrentItem(2);
-        } else if (getUser_desired() == null || getUser_desired().equals("")) {
+        } else if (getUserDesired() == null || getUserDesired().equals("")) {
             Toast.makeText(getApplicationContext(), getString(R.string.profile_set_up_you_need_to_enter, getString(R.string.profile_set_up_desired_weight).toLowerCase()), Toast.LENGTH_SHORT).show();
             mViewPager.setCurrentItem(3);
         } else {
-            db.createUser(getUser_name(), getUser_gender(), getUser_height(), getUser_weight());
-            db.setDefaultGoals(getUser_desired());
+            db.createUser(getUserName(), getUserGender(), getUserHeight(), getUserWeight());
+            db.setDefaultGoals(getUserDesired());
 
             // Update the SharedPreferences so this screen is never shown again.
             SharedPreferences prefs = this.getSharedPreferences("com.karl.fyp", Context.MODE_PRIVATE);
@@ -153,44 +160,43 @@ public class ProfileSetUp extends AppCompatActivity {
         }
     }
 
-
-    public String getUser_weight() {
-        return user_weight;
+    public String getUserWeight() {
+        return userWeight;
     }
 
-    public void setUser_weight(String user_weight) {
-        this.user_weight = user_weight;
+    public void setUserWeight(String userWeight) {
+        this.userWeight = userWeight;
     }
 
-    public String getUser_name() {
-        return user_name;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUser_name(String user_name) {
-        this.user_name = user_name;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
-    public String getUser_gender() {
-        return user_gender;
+    public String getUserGender() {
+        return userGender;
     }
 
-    public void setUser_gender(String user_gender) {
-        this.user_gender = user_gender;
+    public void setUserGender(String userGender) {
+        this.userGender = userGender;
     }
 
-    public String getUser_height() {
-        return user_height;
+    public String getUserHeight() {
+        return userHeight;
     }
 
-    public void setUser_height(String user_height) {
-        this.user_height = user_height;
+    public void setUserHeight(String userHeight) {
+        this.userHeight = userHeight;
     }
 
-    public String getUser_desired() {
-        return user_desired;
+    public String getUserDesired() {
+        return userDesired;
     }
 
-    public void setUser_desired(String user_desired) {
-        this.user_desired = user_desired;
+    public void setUserDesired(String userDesired) {
+        this.userDesired = userDesired;
     }
 }

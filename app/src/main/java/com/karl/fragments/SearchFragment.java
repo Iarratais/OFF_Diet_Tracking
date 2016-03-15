@@ -9,6 +9,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+/**
+ * Copyright Karl jones 2016.
+ * SearchFragment
+ *
+ * This fragment will search the openfoodfacts database by string
+ */
+
 public class SearchFragment extends android.support.v4.app.Fragment {
 
     @Nullable

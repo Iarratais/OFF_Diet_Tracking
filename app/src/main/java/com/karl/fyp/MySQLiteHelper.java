@@ -1,13 +1,10 @@
 package com.karl.fyp;
 
-import android.app.Application;
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.karl.models.Food;
@@ -17,13 +14,13 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
-import static android.preference.PreferenceManager.*;
-
 /**
- * Database Class
+ * Copyright Karl jones 2016.
+ * MySQLiteHelper
  *
- * Copyright Karl Jones 2016
+ * This handles the methods of the database.
  */
+
 public class MySQLiteHelper extends SQLiteOpenHelper{
 
     private static final String TAG = "MySQLiteHelper";
@@ -186,7 +183,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
     /**
      * Clear all of the user data.
      */
-    public void clearAllUser() {
+    public void wipeUserTable() {
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("DELETE FROM " + USER_TABLE);
         db.close();
@@ -247,7 +244,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
                 + TODAY_STATS_KEY_SODIUM + " TEXT)");
     }
 
-    public void createNewEntryToday(Food food) {
+    public void createNewTodayEntry(Food food) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues today = new ContentValues();

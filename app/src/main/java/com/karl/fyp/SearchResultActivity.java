@@ -42,7 +42,7 @@ public class SearchResultActivity extends AppCompatActivity {
 
     public String barcode_number = "4260427290019";
 
-    FloatingActionButton fab;
+    FloatingActionButton floatingActionButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,8 +72,8 @@ public class SearchResultActivity extends AppCompatActivity {
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
 
-        fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        floatingActionButton = (FloatingActionButton) findViewById(R.id.fab);
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showInputDialog();
@@ -92,7 +92,7 @@ public class SearchResultActivity extends AppCompatActivity {
     public boolean onPrepareOptionsMenu(Menu menu) {
         // Check the screen size of the device
         if(getScreenSize() < SMALL_DEVICE_THRESHOLD) {
-            fab.setVisibility(View.GONE);
+            floatingActionButton.setVisibility(View.GONE);
             MenuItem addButton = menu.findItem(R.id.action_save);
             addButton.setVisible(true);
         } else {
@@ -115,7 +115,7 @@ public class SearchResultActivity extends AppCompatActivity {
      * Set the title of the actionbar.
      * @param title of the actionbar.
      */
-    public void setTitle(String title) {
+    public void setActionbarTitle(String title) {
         try {
             getSupportActionBar().setTitle(title);
         } catch (NullPointerException e){
@@ -195,6 +195,10 @@ public class SearchResultActivity extends AppCompatActivity {
         dialog.show(getSupportFragmentManager().beginTransaction(), "dialog");
     }
 
+    /**
+     * This gets the food type by 100g and divides it by the amount that the user input.
+     * @param amt that the user input.
+     */
     public void calculateInformation(String amt){
         Food gram = new Food();
         final DecimalFormat df = new DecimalFormat("#.###");
@@ -213,7 +217,7 @@ public class SearchResultActivity extends AppCompatActivity {
         System.out.println("CalculateInformation(): " + gram.toString());
 
         MySQLiteHelper db = new MySQLiteHelper(this);
-        db.createNewEntryToday(gram);
+        db.createNewTodayEntry(gram);
         System.out.println(gram.toString());
 
         Toast.makeText(getApplicationContext(), getString(R.string.search_results_result_added, gram.getName()), Toast.LENGTH_SHORT).show();

@@ -12,7 +12,11 @@ import java.text.DecimalFormat;
 import java.util.Random;
 
 /**
- * This is just to populate the history database with dummy data
+ * Copyright Karl jones 2016.
+ *
+ * The HistorySamples mock object creates database entries that can be used to test functionality
+ * of the application. It creates randomised objects for January and February for the application
+ * to use for testing.
  */
 public class HistorySamples {
 
@@ -20,9 +24,10 @@ public class HistorySamples {
 
     private static final String START_DATE = "1012016";
     private static final String START_DATE_FEB = "01022016";
-    private static final int INCREMENT = 1000000;
+    private static final int INCREMENT = 1000000;           // This is the same as moving up by a
+    // day.
 
-    // Max
+    // Max of each of the nutrients.
     private static final double FINAL_CALORIES = 2000f;
     private static final double FINAL_FAT = 65f;
     private static final double FINAL_SAT_FAT = 20f;
@@ -40,11 +45,10 @@ public class HistorySamples {
     }
 
     /**
-     * Set up the stats for january.
+     * Create randomised entries for the month of Jan.
      * @param context of the application.
      */
     public void setUpStatsJan(Context context){
-
         // Get the identifiers for the days.
         Resources res = context.getResources();
         final String[] days = new String[]{res.getString(R.string.monday).substring(0,3).toUpperCase(), res.getString(R.string.tuesday).substring(0,3).toUpperCase(),
@@ -55,18 +59,17 @@ public class HistorySamples {
         final DecimalFormat df = new DecimalFormat("#.###");
 
         Log.d(TAG, "START DATE " + Integer.parseInt(START_DATE));
-        System.out.println("INCREMENT " + INCREMENT);
+        Log.d(TAG, "INCREMENT " + INCREMENT);
 
         // The first day of january is a friday
         int day_num = 4;
 
         /**
-         * Loop through 30 days
+         * Loop through 30 days.
          */
         for(int i = Integer.parseInt(START_DATE); i <= 31012016; i += INCREMENT){
 
             food = new Food();
-
 
             // Set the date
             if(Integer.toString(i).length() < 8) {
@@ -80,37 +83,26 @@ public class HistorySamples {
                 day_num = 0;
             }
 
-            // Set up calories
+            // Set up random nutrients.
             double cals = (Math.random() * (int)FINAL_CALORIES);
             food.setCalories(Integer.toString((int) cals));
-
-            // Set fats
             food.setFats(df.format(Math.random() * FINAL_FAT));
-
-            // Set sat fats
             food.setSaturated_fat(df.format(Math.random() * FINAL_SAT_FAT));
-
-            // Set sodium
             food.setSodium(df.format(Math.random() * FINAL_SODIUM));
-
-            // Set carbs
             food.setCarbohydrates(df.format(Math.random() * FINAL_CARBS));
-
-            // Set salt
             food.setSalt(df.format(Math.random() * FINAL_SALT));
-
-            // Set sugar
             food.setSugar(df.format(Math.random() * FINAL_SUGAR));
-
-            // Set protein
             food.setProtein(df.format(Math.random() * FINAL_PROTEIN));
 
             db.createHistoryEntry(food);
         }
     }
 
+    /**
+     * Create randomised entries for the month of Feb.
+     * @param context of the application.
+     */
     public void setUpStatsFeb(Context context){
-
         // Get the identifiers for the days.
         Resources res = context.getResources();
         final String[] days = new String[]{res.getString(R.string.monday).substring(0,3).toUpperCase(), res.getString(R.string.tuesday).substring(0,3).toUpperCase(),
@@ -120,15 +112,15 @@ public class HistorySamples {
 
         final DecimalFormat df = new DecimalFormat("#.###");
 
-        System.out.println("START DATE " + Integer.parseInt(START_DATE));
-        System.out.println("INCREMENT " + INCREMENT);
+        Log.d(TAG, "START DATE " + Integer.parseInt(START_DATE));
+        Log.d(TAG, "INCREMENT " + INCREMENT);
 
-        // The first day of january is a friday
+        // The first day of february is a Monday.
         int day_num = 0;
 
         Random r = new Random();
         /**
-         * Loop through 28 days
+         * Loop through 28 days (ignoring 2016 being a leap year).
          */
         for(int i = Integer.parseInt(START_DATE_FEB); i <= 28022016; i += INCREMENT){
 
@@ -146,29 +138,15 @@ public class HistorySamples {
                 day_num = 0;
             }
 
-            // Set up calories
+            // Set up random nutrients.
             double cals = (Math.random() * (int)FINAL_CALORIES);
             food.setCalories(Integer.toString((int) cals));
-
-            // Set fats
             food.setFats(df.format(Math.random() * FINAL_FAT));
-
-            // Set sat fats
             food.setSaturated_fat(df.format(Math.random() * FINAL_SAT_FAT));
-
-            // Set sodium
             food.setSodium(df.format(Math.random() * FINAL_SODIUM));
-
-            // Set carbs
             food.setCarbohydrates(df.format(Math.random() * FINAL_CARBS));
-
-            // Set salt
             food.setSalt(df.format(Math.random() * FINAL_SALT));
-
-            // Set sugar
             food.setSugar(df.format(Math.random() * FINAL_SUGAR));
-
-            // Set protein
             food.setProtein(df.format(Math.random() * FINAL_PROTEIN));
 
             db.createHistoryEntry(food);

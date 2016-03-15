@@ -10,8 +10,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Karl on 29/01/2016.
+ * Copyright Karl jones 2016.
+ *
+ * This holds methods that communicate with the NetworkDAO in order to get information about the
+ * foods using the barcodes that the camera provides.
  */
+
 public class FoodDAO implements IFoodDAO {
 
     private final NetworkDAO networkDAO;
@@ -21,9 +25,9 @@ public class FoodDAO implements IFoodDAO {
     }
 
     /**
-     *
-     * @param searchBarcode the barcode of the infromation being sourced
-     * @return List of Food items
+     * Get the information about the food using the barcode that was provided from the camera.
+     * @param searchBarcode the barcode of the information being sourced.
+     * @return List of Food items.
      * @throws IOException
      * @throws JSONException
      */
@@ -43,7 +47,6 @@ public class FoodDAO implements IFoodDAO {
 
             // 100g/100ml
             Food food = new Food();
-
             String product_name = "Result";
             String energy = "0";
             String fat = "0";
@@ -59,81 +62,61 @@ public class FoodDAO implements IFoodDAO {
                 product_name = product.getString("product_name");
                 if(product_name.equals(""))
                     product_name = "Result";
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+            } catch (JSONException e) {e.printStackTrace();}
 
             try {
                 energy = nutriments.getString("energy_100g");
                 if(energy.equals(""))
                     energy = "0";
-            } catch (JSONException e){
-                e.printStackTrace();
-            }
+            } catch (JSONException e){e.printStackTrace();}
 
             try {
                 fat = nutriments.getString("fat_100g");
                 if(fat.equals(""))
                     fat = "0";
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+            } catch (JSONException e) {e.printStackTrace();}
 
             try {
                 saturated_fat = nutriments.getString("saturated-fat_100g");
                 if(saturated_fat.equals(""))
                     saturated_fat = "0";
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+            } catch (JSONException e) {e.printStackTrace();}
 
             try {
                 carbohydrates = nutriments.getString("carbohydrates_100g");
                 if(carbohydrates.equals(""))
                     carbohydrates = "0";
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+            } catch (JSONException e) {e.printStackTrace();}
 
             try {
                 sugar = nutriments.getString("sugars_100g");
                 if(sugar.equals(""))
                     sugar = "0";
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+            } catch (JSONException e) {e.printStackTrace();}
 
             try {
                 protein = nutriments.getString("proteins_100g");
                 if(protein.equals(""))
                     protein = "0";
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+            } catch (JSONException e) {e.printStackTrace();}
 
             try {
                 salt = nutriments.getString("salt_100g");
                 if(salt.equals(""))
                     salt = "0";
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+            } catch (JSONException e) {e.printStackTrace();}
 
             try {
                 sodium = nutriments.getString("sodium_100g");
                 if(sodium.equals(""))
                     sodium = "0";
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+            } catch (JSONException e) {e.printStackTrace();}
 
             try{
                 serving_size = product.getString("serving_size");
                 if(serving_size.equals(""))
                     serving_size = "0";
-            } catch (JSONException e){
-                e.printStackTrace();
-            }
+            } catch (JSONException e){e.printStackTrace();}
 
             food.setName(product_name);
             food.setBarcode_number(searchBarcode);
@@ -166,65 +149,49 @@ public class FoodDAO implements IFoodDAO {
                 energy_serving = nutriments.getString("energy_serving");
                 if(energy_serving.equals(""))
                     energy_serving = "0";
-            } catch (JSONException e){
-                e.printStackTrace();
-            }
+            } catch (JSONException e){e.printStackTrace();}
 
             try {
                 fat_serving = nutriments.getString("fat_serving");
                 if(fat_serving.equals(""))
                     fat_serving = "0";
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+            } catch (JSONException e) {e.printStackTrace();}
 
             try {
                 saturated_fat_serving = nutriments.getString("saturated-fat_serving");
                 if(saturated_fat_serving.equals(""))
                     saturated_fat_serving = "0";
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+            } catch (JSONException e) {e.printStackTrace();}
 
             try {
                 carbohydrates_serving = nutriments.getString("carbohydrates_serving");
                 if(carbohydrates_serving.equals(""))
                     carbohydrates_serving = "0";
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+            } catch (JSONException e) {e.printStackTrace();}
 
             try {
                 sugar_serving = nutriments.getString("sugars_serving");
                 if(sugar_serving.equals(""))
                     sugar_serving = "0";
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+            } catch (JSONException e) {e.printStackTrace();}
 
             try {
                 protein_serving = nutriments.getString("proteins_serving");
                 if(protein_serving.equals(""))
                     protein_serving = "0";
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+            } catch (JSONException e) {e.printStackTrace();}
 
             try {
                 salt_serving = nutriments.getString("salt_serving");
                 if(salt_serving.equals(""))
                     salt_serving = "0";
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+            } catch (JSONException e) {e.printStackTrace();}
 
             try {
                 sodium_serving = nutriments.getString("sodium_serving");
                 if(sodium_serving.equals(""))
                     sodium_serving = "0";
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+            } catch (JSONException e) {e.printStackTrace();}
 
             foodServing.setName(product_name);
             foodServing.setBarcode_number(searchBarcode);
@@ -240,13 +207,12 @@ public class FoodDAO implements IFoodDAO {
 
             allFoods.add(foodServing);
         }
-
         return allFoods;
     }
 
     /**
      * This method checks if the product exists on the database or not.
-     * @param barcode of the product.
+     * @param barcode : string of the product.
      * @return true or false if the product is found.
      * @throws IOException
      * @throws JSONException
@@ -265,9 +231,5 @@ public class FoodDAO implements IFoodDAO {
             }
         }
         return false;
-    }
-
-    public String convertCalsToKJ(String cals){
-        return String.valueOf((int)(Integer.valueOf(cals) * 4.148));
     }
 }

@@ -19,6 +19,13 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
+/**
+ * Copyright Karl jones 2016.
+ * ProgressFragment
+ *
+ * This class controls the progress fragment. This fragment contains a list with information
+ * about the weight that the users logged into the application, it shows the history of this.
+ */
 
 public class ProgressFragment extends android.support.v4.app.Fragment {
 
@@ -44,32 +51,38 @@ public class ProgressFragment extends android.support.v4.app.Fragment {
         return rootView;
     }
 
+    /**
+     * Get the information from the database table - weighthistory.
+     * @return arraylist<weight> history.
+     */
     public ArrayList<Weight> getProgressInformation(){
-        Cursor res = db.getWeightInformation();
+        Cursor weightHistoryFromDatabase = db.getWeightInformation();
 
-        ArrayList<Weight> weights = new ArrayList<>();
+        ArrayList<Weight> weightHistory = new ArrayList<>();
 
-        if(res.getCount() == 0){
+        if(weightHistoryFromDatabase.getCount() == 0){
             Log.d(TAG, "There is nothing in the weight table");
         } else {
-            while(res.moveToNext()){
+            while(weightHistoryFromDatabase.moveToNext()){
                 Weight weight = new Weight();
-                weight.setDate(res.getString(1));
-                weight.setWeight(res.getString(2));
-                weight.setChange(res.getString(3));
-                weights.add(weight);
+                weight.setDate(weightHistoryFromDatabase.getString(1));
+                weight.setWeight(weightHistoryFromDatabase.getString(2));
+                weight.setChange(weightHistoryFromDatabase.getString(3));
+                weightHistory.add(weight);
             }
-            return weights;
+            return weightHistory;
         }
         return null;
     }
 
+    /**
+     * Input the data into the list adapter.
+     */
     public void makeList(){
-        final SharedPreferences prefs = getContext().getSharedPreferences("com.karl.fyp", Context.MODE_PRIVATE);
-        boolean showDays = prefs.getBoolean("showDays", false);
-
-        ProgressListAdapter adapter = new ProgressListAdapter(getActivity(), getProgressInformation(), showDays);
-        ListView list = (ListView) rootView.findViewById(R.id.weight_progress_list);
-        list.setAdapter(adapter);
+        if(getProgressInformation() != null) {
+            ProgressListAdapter adapter = new ProgressListAdapter(getActivity(), getProgressInformation());
+            ListView list = (ListView) rootView.findViewById(R.id.weight_progress_list);
+            list.setAdapter(adapter);
+        }
     }
 }

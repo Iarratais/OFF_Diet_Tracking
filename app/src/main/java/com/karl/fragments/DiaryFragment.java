@@ -2,28 +2,33 @@ package com.karl.fragments;
 
 import android.app.DialogFragment;
 import android.database.Cursor;
-
-import com.karl.adapters.DiaryListAdapter;
-import com.karl.alerts.MyAlertDialogFragment;
-import com.karl.fyp.MySQLiteHelper;
-import com.karl.models.Food;
-import com.karl.fyp.MainActivity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.karl.fyp.R;
-
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.karl.adapters.DiaryListAdapter;
+import com.karl.alerts.MyAlertDialogFragment;
+import com.karl.fyp.MainActivity;
+import com.karl.fyp.MySQLiteHelper;
+import com.karl.fyp.R;
+import com.karl.models.Food;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
+
+/**
+ * Copyright Karl jones 2016.
+ *
+ * The diary fragment gets information from the database in relation to the food that the user
+ * logged for the current day.
+ */
 
 public class DiaryFragment extends android.support.v4.app.Fragment {
 
@@ -34,10 +39,8 @@ public class DiaryFragment extends android.support.v4.app.Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
         rootView = inflater.inflate(R.layout.fragment_diary, container, false);
 
-        // Set the title
         ((MainActivity) getActivity()).setActionBarTitle(setDateTitle());
 
         makeList();
@@ -56,7 +59,7 @@ public class DiaryFragment extends android.support.v4.app.Fragment {
     }
 
     /**
-     * Create the list to display the information
+     * Create the list to display the information to the user.
      */
     public void makeList() {
         ListView list = (ListView) rootView.findViewById(R.id.today_chart_information);
@@ -68,15 +71,20 @@ public class DiaryFragment extends android.support.v4.app.Fragment {
         list.setAdapter(adapter);
     }
 
+    /**
+     * Get the information from the database. If there is no information, display the message to
+     * the user informing them that there is no information in the database.
+     * @return ArrayList<Food> containing food items for the day.
+     */
     public ArrayList<Food> getInformation() {
         MySQLiteHelper db = new MySQLiteHelper(getContext());
 
-        Cursor todayRes = db.returnAllTodayEntries();
-        Cursor todayStatsRes = db.returnAllTodaysStats();
+        Cursor todaysEntriesFromDatabase = db.returnAllTodayEntries();
+        Cursor todaysStatEntriesFromDatabase = db.returnAllTodaysStats();
 
-        ArrayList<Food> foods = new ArrayList<>();
+        ArrayList<Food> foodsFromDatabase = new ArrayList<>();
 
-        if(todayRes == null || todayStatsRes == null || todayRes.getCount() == 0) {
+        if(todaysEntriesFromDatabase == null || todaysStatEntriesFromDatabase == null || todaysEntriesFromDatabase.getCount() == 0) {
             ListView list = (ListView) rootView.findViewById(R.id.today_chart_information);
             list.setVisibility(View.GONE);
 
@@ -85,50 +93,30 @@ public class DiaryFragment extends android.support.v4.app.Fragment {
             TextView nothing_to_show_txt = (TextView) rootView.findViewById(R.id.nothing_to_show_text_diary);
             nothing_to_show_txt.setVisibility(View.VISIBLE);
         } else {
-
-            // 4 columns in todayRes
-            while(todayRes.moveToNext()) {
-                int today_id = todayRes.getInt(0);
-                String today_date = todayRes.getString(1);
-                String food_name = todayRes.getString(2);
-                String barcode_number = todayRes.getString(3);
-
+            while(todaysEntriesFromDatabase.moveToNext()) {
                 Food f = new Food();
-                f.setId(String.valueOf(today_id));
-                f.setDate(today_date);
-                f.setName(food_name);
-                f.setBarcode_number(barcode_number);
-
-                foods.add(f);
-            } // End while(todayRes.moveToNext())
+                f.setId(String.valueOf(todaysEntriesFromDatabase.getInt(0)));
+                f.setDate(todaysEntriesFromDatabase.getString(1));
+                f.setName(todaysEntriesFromDatabase.getString(2));
+                f.setBarcode_number(todaysEntriesFromDatabase.getString(3));
+                foodsFromDatabase.add(f);
+            } // End while(todaysEntriesFromDatabase.moveToNext())
 
             int i = 0;
-
-            // 10 columns in todayStatsRes
-            while(todayStatsRes.moveToNext()){
-                String calories = todayStatsRes.getString(2);
-                String fat = todayStatsRes.getString(3);
-                String sat_fat = todayStatsRes.getString(4);
-                String carbs = todayStatsRes.getString(5);
-                String sugar = todayStatsRes.getString(6);
-                String protein = todayStatsRes.getString(7);
-                String salt = todayStatsRes.getString(8);
-                String sodium = todayStatsRes.getString(9);
-
-                foods.get(i).setCalories(calories);
-                foods.get(i).setFats(fat);
-                foods.get(i).setSaturated_fat(sat_fat);
-                foods.get(i).setCarbohydrates(carbs);
-                foods.get(i).setSugar(sugar);
-                foods.get(i).setProtein(protein);
-                foods.get(i).setSalt(salt);
-                foods.get(i).setSodium(sodium);
+            while(todaysStatEntriesFromDatabase.moveToNext()){
+                foodsFromDatabase.get(i).setCalories(todaysStatEntriesFromDatabase.getString(2));
+                foodsFromDatabase.get(i).setFats(todaysStatEntriesFromDatabase.getString(3));
+                foodsFromDatabase.get(i).setSaturated_fat(todaysStatEntriesFromDatabase.getString(4));
+                foodsFromDatabase.get(i).setCarbohydrates(todaysStatEntriesFromDatabase.getString(5));
+                foodsFromDatabase.get(i).setSugar(todaysStatEntriesFromDatabase.getString(6));
+                foodsFromDatabase.get(i).setProtein(todaysStatEntriesFromDatabase.getString(7));
+                foodsFromDatabase.get(i).setSalt(todaysStatEntriesFromDatabase.getString(8));
+                foodsFromDatabase.get(i).setSodium(todaysStatEntriesFromDatabase.getString(9));
 
                 i++;
-            } // End while(todayStatsRes.moveToNext())
+            } // End while(todaysStatEntriesFromDatabase.moveToNext())
         }
-
-        return foods;
+        return foodsFromDatabase;
     }
     /**
      * Set the title of the page using the current date.
@@ -216,6 +204,10 @@ public class DiaryFragment extends android.support.v4.app.Fragment {
         return daysDate.toString();
     }
 
+    /**
+     * Get the current date.
+     * @return current date.
+     */
     public String getDate() {
         Calendar c = Calendar.getInstance();
         String day = Integer.toString(c.get(Calendar.DAY_OF_MONTH));
@@ -234,8 +226,6 @@ public class DiaryFragment extends android.support.v4.app.Fragment {
             String temp = month;
             month = "0" + temp;
         }
-
         return weekDay.substring(0, 3).toUpperCase() + day + month + year;
     }
-
 }

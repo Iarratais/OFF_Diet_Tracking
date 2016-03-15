@@ -19,6 +19,7 @@ public class Food {
     private String protein = null;
     private String salt = null;
     private String sodium = null;
+    private String weight = null;
     private String serving_size = null;
 
     public Food() {
@@ -51,6 +52,23 @@ public class Food {
         this.protein = protein;
         this.salt = salt;
         this.sodium = sodium;
+    }
+
+    public Food(String date, String id, String name, String barcode_number, String calories, String fats, String saturated_fat, String carbohydrates, String sugar, String protein, String salt, String sodium, String weight, String serving_size) {
+        this.date = date;
+        this.id = id;
+        this.name = name;
+        this.barcode_number = barcode_number;
+        this.calories = calories;
+        this.fats = fats;
+        this.saturated_fat = saturated_fat;
+        this.carbohydrates = carbohydrates;
+        this.sugar = sugar;
+        this.protein = protein;
+        this.salt = salt;
+        this.sodium = sodium;
+        this.weight = weight;
+        this.serving_size = serving_size;
     }
 
     public String getDate() {
@@ -157,6 +175,14 @@ public class Food {
         this.serving_size = serving_size;
     }
 
+    public String getWeight() {
+        return weight;
+    }
+
+    public void setWeight(String weight) {
+        this.weight = weight;
+    }
+
     @Override
     public String toString() {
         return "Food{" +
@@ -172,6 +198,7 @@ public class Food {
                 ", protein='" + protein + '\'' +
                 ", salt='" + salt + '\'' +
                 ", sodium='" + sodium + '\'' +
+                ", weight='" + weight + '\'' +
                 ", serving_size='" + serving_size + '\'' +
                 '}';
     }

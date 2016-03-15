@@ -1,5 +1,6 @@
 package com.karl.fyp;
 
+import android.app.DialogFragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -13,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
 
+import com.karl.alerts.MyAlertDialogFragment;
 import com.karl.fragments.ProfileSetupFive;
 import com.karl.fragments.ProfileSetupFour;
 import com.karl.fragments.ProfileSetupOne;
@@ -37,6 +39,9 @@ public class ProfileSetUp extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_set_up);
+
+        DialogFragment dialog = MyAlertDialogFragment.newInstance("Beta", "Hi! Thanks for beta testing the application, please report any feedback that you may have. This is in very early stages");
+        dialog.show(getFragmentManager(), "dialog");
 
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
@@ -109,19 +114,19 @@ public class ProfileSetUp extends AppCompatActivity {
         final ExplosionField explosionField = ExplosionField.attach2Window(this);
 
         if(getUser_name() == null || getUser_name().equals("")){
-            Toast.makeText(getApplicationContext(), getString(R.string.profile_set_up_you_need_to_enter, getString(R.string.profile_fragment_name)), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), getString(R.string.profile_set_up_you_need_to_enter, getString(R.string.profile_fragment_name).toLowerCase()), Toast.LENGTH_SHORT).show();
             mViewPager.setCurrentItem(1);
         } else if (getUser_gender() == null || getUser_gender().equals("")) {
-            Toast.makeText(getApplicationContext(), getString(R.string.profile_set_up_you_need_to_enter, getString(R.string.profile_fragment_gender)), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), getString(R.string.profile_set_up_you_need_to_enter, getString(R.string.profile_fragment_gender).toLowerCase()), Toast.LENGTH_SHORT).show();
             mViewPager.setCurrentItem(1);
         } else if (getUser_height() == null || getUser_height().equals("")){
-            Toast.makeText(getApplicationContext(), getString(R.string.profile_set_up_you_need_to_enter, getString(R.string.profile_fragment_height)), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), getString(R.string.profile_set_up_you_need_to_enter, getString(R.string.profile_fragment_height).toLowerCase()), Toast.LENGTH_SHORT).show();
             mViewPager.setCurrentItem(2);
         } else if (getUser_weight() == null || getUser_weight().equals("")){
-            Toast.makeText(getApplicationContext(), getString(R.string.profile_set_up_you_need_to_enter, getString(R.string.profile_fragment_weight)), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), getString(R.string.profile_set_up_you_need_to_enter, getString(R.string.profile_fragment_weight).toLowerCase()), Toast.LENGTH_SHORT).show();
             mViewPager.setCurrentItem(2);
         } else if (getUser_desired() == null || getUser_desired().equals("")) {
-            Toast.makeText(getApplicationContext(), getString(R.string.profile_set_up_you_need_to_enter, getString(R.string.profile_set_up_desired_weight)), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), getString(R.string.profile_set_up_you_need_to_enter, getString(R.string.profile_set_up_desired_weight).toLowerCase()), Toast.LENGTH_SHORT).show();
             mViewPager.setCurrentItem(3);
         } else {
             db.createUser(getUser_name(), getUser_gender(), getUser_height(), getUser_weight());

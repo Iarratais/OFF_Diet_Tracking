@@ -266,4 +266,8 @@ public class FoodDAO implements IFoodDAO {
         }
         return false;
     }
+
+    public String convertCalsToKJ(String cals){
+        return String.valueOf((int)(Integer.valueOf(cals) * 4.148));
+    }
 }

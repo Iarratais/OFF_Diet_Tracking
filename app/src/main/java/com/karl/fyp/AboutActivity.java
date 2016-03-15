@@ -1,40 +1,39 @@
 package com.karl.fyp;
 
+import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class AboutActivity extends AppCompatActivity {
+public class AboutActivity extends Fragment {
 
+    View rootView;
+
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_about);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        // Set the activity title
-        try {
-            getSupportActionBar().setTitle(getString(R.string.about_fragment_title));
-        } catch (NullPointerException e) {
-            e.printStackTrace();
-        }
+        rootView = inflater.inflate(R.layout.activity_about, container, false);
 
 
-        TextView versionNumber = (TextView) findViewById(R.id.version_number_textview);
+        TextView versionNumber = (TextView) rootView.findViewById(R.id.version_number_textview);
         versionNumber.setText("Version " + BuildConfig.VERSION_NAME);
 
-        Button faq = (Button) findViewById(R.id.faq_button);
+        Button faq = (Button) rootView.findViewById(R.id.faq_button);
         faq.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), FAQActivity.class));
+                startActivity(new Intent(getActivity(), FAQActivity.class));
             }
         });
+
+        return rootView;
     }
 
-    public void onBackPressed() {
-        finish();
-    }
 }

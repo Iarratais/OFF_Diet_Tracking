@@ -10,8 +10,8 @@
             android:title="@string/analysis_fragment_title" />
         <item android:id="@+id/nav_lookup" android:icon="@drawable/icon_camera_black"
             android:title="@string/lookup_fragment_title" />
-        <item android:id="@+id/nav_search" android:icon="@drawable/icon_search_black"
-            android:title="@string/search_fragment_title" />
+        <!--<item android:id="@+id/nav_search" android:icon="@drawable/icon_search_black"
+            android:title="@string/search_fragment_title" /> -->
         <item android:id="@+id/nav_history" android:icon="@drawable/icon_history_black"
             android:title="@string/history_fragment_title" />
         <item android:id="@+id/nav_goals" android:icon="@drawable/icon_assessment_black"
@@ -25,7 +25,6 @@
     <item android:title="">
         <menu>
             <item android:id="@+id/nav_addtodatabase" android:title="@string/addtodatabase_fragment_title" />
-            <item android:id="@+id/nav_settings" android:title="@string/settings_fragment_title" />
             <item android:id="@+id/nav_about" android:title="@string/about_fragment_title" />
         </menu>
     </item>

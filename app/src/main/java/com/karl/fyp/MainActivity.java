@@ -1,6 +1,8 @@
 package com.karl.fyp;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -102,6 +104,12 @@ public class MainActivity extends AppCompatActivity
         //hist.setUpStatsFeb(getApplicationContext());
         //db.clearHistory();
         //db.clearWeightTable();
+
+//        db.clearAllUser();
+//        final SharedPreferences prefs = getApplicationContext().getSharedPreferences("com.karl.fyp", Context.MODE_PRIVATE);
+//        SharedPreferences.Editor editor = prefs.edit();
+//        editor.clear();
+//        editor.commit();
 
         Boolean recipeKeepInstalled = appInstalledOrNot("com.karl.recipekeeper");
         if(recipeKeepInstalled){
@@ -206,24 +214,11 @@ public class MainActivity extends AppCompatActivity
             setNewEntryVisibility(true);
 
             hideFab();
-        } else if (id == R.id.nav_settings) {
-
-            // Switch to the settings
-            Intent i = new Intent(getApplicationContext(), SettingsActivity.class);
-            startActivity(i);
-        } else if (id == R.id.nav_about) {
+        }else if (id == R.id.nav_about) {
 
             // Switch to the about section
             Intent i = new Intent(getApplicationContext(), AboutActivity.class);
             startActivity(i);
-        } else if (id == R.id.nav_search){
-
-            // Switch to the goals tab
-            fm.beginTransaction().replace(R.id.content_frame, new SearchFragment()).commit();
-
-            setNewEntryVisibility(false);
-
-            hideFab();
         } else if (id == R.id.nav_progress){
 
             // Switch to the goals tab
@@ -249,6 +244,15 @@ public class MainActivity extends AppCompatActivity
             setNewEntryVisibility(false);
             hideFab();
         }
+//        else if (id == R.id.nav_search){
+//
+//            // Switch to the goals tab
+//            fm.beginTransaction().replace(R.id.content_frame, new SearchFragment()).commit();
+//
+//            setNewEntryVisibility(false);
+//
+//            hideFab();
+//        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

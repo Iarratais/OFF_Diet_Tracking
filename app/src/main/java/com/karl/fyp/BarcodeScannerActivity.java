@@ -20,6 +20,9 @@ import com.google.android.gms.vision.barcode.Barcode;
 import com.karl.barcodereader.BarcodeCaptureActivity;
 import com.karl.dao.FoodDAO;
 import com.karl.dao.IFoodDAO;
+import com.karl.models.Food;
+
+import java.io.IOException;
 
 public class BarcodeScannerActivity extends Activity implements View.OnClickListener {
 
@@ -217,7 +220,6 @@ public class BarcodeScannerActivity extends Activity implements View.OnClickList
                 i.putExtra("scan_success", false);
                 i.putExtra("barcode", barcode);
                 startActivity(i);
-                //Toast.makeText(getApplicationContext(), getString(R.string.error_item_does_not_exist), Toast.LENGTH_SHORT).show();
             }
             progressBar.setVisibility(View.GONE);
 

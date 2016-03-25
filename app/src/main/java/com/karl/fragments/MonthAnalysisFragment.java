@@ -41,8 +41,10 @@ public class MonthAnalysisFragment extends android.support.v4.app.Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_month_analysis, container, false);
 
-        Monthly_Analysis_Task ma = new Monthly_Analysis_Task();
-        ma.execute();
+        //Monthly_Analysis_Task ma = new Monthly_Analysis_Task();
+        //ma.execute();
+
+
 
         return rootView;
     }

@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/profile_set_up_swipe_to_continue"
-        android:id="@+id/textView21"
+        android:id="@+id/profile_setup_one_swipe_to_continue"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="66dp"

@@ -18,7 +18,7 @@ import android.widget.TextView;
  * This gives the user information about the application.
  */
 
-public class AboutActivity extends Fragment {
+public class AboutActivity extends android.support.v4.app.Fragment {
 
     View rootView;
 
@@ -27,6 +27,8 @@ public class AboutActivity extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         rootView = inflater.inflate(R.layout.activity_about, container, false);
+
+        ((MainActivity) getActivity()).setActionBarTitle(getString(R.string.about_fragment_title));
 
         TextView versionNumberTextView = (TextView) rootView.findViewById(R.id.version_number_textview);
         versionNumberTextView.setText("Version " + BuildConfig.VERSION_NAME);

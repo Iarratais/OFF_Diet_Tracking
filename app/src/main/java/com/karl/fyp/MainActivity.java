@@ -1,6 +1,7 @@
 package com.karl.fyp;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -68,7 +69,7 @@ public class MainActivity extends AppCompatActivity
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                presentUserOptions();
+                presentActionsDialog();
             }
         });
 
@@ -101,12 +102,25 @@ public class MainActivity extends AppCompatActivity
         getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new TodayFragment()).commit();
 
         // Check if Recipe Keep is installed on the device. If it is, hide the menu item.
-        Boolean recipeKeepInstalled = appInstalledOrNot("com.karl.recipekeeper");
+        Boolean recipeKeepInstalled = isApplicationInstalled("com.karl.recipekeeper");
         if(recipeKeepInstalled){
             Menu menu = navigationView.getMenu();
             MenuItem target = menu.findItem(R.id.nav_recipe_keep);
             target.setVisible(false);
         }
+    }
+
+    /**
+     * This method is used for testing purposes and clears all relevant information.
+     */
+    public void freshStart(){
+        SharedPreferences prefs = getApplicationContext().getSharedPreferences("com.karl.fyp",
+                MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.clear();
+        editor.commit();
+
+        db.wipeUserTable();
     }
 
     @Override
@@ -148,7 +162,7 @@ public class MainActivity extends AppCompatActivity
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()) {
             case R.id.action_new_entry:
-                presentUserOptions();
+                presentActionsDialog();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -156,8 +170,6 @@ public class MainActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-
-        // Get the fragment manager
         android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
 
         // Handle navigation view item clicks here.
@@ -206,8 +218,12 @@ public class MainActivity extends AppCompatActivity
         }else if (id == R.id.nav_about) {
 
             // Switch to the about section
-            Intent i = new Intent(getApplicationContext(), AboutActivity.class);
-            startActivity(i);
+//            Intent i = new Intent(getApplicationContext(), AboutActivity.class);
+//            startActivity(i);
+            fm.beginTransaction().replace(R.id.content_frame, new AboutActivity()).commit();
+            setNewEntryVisibility(false);
+
+            hideFloatingActionButton();
         } else if (id == R.id.nav_progress){
 
             // Switch to the goals tab
@@ -233,15 +249,6 @@ public class MainActivity extends AppCompatActivity
             setNewEntryVisibility(false);
             hideFloatingActionButton();
         }
-//        else if (id == R.id.nav_search){
-//
-//            // Switch to the goals tab
-//            fm.beginTransaction().replace(R.id.content_frame, new SearchFragment()).commit();
-//
-//            setNewEntryVisibility(false);
-//
-//            hideFloatingActionButton();
-//        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -249,9 +256,10 @@ public class MainActivity extends AppCompatActivity
     }
 
     /**
-     * Ask the user how they would like to add an entry.
+     * Present the user with the option of actions on what they can do.
+     * Users can do the following actions: scan barcode, manual entry, and log their weight.
      */
-    public void presentUserOptions() {
+    public void presentActionsDialog() {
         android.support.v4.app.DialogFragment newFrag = MyListAlertDialogFragment.newInstance(R.string.main_activity_new_entry_options_title);
         newFrag.show(getSupportFragmentManager(), "dialog");
     }
@@ -297,11 +305,12 @@ public class MainActivity extends AppCompatActivity
     }
 
     /**
-     * Get the users name from the database.
+     * Get the users name from the database to be displayed in the navigation drawer.
      */
     public void getTheUsersNameFromDatabase() {
         Cursor res = db.getUser();
 
+        // If there is no information in the user table, ask the user to set up a new profile.
         if(res == null) {
             startActivity(new Intent(getApplicationContext(), ProfileSetUp.class));
             finish();
@@ -342,16 +351,14 @@ public class MainActivity extends AppCompatActivity
      * @param uri package name of application to check.
      * @return true if installed.
      */
-    private boolean appInstalledOrNot(String uri) {
+    private boolean isApplicationInstalled(String uri) {
         PackageManager pm = getPackageManager();
-        boolean app_installed;
         try {
             pm.getPackageInfo(uri, PackageManager.GET_ACTIVITIES);
-            app_installed = true;
+            return true;
         }
         catch (PackageManager.NameNotFoundException e) {
-            app_installed = false;
+            return false;
         }
-        return app_installed;
     }
 }

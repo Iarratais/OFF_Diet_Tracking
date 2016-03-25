@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Diet Keep (WIP)</string>
+    <string name="app_name">Food Keep</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -7,13 +7,13 @@
 
     <!-- MainActivity -->
     <string name="main_activity_new">New</string>
-    <string name="main_activity_new_entry_manual">Manual</string>
-    <string name="main_activity_new_entry_barcode">Scan inputBarcode</string>
+    <string name="main_activity_new_entry_manual">Manual Entry</string>
+    <string name="main_activity_new_entry_barcode">Scan Barcode</string>
     <string name="main_activity_new_entry_options_title">What would you like to do?</string>
 
     <!-- Profile Set Up Fragments -->
     <string name="profile_set_up_swipe_to_continue">Swipe to continue</string>
-    <string name="profile_set_up_welcome">Welcome!\n\nPlease begin by setting up a profile.</string>
+    <string name="profile_set_up_welcome">Welcome!\n\nPlease begin by setting up a profile</string>
     <string name="profile_set_up_save_profile">Save Profile</string>
     <string name="profile_set_up_you_need_to_enter">You need to enter your %1$s</string>
     <string name="profile_set_up_desired_weight">Your weight goal (kgs)</string>
@@ -39,9 +39,10 @@
     <!-- Lookup fragment -->
     <string name="lookup_fragment_title">Barcode Search</string>
     <string name="lookup_fragment_scan">Scan</string>
-    <string name="lookup_fragment_your_barcode_needs_13_digits">Please enter a 13 digit inputBarcode</string>
+    <string name="lookup_fragment_your_barcode_needs_13_digits">Please enter a 13 digit
+        barcode</string>
     <string name="lookup_fragment_serving_size">Serving size:</string>
-    <string name="lookup_fragment_manual_barcode_entry">Manual inputBarcode entry</string>
+    <string name="lookup_fragment_manual_barcode_entry">Manual barcode entry</string>
 
     <!-- Search fragment -->
     <string name="search_fragment_title">Search</string>
@@ -163,8 +164,6 @@
     <string name="title_activity_search_result">SearchResultActivity</string>
 
     <string name="title_activity_barcode_scanner">BarcodeScannerActivity</string>
-    <string name="dummy_button">Dummy Button</string>
-    <string name="dummy_content">DUMMY\nCONTENT</string>
     
     <!-- Barcode reader activity strings -->
     <string name="ok">OK</string>
@@ -177,7 +176,7 @@
     <string name="auto_focus">Auto Focus</string>
     <string name="use_flash">Use Flash</string>
     <string name="barcode_success">Barcode read successfully</string>
-    <string name="barcode_failure">No inputBarcode captured</string>
+    <string name="barcode_failure">No barcode captured</string>
     <string name="barcode_error">"Error reading inputBarcode: %1$s"</string>
     <string name="barcode_reader_tap_to_capture">Tap to capture when the inputBarcode is
         detected</string>

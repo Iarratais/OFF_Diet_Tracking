@@ -1,4 +1,4 @@
-<!-- Copyright Karl Jones 2016 -->
+<!--Copyright Karl Jones 2016 -->
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
@@ -212,5 +212,4 @@
         android:textAlignment="center"
         android:fontFeatureSettings="smcp"
         android:visibility="gone"/>
-
 </RelativeLayout>

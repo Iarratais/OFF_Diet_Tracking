@@ -84,5 +84,4 @@
                 android:value="com.karl.fyp.MainActivity" />
         </activity>
     </application>
-
 </manifest>

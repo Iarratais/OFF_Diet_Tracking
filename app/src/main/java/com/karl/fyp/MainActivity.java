@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity
                 getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new ProfileFragment()).commit();
                 DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
                 drawer.closeDrawer(GravityCompat.START);
-                setNewEntryVisibility(false);
+                hideAddButton();
             }
         });
         navigationBarNameSpaceTextView = (TextView) header.findViewById(R.id.nav_bar_name);
@@ -141,8 +141,12 @@ public class MainActivity extends AppCompatActivity
         return super.onCreateOptionsMenu(menu);
     }
 
+    private Menu mainMenu;
+
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
+        mainMenu = menu;
+
         // Check the screen size of the device
         if(getScreenSize() < SMALL_DEVICE_THRESHOLD) {
             hideFloatingActionButton();
@@ -156,6 +160,18 @@ public class MainActivity extends AppCompatActivity
         }
 
         return super.onPrepareOptionsMenu(menu);
+    }
+
+    public void hideAddButton(){
+        MenuItem addButton = mainMenu.findItem(R.id.action_new_entry);
+        addButton.setVisible(false);
+        hideFloatingActionButton();
+    }
+
+    public void showAddButtons(){
+        MenuItem addButton = mainMenu.findItem(R.id.action_new_entry);
+        addButton.setVisible(true);
+        showFloatingActionButton();
     }
 
     @Override
@@ -172,81 +188,36 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
 
+        invalidateOptionsMenu();
+
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
         if (id == R.id.nav_today) {
-
-            // Switch to the Today tab
             fm.beginTransaction().replace(R.id.content_frame, new TodayFragment()).commit();
-
-            setNewEntryVisibility(true);
-
-            showFloatingActionButton();
         } else if (id == R.id.nav_history) {
-
-            // Switch to the History tab
             fm.beginTransaction().replace(R.id.content_frame, new HistoryFragment()).commit();
-
-            setNewEntryVisibility(true);
-
-            hideFloatingActionButton();
         } else if (id == R.id.nav_lookup) {
-
-            // Switch to the Lookup tab
             fm.beginTransaction().replace(R.id.content_frame, new LookupFragment()).commit();
-
-            setNewEntryVisibility(false);
-
             hideFloatingActionButton();
         } else if (id == R.id.nav_addtodatabase){
-
-            // Switch to the goals tab
             fm.beginTransaction().replace(R.id.content_frame, new AddToDatabaseFragment()).commit();
-
-            setNewEntryVisibility(true);
-
             hideFloatingActionButton();
         } else if (id == R.id.nav_goals){
-
-            // Switch to the goals tab
             fm.beginTransaction().replace(R.id.content_frame, new GoalsFragment()).commit();
-
-            setNewEntryVisibility(true);
-
             hideFloatingActionButton();
         }else if (id == R.id.nav_about) {
-
-            // Switch to the about section
-//            Intent i = new Intent(getApplicationContext(), AboutActivity.class);
-//            startActivity(i);
             fm.beginTransaction().replace(R.id.content_frame, new AboutActivity()).commit();
-            setNewEntryVisibility(false);
-
             hideFloatingActionButton();
         } else if (id == R.id.nav_progress){
-
-            // Switch to the goals tab
             fm.beginTransaction().replace(R.id.content_frame, new ProgressFragment()).commit();
-
-            setNewEntryVisibility(true);
-
-            hideFloatingActionButton();
         } else if (id == R.id.nav_diary) {
-
-            // Switch to the Profile tab
             fm.beginTransaction().replace(R.id.content_frame, new DiaryFragment()).commit();
-
-            setNewEntryVisibility(true);
-
-            hideFloatingActionButton();
         } else if (id == R.id.nav_analysis) {
             fm.beginTransaction().replace(R.id.content_frame, new AnalysisActivityFragment()).commit();
             hideFloatingActionButton();
-            setNewEntryVisibility(false);
         } else if (id == R.id.nav_recipe_keep){
             fm.beginTransaction().replace(R.id.content_frame, new RecipeKeepFragment()).commit();
-            setNewEntryVisibility(false);
             hideFloatingActionButton();
         }
 
@@ -294,14 +265,6 @@ public class MainActivity extends AppCompatActivity
             floatingActionButton.setAnimation(rollRight);
             floatingActionButton.setVisibility(View.GONE);
         }
-    }
-
-    /**
-     * Set the menu item for a new entry to show or hide.
-     * @param visibility visible or gone.
-     */
-    public void setNewEntryVisibility(boolean visibility) {
-        menu.findItem(R.id.action_new_entry).setVisible(visibility);
     }
 
     /**

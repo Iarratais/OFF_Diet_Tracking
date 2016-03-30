@@ -44,7 +44,7 @@ import com.karl.fragments.TodayFragment;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private static final double SMALL_DEVICE_THRESHOLD = 4.4;
+    private static final double SMALL_DEVICE_THRESHOLD = 4.8;
     private static final String TAG = "MainActivity";
 
     FloatingActionButton floatingActionButton;
@@ -54,6 +54,10 @@ public class MainActivity extends AppCompatActivity
     String usersName;
 
     TextView navigationBarNameSpaceTextView;
+
+    String showAdd = "SHOW_ADD";
+    String SHOWADD = "SHOW_ADD";
+    String HIDEADD = "HIDE_ADD";
 
     private Menu menu;
 
@@ -93,7 +97,8 @@ public class MainActivity extends AppCompatActivity
                 getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new ProfileFragment()).commit();
                 DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
                 drawer.closeDrawer(GravityCompat.START);
-                hideAddButton();
+                showAdd = HIDEADD;
+                invalidateOptionsMenu();
             }
         });
         navigationBarNameSpaceTextView = (TextView) header.findViewById(R.id.nav_bar_name);
@@ -111,7 +116,8 @@ public class MainActivity extends AppCompatActivity
     }
 
     /**
-     * This method is used for testing purposes and clears all relevant information.
+     * This method is used for testing purposes and clears all regarding SharedPreferences and
+     * the user database to ensure that there is not two users.
      */
     public void freshStart(){
         SharedPreferences prefs = getApplicationContext().getSharedPreferences("com.karl.fyp",
@@ -147,31 +153,27 @@ public class MainActivity extends AppCompatActivity
     public boolean onPrepareOptionsMenu(Menu menu) {
         mainMenu = menu;
 
-        // Check the screen size of the device
-        if(getScreenSize() < SMALL_DEVICE_THRESHOLD) {
-            hideFloatingActionButton();
-            MenuItem addButton = menu.findItem(R.id.action_new_entry);
-            addButton.setVisible(true);
-        }
-        if(getScreenSize() > SMALL_DEVICE_THRESHOLD) {
-            MenuItem addButton = menu.findItem(R.id.action_new_entry);
+        // The code checks if there is supposed to be a menuitem that is not to be shown, in this
+        // case, its for the button to add a new entry into the system.
+        if(showAdd.equals(SHOWADD)) {
+            // Check the screen size of the device
+            if (getScreenSize() < SMALL_DEVICE_THRESHOLD) {
+                hideFloatingActionButton();
+                MenuItem addButton = menu.findItem(R.id.action_new_entry);
+                addButton.setVisible(true);
+            }
+            if (getScreenSize() > SMALL_DEVICE_THRESHOLD) {
+                MenuItem addButton = menu.findItem(R.id.action_new_entry);
+                addButton.setVisible(false);
+                showFloatingActionButton();
+            }
+        } else if (showAdd.equals(HIDEADD)){
+            MenuItem addButton = mainMenu.findItem(R.id.action_new_entry);
             addButton.setVisible(false);
-            showFloatingActionButton();
+            hideFloatingActionButton();
         }
 
         return super.onPrepareOptionsMenu(menu);
-    }
-
-    public void hideAddButton(){
-        MenuItem addButton = mainMenu.findItem(R.id.action_new_entry);
-        addButton.setVisible(false);
-        hideFloatingActionButton();
-    }
-
-    public void showAddButtons(){
-        MenuItem addButton = mainMenu.findItem(R.id.action_new_entry);
-        addButton.setVisible(true);
-        showFloatingActionButton();
     }
 
     @Override
@@ -188,37 +190,49 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
 
-        invalidateOptionsMenu();
-
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
         if (id == R.id.nav_today) {
             fm.beginTransaction().replace(R.id.content_frame, new TodayFragment()).commit();
+            showAdd = SHOWADD;
+            invalidateOptionsMenu();
         } else if (id == R.id.nav_history) {
             fm.beginTransaction().replace(R.id.content_frame, new HistoryFragment()).commit();
+            showAdd = SHOWADD;
+            invalidateOptionsMenu();
         } else if (id == R.id.nav_lookup) {
             fm.beginTransaction().replace(R.id.content_frame, new LookupFragment()).commit();
-            hideFloatingActionButton();
+            showAdd = HIDEADD;
+            invalidateOptionsMenu();
         } else if (id == R.id.nav_addtodatabase){
             fm.beginTransaction().replace(R.id.content_frame, new AddToDatabaseFragment()).commit();
-            hideFloatingActionButton();
+            showAdd = HIDEADD;
+            invalidateOptionsMenu();
         } else if (id == R.id.nav_goals){
             fm.beginTransaction().replace(R.id.content_frame, new GoalsFragment()).commit();
-            hideFloatingActionButton();
+            showAdd = HIDEADD;
+            invalidateOptionsMenu();
         }else if (id == R.id.nav_about) {
             fm.beginTransaction().replace(R.id.content_frame, new AboutActivity()).commit();
-            hideFloatingActionButton();
+            showAdd = HIDEADD;
+            invalidateOptionsMenu();
         } else if (id == R.id.nav_progress){
             fm.beginTransaction().replace(R.id.content_frame, new ProgressFragment()).commit();
+            showAdd = SHOWADD;
+            invalidateOptionsMenu();
         } else if (id == R.id.nav_diary) {
             fm.beginTransaction().replace(R.id.content_frame, new DiaryFragment()).commit();
+            showAdd = SHOWADD;
+            invalidateOptionsMenu();
         } else if (id == R.id.nav_analysis) {
             fm.beginTransaction().replace(R.id.content_frame, new AnalysisActivityFragment()).commit();
-            hideFloatingActionButton();
+            showAdd = HIDEADD;
+            invalidateOptionsMenu();
         } else if (id == R.id.nav_recipe_keep){
             fm.beginTransaction().replace(R.id.content_frame, new RecipeKeepFragment()).commit();
-            hideFloatingActionButton();
+            showAdd = HIDEADD;
+            invalidateOptionsMenu();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

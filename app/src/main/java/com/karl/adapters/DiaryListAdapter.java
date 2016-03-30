@@ -81,13 +81,13 @@ public class DiaryListAdapter extends ArrayAdapter<Food> {
         fatView.setText(foods.get(position).getFats() + context.getString(R.string.grams_abbv));
         fatView.setTypeface(normalTypeface);
 
-        TextView satFatView = (TextView) view.findViewById(R.id.textView6);
-        satFatView.setText(foods.get(position).getSaturated_fat() + context.getString(R.string.grams_abbv));
+        TextView saturatedFatsView = (TextView) view.findViewById(R.id.textView6);
+        saturatedFatsView.setText(foods.get(position).getSaturated_fat() + context.getString(R.string.grams_abbv));
         fatView.setTypeface(normalTypeface);
 
-        TextView carbsView = (TextView) view.findViewById(R.id.textView9);
-        carbsView.setText(foods.get(position).getCarbohydrates() + context.getString(R.string.grams_abbv));
-        carbsView.setTypeface(normalTypeface);
+        TextView carbohydratesView = (TextView) view.findViewById(R.id.textView9);
+        carbohydratesView.setText(foods.get(position).getCarbohydrates() + context.getString(R.string.grams_abbv));
+        carbohydratesView.setTypeface(normalTypeface);
 
         TextView sugarView = (TextView) view.findViewById(R.id.textView10);
         sugarView.setText(foods.get(position).getSugar() + context.getString(R.string.grams_abbv));
@@ -131,7 +131,6 @@ public class DiaryListAdapter extends ArrayAdapter<Food> {
                         .show();
             }
         });
-
         return view;
     }
 }

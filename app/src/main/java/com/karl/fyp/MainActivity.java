@@ -44,7 +44,7 @@ import com.karl.fragments.TodayFragment;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private static final double SMALL_DEVICE_THRESHOLD = 4.8;
+    private static final double SMALL_DEVICE_THRESHOLD = 4.4;
     private static final String TAG = "MainActivity";
 
     FloatingActionButton floatingActionButton;
@@ -55,9 +55,9 @@ public class MainActivity extends AppCompatActivity
 
     TextView navigationBarNameSpaceTextView;
 
-    String showAdd = "SHOW_ADD";
-    String SHOWADD = "SHOW_ADD";
-    String HIDEADD = "HIDE_ADD";
+    private String showAdd = "SHOW_ADD";
+    private static final String SHOWADD = "SHOW_ADD";
+    private static final String HIDEADD = "HIDE_ADD";
 
     private Menu menu;
 

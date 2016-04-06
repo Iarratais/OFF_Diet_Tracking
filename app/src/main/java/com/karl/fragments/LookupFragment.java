@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,9 +18,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 
+import com.google.android.gms.common.api.CommonStatusCodes;
+import com.google.android.gms.vision.barcode.Barcode;
+import com.karl.barcodereader.BarcodeCaptureActivity;
 import com.karl.dao.FoodDAO;
 import com.karl.dao.IFoodDAO;
-import com.karl.fyp.BarcodeScannerActivity;
 import com.karl.fyp.MainActivity;
 import com.karl.fyp.R;
 import com.karl.fyp.SearchResultActivity;
@@ -33,7 +36,11 @@ import com.karl.fyp.SearchResultActivity;
 
 public class LookupFragment extends android.support.v4.app.Fragment {
 
+    private final String TAG = "LookupFragment";
+
     View rootView;
+
+    private static final int RC_BARCODE_CAPTURE = 9001;
 
     ProgressBar progressBar;
 
@@ -50,7 +57,7 @@ public class LookupFragment extends android.support.v4.app.Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), BarcodeScannerActivity.class));
+                startActivity(new Intent(getActivity(), BarcodeCaptureActivity.class));
             }
         });
 
@@ -66,6 +73,40 @@ public class LookupFragment extends android.support.v4.app.Fragment {
         progressBar.setVisibility(View.GONE);
 
         return rootView;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == RC_BARCODE_CAPTURE) {
+            if (resultCode == CommonStatusCodes.SUCCESS) {
+                if (data != null) {
+                    Barcode barcode = data.getParcelableExtra(BarcodeCaptureActivity.BarcodeObject);
+                    if(isNetworkOnline() && checkLength(barcode.displayValue)){
+                        setUpTask(barcode.displayValue);
+                    } else if (!isNetworkOnline()) {
+                        Snackbar.make(rootView.findViewById(android.R.id.content), getString(R
+                                .string
+                                .error_sorry_check_your_network_settings), Snackbar.LENGTH_INDEFINITE)
+                                .setAction(getString(R.string.settings_fragment_title), new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        startActivityForResult(new Intent(android.provider.Settings.ACTION_SETTINGS), 0);
+                                    }
+                                })
+                                .show();
+                    }
+                    Log.d(TAG, "Barcode read: " + barcode.displayValue);
+                } else {
+
+                    Log.d(TAG, "No barcode captured, intent data is null");
+                }
+            } else {
+                Log.d(TAG, "Error");
+            }
+        }
+        else {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
     }
 
     /**

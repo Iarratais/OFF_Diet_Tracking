@@ -121,9 +121,6 @@ public class SplashScreenActivity extends Activity {
 
         if(foods.size() > 0) {
             calculateTotals(foods);
-        } else {
-            Log.d(TAG, "There is no food items loaded from the system - not proceeding to calculating totals");
-
         }
     } // End moveDataToHistoryDatabase()
 
@@ -165,6 +162,8 @@ public class SplashScreenActivity extends Activity {
 
                 for (int j = 0; j < dateRange.size(); j++) {
                     if (foods.get(i).getDate().equals(dateRange.get(j))) {
+                        System.out.println("Foods date: " + foods.get(i).getDate());
+                        System.out.println("dateRange date: " + dateRange.get(j));
                         totals.get(j).setDate(foods.get(i).getDate());
                         totals.get(j).setId(foods.get(i).getId());
 
@@ -354,6 +353,6 @@ public class SplashScreenActivity extends Activity {
             month = "0" + temp;
         }
 
-        return weekDay.substring(0, 3) + day + month + year;
+        return weekDay.substring(0, 3).toUpperCase() + day + month + year;
     }
 }

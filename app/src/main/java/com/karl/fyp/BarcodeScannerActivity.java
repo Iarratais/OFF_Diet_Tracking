@@ -57,12 +57,12 @@ public class BarcodeScannerActivity extends Activity implements View.OnClickList
 
         findViewById(R.id.read_barcode).setOnClickListener(this);
 
-        // launch barcode activity.
-        Intent intent = new Intent(this, BarcodeCaptureActivity.class);
-        intent.putExtra(BarcodeCaptureActivity.AutoFocus, autoFocus.isChecked());
-        intent.putExtra(BarcodeCaptureActivity.UseFlash, useFlash.isChecked());
-
-        startActivityForResult(intent, RC_BARCODE_CAPTURE);
+//        // launch barcode activity.
+//        Intent intent = new Intent(this, BarcodeCaptureActivity.class);
+//        intent.putExtra(BarcodeCaptureActivity.AutoFocus, autoFocus.isChecked());
+//        intent.putExtra(BarcodeCaptureActivity.UseFlash, useFlash.isChecked());
+//
+//        startActivityForResult(intent, RC_BARCODE_CAPTURE);
     }
 
     /**

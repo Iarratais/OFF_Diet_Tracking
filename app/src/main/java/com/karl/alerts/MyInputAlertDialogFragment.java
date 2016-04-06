@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.karl.fyp.MySQLiteHelper;
 import com.karl.fyp.R;
@@ -50,7 +51,13 @@ public class MyInputAlertDialogFragment extends android.support.v4.app.DialogFra
                 if (title != null) {
                     if(title.equals(getString(R.string.progress_fragment_log_your_weight))){
                         MySQLiteHelper db = new MySQLiteHelper(getContext());
-                        db.logWeight(getDate(), message, null);
+                        if(!message.equals("")) {
+                            db.logWeight(getDate(), message, null);
+                        } else {
+                            Toast.makeText(getContext(), getString(R.string
+                                    .main_activity_new_entry_weight_not_saved), Toast
+                                    .LENGTH_SHORT).show();
+                        }
                     } else {
                         ((SearchResultActivity) getActivity()).calculateInformation(message);
                     }

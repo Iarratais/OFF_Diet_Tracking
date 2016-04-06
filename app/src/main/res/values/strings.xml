@@ -10,6 +10,7 @@
     <string name="main_activity_new_entry_manual">Manual Entry</string>
     <string name="main_activity_new_entry_barcode">Scan Barcode</string>
     <string name="main_activity_new_entry_options_title">What would you like to do?</string>
+    <string name="main_activity_new_entry_weight_not_saved">Please enter a valid weight</string>
 
     <!-- Profile Set Up Fragments -->
     <string name="profile_set_up_swipe_to_continue">Swipe to continue</string>
@@ -181,6 +182,7 @@
     <string name="barcode_error">"Error reading barcode: %1$s"</string>
     <string name="barcode_reader_tap_to_capture">Tap to capture when the barcode is
         detected</string>
+    <string name="barcode_reader_no_barcode_detected">No barcode detected</string>
 
     <!-- Months -->
     <string name="january">January</string>

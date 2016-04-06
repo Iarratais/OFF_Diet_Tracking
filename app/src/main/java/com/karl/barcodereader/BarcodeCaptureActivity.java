@@ -24,8 +24,12 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.hardware.Camera;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -33,16 +37,20 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.common.api.CommonStatusCodes;
+import com.karl.dao.FoodDAO;
+import com.karl.dao.IFoodDAO;
+import com.karl.fyp.NewManualEntryActivity;
 import com.karl.fyp.R;
+import com.karl.fyp.SearchResultActivity;
 import com.karl.ui.camera.CameraSource;
 import com.karl.ui.camera.CameraSourcePreview;
 
@@ -78,7 +86,6 @@ public final class BarcodeCaptureActivity extends AppCompatActivity {
 
     // helper objects for detecting taps and pinches.
     private ScaleGestureDetector scaleGestureDetector;
-    private GestureDetector gestureDetector;
 
     /**
      * Initializes the UI and creates the detector pipeline.
@@ -92,8 +99,8 @@ public final class BarcodeCaptureActivity extends AppCompatActivity {
         mGraphicOverlay = (GraphicOverlay<BarcodeGraphic>) findViewById(R.id.graphicOverlay);
 
         // Read parameters from the intent used to launch the activity.
-        boolean autoFocus = getIntent().getBooleanExtra(AutoFocus, true);
-        boolean useFlash = getIntent().getBooleanExtra(UseFlash, false);
+        boolean autoFocus = true;
+        boolean useFlash = false;
 
         // Check for the camera permission before accessing the camera.  If the
         // permission is not granted yet, request permission.
@@ -104,12 +111,7 @@ public final class BarcodeCaptureActivity extends AppCompatActivity {
             requestCameraPermission();
         }
 
-        gestureDetector = new GestureDetector(this, new CaptureGestureListener());
         scaleGestureDetector = new ScaleGestureDetector(this, new ScaleListener());
-
-        Snackbar.make(mGraphicOverlay, getString(R.string.barcode_reader_tap_to_capture),
-                Snackbar.LENGTH_INDEFINITE)
-                .show();
     }
 
     /**
@@ -148,9 +150,9 @@ public final class BarcodeCaptureActivity extends AppCompatActivity {
     public boolean onTouchEvent(MotionEvent e) {
         boolean b = scaleGestureDetector.onTouchEvent(e);
 
-        boolean c = gestureDetector.onTouchEvent(e);
+        //boolean c = gestureDetector.onTouchEvent(e);
 
-        return b || c || super.onTouchEvent(e);
+        return b || super.onTouchEvent(e); //  b || c || super.onTouchEvent(e);
     }
 
     /**
@@ -199,6 +201,16 @@ public final class BarcodeCaptureActivity extends AppCompatActivity {
         mCameraSource = builder
                 .setFlashMode(useFlash ? Camera.Parameters.FLASH_MODE_TORCH : null)
                 .build();
+
+        ImageView captureButton = (ImageView) findViewById(R.id.capture_button);
+        captureButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                captureButtonClicked();
+            }
+        });
+
+
     }
 
     /**
@@ -253,8 +265,8 @@ public final class BarcodeCaptureActivity extends AppCompatActivity {
         if (grantResults.length != 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             Log.d(TAG, "Camera permission granted - initialize the camera source");
             // we have permission, so create the camerasource
-            boolean autoFocus = getIntent().getBooleanExtra(AutoFocus,false);
-            boolean useFlash = getIntent().getBooleanExtra(UseFlash, false);
+            boolean autoFocus = true;
+            boolean useFlash = false;
             createCameraSource(autoFocus, useFlash);
             return;
         }
@@ -302,44 +314,42 @@ public final class BarcodeCaptureActivity extends AppCompatActivity {
         }
     }
 
-    /**
-     * onTap is called to capture the oldest barcode currently detected and
-     * return it to the caller.
-     *
-     * @param rawX - the raw position of the tap
-     * @param rawY - the raw position of the tap.
-     * @return true if the activity is ending.
-     */
-    private boolean onTap(float rawX, float rawY) {
-
-        //TODO: use the tap position to select the barcode.
+    public boolean captureButtonClicked(){
         BarcodeGraphic graphic = mGraphicOverlay.getFirstGraphic();
         Barcode barcode = null;
         if (graphic != null) {
             barcode = graphic.getBarcode();
             if (barcode != null) {
-                Intent data = new Intent();
-                data.putExtra(BarcodeObject, barcode);
-                setResult(CommonStatusCodes.SUCCESS, data);
-                finish();
+//                Intent data = new Intent();
+//                data.putExtra(BarcodeObject, barcode);
+//                setResult(CommonStatusCodes.SUCCESS, data);
+//                finish();
+
+                if(isNetworkOnline()){
+                    setUpTask(barcode.displayValue);
+                } else if (!isNetworkOnline()) {
+                    Snackbar.make(findViewById(android.R.id.content), getString(R
+                            .string
+                            .error_sorry_check_your_network_settings), Snackbar.LENGTH_INDEFINITE)
+                            .setAction(getString(R.string.settings_fragment_title), new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    startActivityForResult(new Intent(android.provider.Settings.ACTION_SETTINGS), 0);
+                                }
+                            })
+                            .show();
+                }
+                Log.d(TAG, "Barcode read: " + barcode.displayValue);
             }
             else {
                 Log.d(TAG, "barcode data is null");
             }
         }
         else {
-            Log.d(TAG,"no barcode detected");
+            Toast.makeText(getApplicationContext(), getString(R.string
+                    .barcode_reader_no_barcode_detected), Toast.LENGTH_SHORT).show();
         }
         return barcode != null;
-    }
-
-    private class CaptureGestureListener extends GestureDetector.SimpleOnGestureListener {
-
-        @Override
-        public boolean onSingleTapConfirmed(MotionEvent e) {
-
-            return onTap(e.getRawX(), e.getRawY()) || super.onSingleTapConfirmed(e);
-        }
     }
 
     private class ScaleListener implements ScaleGestureDetector.OnScaleGestureListener {
@@ -389,6 +399,107 @@ public final class BarcodeCaptureActivity extends AppCompatActivity {
         @Override
         public void onScaleEnd(ScaleGestureDetector detector) {
             mCameraSource.doZoom(detector.getScaleFactor());
+        }
+    }
+
+    /**
+     * Send the user to the results screen.
+     * @param barcode to pass to the results activity.
+     */
+    public void getResults(String barcode) {
+        Intent i = new Intent(getApplicationContext(), SearchResultActivity.class);
+        i.putExtra("barcode", barcode);
+        startActivity(i);
+    }
+
+    public void sendToManual(String barcode){
+        Intent i = new Intent(getApplicationContext(), NewManualEntryActivity.class);
+        i.putExtra("barcode", barcode);
+        startActivity(i);
+    }
+
+    /**
+     * Check if the network is connected or not.
+     * @return network connected status.
+     */
+    public boolean isNetworkOnline() {
+        boolean status = false;
+
+        try{
+            ConnectivityManager connectivityManager = (ConnectivityManager) getApplicationContext().getSystemService
+                    (Context.CONNECTIVITY_SERVICE);
+            NetworkInfo networkInfo = connectivityManager.getNetworkInfo(0);
+            if(networkInfo != null && networkInfo.getState() == NetworkInfo.State.CONNECTED){
+                status = true;
+            } else {
+                networkInfo = connectivityManager.getNetworkInfo(1);
+                if(networkInfo != null && networkInfo.getState() == NetworkInfo.State.CONNECTED) {
+                    status = true;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            status = false;
+        }
+
+        return status;
+    }
+
+    /**
+     * Check if the length of the barcode is 13.
+     * @param barcode of the product.
+     * @return true if right length, false if wrong length.
+     */
+    public boolean checkLength(String barcode) {
+        boolean is13 = false;
+        if(barcode.length() == 13) {
+            is13 = true;
+        }
+        return is13;
+    }
+
+    /**
+     * Set up the asynchtask.
+     * @param barcode of the product.
+     */
+    public void setUpTask(String barcode) {
+        BarcodeSearchTask bst = new BarcodeSearchTask();
+        bst.execute(barcode);
+    }
+
+    class BarcodeSearchTask extends AsyncTask<String, Integer, Boolean> {
+
+        String barcode = "0000000000000";
+
+        /**
+         * Things to be done in the background of the UI thread.
+         * @param params string put into the task
+         * @return exists, true if exits, false otherwise.
+         */
+        @Override
+        protected Boolean doInBackground(String... params) {
+            IFoodDAO foodDAO = new FoodDAO();
+
+            barcode = params[0];
+
+            try {return foodDAO.checkProduct(params[0]);}
+            catch (Exception e) {e.printStackTrace(); return false;}
+        }
+
+        /**
+         * UI thread interaction.
+         * @param exists if the product exists of not.
+         */
+        protected void onPostExecute(Boolean exists) {
+            super.onPostExecute(exists);
+
+            if(exists) {
+                getResults(barcode);
+            }else {
+                Toast.makeText(getApplicationContext(), getString(R.string
+                        .error_item_does_not_exist), Toast.LENGTH_SHORT).show();
+                sendToManual(barcode);
+            }
         }
     }
 }

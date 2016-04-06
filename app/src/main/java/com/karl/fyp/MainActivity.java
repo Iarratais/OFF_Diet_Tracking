@@ -205,11 +205,7 @@ public class MainActivity extends AppCompatActivity
             fm.beginTransaction().replace(R.id.content_frame, new LookupFragment()).commit();
             showAdd = HIDEADD;
             invalidateOptionsMenu();
-        } else if (id == R.id.nav_addtodatabase){
-            fm.beginTransaction().replace(R.id.content_frame, new AddToDatabaseFragment()).commit();
-            showAdd = HIDEADD;
-            invalidateOptionsMenu();
-        } else if (id == R.id.nav_goals){
+        }else if (id == R.id.nav_goals){
             fm.beginTransaction().replace(R.id.content_frame, new GoalsFragment()).commit();
             showAdd = HIDEADD;
             invalidateOptionsMenu();
@@ -229,11 +225,16 @@ public class MainActivity extends AppCompatActivity
             fm.beginTransaction().replace(R.id.content_frame, new AnalysisActivityFragment()).commit();
             showAdd = HIDEADD;
             invalidateOptionsMenu();
-        } else if (id == R.id.nav_recipe_keep){
+        } else if (id == R.id.nav_recipe_keep) {
             fm.beginTransaction().replace(R.id.content_frame, new RecipeKeepFragment()).commit();
             showAdd = HIDEADD;
             invalidateOptionsMenu();
         }
+//        }  else if (id == R.id.nav_addtodatabase){
+//            fm.beginTransaction().replace(R.id.content_frame, new AddToDatabaseFragment()).commit();
+//            showAdd = HIDEADD;
+//            invalidateOptionsMenu();
+//        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

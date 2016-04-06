@@ -29,6 +29,7 @@ import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresPermission;
 import android.support.annotation.StringDef;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Surface;
 import android.view.SurfaceHolder;
@@ -136,7 +137,6 @@ public class CameraSource {
     private float mRequestedFps = 30.0f;
     private int mRequestedPreviewWidth = 1024;
     private int mRequestedPreviewHeight = 768;
-
 
     private String mFocusMode = null;
     private String mFlashMode = null;

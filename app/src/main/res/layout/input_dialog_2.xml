@@ -13,7 +13,7 @@
         android:id="@+id/edittext"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter text here.."
+        android:hint="New Weight Entry"
         android:padding="10dp"
         android:inputType="numberDecimal"
         android:minEms="13"/>

@@ -66,6 +66,8 @@ public class NewManualEntryActivity extends AppCompatActivity {
             case R.id.nav_save:
                 if(validateSaveEntry()){
                     saveFood();
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                    finish();
                     return true;
                 }
             default:

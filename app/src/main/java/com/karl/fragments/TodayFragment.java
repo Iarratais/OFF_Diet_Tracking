@@ -200,8 +200,8 @@ public class TodayFragment extends android.support.v4.app.Fragment {
      */
     public void getInformation() {
         getInformationFromToday();
-        calculateNutrientTotalsForToday();
         setUpGoalsTable();
+        calculateNutrientTotalsForToday();
     }
 
     /**
@@ -441,6 +441,24 @@ public class TodayFragment extends android.support.v4.app.Fragment {
         total_protein = String.valueOf(temp_protein);
         total_salt = String.valueOf(temp_salt);
         total_sodium = String.valueOf(temp_sodium);
+
+        TextView resultCalorieStatsTextView         = (TextView) rootView.findViewById(R.id.today_calories_stats);
+        TextView resultFatStatsTextView             = (TextView) rootView.findViewById(R.id.today_fat_stats);
+        TextView resultSatFatStatsTextView          = (TextView) rootView.findViewById(R.id.today_sat_fat_stats);
+        TextView resultSaltStatsTextView            = (TextView) rootView.findViewById(R.id.today_salt_stats);
+        TextView resultSodiumStatsTextView          = (TextView) rootView.findViewById(R.id.today_sodium_stats);
+        TextView resultCarbohydratesStatsTextView   = (TextView) rootView.findViewById(R.id.today_carbs_stats);
+        TextView resultSugarStatsTextView           = (TextView) rootView.findViewById(R.id.today_sugar_stats);
+        TextView resultProteinStatsTextView         = (TextView) rootView.findViewById(R.id.today_protein_stats);
+
+        resultCalorieStatsTextView.setText(total_calories);
+        resultFatStatsTextView.setText(total_fats);
+        resultSatFatStatsTextView.setText(total_sat_fats);
+        resultSaltStatsTextView.setText(total_salt);
+        resultSodiumStatsTextView.setText(total_sodium);
+        resultCarbohydratesStatsTextView.setText(total_carbs);
+        resultSugarStatsTextView.setText(total_sugar);
+        resultProteinStatsTextView.setText(total_protein);
     }
 
     /**

@@ -109,7 +109,7 @@
                 android:fontFamily="sans-serif"
                 android:id="@+id/new_fat"
                 android:hint="@string/fat"
-                android:inputType="textCapWords|numberDecimal"
+                android:inputType="numberDecimal"
                 android:imeOptions="actionNext"
                 />
         </android.support.design.widget.TextInputLayout>

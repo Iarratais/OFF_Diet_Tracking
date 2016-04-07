@@ -20,7 +20,7 @@ import java.util.Locale;
 public class SplashScreenActivity extends Activity {
 
     // Splash screen timer
-    private static double timer = 0.2;                           // Put in seconds value here
+    private static double timer = 0.8;                           // Put in seconds value here
     private static int SPLASH_TIME_OUT = (int)(timer * 1000);
     private static String TAG = "SplashScreenActivity";
 

@@ -75,35 +75,27 @@ public class DiaryListAdapter extends ArrayAdapter<Food> {
 
         TextView caloriesView = (TextView) view.findViewById(R.id.textView4);
         caloriesView.setText(foods.get(position).getCalories());
-        caloriesView.setTypeface(normalTypeface);
 
         TextView fatView = (TextView) view.findViewById(R.id.textView5);
         fatView.setText(foods.get(position).getFats() + context.getString(R.string.grams_abbv));
-        fatView.setTypeface(normalTypeface);
 
         TextView saturatedFatsView = (TextView) view.findViewById(R.id.textView6);
         saturatedFatsView.setText(foods.get(position).getSaturated_fat() + context.getString(R.string.grams_abbv));
-        fatView.setTypeface(normalTypeface);
 
         TextView carbohydratesView = (TextView) view.findViewById(R.id.textView9);
         carbohydratesView.setText(foods.get(position).getCarbohydrates() + context.getString(R.string.grams_abbv));
-        carbohydratesView.setTypeface(normalTypeface);
 
         TextView sugarView = (TextView) view.findViewById(R.id.textView10);
         sugarView.setText(foods.get(position).getSugar() + context.getString(R.string.grams_abbv));
-        sugarView.setTypeface(normalTypeface);
 
         TextView saltView = (TextView) view.findViewById(R.id.textView7);
         saltView.setText(foods.get(position).getSalt() + context.getString(R.string.grams_abbv));
-        saltView.setTypeface(normalTypeface);
 
         TextView sodiumView = (TextView) view.findViewById(R.id.textView8);
         sodiumView.setText(foods.get(position).getSodium() + context.getString(R.string.grams_abbv));
-        sodiumView.setTypeface(normalTypeface);
 
         TextView proteinView = (TextView) view.findViewById(R.id.textView11);
         proteinView.setText(foods.get(position).getProtein() + context.getString(R.string.grams_abbv));
-        proteinView.setTypeface(normalTypeface);
 
         // Handle the deletion of entries.
         final MySQLiteHelper db = new MySQLiteHelper(getContext());

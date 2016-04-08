@@ -24,6 +24,7 @@ import com.karl.analysis.GoalAnalysis;
 import com.karl.fyp.MySQLiteHelper;
 import com.karl.fyp.R;
 import com.karl.models.Day;
+import com.karl.models.Goals;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -67,6 +68,10 @@ public class MonthAnalysisFragment extends android.support.v4.app.Fragment {
             graphLayout.setVisibility(View.GONE);
         }
 
+        inputGoals();
+
+        inputGoalsOver();
+
         return rootView;
     }
 
@@ -90,6 +95,31 @@ public class MonthAnalysisFragment extends android.support.v4.app.Fragment {
         }
 
         super.onResume();
+    }
+
+    /**
+     * Retrieve the goals from the database.
+     * @return Goals    the users goals.
+     */
+    public Goals getGoals(){
+        MySQLiteHelper db = new MySQLiteHelper(getContext());
+        Goals resGoals = new Goals();
+        Cursor res = db.getGoals();
+        if(res.getCount() != 0){
+            while(res.moveToNext()){
+                for(int i = 0; i < res.getColumnCount(); i++){
+                    resGoals.setCalories(res.getString(1));
+                    resGoals.setFat(res.getString(2));
+                    resGoals.setSaturatedFat(res.getString(3));
+                    resGoals.setSalt(res.getString(4));
+                    resGoals.setSodium(res.getString(5));
+                    resGoals.setCarbohydrates(res.getString(6));
+                    resGoals.setSugar(res.getString(7));
+                    resGoals.setProtein(res.getString(8));
+                }
+            }
+        }
+        return resGoals;
     }
 
     int historyDatabaseEntries = 0;
@@ -224,6 +254,46 @@ public class MonthAnalysisFragment extends android.support.v4.app.Fragment {
         } else {
             analysis_subtext.setText(getString(R.string.analysis_fragment_based_on, historyDatabaseEntries));
         }
+    }
+
+    public void inputGoals(){
+        Goals goals = getGoals();
+
+        Typeface normalTypeface = Typeface.createFromAsset(getActivity().getAssets(), "fonts/New_Cicle_Gordita.ttf");
+
+        TextView caloriesGoals = (TextView) rootView.findViewById(R.id.calorie_analysis_personal_goal);
+        caloriesGoals.setText(getString(R.string.analysis_fragment_personal_goal, goals.getCalories()));
+        caloriesGoals.setTypeface(normalTypeface);
+        caloriesGoals.setTextSize(18);
+
+        TextView fatGoals = (TextView) rootView.findViewById(R.id.fat_analysis_personal_goal);
+        fatGoals.setText(getString(R.string.analysis_fragment_personal_goal, goals.getFat()));
+        fatGoals.setTypeface(normalTypeface);
+        fatGoals.setTextSize(18);
+
+        TextView satFatGoals = (TextView) rootView.findViewById(R.id.sat_fat_analysis_personal_goal);
+        satFatGoals.setText(getString(R.string.analysis_fragment_personal_goal, goals.getSaturatedFat()));
+        satFatGoals.setTypeface(normalTypeface);
+        satFatGoals.setTextSize(18);
+    }
+
+    public void inputGoalsOver(){
+        Typeface normalTypeface = Typeface.createFromAsset(getActivity().getAssets(), "fonts/New_Cicle_Gordita.ttf");
+
+        TextView caloriesGone = (TextView) rootView.findViewById(R.id.calorie_analysis_times_gone_over);
+        caloriesGone.setText(getString(R.string.analysis_fragment_times_gone_over_goals, ga.getCalories_broken()));
+        caloriesGone.setTypeface(normalTypeface);
+        caloriesGone.setTextSize(18);
+
+        TextView fatGone = (TextView) rootView.findViewById(R.id.fat_analysis_gone_over);
+        fatGone.setText(getString(R.string.analysis_fragment_times_gone_over_goals, ga.getFats_broken()) + getString(R.string.grams_abbv));
+        fatGone.setTypeface(normalTypeface);
+        fatGone.setTextSize(18);
+
+        TextView satFatGone = (TextView) rootView.findViewById(R.id.sat_fat_analysis_gone_over);
+        satFatGone.setText(getString(R.string.analysis_fragment_times_gone_over_goals, ga.getSaturated_fats_broken()) + getString(R.string.grams_abbv));
+        satFatGone.setTypeface(normalTypeface);
+        satFatGone.setTextSize(18);
     }
 
     /**

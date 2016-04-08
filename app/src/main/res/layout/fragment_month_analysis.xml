@@ -18,13 +18,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/analysis_month_title"
-                style="?android:attr/borderlessButtonStyle"
-                android:textColor="@color/colorAccent"
-                android:layout_gravity="start" />
+
 
             <!--Graph -->
             <LinearLayout
@@ -38,6 +32,16 @@
                 android:layout_marginStart="10dp"
                 android:elevation="6dp"
                 android:id="@+id/year_graph_layout">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/analysis_month_title"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:textColor="@color/colorAccent"
+                    android:layout_gravity="start"
+                    android:paddingBottom="5dp"/>
+
                 <com.github.mikephil.charting.charts.HorizontalBarChart
                     android:id="@+id/month_analysis_chart"
                     android:layout_width="match_parent"
@@ -57,11 +61,33 @@
                 android:layout_marginEnd="10dp"
                 android:layout_marginStart="10dp"
                 android:elevation="6dp">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:id="@+id/calorie_analysis_title"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:textColor="@color/colorAccent"
+                    android:text="@string/calories"
+                    android:layout_gravity="start"
+                    android:paddingBottom="5dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/calorie_analysis_times_gone_over"
+                    android:layout_margin="10dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:id="@+id/calorie_analysis"
+                    android:layout_margin="10dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/calorie_analysis_personal_goal"
                     android:layout_margin="10dp"/>
             </LinearLayout>
 
@@ -76,11 +102,33 @@
                 android:layout_marginEnd="10dp"
                 android:layout_marginStart="10dp"
                 android:elevation="6dp">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:id="@+id/fat_analysis_title"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:textColor="@color/colorAccent"
+                    android:text="@string/fat"
+                    android:layout_gravity="start"
+                    android:paddingBottom="5dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:id="@+id/fat_analysis"
+                    android:layout_margin="10dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/fat_analysis_gone_over"
+                    android:layout_margin="10dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/fat_analysis_personal_goal"
                     android:layout_margin="10dp"/>
             </LinearLayout>
 
@@ -95,11 +143,33 @@
                 android:layout_marginEnd="10dp"
                 android:layout_marginStart="10dp"
                 android:elevation="6dp">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:id="@+id/sat_fat_analysis_title"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:textColor="@color/colorAccent"
+                    android:text="@string/saturated_fat"
+                    android:layout_gravity="start"
+                    android:paddingBottom="5dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:id="@+id/sat_fat_analysis"
+                    android:layout_margin="10dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/sat_fat_analysis_gone_over"
+                    android:layout_margin="10dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/sat_fat_analysis_personal_goal"
                     android:layout_margin="10dp"/>
             </LinearLayout>
 
@@ -117,7 +187,6 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
                     android:id="@+id/salt_analysis"
                     android:layout_margin="10dp"/>
             </LinearLayout>

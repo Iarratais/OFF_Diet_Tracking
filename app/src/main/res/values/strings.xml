@@ -71,8 +71,10 @@
 
     <!-- Analysis fragment -->
     <string name="analysis_fragment_title">Diet Analysis</string>
-    <string name="analysis_fragment_during_month_year">During %1$s, you consumed the most: </string>
-    <string name="analysis_fragment_you_ate_the_most_on">%1$s on %2$s</string>
+    <string name="analysis_fragment_during_month_year">During %1$s, you went over your goals...</string>
+    <string name="analysis_fragment_you_ate_the_most_on">The most %1$s on %2$s</string>
+    <string name="analysis_fragment_times_gone_over_goals">You went over your goals %1$s times</string>
+    <string name="analysis_fragment_personal_goal">Your personal goal is %1$s</string>
     <string name="analysis_fragment_based_on">Based on %1$s items</string>
     <string name="analysis_fragment_low_entries_warning">This information may not be reliable due to the low number of entries.</string>
 

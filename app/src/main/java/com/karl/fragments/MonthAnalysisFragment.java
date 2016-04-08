@@ -26,6 +26,8 @@ import com.karl.fyp.R;
 import com.karl.models.Day;
 import com.karl.models.Goals;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -256,6 +258,9 @@ public class MonthAnalysisFragment extends android.support.v4.app.Fragment {
         }
     }
 
+    /**
+     * This fills out the goals data into the interface.
+     */
     public void inputGoals(){
         Goals goals = getGoals();
 
@@ -267,16 +272,45 @@ public class MonthAnalysisFragment extends android.support.v4.app.Fragment {
         caloriesGoals.setTextSize(18);
 
         TextView fatGoals = (TextView) rootView.findViewById(R.id.fat_analysis_personal_goal);
-        fatGoals.setText(getString(R.string.analysis_fragment_personal_goal, goals.getFat()));
+        fatGoals.setText(getString(R.string.analysis_fragment_personal_goal, goals.getFat()) + getString(R.string.grams_abbv));
         fatGoals.setTypeface(normalTypeface);
         fatGoals.setTextSize(18);
 
         TextView satFatGoals = (TextView) rootView.findViewById(R.id.sat_fat_analysis_personal_goal);
-        satFatGoals.setText(getString(R.string.analysis_fragment_personal_goal, goals.getSaturatedFat()));
+        satFatGoals.setText(getString(R.string.analysis_fragment_personal_goal, goals.getSaturatedFat()) + getString(R.string.grams_abbv));
         satFatGoals.setTypeface(normalTypeface);
         satFatGoals.setTextSize(18);
+
+        TextView saltGoals = (TextView) rootView.findViewById(R.id.salt_analysis_personal_goal);
+        saltGoals.setText(getString(R.string.analysis_fragment_personal_goal, goals.getSalt()) + getString(R.string.grams_abbv));
+        saltGoals.setTypeface(normalTypeface);
+        saltGoals.setTextSize(18);
+
+        TextView sodiumGoals = (TextView) rootView.findViewById(R.id.sodium_analysis_personal_goal);
+        sodiumGoals.setText(getString(R.string.analysis_fragment_personal_goal, goals.getSodium()) + getString(R.string.grams_abbv));
+        sodiumGoals.setTypeface(normalTypeface);
+        sodiumGoals.setTextSize(18);
+
+        TextView carbohydratesGoals = (TextView) rootView.findViewById(R.id.carbohydrate_analysis_personal_goal);
+        carbohydratesGoals.setText(getString(R.string.analysis_fragment_personal_goal, goals.getCarbohydrates()) + getString(R.string.grams_abbv));
+        carbohydratesGoals.setTypeface(normalTypeface);
+        carbohydratesGoals.setTextSize(18);
+
+        TextView sugarGoals = (TextView) rootView.findViewById(R.id.sugar_analysis_personal_goal);
+        sugarGoals.setText(getString(R.string.analysis_fragment_personal_goal, goals.getSugar()) + getString(R.string.grams_abbv));
+        sugarGoals.setTypeface(normalTypeface);
+        sugarGoals.setTextSize(18);
+
+        TextView proteinGoals = (TextView) rootView.findViewById(R.id.protein_analysis_personal_goal);
+        proteinGoals.setText(getString(R.string.analysis_fragment_personal_goal, goals.getProtein()) + getString(R.string.grams_abbv));
+        proteinGoals.setTypeface(normalTypeface);
+        proteinGoals.setTextSize(18);
     }
 
+    /**
+     * This uses the information from the GoalsAnalysis activity to fill in information about how many times the user went
+     * over their goals.
+     */
     public void inputGoalsOver(){
         Typeface normalTypeface = Typeface.createFromAsset(getActivity().getAssets(), "fonts/New_Cicle_Gordita.ttf");
 
@@ -286,14 +320,39 @@ public class MonthAnalysisFragment extends android.support.v4.app.Fragment {
         caloriesGone.setTextSize(18);
 
         TextView fatGone = (TextView) rootView.findViewById(R.id.fat_analysis_gone_over);
-        fatGone.setText(getString(R.string.analysis_fragment_times_gone_over_goals, ga.getFats_broken()) + getString(R.string.grams_abbv));
+        fatGone.setText(getString(R.string.analysis_fragment_times_gone_over_goals, ga.getFats_broken()));
         fatGone.setTypeface(normalTypeface);
         fatGone.setTextSize(18);
 
         TextView satFatGone = (TextView) rootView.findViewById(R.id.sat_fat_analysis_gone_over);
-        satFatGone.setText(getString(R.string.analysis_fragment_times_gone_over_goals, ga.getSaturated_fats_broken()) + getString(R.string.grams_abbv));
+        satFatGone.setText(getString(R.string.analysis_fragment_times_gone_over_goals, ga.getSaturated_fats_broken()));
         satFatGone.setTypeface(normalTypeface);
         satFatGone.setTextSize(18);
+
+        TextView saltGone = (TextView) rootView.findViewById(R.id.salt_analysis_gone_over);
+        saltGone.setText(getString(R.string.analysis_fragment_times_gone_over_goals, ga.getSalt_broken()));
+        saltGone.setTypeface(normalTypeface);
+        saltGone.setTextSize(18);
+
+        TextView sodiumGone = (TextView) rootView.findViewById(R.id.sodium_analysis_gone_over);
+        sodiumGone.setText(getString(R.string.analysis_fragment_times_gone_over_goals, ga.getSodium_broken()));
+        sodiumGone.setTypeface(normalTypeface);
+        sodiumGone.setTextSize(18);
+
+        TextView carbohydrateGone = (TextView) rootView.findViewById(R.id.carbohydrate_analysis_gone_over);
+        carbohydrateGone.setText(getString(R.string.analysis_fragment_times_gone_over_goals, ga.getCarbohydrates_broken()));
+        carbohydrateGone.setTypeface(normalTypeface);
+        carbohydrateGone.setTextSize(18);
+
+        TextView sugarGone = (TextView) rootView.findViewById(R.id.sugar_analysis_gone_over);
+        sugarGone.setText(getString(R.string.analysis_fragment_times_gone_over_goals, ga.getSugar_broken()));
+        sugarGone.setTypeface(normalTypeface);
+        sugarGone.setTextSize(18);
+
+        TextView proteinGone = (TextView) rootView.findViewById(R.id.protein_analysis_gone_over);
+        proteinGone.setText(getString(R.string.analysis_fragment_times_gone_over_goals, ga.getProtein_broken()));
+        proteinGone.setTypeface(normalTypeface);
+        proteinGone.setTextSize(18);
     }
 
     /**

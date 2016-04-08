@@ -18,14 +18,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/analysis_year_title"
-                style="?android:attr/borderlessButtonStyle"
-                android:textColor="@color/colorAccent"
-                android:layout_gravity="start" />
-
             <!--Graph -->
             <LinearLayout
                 android:layout_width="match_parent"
@@ -38,6 +30,16 @@
                 android:layout_marginStart="10dp"
                 android:elevation="6dp"
                 android:id="@+id/graph_layout">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/analysis_year_title"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:textColor="@color/colorAccent"
+                    android:layout_gravity="start"
+                    android:paddingBottom="5dp"/>
+
                 <com.github.mikephil.charting.charts.HorizontalBarChart
                     android:id="@+id/year_analysis_chart"
                     android:layout_width="match_parent"
@@ -56,11 +58,33 @@
                 android:layout_marginEnd="10dp"
                 android:layout_marginStart="10dp"
                 android:elevation="6dp">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:id="@+id/calorie_analysis_title"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:textColor="@color/colorAccent"
+                    android:text="@string/calories"
+                    android:layout_gravity="center"
+                    android:paddingBottom="5dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:id="@+id/calorie_analysis_year"
+                    android:layout_margin="10dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/calorie_analysis_times_gone_over_year"
+                    android:layout_margin="10dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/calorie_analysis_personal_goal_year"
                     android:layout_margin="10dp"/>
             </LinearLayout>
 
@@ -75,11 +99,33 @@
                 android:layout_marginEnd="10dp"
                 android:layout_marginStart="10dp"
                 android:elevation="6dp">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:id="@+id/fat_analysis_title"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:textColor="@color/colorAccent"
+                    android:text="@string/fat"
+                    android:layout_gravity="center"
+                    android:paddingBottom="5dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:id="@+id/fat_analysis_year"
+                    android:layout_margin="10dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/fat_analysis_gone_over_year"
+                    android:layout_margin="10dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/fat_analysis_personal_goal_year"
                     android:layout_margin="10dp"/>
             </LinearLayout>
 
@@ -94,11 +140,33 @@
                 android:layout_marginEnd="10dp"
                 android:layout_marginStart="10dp"
                 android:elevation="6dp">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:id="@+id/sat_fat_analysis_title"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:textColor="@color/colorAccent"
+                    android:text="@string/saturated_fat"
+                    android:layout_gravity="center"
+                    android:paddingBottom="5dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:id="@+id/sat_fat_analysis_year"
+                    android:layout_margin="10dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/sat_fat_analysis_gone_over_year"
+                    android:layout_margin="10dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/sat_fat_analysis_personal_goal_year"
                     android:layout_margin="10dp"/>
             </LinearLayout>
 
@@ -113,12 +181,35 @@
                 android:layout_marginEnd="10dp"
                 android:layout_marginStart="10dp"
                 android:elevation="6dp">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:id="@+id/salt_analysis_title"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:textColor="@color/colorAccent"
+                    android:text="@string/salt"
+                    android:layout_gravity="center"
+                    android:paddingBottom="5dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:id="@+id/salt_analysis_year"
                     android:layout_margin="10dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/salt_analysis_gone_over_year"
+                    android:layout_margin="10dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/salt_analysis_personal_goal_year"
+                    android:layout_margin="10dp"/>
+
             </LinearLayout>
 
             <!-- Sodium -->
@@ -132,11 +223,33 @@
                 android:layout_marginEnd="10dp"
                 android:layout_marginStart="10dp"
                 android:elevation="6dp">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:id="@+id/sodium_analysis_title"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:textColor="@color/colorAccent"
+                    android:text="@string/sodium"
+                    android:layout_gravity="center"
+                    android:paddingBottom="5dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:id="@+id/sodium_analysis_year"
+                    android:layout_margin="10dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/sodium_analysis_gone_over_year"
+                    android:layout_margin="10dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/sodium_analysis_personal_goal_year"
                     android:layout_margin="10dp"/>
             </LinearLayout>
 
@@ -151,11 +264,33 @@
                 android:layout_marginEnd="10dp"
                 android:layout_marginStart="10dp"
                 android:elevation="6dp">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:id="@+id/carbohydrates_analysis_title"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:textColor="@color/colorAccent"
+                    android:text="@string/carbohydrate"
+                    android:layout_gravity="center"
+                    android:paddingBottom="5dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:id="@+id/carbohydrates_analysis_year"
+                    android:layout_margin="10dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/carbohydrate_analysis_gone_over_year"
+                    android:layout_margin="10dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/carbohydrate_analysis_personal_goal_year"
                     android:layout_margin="10dp"/>
             </LinearLayout>
 
@@ -170,12 +305,35 @@
                 android:layout_marginEnd="10dp"
                 android:layout_marginStart="10dp"
                 android:elevation="6dp">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:id="@+id/sugar_analysis_title"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:textColor="@color/colorAccent"
+                    android:text="@string/sugar"
+                    android:layout_gravity="center"
+                    android:paddingBottom="5dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:id="@+id/sugar_analysis_year"
                     android:layout_margin="10dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/sugar_analysis_gone_over_year"
+                    android:layout_margin="10dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/sugar_analysis_personal_goal_year"
+                    android:layout_margin="10dp"/>
+
             </LinearLayout>
 
             <!-- Protein -->
@@ -189,11 +347,33 @@
                 android:layout_marginEnd="10dp"
                 android:layout_marginStart="10dp"
                 android:elevation="6dp">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:id="@+id/protein_analysis_title"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:textColor="@color/colorAccent"
+                    android:text="@string/protein"
+                    android:layout_gravity="center"
+                    android:paddingBottom="5dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:id="@+id/protein_analysis_year"
+                    android:layout_margin="10dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/protein_analysis_gone_over_year"
+                    android:layout_margin="10dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/protein_analysis_personal_goal_year"
                     android:layout_margin="10dp"/>
             </LinearLayout>
 

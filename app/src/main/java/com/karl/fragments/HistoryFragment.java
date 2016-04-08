@@ -1,6 +1,9 @@
 package com.karl.fragments;
 
+import com.github.mikephil.charting.charts.HorizontalBarChart;
+import com.github.mikephil.charting.data.BarData;
 import com.karl.adapters.HistoryListAdapter;
+import com.karl.analysis.GoalAnalysis;
 import com.karl.fyp.MainActivity;
 import com.karl.fyp.MySQLiteHelper;
 import com.karl.fyp.R;
@@ -13,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 

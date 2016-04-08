@@ -28,14 +28,14 @@ public class HistorySamples {
     // day.
 
     // Max of each of the nutrients.
-    private static final double FINAL_CALORIES = 2000f;
-    private static final double FINAL_FAT = 65f;
-    private static final double FINAL_SAT_FAT = 20f;
+    private static final double FINAL_CALORIES = 3000f;
+    private static final double FINAL_FAT = 100f;
+    private static final double FINAL_SAT_FAT = 50;
     private static final double FINAL_SODIUM = 2.4f;
     private static final double FINAL_CARBS = 300f;
-    private static final double FINAL_PROTEIN = 50f;
+    private static final double FINAL_PROTEIN = 100f;
     private static final double FINAL_SUGAR = 160f;
-    private static final double FINAL_SALT = 5f;
+    private static final double FINAL_SALT = 15f;
 
     private static Food food;
     private static MySQLiteHelper db;

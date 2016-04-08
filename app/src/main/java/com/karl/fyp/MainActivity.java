@@ -33,6 +33,7 @@ import com.karl.fragments.ProfileFragment;
 import com.karl.fragments.ProgressFragment;
 import com.karl.fragments.RecipeKeepFragment;
 import com.karl.fragments.TodayFragment;
+import com.karl.testing.HistorySamples;
 
 /**
  * Copyright Karl jones 2016.
@@ -113,6 +114,10 @@ public class MainActivity extends AppCompatActivity
             MenuItem target = menu.findItem(R.id.nav_recipe_keep);
             target.setVisible(false);
         }
+
+//        HistorySamples hs = new HistorySamples(db);
+//        hs.setUpStatsJan(getApplicationContext());
+//        hs.setUpStatsFeb(getApplicationContext());
     }
 
     /**

@@ -11,10 +11,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.github.mikephil.charting.charts.HorizontalBarChart;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.utils.ColorTemplate;
 import com.karl.analysis.Analyse;
+import com.karl.analysis.GoalAnalysis;
 import com.karl.fyp.MySQLiteHelper;
 import com.karl.fyp.R;
 import com.karl.models.Day;
@@ -38,6 +45,8 @@ public class YearAnalysisFragment extends android.support.v4.app.Fragment {
 
     Analyse analyse;
 
+    GoalAnalysis ga;
+
     View rootView;
 
     public YearAnalysisFragment() {}
@@ -51,6 +60,20 @@ public class YearAnalysisFragment extends android.support.v4.app.Fragment {
         Yearly_Analysis ya = new Yearly_Analysis();
         ya.execute();
 
+        ArrayList<Day> historyFromDatabase = getInformationFromDatabase();
+        if(historyFromDatabase != null) {
+            ga = new GoalAnalysis(historyFromDatabase, getContext());
+            HorizontalBarChart chart = (HorizontalBarChart) rootView.findViewById(R.id.year_analysis_chart);
+            BarData chartData = new BarData(getXAxisValues(), getDataSet());
+            chart.setData(chartData);
+            chart.animateXY(2000, 2000);
+            chart.setDescription(" ");
+            chart.invalidate();
+        } else {
+            LinearLayout graphLayout = (LinearLayout) rootView.findViewById(R.id.graph_layout);
+            graphLayout.setVisibility(View.GONE);
+        }
+
         return rootView;
     }
 
@@ -58,6 +81,21 @@ public class YearAnalysisFragment extends android.support.v4.app.Fragment {
     public void onResume() {
         Yearly_Analysis ya = new Yearly_Analysis();
         ya.execute();
+
+        ArrayList<Day> historyFromDatabase = getInformationFromDatabase();
+        if(historyFromDatabase != null) {
+            ga = new GoalAnalysis(historyFromDatabase, getContext());
+            HorizontalBarChart chart = (HorizontalBarChart) rootView.findViewById(R.id.year_analysis_chart);
+            BarData chartData = new BarData(getXAxisValues(), getDataSet());
+            chart.setData(chartData);
+            chart.animateXY(2000, 2000);
+            chart.setDescription(" ");
+            chart.invalidate();
+        } else {
+            LinearLayout graphLayout = (LinearLayout) rootView.findViewById(R.id.graph_layout);
+            graphLayout.setVisibility(View.GONE);
+        }
+
         super.onResume();
     }
 
@@ -91,6 +129,58 @@ public class YearAnalysisFragment extends android.support.v4.app.Fragment {
         }
         entry_count = yearlyHistory.getCount();
         return historyDaysInformation;
+    }
+
+    /**
+     *
+     * @return ArrayList of data for the chart
+     */
+    private ArrayList<BarDataSet> getDataSet() {
+        ArrayList<BarDataSet> dataSets = new ArrayList<>();
+
+        // Add the data to the ArrayList
+        ArrayList<BarEntry> valueSet1 = new ArrayList<>();
+        BarEntry value1 = new BarEntry(ga.getSodium_broken(), 0); // Sodium
+        valueSet1.add(value1);
+        BarEntry value2 = new BarEntry(ga.getSalt_broken(), 1); // Salt
+        valueSet1.add(value2);
+        BarEntry value3 = new BarEntry(ga.getProtein_broken(), 2); // Proteins
+        valueSet1.add(value3);
+        BarEntry value4 = new BarEntry(ga.getSugar_broken(), 3); // Sugar
+        valueSet1.add(value4);
+        BarEntry value5 = new BarEntry(ga.getCarbohydrates_broken(), 4); // Carbohydrates
+        valueSet1.add(value5);
+        BarEntry value6 = new BarEntry(ga.getSaturated_fats_broken(), 5); // Saturated Fat
+        valueSet1.add(value6);
+        BarEntry value7 = new BarEntry(ga.getFats_broken(), 6); // Fats
+        valueSet1.add(value7);
+        BarEntry value8 = new BarEntry(ga.getCalories_broken(), 7); // calories
+        valueSet1.add(value8);
+
+        BarDataSet barDataSet1 = new BarDataSet(valueSet1, " ");
+        barDataSet1.setColors(ColorTemplate.PASTEL_COLORS);
+
+        dataSets.add(barDataSet1);
+
+        return dataSets;
+    }
+
+    /**
+     * Give the x-axis names
+     * @return ArrayList of data for the titles of the chart
+     */
+    private ArrayList<String> getXAxisValues() {
+        ArrayList<String> xAxis = new ArrayList<>();
+        xAxis.add(getString(R.string.sodium));
+        xAxis.add(getString(R.string.salt));
+        xAxis.add(getString(R.string.protein));
+        xAxis.add(getString(R.string.sugar));
+        xAxis.add(getString(R.string.carbohydrate));
+        xAxis.add(getString(R.string.saturated_fat));
+        xAxis.add(getString(R.string.fat));
+        xAxis.add(getString(R.string.calories));
+
+        return xAxis;
     }
 
     /**

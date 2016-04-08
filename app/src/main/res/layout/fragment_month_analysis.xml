@@ -26,6 +26,26 @@
                 android:textColor="@color/colorAccent"
                 android:layout_gravity="start" />
 
+            <!--Graph -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="#FFFFFF"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp"
+                android:elevation="6dp"
+                android:id="@+id/year_graph_layout">
+                <com.github.mikephil.charting.charts.HorizontalBarChart
+                    android:id="@+id/month_analysis_chart"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:paddingBottom="30dp"/>
+            </LinearLayout>
+
+
             <!-- Calories -->
             <LinearLayout
                 android:layout_width="match_parent"

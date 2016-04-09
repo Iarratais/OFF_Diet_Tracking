@@ -29,7 +29,7 @@
                 android:layout_marginEnd="10dp"
                 android:layout_marginStart="10dp"
                 android:elevation="6dp"
-                android:id="@+id/year_graph_layout">
+                android:id="@+id/graph_layout">
 
                 <TextView
                     android:layout_width="wrap_content"

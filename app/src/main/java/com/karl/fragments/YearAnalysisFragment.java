@@ -98,6 +98,9 @@ public class YearAnalysisFragment extends android.support.v4.app.Fragment {
             chart.animateXY(2000, 2000);
             chart.setDescription(" ");
             chart.invalidate();
+
+            inputGoals();
+            inputGoalsOver();
         } else {
             LinearLayout graphLayout = (LinearLayout) rootView.findViewById(R.id.graph_layout);
             graphLayout.setVisibility(View.GONE);

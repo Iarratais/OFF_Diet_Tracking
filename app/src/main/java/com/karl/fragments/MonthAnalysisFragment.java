@@ -65,14 +65,14 @@ public class MonthAnalysisFragment extends android.support.v4.app.Fragment {
             chart.animateXY(2000, 2000);
             chart.setDescription(" ");
             chart.invalidate();
+
+            inputGoals();
+            inputGoalsOver();
         } else {
             LinearLayout graphLayout = (LinearLayout) rootView.findViewById(R.id.graph_layout);
             graphLayout.setVisibility(View.GONE);
+            hideGoalsIfNone();
         }
-
-        inputGoals();
-
-        inputGoalsOver();
 
         return rootView;
     }
@@ -95,7 +95,6 @@ public class MonthAnalysisFragment extends android.support.v4.app.Fragment {
             LinearLayout graphLayout = (LinearLayout) rootView.findViewById(R.id.graph_layout);
             graphLayout.setVisibility(View.GONE);
         }
-
         super.onResume();
     }
 
@@ -259,6 +258,35 @@ public class MonthAnalysisFragment extends android.support.v4.app.Fragment {
     }
 
     /**
+     * This hides the personal goals textviews.
+     */
+    public void hideGoalsIfNone(){
+        TextView caloriesGoals = (TextView) rootView.findViewById(R.id.calorie_analysis_personal_goal);
+        caloriesGoals.setVisibility(View.GONE);
+
+        TextView fatGoals = (TextView) rootView.findViewById(R.id.fat_analysis_personal_goal);
+        fatGoals.setVisibility(View.GONE);
+
+        TextView satFatGoals = (TextView) rootView.findViewById(R.id.sat_fat_analysis_personal_goal);
+        satFatGoals.setVisibility(View.GONE);
+
+        TextView saltGoals = (TextView) rootView.findViewById(R.id.salt_analysis_personal_goal);
+        saltGoals.setVisibility(View.GONE);
+
+        TextView sodiumGoals = (TextView) rootView.findViewById(R.id.sodium_analysis_personal_goal);
+        sodiumGoals.setVisibility(View.GONE);
+
+        TextView carbohydratesGoals = (TextView) rootView.findViewById(R.id.carbohydrate_analysis_personal_goal);
+        carbohydratesGoals.setVisibility(View.GONE);
+
+        TextView sugarGoals = (TextView) rootView.findViewById(R.id.sugar_analysis_personal_goal);
+        sugarGoals.setVisibility(View.GONE);
+
+        TextView proteinGoals = (TextView) rootView.findViewById(R.id.protein_analysis_personal_goal);
+        proteinGoals.setVisibility(View.GONE);
+    }
+
+    /**
      * This fills out the goals data into the interface.
      */
     public void inputGoals(){
@@ -305,6 +333,35 @@ public class MonthAnalysisFragment extends android.support.v4.app.Fragment {
         proteinGoals.setText(getString(R.string.analysis_fragment_personal_goal, goals.getProtein()) + getString(R.string.grams_abbv));
         proteinGoals.setTypeface(normalTypeface);
         proteinGoals.setTextSize(18);
+    }
+
+    /**
+     * Hide the textviews for goals broken if none.
+     */
+    public void hideGoneOverIfNone(){
+        TextView caloriesGone = (TextView) rootView.findViewById(R.id.calorie_analysis_times_gone_over);
+        caloriesGone.setVisibility(View.GONE);
+
+        TextView fatGone = (TextView) rootView.findViewById(R.id.fat_analysis_gone_over);
+        fatGone.setVisibility(View.GONE);
+
+        TextView satFatGone = (TextView) rootView.findViewById(R.id.sat_fat_analysis_gone_over);
+        satFatGone.setVisibility(View.GONE);
+
+        TextView saltGone = (TextView) rootView.findViewById(R.id.salt_analysis_gone_over);
+        saltGone.setVisibility(View.GONE);
+
+        TextView sodiumGone = (TextView) rootView.findViewById(R.id.sodium_analysis_gone_over);
+        sodiumGone.setVisibility(View.GONE);
+
+        TextView carbohydrateGone = (TextView) rootView.findViewById(R.id.carbohydrate_analysis_gone_over);
+        carbohydrateGone.setVisibility(View.GONE);
+
+        TextView sugarGone = (TextView) rootView.findViewById(R.id.sugar_analysis_gone_over);
+        sugarGone.setVisibility(View.GONE);
+
+        TextView proteinGone = (TextView) rootView.findViewById(R.id.protein_analysis_gone_over);
+        proteinGone.setVisibility(View.GONE);
     }
 
     /**

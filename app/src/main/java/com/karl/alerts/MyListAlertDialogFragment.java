@@ -6,11 +6,9 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.app.Fragment;
 import android.widget.ArrayAdapter;
 
 import com.karl.barcodereader.BarcodeCaptureActivity;
-import com.karl.fyp.BarcodeScannerActivity;
 import com.karl.fyp.NewManualEntryActivity;
 import com.karl.fyp.R;
 

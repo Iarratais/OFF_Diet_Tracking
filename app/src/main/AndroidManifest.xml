@@ -23,7 +23,7 @@
             android:value="inputBarcode" />
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/facebook_app_id"/>
+            android:value="@string/facebook_app_id" />
 
         <activity
             android:name=".MainActivity"
@@ -69,8 +69,7 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.karl.fyp.MainActivity" />
-            </activity>
-
+        </activity>
         <activity
             android:name=".ProfileSetUp"
             android:label="@string/title_activity_profile_set_up"
@@ -82,4 +81,5 @@
                 android:value="com.karl.fyp.MainActivity" />
         </activity>
     </application>
+
 </manifest>

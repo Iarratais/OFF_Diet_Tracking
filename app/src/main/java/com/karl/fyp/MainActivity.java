@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -22,7 +23,6 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
-import com.karl.fragments.AddToDatabaseFragment;
 import com.karl.fragments.AnalysisActivityFragment;
 import com.karl.fragments.DiaryFragment;
 import com.karl.fragments.GoalsFragment;
@@ -33,7 +33,6 @@ import com.karl.fragments.ProfileFragment;
 import com.karl.fragments.ProgressFragment;
 import com.karl.fragments.RecipeKeepFragment;
 import com.karl.fragments.TodayFragment;
-import com.karl.testing.HistorySamples;
 
 /**
  * Copyright Karl jones 2016.
@@ -114,6 +113,8 @@ public class MainActivity extends AppCompatActivity
             MenuItem target = menu.findItem(R.id.nav_recipe_keep);
             target.setVisible(false);
         }
+
+        //freshStart();
 
 //        HistorySamples hs = new HistorySamples(db);
 //        hs.setUpStatsJan(getApplicationContext());
@@ -342,6 +343,25 @@ public class MainActivity extends AppCompatActivity
         }
         catch (PackageManager.NameNotFoundException e) {
             return false;
+        }
+    }
+
+    final static int DRIVE_RETRIEVE = 1001;
+    final static int DRIVE_BACKUP = 1002;
+    /**
+     * This class is used to manage the upload and the download of the database as a backup
+     * from Google Drive for the database of the application.
+     */
+    public class GoogleDriveManager extends AsyncTask<Integer, Void, Void> {
+
+        @Override
+        protected Void doInBackground(Integer... params) {
+            if(params[0] == DRIVE_RETRIEVE){
+                // Download the database from Google Drive.
+            } else if (params[0] == DRIVE_BACKUP){
+                // Back the database up to Google Drive.
+            }
+            return null;
         }
     }
 }

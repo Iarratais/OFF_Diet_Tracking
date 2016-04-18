@@ -22,6 +22,8 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
+import android.widget.Toast;
+
 
 import com.karl.alerts.MyListAlertDialogFragment;
 import com.karl.fragments.AnalysisActivityFragment;
@@ -61,12 +63,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private Menu menu;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        db = new MySQLiteHelper(this);
 
         // Floating action button
         floatingActionButton = (FloatingActionButton) findViewById(R.id.fab);
@@ -83,7 +88,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        db = new MySQLiteHelper(this);
 
         getTheUsersNameFromDatabase();
 
@@ -113,6 +117,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             MenuItem target = menu.findItem(R.id.nav_recipe_keep);
             target.setVisible(false);
         }
+
 
         //freshStart();
 
@@ -345,28 +350,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         catch (PackageManager.NameNotFoundException e) {
             return false;
-        }
-    }
-
-    final static int DRIVE_RETRIEVE = 1001;
-    final static int DRIVE_BACKUP = 1002;
-    /**
-     * This class is used to manage the upload and the download of the database as a backup
-     * from Google Drive for the database of the application.
-     */
-    public class GoogleDriveManager extends AsyncTask<Integer, Void, Void> {
-
-
-
-        @Override
-        protected Void doInBackground(Integer... params) {
-
-            if(params[0] == DRIVE_RETRIEVE){
-                // Download the database from Google Drive.
-            } else if (params[0] == DRIVE_BACKUP){
-                // Back the database up to Google Drive.
-            }
-            return null;
         }
     }
 }

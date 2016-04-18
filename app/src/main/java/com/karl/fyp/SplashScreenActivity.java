@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 
-public class SplashScreenActivity extends Activity {
+public class SplashScreenActivity extends Activity{
 
     // Splash screen timer
     private static double timer = 0.8;                           // Put in seconds value here
@@ -48,7 +48,6 @@ public class SplashScreenActivity extends Activity {
         if(isFirst){
             db.wipeUserTable();
             db.clearGoals();
-
             startActivity(new Intent(getApplicationContext(), ProfileSetUp.class));
             finish();
         } else {
@@ -355,4 +354,5 @@ public class SplashScreenActivity extends Activity {
 
         return weekDay.substring(0, 3).toUpperCase() + day + month + year;
     }
+
 }

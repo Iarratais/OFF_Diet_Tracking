@@ -32,5 +32,4 @@ dependencies {
     compile 'com.google.android.gms:play-services:8.4.0'
     compile 'com.android.support:support-v4:23.1.1'
     compile 'com.facebook.android:facebook-android-sdk:[4,5)'
-    compile 'com.github.athingunique:ddbs:0.0.5@aar'
 }

@@ -117,6 +117,10 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
         createWeightHistoryTable(db);
     }
 
+    public String getDatabaseName(){
+        return DATABASE_NAME;
+    }
+
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + USER_TABLE);

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.database.sqlite.SQLiteStatement;
 import android.util.Log;
 
 import com.karl.models.Food;
@@ -12,6 +13,9 @@ import com.karl.models.Goals;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Locale;
 
 /**
@@ -89,6 +93,10 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
     private static final String WEIGHT_DATE = "date";
     private static final String WEIGHT_TOTAL = "weight";
     private static final String WEIGHT_CHANGE = "change";
+
+    // Date table
+    private static final String DATETABLE = "datetable";
+    private static final String DATE_COL = "date_col";
 
     public MySQLiteHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -348,7 +356,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
 
     public void deleteTodayEntry(String id) {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(TODAY_TABLE, TODAY_KEY_ID + " = ?", new String[]{ id });
+        db.delete(TODAY_TABLE, TODAY_KEY_ID + " = ?", new String[]{id});
         db.close();
     }
 
@@ -526,6 +534,74 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("DELETE FROM " + WEIGHT_HISTORY_TABLE);
         Log.d(TAG, "Weight table cleared");
+    }
+
+    public void putDateInDatabase(Date date) {
+        putDateInDatabase(date.getTime());
+    }
+
+    public void putDateInDatabase(long now) {
+        SQLiteDatabase db = getWritableDatabase();
+        SQLiteStatement insert = makeInsertStatement(db);
+
+        insert.bindLong(1, now);
+        insert.executeInsert();
+        insert.clearBindings();
+    }
+
+    public Date getDateFromDatabase() {
+        SQLiteDatabase db = getReadableDatabase();
+
+        Cursor cursor = db.query(
+                DATETABLE,
+                new String[]{DATE_COL},
+                null,
+                null,
+                null,
+                null,
+                null
+        );
+
+        long dateTime = -1;
+        if (cursor.moveToLast()) {
+            dateTime = cursor.getLong(0);
+        }
+
+        cursor.close();
+
+        return new Date(dateTime);
+    }
+
+    public Date[] getDatesFromDatabase() {
+        SQLiteDatabase db = getReadableDatabase();
+
+        Cursor cursor = db.query(
+                DATETABLE,
+                new String[]{DATE_COL},
+                null,
+                null,
+                null,
+                null,
+                null
+        );
+
+        List<Date> dates = new LinkedList<>();
+
+        if (cursor.moveToFirst()) {
+            do {
+                Date date = new Date(cursor.getLong(0));
+                dates.add(date);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+
+        return dates.toArray(new Date[dates.size()]);
+    }
+
+    private SQLiteStatement makeInsertStatement(SQLiteDatabase db) {
+        String statement =  "INSERT OR REPLACE INTO " + DATETABLE + " (" + DATE_COL + ") VALUES (?);";
+        return db.compileStatement(statement);
     }
 
     public String getDate() {

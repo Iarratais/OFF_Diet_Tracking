@@ -23,16 +23,17 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
+import com.karl.alerts.MyListAlertDialogFragment;
 import com.karl.fragments.AnalysisActivityFragment;
 import com.karl.fragments.DiaryFragment;
 import com.karl.fragments.GoalsFragment;
 import com.karl.fragments.HistoryFragment;
 import com.karl.fragments.LookupFragment;
-import com.karl.alerts.MyListAlertDialogFragment;
 import com.karl.fragments.ProfileFragment;
 import com.karl.fragments.ProgressFragment;
 import com.karl.fragments.RecipeKeepFragment;
 import com.karl.fragments.TodayFragment;
+
 
 /**
  * Copyright Karl jones 2016.
@@ -41,8 +42,7 @@ import com.karl.fragments.TodayFragment;
  * This is the mainactivity that controls the whole application.
  */
 
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     private static final double SMALL_DEVICE_THRESHOLD = 4.4;
     private static final String TAG = "MainActivity";
@@ -134,6 +134,7 @@ public class MainActivity extends AppCompatActivity
 
         db.wipeUserTable();
     }
+
 
     @Override
     public void onBackPressed() {
@@ -338,6 +339,7 @@ public class MainActivity extends AppCompatActivity
     private boolean isApplicationInstalled(String uri) {
         PackageManager pm = getPackageManager();
         try {
+            // Check if the package name exists, if exception is thrown, package name does not exist.
             pm.getPackageInfo(uri, PackageManager.GET_ACTIVITIES);
             return true;
         }
@@ -354,8 +356,11 @@ public class MainActivity extends AppCompatActivity
      */
     public class GoogleDriveManager extends AsyncTask<Integer, Void, Void> {
 
+
+
         @Override
         protected Void doInBackground(Integer... params) {
+
             if(params[0] == DRIVE_RETRIEVE){
                 // Download the database from Google Drive.
             } else if (params[0] == DRIVE_BACKUP){

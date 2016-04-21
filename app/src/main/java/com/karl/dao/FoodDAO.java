@@ -36,7 +36,7 @@ public class FoodDAO implements IFoodDAO {
         String uri = "http://world.openfoodfacts.org/api/v0/product/" + searchBarcode + ".json";
         String request = networkDAO.request(uri);
 
-        List<Food> allFoods = new ArrayList<Food>();
+        List<Food> allFoods = new ArrayList<>();
 
         // Parse the string into JSON here
         JSONObject root = new JSONObject(request);
@@ -129,7 +129,7 @@ public class FoodDAO implements IFoodDAO {
             food.setSalt(salt);
             food.setSodium(sodium);
             food.setServing_size(serving_size);
-            System.out.println("FOOD : " + food.toString());
+            System.out.println("FOOD100 : " + food.toString());
 
             allFoods.add(food);
 

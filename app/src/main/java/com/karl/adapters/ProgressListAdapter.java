@@ -56,7 +56,6 @@ public class ProgressListAdapter extends ArrayAdapter<Weight> {
 
         daysDate.append(getFullDay(sb.toString())).append(" ");
 
-
         // Day
         char char1 = date.charAt(3);
         char char2 = date.charAt(4);

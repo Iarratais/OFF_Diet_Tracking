@@ -30,7 +30,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
     private static final String TAG = "MySQLiteHelper";
 
     // Common
-    private static final int DATABASE_VERSION = 11;
+    private static final int DATABASE_VERSION = 12;
     private static final String DATABASE_NAME = "diet.db";
     private static final String USER_TABLE = "user";
     private static final String TODAY_TABLE = "today";
@@ -38,6 +38,8 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
     private static final String HISTORY_TABLE = "history";
     private static final String WEIGHT_HISTORY_TABLE = "weight_history";
     private static final String GOALS_TABLE = "goals";
+    private static final String QUERY100_TABLE = "query100";
+    private static final String QUERYSERVING_TABLE = "queryserving";
 
     // User table
     private static final String USER_KEY_ID = "user_id";
@@ -94,9 +96,29 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
     private static final String WEIGHT_TOTAL = "weight";
     private static final String WEIGHT_CHANGE = "change";
 
-    // Date table
-    private static final String DATETABLE = "datetable";
-    private static final String DATE_COL = "date_col";
+    // Query100 table
+    private static final String QUERY100_KEY_ID = "query100_id";
+    private static final String QUERY100_BARCODE = "barcode";
+    private static final String QUERY100_CALORIES = "calories";
+    private static final String QUERY100_FAT = "fats";
+    private static final String QUERY100_SAT_FAT = "sat_fat";
+    private static final String QUERY100_SALT = "salt";
+    private static final String QUERY100_SODIUM = "sodium";
+    private static final String QUERY100_CARBS = "carbohydrates";
+    private static final String QUERY100_SUGAR = "sugar";
+    private static final String QUERY100_PROTEIN = "protein";
+
+    // QueryServing table
+    private static final String QUERYSERVING_KEY_ID = "query100_id";
+    private static final String QUERYSERVING_BARCODE= "barcode";
+    private static final String QUERYSERVING_CALORIES = "calories";
+    private static final String QUERYSERVING_FAT = "fats";
+    private static final String QUERYSERVING_SAT_FAT = "sat_fat";
+    private static final String QUERYSERVING_SALT = "salt";
+    private static final String QUERYSERVING_SODIUM = "sodium";
+    private static final String QUERYSERVING_CARBS = "carbohydrates";
+    private static final String QUERYSERVING_SUGAR = "sugar";
+    private static final String QUERYSERVING_PROTEIN = "protein";
 
     public MySQLiteHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -115,6 +137,10 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
         createGoalsTable(db);
 
         createWeightHistoryTable(db);
+
+        createQuery100Table(db);
+
+        createQueryServingTable(db);
     }
 
     public String getDatabaseName(){
@@ -129,6 +155,8 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
         db.execSQL("DROP TABLE IF EXISTS " + HISTORY_TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + GOALS_TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + WEIGHT_HISTORY_TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + QUERY100_TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + QUERYSERVING_TABLE);
         onCreate(db);
     }
 
@@ -534,78 +562,98 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
         return db.rawQuery("SELECT * FROM " + WEIGHT_HISTORY_TABLE, null);
     }
 
+    public void deleteWeight(String id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(WEIGHT_HISTORY_TABLE, WEIGHT_KEY_ID + " + ?", new String[]{id});
+        db.close();
+    }
+
     public void clearWeightTable(){
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("DELETE FROM " + WEIGHT_HISTORY_TABLE);
         Log.d(TAG, "Weight table cleared");
     }
 
-    public void putDateInDatabase(Date date) {
-        putDateInDatabase(date.getTime());
+    public void createQuery100Table(SQLiteDatabase db){
+        db.execSQL("CREATE TABLE " + QUERY100_TABLE + "("
+            + QUERY100_KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+            + QUERY100_BARCODE + " TEXT, "
+            + QUERY100_CALORIES + " TEXT, "
+            + QUERY100_FAT + " TEXT, "
+            + QUERY100_SAT_FAT + " TEXT, "
+            + QUERY100_SALT + " TEXT, "
+            + QUERY100_SODIUM + " TEXT, "
+            + QUERY100_CARBS + " TEXT, "
+            + QUERY100_SUGAR + " TEXT, "
+            + QUERY100_PROTEIN + " TEXT)");
+        Log.d(TAG, "createQuery100Table run");
     }
 
-    public void putDateInDatabase(long now) {
-        SQLiteDatabase db = getWritableDatabase();
-        SQLiteStatement insert = makeInsertStatement(db);
+    public void insertIntoQuery100(Food food){
+        SQLiteDatabase db = this.getWritableDatabase();
 
-        insert.bindLong(1, now);
-        insert.executeInsert();
-        insert.clearBindings();
+        ContentValues query = new ContentValues();
+        query.put(QUERY100_BARCODE, food.getBarcode_number());
+        query.put(QUERY100_CALORIES, food.getCalories());
+        query.put(QUERY100_FAT, food.getFats());
+        query.put(QUERY100_SAT_FAT, food.getSaturated_fat());
+        query.put(QUERY100_SALT, food.getSalt());
+        query.put(QUERY100_SODIUM, food.getSodium());
+        query.put(QUERY100_CARBS, food.getCarbohydrates());
+        query.put(QUERY100_SUGAR, food.getSugar());
+        query.put(QUERY100_PROTEIN, food.getProtein());
+
+        db.insert(QUERY100_TABLE, null, query);
     }
 
-    public Date getDateFromDatabase() {
-        SQLiteDatabase db = getReadableDatabase();
-
-        Cursor cursor = db.query(
-                DATETABLE,
-                new String[]{DATE_COL},
-                null,
-                null,
-                null,
-                null,
-                null
-        );
-
-        long dateTime = -1;
-        if (cursor.moveToLast()) {
-            dateTime = cursor.getLong(0);
-        }
-
-        cursor.close();
-
-        return new Date(dateTime);
+    public Cursor getQuery100Information(String barcode){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT * FROM " + QUERY100_TABLE + " WHERE " + QUERY100_BARCODE + " LIKE ?";
+        return db.rawQuery(query, new String[]{barcode});
     }
 
-    public Date[] getDatesFromDatabase() {
-        SQLiteDatabase db = getReadableDatabase();
-
-        Cursor cursor = db.query(
-                DATETABLE,
-                new String[]{DATE_COL},
-                null,
-                null,
-                null,
-                null,
-                null
-        );
-
-        List<Date> dates = new LinkedList<>();
-
-        if (cursor.moveToFirst()) {
-            do {
-                Date date = new Date(cursor.getLong(0));
-                dates.add(date);
-            } while (cursor.moveToNext());
-        }
-
-        cursor.close();
-
-        return dates.toArray(new Date[dates.size()]);
+    public void createQueryServingTable(SQLiteDatabase db){
+        db.execSQL("CREATE TABLE " + QUERYSERVING_TABLE + "("
+                + QUERYSERVING_KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + QUERYSERVING_BARCODE + " TEXT, "
+                + QUERYSERVING_CALORIES + " TEXT, "
+                + QUERYSERVING_FAT + " TEXT, "
+                + QUERYSERVING_SAT_FAT + " TEXT, "
+                + QUERYSERVING_SALT + " TEXT, "
+                + QUERYSERVING_SODIUM + " TEXT, "
+                + QUERYSERVING_CARBS + " TEXT, "
+                + QUERYSERVING_SUGAR + " TEXT, "
+                + QUERYSERVING_PROTEIN + " TEXT)");
+        Log.d(TAG, "createQueryServingTable run");
     }
 
-    private SQLiteStatement makeInsertStatement(SQLiteDatabase db) {
-        String statement =  "INSERT OR REPLACE INTO " + DATETABLE + " (" + DATE_COL + ") VALUES (?);";
-        return db.compileStatement(statement);
+    public void insertIntoQueryServing(Food food){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues query = new ContentValues();
+        query.put(QUERYSERVING_BARCODE, food.getBarcode_number());
+        query.put(QUERYSERVING_CALORIES, food.getCalories());
+        query.put(QUERYSERVING_FAT, food.getFats());
+        query.put(QUERYSERVING_SAT_FAT, food.getSaturated_fat());
+        query.put(QUERYSERVING_SALT, food.getSalt());
+        query.put(QUERYSERVING_SODIUM, food.getSodium());
+        query.put(QUERYSERVING_CARBS, food.getCarbohydrates());
+        query.put(QUERYSERVING_SUGAR, food.getSugar());
+        query.put(QUERYSERVING_PROTEIN, food.getProtein());
+
+        db.insert(QUERYSERVING_TABLE, null, query);
+    }
+
+    /**
+     * Check if the food item exists in the database.
+     * @param barcode the barcode to be checked.
+     * @return boolean: true if does not exists, false otherwise.
+     */
+    public boolean checkIfItemExists(String barcode){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT * FROM " + QUERY100_TABLE + " WHERE " + QUERY100_BARCODE + " LIKE ?";
+        Cursor res = db.rawQuery(query, new String[]{barcode});
+        return res.getCount() < 1;
     }
 
     public String getDate() {

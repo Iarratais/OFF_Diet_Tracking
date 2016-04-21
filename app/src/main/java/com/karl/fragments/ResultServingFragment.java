@@ -161,20 +161,20 @@ public class ResultServingFragment extends android.support.v4.app.Fragment {
             TextView resultSugarStatsTextView           = (TextView) rootView.findViewById(R.id.today_sugar_stats);
             TextView resultProteinStatsTextView         = (TextView) rootView.findViewById(R.id.today_protein_stats);
 
-            final String resultCalories   = df.format(Float.parseFloat(foods.get(0).getCalories()));
-            final String resultFats       = df.format(Float.parseFloat(foods.get(0).getFats())) +
+            final String resultCalories   = df.format(Float.parseFloat(foods.get(1).getCalories()));
+            final String resultFats       = df.format(Float.parseFloat(foods.get(1).getFats())) +
                     getString(R.string.grams_abbv);
-            final String resultSatFats    = df.format(Float.parseFloat(foods.get(0)
+            final String resultSatFats    = df.format(Float.parseFloat(foods.get(1)
                     .getSaturated_fat())) + getString(R.string.grams_abbv);
-            final String resultSalts      = df.format(Float.parseFloat(foods.get(0).getSalt())) +
+            final String resultSalts      = df.format(Float.parseFloat(foods.get(1).getSalt())) +
                     getString(R.string.grams_abbv);
-            final String resultSodium     = df.format(Float.parseFloat(foods.get(0).getSodium())) +
+            final String resultSodium     = df.format(Float.parseFloat(foods.get(1).getSodium())) +
                     getString(R.string.grams_abbv);
-            final String resultCarbohydrates      = df.format(Float.parseFloat(foods.get(0)
+            final String resultCarbohydrates      = df.format(Float.parseFloat(foods.get(1)
                     .getCarbohydrates())) + getString(R.string.grams_abbv);
-            final String resultSugars     = df.format(Float.parseFloat(foods.get(0).getSugar())) +
+            final String resultSugars     = df.format(Float.parseFloat(foods.get(1).getSugar())) +
                     getString(R.string.grams_abbv);
-            final String resultProteins   = df.format(Float.parseFloat(foods.get(0).getProtein())
+            final String resultProteins   = df.format(Float.parseFloat(foods.get(1).getProtein())
             ) + getString(R.string.grams_abbv);
 
             resultCalorieStatsTextView.setText(resultCalories);

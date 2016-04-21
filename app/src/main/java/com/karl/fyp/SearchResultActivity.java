@@ -37,6 +37,9 @@ public class SearchResultActivity extends AppCompatActivity {
 
     private final static int NUM_PAGES = 2;
 
+    Food foodper100;
+    Food foodperserving;
+
     // Food information
     Food food;
 
@@ -185,6 +188,10 @@ public class SearchResultActivity extends AppCompatActivity {
 
     public Food incomingFood;
 
+    /**
+     * Set the informatin for the base of food
+     * @param foods: this is the food per 100grams.
+     */
     public void setInformation(Food foods){
         incomingFood = new Food();
         incomingFood = foods;
@@ -214,11 +221,8 @@ public class SearchResultActivity extends AppCompatActivity {
         gram.setSodium(String.valueOf(df.format((Double.parseDouble(incomingFood.getSodium()) / 100) * Integer.valueOf(amt))));
         gram.setBarcode_number(incomingFood.getBarcode_number());
 
-        System.out.println("CalculateInformation(): " + gram.toString());
-
         MySQLiteHelper db = new MySQLiteHelper(this);
         db.createNewTodayEntry(gram);
-        System.out.println(gram.toString());
 
         Toast.makeText(getApplicationContext(), getString(R.string.search_results_result_added, gram.getName()), Toast.LENGTH_SHORT).show();
 

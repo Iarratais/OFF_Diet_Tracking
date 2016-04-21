@@ -36,11 +36,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="build.gradle" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/build.gradle">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.65068495">
+              <caret line="28" column="44" selection-start-line="28" selection-start-column="44" selection-end-line="28" selection-end-column="44" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/karl/fyp/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.14554794">
-              <caret line="74" column="10" selection-start-line="74" selection-start-column="10" selection-end-line="74" selection-end-column="10" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="93" column="85" selection-start-line="93" selection-start-column="85" selection-end-line="93" selection-end-column="85" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -48,11 +58,59 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="NewManualEntryActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/karl/fyp/NewManualEntryActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="102" column="43" selection-start-line="102" selection-start-column="43" selection-end-line="102" selection-end-column="43" />
+              <folding>
+                <element signature="e#1548#1583#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Food.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/karl/models/Food.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="strings.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-5.6666665">
+              <caret line="9" column="76" selection-start-line="9" selection-start-column="76" selection-end-line="9" selection-end-column="76" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="activity_new_manual_entry.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_new_manual_entry.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-17.0">
+              <caret line="62" column="29" selection-start-line="62" selection-start-column="29" selection-end-line="62" selection-end-column="29" />
+              <folding>
+                <element signature="e#2504#2538#0" expanded="true" />
+                <element signature="e#5389#5412#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+          <provider editor-type-id="android-designer">
+            <state />
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="BarcodeCaptureActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/karl/barcodereader/BarcodeCaptureActivity.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="428" column="12" selection-start-line="428" selection-start-column="12" selection-end-line="428" selection-end-column="12" />
+              <caret line="413" column="5" selection-start-line="413" selection-start-column="5" selection-end-line="413" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -71,48 +129,28 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="NetworkDAO.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/karl/dao/NetworkDAO.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FoodDAO.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/karl/dao/FoodDAO.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="38" column="8" selection-start-line="38" selection-start-column="8" selection-end-line="38" selection-end-column="48" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="ResultServingFragment.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/karl/fragments/ResultServingFragment.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="309" column="89" selection-start-line="309" selection-start-column="89" selection-end-line="309" selection-end-column="89" />
+              <caret line="73" column="22" selection-start-line="73" selection-start-column="22" selection-end-line="73" selection-end-column="22" />
               <folding>
-                <element signature="e#1433#1434#0" expanded="true" />
-                <element signature="e#1471#1472#0" expanded="true" />
-                <element signature="e#8227#8253#0" expanded="true" />
-                <element signature="e#8274#8298#0" expanded="true" />
-                <element signature="e#8319#8346#0" expanded="true" />
-                <element signature="e#8367#8392#0" expanded="true" />
-                <element signature="e#8413#8445#0" expanded="true" />
-                <element signature="e#8466#8499#0" expanded="true" />
-                <element signature="e#8520#8543#0" expanded="true" />
-                <element signature="e#9793#9823#0" expanded="true" />
-                <element signature="e#9945#9975#0" expanded="true" />
-                <element signature="e#10087#10117#0" expanded="true" />
-                <element signature="e#10231#10261#0" expanded="true" />
-                <element signature="e#10391#10421#0" expanded="true" />
-                <element signature="e#10534#10564#0" expanded="true" />
-                <element signature="e#10672#10702#0" expanded="true" />
+                <element signature="e#1508#1509#0" expanded="true" />
+                <element signature="e#1546#1547#0" expanded="true" />
+                <element signature="e#8362#8388#0" expanded="true" />
+                <element signature="e#8409#8433#0" expanded="true" />
+                <element signature="e#8454#8481#0" expanded="true" />
+                <element signature="e#8502#8527#0" expanded="true" />
+                <element signature="e#8548#8580#0" expanded="true" />
+                <element signature="e#8601#8634#0" expanded="true" />
+                <element signature="e#8655#8678#0" expanded="true" />
+                <element signature="e#9928#9958#0" expanded="true" />
+                <element signature="e#10080#10110#0" expanded="true" />
+                <element signature="e#10222#10252#0" expanded="true" />
+                <element signature="e#10366#10396#0" expanded="true" />
+                <element signature="e#10526#10556#0" expanded="true" />
+                <element signature="e#10669#10699#0" expanded="true" />
+                <element signature="e#10807#10837#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -122,57 +160,25 @@
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/karl/fragments/ResultPer100Fragment.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="336" column="45" selection-start-line="336" selection-start-column="45" selection-end-line="336" selection-end-column="45" />
+              <caret line="79" column="41" selection-start-line="79" selection-start-column="41" selection-end-line="79" selection-end-column="41" />
               <folding>
-                <element signature="e#1488#1489#0" expanded="true" />
-                <element signature="e#1536#1537#0" expanded="true" />
-                <element signature="e#8658#8688#0" expanded="true" />
-                <element signature="e#8810#8840#0" expanded="true" />
-                <element signature="e#8952#8982#0" expanded="true" />
-                <element signature="e#9096#9126#0" expanded="true" />
-                <element signature="e#9256#9286#0" expanded="true" />
-                <element signature="e#9399#9429#0" expanded="true" />
-                <element signature="e#9537#9567#0" expanded="true" />
-                <element signature="e#12761#12787#0" expanded="true" />
-                <element signature="e#12808#12832#0" expanded="true" />
-                <element signature="e#12853#12880#0" expanded="true" />
-                <element signature="e#12901#12926#0" expanded="true" />
-                <element signature="e#12947#12979#0" expanded="true" />
-                <element signature="e#13000#13033#0" expanded="true" />
-                <element signature="e#13054#13077#0" expanded="true" />
+                <element signature="e#1563#1564#0" expanded="true" />
+                <element signature="e#1611#1612#0" expanded="true" />
+                <element signature="e#8993#9023#0" expanded="true" />
+                <element signature="e#9145#9175#0" expanded="true" />
+                <element signature="e#9287#9317#0" expanded="true" />
+                <element signature="e#9431#9461#0" expanded="true" />
+                <element signature="e#9591#9621#0" expanded="true" />
+                <element signature="e#9734#9764#0" expanded="true" />
+                <element signature="e#9872#9902#0" expanded="true" />
+                <element signature="e#13096#13122#0" expanded="true" />
+                <element signature="e#13143#13167#0" expanded="true" />
+                <element signature="e#13188#13215#0" expanded="true" />
+                <element signature="e#13236#13261#0" expanded="true" />
+                <element signature="e#13282#13314#0" expanded="true" />
+                <element signature="e#13335#13368#0" expanded="true" />
+                <element signature="e#13389#13412#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RecipeKeepFragment.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/karl/fragments/RecipeKeepFragment.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="24" column="13" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SearchResultActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/karl/fyp/SearchResultActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="221" column="65" selection-start-line="221" selection-start-column="65" selection-end-line="221" selection-end-column="65" />
-              <folding>
-                <element signature="e#6236#6284#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ProgressListAdapter.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/karl/adapters/ProgressListAdapter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="140" column="0" selection-start-line="140" selection-start-column="0" selection-end-line="140" selection-end-column="0" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -1650,7 +1656,7 @@
     </option>
     <option name="modificationStamps">
       <map>
-        <entry key="C:\Users\Karl\AndroidStudioProjects\FYP" value="4373642614582" />
+        <entry key="C:\Users\Karl\AndroidStudioProjects\FYP" value="4373911530203" />
       </map>
     </option>
     <option name="projectBuildClasspath">
@@ -2013,7 +2019,6 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/karl/fyp/BarcodeScannerActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/karl/fragments/LookupFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/input_dialog_2.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/karl/fyp/NewManualEntryActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/karl/alerts/MyInputAlertDialogFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/menu/activity_main_drawer.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/karl/fragments/TodayFragment.java" />
@@ -2027,7 +2032,6 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/karl/adapters/DiaryListAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/karl/testing/HistorySamples.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/karl/fragments/HistoryFragment.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_year_analysis.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/karl/fragments/MonthAnalysisFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/karl/analysis/GoalAnalysis.java" />
@@ -2041,15 +2045,17 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/karl/fyp/SplashScreenActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/karl/fyp/GoogleDriveController.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_splash_screen.xml" />
-        <option value="$PROJECT_DIR$/app/build.gradle" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/karl/adapters/ProgressListAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/karl/dao/FoodDAO.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/karl/fyp/SearchResultActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/karl/barcodereader/BarcodeCaptureActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/karl/fragments/ResultServingFragment.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/karl/fragments/ResultPer100Fragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/karl/fyp/MySQLiteHelper.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/karl/fyp/MainActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/karl/fyp/NewManualEntryActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/karl/fragments/ResultPer100Fragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/karl/fragments/ResultServingFragment.java" />
+        <option value="$PROJECT_DIR$/app/build.gradle" />
       </list>
     </option>
   </component>
@@ -2180,11 +2186,71 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="FYP" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="FYP" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="java" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="karl" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="FYP" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="FYP" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="karl" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="models" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -2715,7 +2781,8 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Android Monitor" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32673267" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32673267" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32893288" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -2734,7 +2801,6 @@
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32893288" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -2761,13 +2827,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/karl/barcodereader/BarcodeTrackerFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="26" column="6" selection-start-line="26" selection-start-column="6" selection-end-line="26" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/karl/alerts/MyListAlertDialogFragment.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -2846,24 +2905,6 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="225" column="13" selection-start-line="225" selection-start-column="13" selection-end-line="225" selection-end-column="13" />
         </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/karl/fyp/NewManualEntryActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="69" column="29" selection-start-line="69" selection-start-column="29" selection-end-line="69" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_new_manual_entry.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="108" column="42" selection-start-line="108" selection-start-column="42" selection-end-line="108" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/build.gradle">
@@ -2967,14 +3008,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="49" column="37" selection-start-line="49" selection-start-column="37" selection-end-line="49" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="76" column="77" selection-start-line="76" selection-start-column="77" selection-end-line="76" selection-end-column="77" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3096,14 +3129,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/karl/adapters/ProgressListAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -3138,69 +3163,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/karl/barcodereader/BarcodeCaptureActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="428" column="12" selection-start-line="428" selection-start-column="12" selection-end-line="428" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/karl/fragments/RecipeKeepFragment.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="24" column="13" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/karl/fragments/ResultServingFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="309" column="89" selection-start-line="309" selection-start-column="89" selection-end-line="309" selection-end-column="89" />
-          <folding>
-            <element signature="e#1433#1434#0" expanded="true" />
-            <element signature="e#1471#1472#0" expanded="true" />
-            <element signature="e#8227#8253#0" expanded="true" />
-            <element signature="e#8274#8298#0" expanded="true" />
-            <element signature="e#8319#8346#0" expanded="true" />
-            <element signature="e#8367#8392#0" expanded="true" />
-            <element signature="e#8413#8445#0" expanded="true" />
-            <element signature="e#8466#8499#0" expanded="true" />
-            <element signature="e#8520#8543#0" expanded="true" />
-            <element signature="e#9793#9823#0" expanded="true" />
-            <element signature="e#9945#9975#0" expanded="true" />
-            <element signature="e#10087#10117#0" expanded="true" />
-            <element signature="e#10231#10261#0" expanded="true" />
-            <element signature="e#10391#10421#0" expanded="true" />
-            <element signature="e#10534#10564#0" expanded="true" />
-            <element signature="e#10672#10702#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/karl/fragments/ResultPer100Fragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="336" column="45" selection-start-line="336" selection-start-column="45" selection-end-line="336" selection-end-column="45" />
-          <folding>
-            <element signature="e#1488#1489#0" expanded="true" />
-            <element signature="e#1536#1537#0" expanded="true" />
-            <element signature="e#8658#8688#0" expanded="true" />
-            <element signature="e#8810#8840#0" expanded="true" />
-            <element signature="e#8952#8982#0" expanded="true" />
-            <element signature="e#9096#9126#0" expanded="true" />
-            <element signature="e#9256#9286#0" expanded="true" />
-            <element signature="e#9399#9429#0" expanded="true" />
-            <element signature="e#9537#9567#0" expanded="true" />
-            <element signature="e#12761#12787#0" expanded="true" />
-            <element signature="e#12808#12832#0" expanded="true" />
-            <element signature="e#12853#12880#0" expanded="true" />
-            <element signature="e#12901#12926#0" expanded="true" />
-            <element signature="e#12947#12979#0" expanded="true" />
-            <element signature="e#13000#13033#0" expanded="true" />
-            <element signature="e#13054#13077#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3217,11 +3184,117 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/karl/fyp/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.14554794">
-          <caret line="74" column="10" selection-start-line="74" selection-start-column="10" selection-end-line="74" selection-end-column="10" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="93" column="85" selection-start-line="93" selection-start-column="85" selection-end-line="93" selection-end-column="85" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_new_manual_entry.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-17.0">
+          <caret line="62" column="29" selection-start-line="62" selection-start-column="29" selection-end-line="62" selection-end-column="29" />
+          <folding>
+            <element signature="e#2504#2538#0" expanded="true" />
+            <element signature="e#5389#5412#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.6666665">
+          <caret line="9" column="76" selection-start-line="9" selection-start-column="76" selection-end-line="9" selection-end-column="76" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/karl/models/Food.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/karl/fyp/NewManualEntryActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="102" column="43" selection-start-line="102" selection-start-column="43" selection-end-line="102" selection-end-column="43" />
+          <folding>
+            <element signature="e#1548#1583#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/karl/barcodereader/BarcodeCaptureActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="413" column="5" selection-start-line="413" selection-start-column="5" selection-end-line="413" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/karl/fragments/ResultPer100Fragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="79" column="41" selection-start-line="79" selection-start-column="41" selection-end-line="79" selection-end-column="41" />
+          <folding>
+            <element signature="e#1563#1564#0" expanded="true" />
+            <element signature="e#1611#1612#0" expanded="true" />
+            <element signature="e#8993#9023#0" expanded="true" />
+            <element signature="e#9145#9175#0" expanded="true" />
+            <element signature="e#9287#9317#0" expanded="true" />
+            <element signature="e#9431#9461#0" expanded="true" />
+            <element signature="e#9591#9621#0" expanded="true" />
+            <element signature="e#9734#9764#0" expanded="true" />
+            <element signature="e#9872#9902#0" expanded="true" />
+            <element signature="e#13096#13122#0" expanded="true" />
+            <element signature="e#13143#13167#0" expanded="true" />
+            <element signature="e#13188#13215#0" expanded="true" />
+            <element signature="e#13236#13261#0" expanded="true" />
+            <element signature="e#13282#13314#0" expanded="true" />
+            <element signature="e#13335#13368#0" expanded="true" />
+            <element signature="e#13389#13412#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/karl/fragments/ResultServingFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="73" column="22" selection-start-line="73" selection-start-column="22" selection-end-line="73" selection-end-column="22" />
+          <folding>
+            <element signature="e#1508#1509#0" expanded="true" />
+            <element signature="e#1546#1547#0" expanded="true" />
+            <element signature="e#8362#8388#0" expanded="true" />
+            <element signature="e#8409#8433#0" expanded="true" />
+            <element signature="e#8454#8481#0" expanded="true" />
+            <element signature="e#8502#8527#0" expanded="true" />
+            <element signature="e#8548#8580#0" expanded="true" />
+            <element signature="e#8601#8634#0" expanded="true" />
+            <element signature="e#8655#8678#0" expanded="true" />
+            <element signature="e#9928#9958#0" expanded="true" />
+            <element signature="e#10080#10110#0" expanded="true" />
+            <element signature="e#10222#10252#0" expanded="true" />
+            <element signature="e#10366#10396#0" expanded="true" />
+            <element signature="e#10526#10556#0" expanded="true" />
+            <element signature="e#10669#10699#0" expanded="true" />
+            <element signature="e#10807#10837#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.65068495">
+          <caret line="28" column="44" selection-start-line="28" selection-start-column="44" selection-end-line="28" selection-end-column="44" />
+          <folding />
         </state>
       </provider>
     </entry>

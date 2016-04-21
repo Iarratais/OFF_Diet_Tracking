@@ -95,8 +95,12 @@ public class NewManualEntryActivity extends AppCompatActivity {
                 sugarTextView.getText().toString(), proteinTextView.getText().toString(), saltTextView.getText().toString(),
                 sodiumTextView.getText().toString());
 
+        Food filerFood = new Food("0", barcodeNumberTextView.getText().toString(),"0","0","0","0","0","0","0","0");
+
         MySQLiteHelper db = new MySQLiteHelper(getApplicationContext());
         db.createNewTodayEntry(food);
+        db.insertIntoQuery100(food);
+        db.insertIntoQueryServing(filerFood);
     }
 
     public String getDate() {

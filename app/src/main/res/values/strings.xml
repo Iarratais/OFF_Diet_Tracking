@@ -7,7 +7,7 @@
 
     <!-- MainActivity -->
     <string name="main_activity_new">New</string>
-    <string name="main_activity_new_entry_manual">Manual Entry</string>
+    <string name="main_activity_new_entry_manual">Manual Entry (100G, 100ML)</string>
     <string name="main_activity_new_entry_barcode">Scan Barcode</string>
     <string name="main_activity_new_entry_options_title">What would you like to do?</string>
     <string name="main_activity_new_entry_weight_not_saved">Please enter a valid weight</string>

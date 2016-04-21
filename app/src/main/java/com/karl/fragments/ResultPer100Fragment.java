@@ -2,12 +2,14 @@ package com.karl.fragments;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Typeface;
 import com.karl.dao.FoodDAO;
 import com.karl.dao.IFoodDAO;
 
 import com.karl.fyp.MySQLiteHelper;
+import com.karl.fyp.NewManualEntryActivity;
 import com.karl.fyp.SearchResultActivity;
 import com.karl.models.Food;
 
@@ -74,6 +76,8 @@ public class ResultPer100Fragment extends android.support.v4.app.Fragment {
             if(isNetworkOnline()) {
                 BarcodeSearchTask bst = new BarcodeSearchTask();
                 bst.execute(inputBarcode);
+            } else {
+                sendToManual(inputBarcode);
             }
         } else {
             Log.d(TAG, "Item does exist in the database");
@@ -102,6 +106,12 @@ public class ResultPer100Fragment extends android.support.v4.app.Fragment {
         setViewTypeface();
 
         return rootView;
+    }
+
+    public void sendToManual(String barcode){
+        Intent i = new Intent(getActivity(), NewManualEntryActivity.class);
+        i.putExtra("barcode", barcode);
+        startActivity(i);
     }
 
     /**

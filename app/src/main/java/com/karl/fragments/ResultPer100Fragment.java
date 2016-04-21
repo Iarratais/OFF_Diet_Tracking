@@ -1,6 +1,7 @@
 package com.karl.fragments;
 
 
+import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Typeface;
 import com.karl.dao.FoodDAO;
@@ -10,9 +11,10 @@ import com.karl.fyp.MySQLiteHelper;
 import com.karl.fyp.SearchResultActivity;
 import com.karl.models.Food;
 
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,10 +33,7 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 
 /**
  * Copyright Karl jones 2016.
@@ -70,10 +69,12 @@ public class ResultPer100Fragment extends android.support.v4.app.Fragment {
 
         db = new MySQLiteHelper(getActivity());
 
-        if(db.checkIfItemExists(inputBarcode)) {
+        if(db.checkIfItemExists100(inputBarcode)) {
             Log.d(TAG, "Item does not exist in the database");
-            BarcodeSearchTask bst = new BarcodeSearchTask();
-            bst.execute(inputBarcode);
+            if(isNetworkOnline()) {
+                BarcodeSearchTask bst = new BarcodeSearchTask();
+                bst.execute(inputBarcode);
+            }
         } else {
             Log.d(TAG, "Item does exist in the database");
 
@@ -101,6 +102,33 @@ public class ResultPer100Fragment extends android.support.v4.app.Fragment {
         setViewTypeface();
 
         return rootView;
+    }
+
+    /**
+     * Check if the network is connected or not.
+     * @return network connected status.
+     */
+    public boolean isNetworkOnline() {
+        boolean status = false;
+
+        try{
+            ConnectivityManager connectivityManager = (ConnectivityManager) getActivity().getSystemService
+                    (Context.CONNECTIVITY_SERVICE);
+            NetworkInfo networkInfo = connectivityManager.getNetworkInfo(0);
+            if(networkInfo != null && networkInfo.getState() == NetworkInfo.State.CONNECTED){
+                status = true;
+            } else {
+                networkInfo = connectivityManager.getNetworkInfo(1);
+                if(networkInfo != null && networkInfo.getState() == NetworkInfo.State.CONNECTED) {
+                    status = true;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            status = false;
+        }
+
+        return status;
     }
 
     /**

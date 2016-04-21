@@ -72,6 +72,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         db = new MySQLiteHelper(this);
 
+        //db.clearQueryTables();
+
         // Floating action button
         floatingActionButton = (FloatingActionButton) findViewById(R.id.fab);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {

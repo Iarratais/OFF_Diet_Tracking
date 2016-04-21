@@ -325,20 +325,21 @@ public final class BarcodeCaptureActivity extends AppCompatActivity {
 //                setResult(CommonStatusCodes.SUCCESS, data);
 //                finish();
 
-                if(isNetworkOnline()){
-                    setUpTask(barcode.displayValue);
-                } else if (!isNetworkOnline()) {
-                    Snackbar.make(findViewById(android.R.id.content), getString(R
-                            .string
-                            .error_sorry_check_your_network_settings), Snackbar.LENGTH_INDEFINITE)
-                            .setAction(getString(R.string.settings_fragment_title), new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    startActivityForResult(new Intent(android.provider.Settings.ACTION_SETTINGS), 0);
-                                }
-                            })
-                            .show();
-                }
+//                if(isNetworkOnline()){
+//                    setUpTask(barcode.displayValue);
+//                } else if (!isNetworkOnline()) {
+//                    Snackbar.make(findViewById(android.R.id.content), getString(R
+//                            .string
+//                            .error_sorry_check_your_network_settings), Snackbar.LENGTH_INDEFINITE)
+//                            .setAction(getString(R.string.settings_fragment_title), new View.OnClickListener() {
+//                                @Override
+//                                public void onClick(View v) {
+//                                    startActivityForResult(new Intent(android.provider.Settings.ACTION_SETTINGS), 0);
+//                                }
+//                            })
+//                            .show();
+//                }
+                setUpTask(barcode.displayValue);
                 Log.d(TAG, "Barcode read: " + barcode.displayValue);
             }
             else {
@@ -493,13 +494,14 @@ public final class BarcodeCaptureActivity extends AppCompatActivity {
         protected void onPostExecute(Boolean exists) {
             super.onPostExecute(exists);
 
-            if(exists) {
-                getResults(barcode);
-            }else {
-                Toast.makeText(getApplicationContext(), getString(R.string
-                        .error_item_does_not_exist), Toast.LENGTH_SHORT).show();
-                sendToManual(barcode);
-            }
+//            if(exists) {
+//                getResults(barcode);
+//            }else {
+//                Toast.makeText(getApplicationContext(), getString(R.string
+//                        .error_item_does_not_exist), Toast.LENGTH_SHORT).show();
+//                sendToManual(barcode);
+//            }
+            getResults(barcode);
         }
     }
 }

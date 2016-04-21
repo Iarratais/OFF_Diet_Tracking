@@ -604,12 +604,21 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
         query.put(QUERY100_PROTEIN, food.getProtein());
 
         db.insert(QUERY100_TABLE, null, query);
+
+        Log.d(TAG, "insertIntoQuery100");
     }
 
     public Cursor getQuery100Information(String barcode){
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "SELECT * FROM " + QUERY100_TABLE + " WHERE " + QUERY100_BARCODE + " LIKE ?";
         return db.rawQuery(query, new String[]{barcode});
+    }
+
+    public void clearQueryTables(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("DELETE FROM " + QUERY100_TABLE);
+        db.execSQL("DELETE FROM " + QUERYSERVING_TABLE);
+        db.close();
     }
 
     public void createQueryServingTable(SQLiteDatabase db){
@@ -642,6 +651,14 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
         query.put(QUERYSERVING_PROTEIN, food.getProtein());
 
         db.insert(QUERYSERVING_TABLE, null, query);
+
+        Log.d(TAG, "insertIntoQueryServing");
+    }
+
+    public Cursor getQueryServingInformation(String barcode){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT * FROM " + QUERYSERVING_TABLE + " WHERE " + QUERYSERVING_BARCODE + " LIKE ?";
+        return db.rawQuery(query, new String[]{barcode});
     }
 
     /**
@@ -649,9 +666,21 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
      * @param barcode the barcode to be checked.
      * @return boolean: true if does not exists, false otherwise.
      */
-    public boolean checkIfItemExists(String barcode){
+    public boolean checkIfItemExists100(String barcode){
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "SELECT * FROM " + QUERY100_TABLE + " WHERE " + QUERY100_BARCODE + " LIKE ?";
+        Cursor res = db.rawQuery(query, new String[]{barcode});
+        return res.getCount() < 1;
+    }
+
+    /**
+     * Check if the food item exists in the database.
+     * @param barcode the barcode to be checked.
+     * @return boolean: true if does not exists, false otherwise.
+     */
+    public boolean checkIfItemExistsServing(String barcode){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT * FROM " + QUERYSERVING_TABLE + " WHERE " + QUERYSERVING_BARCODE + " LIKE ?";
         Cursor res = db.rawQuery(query, new String[]{barcode});
         return res.getCount() < 1;
     }

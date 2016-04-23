@@ -23,3 +23,5 @@ One size does not fit all with dieting. This is why <app name> allows for the se
 A built in BMI calculator allows the user to check their BMI from inside <app name>.
 
 Compatible with Android 4.0+.
+
+<a href="https://play.google.com/store/apps/details?id=com.karl.fyp">Available on the Play store</a>

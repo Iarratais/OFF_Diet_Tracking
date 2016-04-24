@@ -2,7 +2,7 @@ Master Changelog
 ================
 
 ===========
-27
+27.20160422
 ===========
 + Database table QUERY100
 + Database table QUERYSERVING

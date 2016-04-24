@@ -1,0 +1,241 @@
+Master Changelog
+================
+
+===========
+27
+===========
++ Database table QUERY100
++ Database table QUERYSERVING
+* Database upgraded to 12
++ deleteWeight(String id)
+* Fixed bug where wrong information was showing in the serving tab
++ Entries for Result100PerFragment are now saved into the database if not already there
++ Entries for ResultServingFragment are now saved into the database if not already there
+- Removed network check for barcode scanner to allow for offline use of the database
+* Send to manual if there is nothing in the database and the device is offline
+
+===========
+26.20160518
+===========
++ New icon!
+- Reduced file size
+
+===========
+25.20160509b
+===========
+* Fixed crashing bug
+
+===========
+24.20160509
+===========
+- Removed typeface for history stats to make the font bigger and realign
+- Removed typeface from diary stats to make the font bigger and realign
++ Added chart into month analysis to show how many times the goals were gone over
++ Added chart into year analysis to show how many times the goals were over
++ More information into the analysis tabs including how many times a user went over their goals, their goals and the day they ate the most
+
+===========
+23.20160407
+===========
+* Barcode length check removed, allowing for more barcodes to be read
++ Toast for no barcode detected
++ Manual entry now pushes the user back to main activity
++ Error checking on logging of weight, with toast
+- Add to database fragment removed
+* Fixed entries being moved to history too early
+* Today fragment now shows correct information
+* New icon for camera
++ Facebook SDK import
+* Splashscreen time to 0.8 seconds
+
+===========
+22.20150405 (naming mistake)
+===========
+* Capture button added to the camera activity, no longer a tap
+- Removed BarcodeScannerActivity, app now goes straight to the camera
+
+==========
+21_0_0_090b
+==========
+* Fixed small screen threshold limit
+
+==========
+20_0_0_090
+==========
+* Changed the icon for entry floating action button
+* Barcode scanning is automatically started
+* Fixed issue with menuitem and floating action button not disappearing when they were supposed to
++ Back button to the camera activity
+
+===========
+19_0_0_085b
+===========
+* Fixed crashing on going into AboutActivity
+
+==========
+18_0_0_085
+==========
+- Removed settings
+* Moved more strings into resources
+
+==========
+17_0_0_070
+==========
+* Changed the fonts throughout the app
+* Temporarily hide search tab
+
+==========
+16_0_0_066
+==========
+* Analysis components are now hidden if there is no history to analyse
+- Removed some logcat dialogs
++ Weight can now be logged
++ Weight progress list is now active
++ Weight object model
++ Added warning of inaccuracy when low number of entries for month
+* Raised history threshold to 4 entries for month
+* Raised history threshold to 21 entries for year
++ Year analysis layout
+* Analysis background color is always light gray
++ Yearly analysis layout and information display
+* Changed string to "During <month/year>, you consumed the most:" in month and year analysis
+* Changed typeface of goals layout
+* Changed nothing_to_show to smallcaps
+* Changed manual entry to a button
+* Changed manual entry font size to 18dp (less distracting)
+* Barcode is now sent to new manual entry
++ Error checking on new entry
+
+==========
+15_0_0_064
+==========
++ Analytics for eating patterns. Can now calculate eating patterns for example, days where most calories are consumed for months
++ Setting for showing days in the history list
++ FAQ section
++ Open Food Facts information section
+
+==========
+14_0_0_061
+==========
++ If item not found, now brings the user to add a new entry and passes the barcode
++ Added save icon in manual entry
++ Added title to new entry activity
++ Analysis now shows previous month name
++ Analysis now shows current year
++ Asychtasks for analysis added
+* Changed the mock objects to include the new date format
++ App now checks if Recipe Keep is installed and doesnt advise users to install if present
+* Updated build tools to 23.0.1
+
+==========
+13_0_0_058
+==========
++ Added information if there is no information present
+* Changed current date format, for example, Wed03022016 to include the day for analysis. Now includes day in saved date
+
+==========
+12_0_0_057
+==========
++ Added information if there is no information present
+
+==========
+11_0_0_054
+==========
+* Now more strict on settings up of profile
++ Added screen to view goals
++ Added screen to edit goals
+
+==========
+10_0_0_051
+==========
++ Added animations to opening screen and to "save profile" button
++ Added ExplosionField library
+* Introduced "Track Your Snacks"
+
+=========
+9_0_0_050b
+=========
+* Fixed issue of debugging code left in app
+* Pushed "desired weight" edittext up a bit
+
+=========
+8_0_0_050
+=========
+* Fixed issue with profile set up not showing on first launch
+* ProfileSetup now ensures that all fields are filled before saving user profile
+* Updated database version to 8 and to 9
++ User profile set up complete
+* Changed how the navigation drawer is laid out
++ Added weight to goals table
++ Added goals setting to goals fragment
++ Added weight table
+* Centered "desired weight" edittext and changed to numbers only
+
+=========
+7_0_0_049b
+=========
+* Fixed issue with isFirst SharedPreference not being set to false
+
+=========
+6_0_0_049
+=========
++ FAB menu now brings directly to scanning of barcode
++ Data is now moved to the history database if not for current day
+* X-axis values are now pulled from resources
+* Diary now shows todays date as title
++ History items can now be deleted from the database
++ Added weight tracking table
+- Removed "Todays Entries" from diary fragment
++ Diary fragment now displays information
++ Added "Log your weight" into list dialog
++ User should now be asked to set up a profile
++ Default goals set when first launch
+
+=========
+5_0_0_041
+=========
+* Changed the menu drawer
++ Added analysis section
++ Snackbar with error now shows on webview not loading
+* Goals are now loaded from the database
++ Added BMI display to user profile with information
++ Today details can now be added and read from the database by barcode
+
+=========
+4_0_0_038
+=========
++ Added history database
++ Added history list
+* Fixed user profiles
++ Adding testings
++ Added goals interface
++ Added goals database
++ Added ability to set and change goals
++ BMI calculator
++ Added ability to work out nutrients using 100g and user input of amount consumed
+
+=========
+3_0_0_030
+=========
++ Added barcode scanner
+* Changed look up fragment layout to include manual entry
++ New permission: Camera
+* Changed icon on the scan button
++ Added manual scan button to look up fragment
++ Added in barecode scanning activity
+* Error checking on barcodes sent into the results from the scanner
++ Added some comments
+
+=========
+2_0_0_030
+=========
++ Changed alerts into fragments
++ Error checking while entering a barcode
++ New icon
+* Better reliability
++ Support for smaller screens
+
+=========
+1_0_0_029
+=========
+* Initial Launch

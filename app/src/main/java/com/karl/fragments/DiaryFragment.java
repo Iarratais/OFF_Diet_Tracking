@@ -1,6 +1,5 @@
 package com.karl.fragments;
 
-import android.app.DialogFragment;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,7 +11,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.karl.adapters.DiaryListAdapter;
-import com.karl.alerts.MyAlertDialogFragment;
 import com.karl.fyp.MainActivity;
 import com.karl.fyp.MySQLiteHelper;
 import com.karl.fyp.R;
@@ -34,8 +32,6 @@ public class DiaryFragment extends android.support.v4.app.Fragment {
 
     View rootView;
 
-    private static final String TAG = "DiaryFragment";
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -46,16 +42,6 @@ public class DiaryFragment extends android.support.v4.app.Fragment {
         makeList();
 
         return rootView;
-    }
-
-    /**
-     * Create a dialog alert for the user.
-     * @param title of the alert
-     * @param message to be contained in the alert
-     */
-    public void makeAlert(String title, String message) {
-        DialogFragment dialogFragment = MyAlertDialogFragment.newInstance(title, message);
-        dialogFragment.show(getActivity().getFragmentManager(), "dialog");
     }
 
     /**

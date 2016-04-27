@@ -26,9 +26,6 @@ import java.util.ArrayList;
  */
 
 public class HistoryListAdapter extends ArrayAdapter<String> {
-
-    private static final String TAG = "HistoryListAdapter";
-
     private final Activity context;
     private final ArrayList<Day> days;
     private final String[] dates;

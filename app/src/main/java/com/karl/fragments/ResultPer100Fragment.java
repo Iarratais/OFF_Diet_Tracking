@@ -5,14 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Typeface;
-import com.karl.dao.FoodDAO;
-import com.karl.dao.IFoodDAO;
-
-import com.karl.fyp.MySQLiteHelper;
-import com.karl.fyp.NewManualEntryActivity;
-import com.karl.fyp.SearchResultActivity;
-import com.karl.models.Food;
-
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -21,9 +13,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.karl.fyp.R;
-
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -32,6 +21,13 @@ import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.karl.dao.FoodDAO;
+import com.karl.dao.IFoodDAO;
+import com.karl.fyp.MySQLiteHelper;
+import com.karl.fyp.NewManualEntryActivity;
+import com.karl.fyp.R;
+import com.karl.fyp.SearchResultActivity;
+import com.karl.models.Food;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;

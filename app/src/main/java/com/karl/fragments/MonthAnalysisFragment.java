@@ -26,8 +26,6 @@ import com.karl.fyp.R;
 import com.karl.models.Day;
 import com.karl.models.Goals;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 import java.util.Calendar;
 

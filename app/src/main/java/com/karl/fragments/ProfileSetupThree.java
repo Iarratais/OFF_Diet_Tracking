@@ -21,8 +21,6 @@ import com.karl.fyp.R;
 
 public class ProfileSetupThree extends android.support.v4.app.Fragment {
 
-    private static final String TAG = "ProfileSetup3";
-
     View rootView;
 
     EditText userHeightEditTextSetup;

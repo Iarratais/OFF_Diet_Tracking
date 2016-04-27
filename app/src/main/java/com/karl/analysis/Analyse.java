@@ -30,23 +30,6 @@ public class Analyse {
     }
 
     /**
-     * Get the day with the most calories.
-     * @return String: day with the most calories.
-     */
-    public String getMostCalories(){
-        int max_calories = 0;
-        String date = "";
-        for(Day day : day_information){
-            String calories = day.getCalories();
-            if(Integer.valueOf(calories) > max_calories){
-                max_calories = Integer.valueOf(calories);
-                date = day.getDate();
-            }
-        }
-        return String.valueOf(max_calories) + "|" + date;
-    }
-
-    /**
      * Get the day with the most nutrient from the previous month.
      * @return string: day that has the most calories.
      */
@@ -89,23 +72,6 @@ public class Analyse {
         }
 
         return getFullDay(days[day]);
-    }
-
-    /**
-     * Get the day with the most fats.
-     * @return String: day with the most fats.
-     */
-    public String getMostFats(){
-        double max_fats = 0.0;
-        String date = "";
-        for(Day day : day_information){
-            String fats = day.getFats();
-            if(Double.valueOf(fats) > max_fats){
-                max_fats = Double.valueOf(fats);
-                date = day.getDate();
-            }
-        }
-        return String.valueOf(max_fats) + "|" + date;
     }
 
     /**
@@ -153,23 +119,6 @@ public class Analyse {
     }
 
     /**
-     * Get the day with the most saturated fats.
-     * @return String: day with the most saturated fats.
-     */
-    public String getMostSatFat(){
-        double max_satfat = 0.0;
-        String date = "";
-        for(Day day : day_information){
-            String satfat = day.getSaturated_fat();
-            if(Double.valueOf(satfat) > max_satfat){
-                max_satfat = Double.valueOf(satfat);
-                date = day.getDate();
-            }
-        }
-        return String.valueOf(max_satfat) + "|" + date;
-    }
-
-    /**
      * Get the day with the most nutrient from the previous month.
      * @return string: day that has the most saturated fats.
      */
@@ -211,23 +160,6 @@ public class Analyse {
         }
 
         return getFullDay(days[day]);
-    }
-
-    /**
-     * Get the day with the most salt.
-     * @return String: day with the most salt.
-     */
-    public String getMostSalt(){
-        double max_salt = 0.0;
-        String date = "";
-        for(Day day : day_information){
-            String salt = day.getSalt();
-            if(Double.valueOf(salt) > max_salt){
-                max_salt = Double.valueOf(salt);
-                date = day.getDate();
-            }
-        }
-        return String.valueOf(max_salt) + "|" + date;
     }
 
     /**
@@ -275,23 +207,6 @@ public class Analyse {
     }
 
     /**
-     * Get the day with the most sodium.
-     * @return String: day with the most sodium.
-     */
-    public String getMostSodium(){
-        double max_sodium = 0.0;
-        String date = "";
-        for(Day day : day_information){
-            String sodium = day.getSodium();
-            if(Double.valueOf(sodium) > max_sodium){
-                max_sodium = Double.valueOf(sodium);
-                date = day.getDate();
-            }
-        }
-        return String.valueOf(max_sodium) + "|" + date;
-    }
-
-    /**
      * Get the day with the most nutrient from the previous month.
      * @return string: day that has the most sodium.
      */
@@ -333,23 +248,6 @@ public class Analyse {
         }
 
         return getFullDay(days[day]);
-    }
-
-    /**
-     * Get the day with the most carbohydrates.
-     * @return String: day with the most carbohydrates.
-     */
-    public String getMostCarbohydrates(){
-        double max_carbohydrates = 0.0;
-        String date = "";
-        for(Day day : day_information){
-            String carbohydrates = day.getCarbs();
-            if(Double.valueOf(carbohydrates) > max_carbohydrates){
-                max_carbohydrates = Double.valueOf(carbohydrates);
-                date = day.getDate();
-            }
-        }
-        return String.valueOf(max_carbohydrates) + "|" + date;
     }
 
     /**
@@ -397,23 +295,6 @@ public class Analyse {
     }
 
     /**
-     * Get the day with the most sugar.
-     * @return String: day with the most sugar.
-     */
-    public String getMostSugar(){
-        double max_sugar = 0.0;
-        String date = "";
-        for(Day day : day_information){
-            String sugar = day.getSugar();
-            if(Double.valueOf(sugar) > max_sugar){
-                max_sugar = Double.valueOf(sugar);
-                date = day.getDate();
-            }
-        }
-        return String.valueOf(max_sugar) + "|" + date;
-    }
-
-    /**
      * Get the day with the most nutrient from the previous month.
      * @return string: day that has the most sugar.
      */
@@ -455,23 +336,6 @@ public class Analyse {
         }
 
         return getFullDay(days[day]);
-    }
-
-    /**
-     * Get the day with the most proteins.
-     * @return String: day with the most proteins.
-     */
-    public String getMostProtein(){
-        double max_protein = 0.0;
-        String date = "";
-        for(Day day : day_information){
-            String protein = day.getProtein();
-            if(Double.valueOf(protein) > max_protein){
-                max_protein = Double.valueOf(protein);
-                date = day.getDate();
-            }
-        }
-        return String.valueOf(max_protein) + "|" + date;
     }
 
     /**

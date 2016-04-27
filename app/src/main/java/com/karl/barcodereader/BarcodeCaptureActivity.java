@@ -15,6 +15,7 @@ package com.karl.barcodereader;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -24,11 +25,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.hardware.Camera;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -45,19 +43,16 @@ import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
-import com.google.android.gms.common.api.CommonStatusCodes;
+import com.google.android.gms.vision.MultiProcessor;
+import com.google.android.gms.vision.barcode.Barcode;
+import com.google.android.gms.vision.barcode.BarcodeDetector;
 import com.karl.dao.FoodDAO;
 import com.karl.dao.IFoodDAO;
-import com.karl.fyp.NewManualEntryActivity;
 import com.karl.fyp.R;
 import com.karl.fyp.SearchResultActivity;
 import com.karl.ui.camera.CameraSource;
 import com.karl.ui.camera.CameraSourcePreview;
-
 import com.karl.ui.camera.GraphicOverlay;
-import com.google.android.gms.vision.MultiProcessor;
-import com.google.android.gms.vision.barcode.Barcode;
-import com.google.android.gms.vision.barcode.BarcodeDetector;
 
 import java.io.IOException;
 
@@ -76,8 +71,6 @@ public final class BarcodeCaptureActivity extends AppCompatActivity {
     private static final int RC_HANDLE_CAMERA_PERM = 2;
 
     // constants used to pass extra data in the intent
-    public static final String AutoFocus = "AutoFocus";
-    public static final String UseFlash = "UseFlash";
     public static final String BarcodeObject = "Barcode";
 
     private CameraSource mCameraSource;
@@ -146,6 +139,7 @@ public final class BarcodeCaptureActivity extends AppCompatActivity {
                 .show();
     }
 
+    //Ref: https://github.com/googlesamples/android-vision/tree/master/visionSamples/barcode-reader/app/src/main/java/com/google/android/gms/samples/vision/barcodereader/ui/camera
     @Override
     public boolean onTouchEvent(MotionEvent e) {
         boolean b = scaleGestureDetector.onTouchEvent(e);
@@ -155,7 +149,7 @@ public final class BarcodeCaptureActivity extends AppCompatActivity {
         return b || super.onTouchEvent(e); //  b || c || super.onTouchEvent(e);
     }
 
-    /**
+    /*
      * Creates and starts the camera.
      *
      * Suppressing InlinedApi since there is a check that the minimum version is met before using
@@ -209,9 +203,8 @@ public final class BarcodeCaptureActivity extends AppCompatActivity {
                 captureButtonClicked();
             }
         });
-
-
     }
+    // End ref
 
     /**
      * Restarts the camera.
@@ -246,6 +239,7 @@ public final class BarcodeCaptureActivity extends AppCompatActivity {
     }
 
     /**
+     * Ref: https://github.com/googlesamples/android-vision/tree/master/visionSamples/barcode-reader/app/src/main/java/com/google/android/gms/samples/vision/barcodereader/ui/camera
      * Request permissions from the user.
      * @param requestCode  The request code passed in {@link #requestPermissions(String[], int)}.
      * @param permissions  The requested permissions. Never null.
@@ -289,6 +283,7 @@ public final class BarcodeCaptureActivity extends AppCompatActivity {
     }
 
     /**
+     *
      * Starts or restarts the camera source, if it exists.
      */
     private void startCameraSource() throws SecurityException {
@@ -314,31 +309,14 @@ public final class BarcodeCaptureActivity extends AppCompatActivity {
         }
     }
 
+    // End ref
+
     public boolean captureButtonClicked(){
         BarcodeGraphic graphic = mGraphicOverlay.getFirstGraphic();
         Barcode barcode = null;
         if (graphic != null) {
             barcode = graphic.getBarcode();
             if (barcode != null) {
-//                Intent data = new Intent();
-//                data.putExtra(BarcodeObject, barcode);
-//                setResult(CommonStatusCodes.SUCCESS, data);
-//                finish();
-
-//                if(isNetworkOnline()){
-//                    setUpTask(barcode.displayValue);
-//                } else if (!isNetworkOnline()) {
-//                    Snackbar.make(findViewById(android.R.id.content), getString(R
-//                            .string
-//                            .error_sorry_check_your_network_settings), Snackbar.LENGTH_INDEFINITE)
-//                            .setAction(getString(R.string.settings_fragment_title), new View.OnClickListener() {
-//                                @Override
-//                                public void onClick(View v) {
-//                                    startActivityForResult(new Intent(android.provider.Settings.ACTION_SETTINGS), 0);
-//                                }
-//                            })
-//                            .show();
-//                }
                 setUpTask(barcode.displayValue);
                 Log.d(TAG, "Barcode read: " + barcode.displayValue);
             }
@@ -353,6 +331,7 @@ public final class BarcodeCaptureActivity extends AppCompatActivity {
         return barcode != null;
     }
 
+    // Ref: https://github.com/googlesamples/android-vision/tree/master/visionSamples/barcode-reader/app/src/main/java/com/google/android/gms/samples/vision/barcodereader/ui/camera
     private class ScaleListener implements ScaleGestureDetector.OnScaleGestureListener {
 
         /**
@@ -402,6 +381,7 @@ public final class BarcodeCaptureActivity extends AppCompatActivity {
             mCameraSource.doZoom(detector.getScaleFactor());
         }
     }
+    // End Ref
 
     /**
      * Send the user to the results screen.
@@ -411,52 +391,6 @@ public final class BarcodeCaptureActivity extends AppCompatActivity {
         Intent i = new Intent(getApplicationContext(), SearchResultActivity.class);
         i.putExtra("barcode", barcode);
         startActivity(i);
-    }
-
-    public void sendToManual(String barcode){
-        Intent i = new Intent(getApplicationContext(), NewManualEntryActivity.class);
-        i.putExtra("barcode", barcode);
-        startActivity(i);
-    }
-
-    /**
-     * Check if the network is connected or not.
-     * @return network connected status.
-     */
-    public boolean isNetworkOnline() {
-        boolean status = false;
-
-        try{
-            ConnectivityManager connectivityManager = (ConnectivityManager) getApplicationContext().getSystemService
-                    (Context.CONNECTIVITY_SERVICE);
-            NetworkInfo networkInfo = connectivityManager.getNetworkInfo(0);
-            if(networkInfo != null && networkInfo.getState() == NetworkInfo.State.CONNECTED){
-                status = true;
-            } else {
-                networkInfo = connectivityManager.getNetworkInfo(1);
-                if(networkInfo != null && networkInfo.getState() == NetworkInfo.State.CONNECTED) {
-                    status = true;
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            status = false;
-        }
-
-        return status;
-    }
-
-    /**
-     * Check if the length of the barcode is 13.
-     * @param barcode of the product.
-     * @return true if right length, false if wrong length.
-     */
-    public boolean checkLength(String barcode) {
-        boolean is13 = false;
-        if(barcode.length() == 13) {
-            is13 = true;
-        }
-        return is13;
     }
 
     /**
@@ -493,14 +427,6 @@ public final class BarcodeCaptureActivity extends AppCompatActivity {
          */
         protected void onPostExecute(Boolean exists) {
             super.onPostExecute(exists);
-
-//            if(exists) {
-//                getResults(barcode);
-//            }else {
-//                Toast.makeText(getApplicationContext(), getString(R.string
-//                        .error_item_does_not_exist), Toast.LENGTH_SHORT).show();
-//                sendToManual(barcode);
-//            }
             getResults(barcode);
         }
     }

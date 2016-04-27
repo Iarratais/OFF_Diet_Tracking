@@ -20,9 +20,6 @@ import java.util.ArrayList;
  */
 
 public class ProgressListAdapter extends ArrayAdapter<Weight> {
-
-    private static final String TAG = "ProgressListAdapter";
-
     public LayoutInflater inflater;
 
     private Context context;

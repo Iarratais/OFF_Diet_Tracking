@@ -1,7 +1,6 @@
 package com.karl.fragments;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,8 +18,6 @@ import com.karl.fyp.R;
  */
 
 public class ProfileSetupOne extends android.support.v4.app.Fragment {
-
-    private static final String TAG = "ProfileSetup1";
 
     View rootView;
 

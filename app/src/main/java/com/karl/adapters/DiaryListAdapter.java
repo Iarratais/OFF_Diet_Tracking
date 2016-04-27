@@ -24,9 +24,6 @@ import java.util.ArrayList;
  * This adapter deals with the diary fragment list.
  */
 public class DiaryListAdapter extends ArrayAdapter<Food> {
-
-    private static final String TAG = "DiaryListAdapter";
-
     private final Activity context;
     private final ArrayList<Food> foods;
 

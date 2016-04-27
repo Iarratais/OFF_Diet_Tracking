@@ -1,10 +1,8 @@
 package com.karl.fyp;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -22,8 +20,6 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
-import android.widget.Toast;
-
 
 import com.karl.alerts.MyListAlertDialogFragment;
 import com.karl.fragments.AnalysisActivityFragment;
@@ -117,29 +113,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             MenuItem target = menu.findItem(R.id.nav_recipe_keep);
             target.setVisible(false);
         }
-
-
-        //freshStart();
-
-//        HistorySamples hs = new HistorySamples(db);
-//        hs.setUpStatsJan(getApplicationContext());
-//        hs.setUpStatsFeb(getApplicationContext());
     }
-
-    /**
-     * This method is used for testing purposes and clears all regarding SharedPreferences and
-     * the user database to ensure that there is not two users.
-     */
-    public void freshStart(){
-        SharedPreferences prefs = getApplicationContext().getSharedPreferences("com.karl.fyp",
-                MODE_PRIVATE);
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.clear();
-        editor.commit();
-
-        db.wipeUserTable();
-    }
-
 
     @Override
     public void onBackPressed() {
@@ -242,11 +216,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             showAdd = HIDEADD;
             invalidateOptionsMenu();
         }
-//        }  else if (id == R.id.nav_addtodatabase){
-//            fm.beginTransaction().replace(R.id.content_frame, new AddToDatabaseFragment()).commit();
-//            showAdd = HIDEADD;
-//            invalidateOptionsMenu();
-//        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

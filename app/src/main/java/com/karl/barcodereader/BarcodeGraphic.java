@@ -1,6 +1,7 @@
 package com.karl.barcodereader;
 
-/*
+/**
+ *  Ref: https://github.com/googlesamples/android-vision/tree/master/visionSamples/barcode-reader/app/src/main/java/com/google/android/gms/samples/vision/barcodereader/ui/camera
  * Copyright (C) The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,13 +16,14 @@ package com.karl.barcodereader;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
 
-import com.karl.ui.camera.GraphicOverlay;
 import com.google.android.gms.vision.barcode.Barcode;
+import com.karl.ui.camera.GraphicOverlay;
 
 /**
  * Graphic instance for rendering barcode position, size, and ID within an associated graphic

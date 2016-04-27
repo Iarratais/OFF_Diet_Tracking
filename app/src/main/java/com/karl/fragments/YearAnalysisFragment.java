@@ -5,8 +5,6 @@ import android.database.Cursor;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,8 +37,6 @@ import java.util.Calendar;
  */
 
 public class YearAnalysisFragment extends android.support.v4.app.Fragment {
-
-    private static final String TAG = "YearAnalysisFragment";
 
     private static final int HISTORY_THRESHOLD = 21;
 

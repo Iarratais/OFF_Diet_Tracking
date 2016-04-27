@@ -19,9 +19,6 @@ import com.karl.fyp.R;
  * This class controls the fifth profile page.
  */
 public class ProfileSetupFive extends android.support.v4.app.Fragment {
-
-    private static final String TAG = "ProfileSetupFive";
-
     View rootView;
 
     EditText desiredWeightEditText;

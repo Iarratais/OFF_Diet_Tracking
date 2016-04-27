@@ -26,8 +26,6 @@ public class ProfileSetupTwo extends android.support.v4.app.Fragment {
 
     View rootView;
 
-    private static final String TAG = "ProfileSetup2";
-
     EditText userNameEditText;
 
     public ProfileSetupTwo() {}

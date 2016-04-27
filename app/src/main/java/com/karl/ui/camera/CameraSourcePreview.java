@@ -1,6 +1,8 @@
 package com.karl.ui.camera;
 
-/*
+/**
+ * Ref: https://github.com/googlesamples/android-vision/tree/master/visionSamples/barcode-reader/app/src/main/java/com/google/android/gms/samples/vision/barcodereader/ui/camera
+ *
  * Copyright (C) The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");

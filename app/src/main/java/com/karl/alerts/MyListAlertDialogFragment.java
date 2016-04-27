@@ -21,10 +21,7 @@ import com.karl.fyp.R;
 
 public class MyListAlertDialogFragment extends android.support.v4.app.DialogFragment {
 
-
-    public MyListAlertDialogFragment() {
-        // Required empty public constructor
-    }
+    public MyListAlertDialogFragment() {}
 
     public static MyListAlertDialogFragment newInstance(int title){
         MyListAlertDialogFragment fragment = new MyListAlertDialogFragment();

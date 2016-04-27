@@ -2,7 +2,6 @@ package com.karl.analysis;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.util.Log;
 
 import com.karl.fyp.MySQLiteHelper;
 import com.karl.models.Day;
@@ -26,8 +25,6 @@ public class GoalAnalysis {
     private int carbohydrates_broken = 0;
     private int sugar_broken = 0;
     private int protein_broken = 0;
-
-    private final static String TAG = "GoalsAnalysis";
 
     ArrayList<Day> day_history;
     Context context;

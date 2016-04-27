@@ -2,6 +2,12 @@ Master Changelog
 ================
 
 ===========
+28.20160427
+===========
+- Reduced file size
+- Code clean up
+
+===========
 27.20160422
 ===========
 + Database table QUERY100

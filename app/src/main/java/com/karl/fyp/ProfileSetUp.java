@@ -47,9 +47,6 @@ public class ProfileSetUp extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_set_up);
 
-        DialogFragment dialog = MyAlertDialogFragment.newInstance("Beta", "Hi! Thanks for beta testing the application, please report any feedback that you may have. This is in very early stages");
-        dialog.show(getFragmentManager(), "dialog");
-
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());

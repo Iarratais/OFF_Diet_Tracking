@@ -27,10 +27,12 @@ import com.karl.fragments.DiaryFragment;
 import com.karl.fragments.GoalsFragment;
 import com.karl.fragments.HistoryFragment;
 import com.karl.fragments.LookupFragment;
+import com.karl.fragments.PrivacyPolicy;
 import com.karl.fragments.ProfileFragment;
 import com.karl.fragments.ProgressFragment;
 import com.karl.fragments.RecipeKeepFragment;
 import com.karl.fragments.TodayFragment;
+import com.karl.testing.HistorySamples;
 
 
 /**
@@ -67,8 +69,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setSupportActionBar(toolbar);
 
         db = new MySQLiteHelper(this);
-
-        //db.clearQueryTables();
 
         // Floating action button
         floatingActionButton = (FloatingActionButton) findViewById(R.id.fab);
@@ -213,6 +213,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             invalidateOptionsMenu();
         } else if (id == R.id.nav_recipe_keep) {
             fm.beginTransaction().replace(R.id.content_frame, new RecipeKeepFragment()).commit();
+            showAdd = HIDEADD;
+            invalidateOptionsMenu();
+        } else if (id == R.id.nav_privacy){
+            fm.beginTransaction().replace(R.id.content_frame, new PrivacyPolicy()).commit();
             showAdd = HIDEADD;
             invalidateOptionsMenu();
         }

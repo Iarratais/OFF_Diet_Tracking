@@ -7,6 +7,12 @@ Master Changelog
 - Reduced file size
 - Code clean up
 
+# 28.20170212
++ Added privacy policy
+- Removed beta prompt
+* Updated target SDK version
+* Updated support library version
+
 ===========
 27.20160422
 ===========

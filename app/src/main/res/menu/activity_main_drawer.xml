@@ -24,8 +24,8 @@
 
     <item android:title="">
         <menu>
-            <!--<item android:id="@+id/nav_addtodatabase" android:title="@string/addtodatabase_fragment_title" />-->
             <item android:id="@+id/nav_about" android:title="@string/about_fragment_title" />
+            <item android:id="@+id/nav_privacy" android:title="@string/fragment_privacy_policy_title"/>
         </menu>
     </item>
 </menu>

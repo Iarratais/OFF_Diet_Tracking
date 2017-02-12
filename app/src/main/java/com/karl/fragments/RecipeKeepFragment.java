@@ -49,7 +49,7 @@ public class RecipeKeepFragment extends android.support.v4.app.Fragment {
                                 try {
                                     startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=com.karl.recipekeeper")));
                                 } catch (Exception e) {
-                                    Toast.makeText(getActivity(), R.string.common_google_play_services_network_error_text, Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getActivity(),"Error occurred, please try again", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         })

@@ -55,6 +55,9 @@
     <string name="goals_fragment_your_goals">Your goals:</string>
     <string name="goals_fragment_edit_goals">Edit</string>
 
+    <!-- Privacy policy fragment -->
+    <string name="fragment_privacy_policy_title">Privacy Policy</string>
+
     <!-- Progress fragment -->
     <string name="progress_fragment_title">Progress</string>
     <string name="progress_fragment_log_your_weight">Log your weight</string>
@@ -163,11 +166,11 @@
     <string name="error_item_does_not_exist">Item does not exist</string>
     <string name="error_please_set_goals_first">Sorry! It appears you have not set goals yet</string>
 
-<!-- TODO: Remove or change this placeholder text -->
+    <!-- TODO: Remove or change this placeholder text -->
     <string name="title_activity_search_result">SearchResultActivity</string>
 
     <string name="title_activity_barcode_scanner">BarcodeScannerActivity</string>
-    
+
     <!-- Barcode reader activity strings -->
     <string name="ok">OK</string>
     <string name="permission_camera_rationale">Access to the camera is needed for detection</string>
@@ -220,7 +223,7 @@
     <string name="action_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
 
-<!-- TODO: Remove or change this placeholder text -->
+    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_profile_set_up">ProfileSetUp</string>
     <string name="title_activity_settings">Settings</string>
